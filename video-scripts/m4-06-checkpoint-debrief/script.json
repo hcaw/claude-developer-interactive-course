@@ -1,0 +1,41 @@
+{
+  "sectionId": "m4-06-checkpoint-debrief",
+  "title": "Checkpoint 6 Walkthrough",
+  "subtitle": "the minimal secure configuration",
+  "source": "course-content/module-4-production-engineering-evals-and-security/06-security/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4111,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint six: assemble the minimal secure configuration for an agent that fetches untrusted content and writes to one protected path. Four candidate pieces on the table. If you haven't picked yours, pause here first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint six", "text": "Checkpoint 6: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause here", "text": "⏸ assemble your config first", "size": 46, "color": "red", "boxed": true, "at": { "x": 540, "y": 440, "w": 860, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "The twist in this one: all four pieces belong. The pre-tool-use hook blocks a write outside the permitted path before the tool runs — enforcement, not convention. The deny rule walls off the sensitive paths, limiting the blast radius if the agent is steered. The environment reference keeps the credential out of committed config, where history is forever. And the audit log records every privileged action with its result — the evidence a regulated review asks to see. Put together: the injected write hits the hook block and the audit log, never the disk.",
+      "elements": [
+        { "id": "twist", "kind": "handtext", "cue": "all four pieces", "text": "trick: ALL FOUR belong", "size": 54, "color": "green", "boxed": true, "at": { "x": 540, "y": 100, "w": 850, "h": 140 } },
+        { "id": "list", "kind": "bullets", "cue": "pre-tool-use hook", "size": 40, "color": "ink", "at": { "x": 200, "y": 300, "w": 1550, "h": 470 }, "items": [
+          { "text": "PreToolUse hook — blocks BEFORE the tool runs", "cue": "pre-tool-use hook" },
+          { "text": "deny rule — walls off /etc, /secrets, ~/.aws", "cue": "deny rule" },
+          { "text": "env reference — history is forever", "cue": "environment reference" },
+          { "text": "audit log — the reviewer's evidence", "cue": "audit log" }
+        ] },
+        { "id": "sum", "kind": "handtext", "cue": "never the disk", "text": "injected write → hook block + log entry, never the disk", "size": 42, "color": "green", "at": { "x": 240, "y": 820, "w": 1450, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "If you dropped a piece, note which layer just went missing: enforcement, blast radius, secret hygiene, or evidence. Next: the cumulative task — three defects hiding in one application.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "dropped a piece", "text": "each piece = a layer:\nenforce · bound · hide · prove", "size": 48, "color": "green", "boxed": true, "at": { "x": 480, "y": 300, "w": 960, "h": 190 } },
+        { "id": "next", "kind": "handtext", "cue": "cumulative task", "text": "→ next: the cumulative task (3 defects, 1 app)", "size": 42, "color": "ink", "at": { "x": 400, "y": 630, "w": 1150, "h": 70 } }
+      ]
+    }
+  ]
+}

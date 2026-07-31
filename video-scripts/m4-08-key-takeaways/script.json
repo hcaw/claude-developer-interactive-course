@@ -1,0 +1,42 @@
+{
+  "sectionId": "m4-08-key-takeaways",
+  "title": "Module 4 Key Takeaways",
+  "subtitle": "five, one per layer",
+  "source": "course-content/module-4-production-engineering-evals-and-security/08-key-takeaways/01-recap.md + 09-module-complete/01-module-complete.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4113,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Module four, wrapped. Five takeaways, one per layer. Same test as always: if you can explain each one to a teammate, it's yours.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Module four", "text": "M4: Key Takeaways", "size": 84, "color": "ink", "at": { "x": 480, "y": 200, "w": 950, "h": 120 } },
+        { "id": "five", "kind": "handtext", "cue": "Five takeaways", "text": "5 takeaways · 5 layers", "size": 56, "color": "blue", "boxed": true, "at": { "x": 600, "y": 440, "w": 720, "h": 130 } },
+        { "id": "test", "kind": "handtext", "cue": "explain each", "text": "can you teach each one?", "size": 42, "color": "green", "at": { "x": 620, "y": 670, "w": 720, "h": 70 } }
+      ]
+    },
+    {
+      "id": "takeaways",
+      "narration": "One: set the standard before you build. The eval turns done into a score, the grader matches the output's shape, and the judge is calibrated against human labels before it's trusted. Two: match the test to the failure, and trace to localize — most silent breaks live at the integration seam where two passing components hand off. Three: sort every failure first. Retriable gets backoff with a cap, terminal fails fast, and tool errors come back flagged, never empty. Four: measure cost per call, and fan out only when the task truly splits — fifteen times the tokens buys nothing on coupled work. Five: treat fetched content as data and enforce the boundary with a hook, because least privilege is what bounds a steered agent.",
+      "elements": [
+        { "id": "list", "kind": "bullets", "cue": "set the standard", "size": 40, "color": "ink", "at": { "x": 180, "y": 160, "w": 1580, "h": 680 }, "items": [
+          { "text": "1. set the standard first — eval, matched grader, calibrated judge", "cue": "set the standard" },
+          { "text": "2. test per failure + trace — breaks live at the seams", "cue": "match the test" },
+          { "text": "3. sort failures — backoff retriable · fail-fast terminal · flag tool errors", "cue": "sort every failure" },
+          { "text": "4. measure per call — fan out only when work truly splits (15×!)", "cue": "measure cost" },
+          { "text": "5. fetched content = data — hooks + least privilege bound the agent", "cue": "fetched content" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "You can now prove a Claude feature holds under production traffic, and defend it in the review. Congratulations on module four. Next, the final module: accelerators and IP contribution — packaging what you built so it scales beyond you.",
+      "elements": [
+        { "id": "can", "kind": "handtext", "cue": "prove a Claude feature", "text": "prove it holds · defend it in review", "size": 46, "color": "blue", "at": { "x": 440, "y": 250, "w": 1050, "h": 70 } },
+        { "id": "congrats", "kind": "handtext", "cue": "Congratulations", "text": "🎉 Module 4 complete", "size": 56, "color": "green", "boxed": true, "at": { "x": 560, "y": 410, "w": 800, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "final module", "text": "→ next: M5 · accelerators & IP contribution (the last one!)", "size": 42, "color": "ink", "at": { "x": 260, "y": 680, "w": 1450, "h": 70 } }
+      ]
+    }
+  ]
+}

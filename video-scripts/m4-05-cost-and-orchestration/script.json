@@ -1,0 +1,99 @@
+{
+  "sectionId": "m4-05-cost-and-orchestration",
+  "title": "Cost & Orchestration",
+  "subtitle": "surviving the bill",
+  "source": "course-content/module-4-production-engineering-evals-and-security/05-cost-and-orchestration/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4108,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "A system that survives failure still has to be affordable and fast, or it won't survive the bill. This section makes the spend visible, names the levers that move it, and then takes on the pattern that multiplies cost fastest: multi-agent orchestration.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "survives failure", "text": "Cost & Orchestration", "size": 78, "color": "ink", "at": { "x": 440, "y": 160, "w": 1050, "h": 110 } },
+        { "id": "bill", "kind": "handtext", "cue": "survive the bill", "text": "resilient isn't enough —\nit has to survive the BILL", "size": 50, "color": "red", "boxed": true, "at": { "x": 480, "y": 400, "w": 980, "h": 180 } },
+        { "id": "plan", "kind": "handtext", "cue": "multiplies cost fastest", "text": "see the spend → pull the levers → tame the fan-out", "size": 42, "color": "blue", "at": { "x": 300, "y": 690, "w": 1350, "h": 70 } }
+      ]
+    },
+    {
+      "id": "instrument",
+      "narration": "Start by making cost visible. Three metrics on every call: token usage in and out, latency, and error rate. It's a thin wrapper logging what the API already returns. With it, a cost spike stops being a mystery on the invoice and becomes a row you can sort — and the flow that looked uniformly expensive usually turns out to have one step doing ninety percent of the spend. That step is where every optimization dollar goes. Same for latency: the slow step is rarely the one you expected.",
+      "elements": [
+        { "id": "metrics", "kind": "handtext", "cue": "Three metrics", "text": "instrument every call: tokens · latency · errors", "size": 46, "color": "blue", "at": { "x": 220, "y": 100, "w": 1500, "h": 70 } },
+        { "id": "code", "kind": "code", "cue": "thin wrapper", "lang": "python", "code": "def instrumented_call(make_call, step):\n    start = time.perf_counter()\n    resp  = make_call()\n    log_metric(step,\n               resp.usage.input_tokens,\n               resp.usage.output_tokens,\n               latency_ms(start))\n    return resp", "at": { "x": 300, "y": 220, "w": 1100, "h": 360 } },
+        { "id": "ninety", "kind": "handtext", "cue": "ninety percent", "text": "one step ≈ 90% of the spend — sort and see", "size": 46, "color": "green", "boxed": true, "at": { "x": 360, "y": 660, "w": 1250, "h": 140 } }
+      ]
+    },
+    {
+      "id": "levers",
+      "narration": "The levers, once you can see. Model selection: route simple work to smaller models. Prompt and context size: every token costs, so trim what the call doesn't need. The number of tool calls: each one adds cost and latency. And streaming, which doesn't cut total time — it changes perceived time, because the first token arrives in milliseconds instead of the user staring at a spinner. One care point: when you stream with tools, a tool block isn't safe to act on until the stream closes. Act on a partial block and you hand your tools malformed input.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "The levers", "text": "the 4 levers", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Model selection", "size": 40, "color": "ink", "at": { "x": 200, "y": 230, "w": 1550, "h": 470 }, "items": [
+          { "text": "model selection — small where it holds", "cue": "Model selection" },
+          { "text": "prompt + context size — every token costs", "cue": "context size" },
+          { "text": "number of tool calls — each adds cost + latency", "cue": "tool calls" },
+          { "text": "streaming — changes PERCEIVED time", "cue": "streaming" }
+        ] },
+        { "id": "partial", "kind": "handtext", "cue": "partial block", "text": "⚠ streaming + tools: wait for stream close —\npartial block = malformed input", "size": 42, "color": "red", "boxed": true, "at": { "x": 380, "y": 730, "w": 1250, "h": 170 } }
+      ]
+    },
+    {
+      "id": "caching",
+      "narration": "Prompt caching removes repeated work. The model processes your prompt before generating anything; normally that work is discarded and the next request recomputes it. Caching stores the work for a stable prefix — the long system prompt, the big tool schema — so later requests read it back for a tenth of the input price. Three conditions decide whether it pays. The prefix must be exactly identical, because one added word invalidates it. It must recur soon, inside the five-minute default lifetime. And it must be long enough to clear the model's minimum. Writes cost extra and reads are cheap, so the economics work when reads outnumber writes.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Prompt caching", "text": "prompt caching: reuse the prefix work", "size": 52, "color": "blue", "at": { "x": 160, "y": 90, "w": 1350, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Three conditions", "size": 42, "color": "ink", "at": { "x": 240, "y": 240, "w": 1450, "h": 380 }, "items": [
+          { "text": "exactly identical — one word breaks it", "cue": "exactly identical" },
+          { "text": "recurs soon — 5-min default lifetime", "cue": "recur soon" },
+          { "text": "long enough — clears the model's minimum", "cue": "long enough" }
+        ] },
+        { "id": "econ", "kind": "handtext", "cue": "outnumber writes", "text": "pays when reads ≫ writes (reads ≈ 0.1×)", "size": 46, "color": "green", "boxed": true, "at": { "x": 420, "y": 690, "w": 1100, "h": 140 } }
+      ]
+    },
+    {
+      "id": "batches",
+      "narration": "Some work doesn't need an answer now. Overnight classification, backfills, scheduled reports — the Batches API processes them asynchronously for roughly half the cost. The trade is pure: latency for money. A user is waiting? Stream it. A schedule drives it? Batch it. And batch plus cache compound: the discount cuts each request, while caching cuts the repeated prefix inside each one.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "answer now", "text": "the Batches API: latency ↔ ~half the bill", "size": 52, "color": "blue", "at": { "x": 180, "y": 110, "w": 1400, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "user is waiting", "size": 44, "color": "ink", "at": { "x": 340, "y": 280, "w": 1300, "h": 260 }, "items": [
+          { "text": "a user waits → stream it", "cue": "user is waiting" },
+          { "text": "a schedule drives → batch it", "cue": "schedule drives" }
+        ] },
+        { "id": "compound", "kind": "handtext", "cue": "compound", "text": "batch + cache compound:\ndiscount × cheaper prefix", "size": 46, "color": "green", "boxed": true, "at": { "x": 480, "y": 610, "w": 960, "h": 180 } }
+      ]
+    },
+    {
+      "id": "orchestration",
+      "narration": "Now the big multiplier. The orchestrator-worker pattern: a lead agent decomposes the task, parallel subagents each work in their own context, and the lead synthesizes their results. Think of it as a hiring decision. Five researchers finish a broad survey faster than one — but you pay five salaries. Anthropic's own research system reports the numbers: a real quality gain on research that genuinely splits into independent parts, at roughly fifteen times the tokens of a normal chat, because every subagent spends its own tokens in its own context. For tightly coupled work like coding, where each step waits on the last, the multiplier buys almost nothing. One trim that helps: a capable model as the lead, cheaper models as the workers.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "decomposes the task", "lang": "python", "code": "plan    = await lead.plan(task)\nresults = await gather(*[worker.run(s)\n                         for s in plan.subtasks])\nanswer  = await lead.synthesize(results)", "at": { "x": 260, "y": 110, "w": 1200, "h": 240 } },
+        { "id": "hire", "kind": "handtext", "cue": "hiring decision", "text": "5 researchers = faster survey · 5 salaries", "size": 44, "color": "ink", "at": { "x": 320, "y": 420, "w": 1300, "h": 65 } },
+        { "id": "mult", "kind": "handtext", "cue": "fifteen times", "text": "≈ 15× the tokens of a single chat", "size": 50, "color": "red", "boxed": true, "at": { "x": 440, "y": 540, "w": 1050, "h": 140 } },
+        { "id": "coupled", "kind": "handtext", "cue": "waits on the last", "text": "coupled work (coding): multiplier buys ~nothing", "size": 40, "color": "red", "at": { "x": 320, "y": 740, "w": 1350, "h": 65 } },
+        { "id": "trim", "kind": "handtext", "cue": "cheaper models", "text": "✓ capable lead · cheaper workers", "size": 40, "color": "green", "at": { "x": 480, "y": 840, "w": 1000, "h": 60 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The watch-out writes itself. A developer split a slow task across parallel subagents. Latency dropped a little, the bill tripled, and quality barely moved. The senior's diagnosis: the task didn't decompose. Each step depended on the last, so the subagents mostly waited on each other — paying the fan-out cost without the parallel benefit. Moved back to a single agent with good context, the bill fell and quality held. Orchestration isn't bad. The multiplier only buys something when the work truly runs in parallel.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "watch-out writes", "text": "watch out: the fan-out that tripled the bill", "size": 52, "color": "red", "at": { "x": 120, "y": 100, "w": 1500, "h": 90 } },
+        { "id": "sums", "kind": "code", "cue": "bill tripled", "lang": "text", "code": "latency:  ↓ a little\nbill:     × 3\nquality:  ≈ unchanged", "at": { "x": 480, "y": 240, "w": 800, "h": 200 } },
+        { "id": "waits", "kind": "handtext", "cue": "waited on each other", "text": "coupled steps → workers just WAIT\n(fan-out cost, no parallel benefit)", "size": 46, "color": "red", "boxed": true, "at": { "x": 400, "y": 510, "w": 1150, "h": 180 } },
+        { "id": "fix", "kind": "handtext", "cue": "single agent with good context", "text": "✓ single agent + good context: bill ↓, quality =", "size": 42, "color": "green", "at": { "x": 320, "y": 760, "w": 1350, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Last rule: reliability is a floor you tune cost within, never a variable you trade down. Set the floor first — the latency ceiling, the retry budget, the pinned eval score — then optimize spend above it. Cost pressure is loud. Reliability failures are quiet, right up until they're an incident. A slightly higher bill is easier to defend than a system that doesn't work. Next: the checkpoint matches four tasks to their cost levers, then security.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "Last rule", "color": "green", "at": { "x": 300, "y": 200, "w": 1320, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "floor first", "delay": 0.2, "text": "set the reliability FLOOR first —\ntune cost above it, never below", "size": 46, "color": "green", "at": { "x": 420, "y": 250, "w": 1080, "h": 140 } },
+        { "id": "loud", "kind": "handtext", "cue": "quiet", "text": "cost is loud · unreliability is quiet (until the incident)", "size": 42, "color": "red", "at": { "x": 260, "y": 520, "w": 1450, "h": 65 } },
+        { "id": "next", "kind": "handtext", "cue": "checkpoint matches", "text": "→ checkpoint, then security", "size": 42, "color": "ink", "at": { "x": 540, "y": 680, "w": 850, "h": 70 } }
+      ]
+    }
+  ]
+}

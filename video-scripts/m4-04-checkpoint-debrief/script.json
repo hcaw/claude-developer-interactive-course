@@ -1,0 +1,54 @@
+{
+  "sectionId": "m4-04-checkpoint-debrief",
+  "title": "Checkpoints 4a & 4b Walkthrough",
+  "subtitle": "the retry fix + the model picks",
+  "source": "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/03-checkpoint.md + 05-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4107,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Section four has two checkpoints: repair a broken retry loop, and pick the model for three scenarios. If you haven't done both, pause — everything past this card is answers.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "two checkpoints", "text": "Checkpoints 4a + 4b: Walkthrough", "size": 68, "color": "ink", "at": { "x": 320, "y": 190, "w": 1350, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ do both checkpoints first — answers ahead", "size": 44, "color": "red", "boxed": true, "at": { "x": 400, "y": 440, "w": 1150, "h": 120 } }
+      ]
+    },
+    {
+      "id": "retry",
+      "narration": "The retry loop has one defect wearing three faces. Sleeping for zero seconds means no backoff at all — every retry fires instantly, and against a rate limit each instant retry is another request that deepens the very limit you're waiting out. Meanwhile the bare except retries everything, including terminal statuses that will fail identically every time. The corrected version does three things: it honors retry-after from the response when present, it grows the wait exponentially with jitter and a cap when the header is absent, and it re-raises terminal statuses so a bad request fails fast.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "retry loop", "text": "4a · the broken retry loop", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "one defect", "lang": "python", "code": "except Exception:      # ✗ retries terminal errors too\n    time.sleep(0)      # ✗ zero backoff — instant hammer", "at": { "x": 240, "y": 220, "w": 1300, "h": 160 } },
+        { "id": "deepens", "kind": "handtext", "cue": "deepens the very limit", "text": "instant retry = another request against the limit", "size": 42, "color": "red", "at": { "x": 300, "y": 460, "w": 1350, "h": 65 } },
+        { "id": "fixes", "kind": "bullets", "cue": "three things", "size": 40, "color": "green", "at": { "x": 300, "y": 570, "w": 1400, "h": 310 }, "items": [
+          { "text": "1. honor retry-after when the response has it", "cue": "honors retry-after" },
+          { "text": "2. exponential backoff + jitter + a cap", "cue": "grows the wait" },
+          { "text": "3. terminal statuses → fail fast, no retry", "cue": "fails fast" }
+        ] }
+      ]
+    },
+    {
+      "id": "models",
+      "narration": "Now the model picks. Millions of short classifications, with the small model holding the bar on the eval: Haiku. The deciding constraint is cost at volume — paying more buys nothing the eval can see. The dependent refactor where a wrong early step is expensive, and the mid tier misses the hardest cases: Opus. Quality on hard reasoning when mistakes are costly. And the mixed traffic, mostly lookups with a little synthesis: route it — a cheap default with a big-model override, because a single model either overpays the simple requests or underperforms the complex ones. In every scenario, the tell is the deciding constraint: the one thing that would change if you swapped the model.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "model picks", "text": "4b · the three scenarios", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Millions of short", "size": 40, "color": "ink", "at": { "x": 200, "y": 230, "w": 1550, "h": 400 }, "items": [
+          { "text": "1 · Haiku — cost-at-volume, eval confirms the bar", "cue": "cost at volume" },
+          { "text": "2 · Opus — hard reasoning, costly mistakes", "cue": "Opus" },
+          { "text": "3 · route — cheap default + big-model override", "cue": "route it" }
+        ] },
+        { "id": "tell", "kind": "handtext", "cue": "deciding constraint", "text": "the constraint = what changes\nif you swapped the model", "size": 46, "color": "green", "boxed": true, "at": { "x": 440, "y": 690, "w": 1050, "h": 180 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Backoff with a cap, tiers by eval. Next: cost and orchestration — where the multi-agent bill actually comes from.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "Backoff with a cap", "text": "backoff with a cap · tiers by eval", "size": 52, "color": "green", "boxed": true, "at": { "x": 420, "y": 320, "w": 1080, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "cost and orchestration", "text": "→ next: cost & orchestration", "size": 44, "color": "ink", "at": { "x": 520, "y": 600, "w": 900, "h": 70 } }
+      ]
+    }
+  ]
+}

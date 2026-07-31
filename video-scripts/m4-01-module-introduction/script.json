@@ -1,0 +1,60 @@
+{
+  "sectionId": "m4-01-module-introduction",
+  "title": "Module 4: Production Engineering, Evals & Security",
+  "subtitle": "proving it keeps working",
+  "source": "course-content/module-4-production-engineering-evals-and-security/01-module-introduction/01-orientation.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4101,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Module four. Your agents work — you built them over the last two modules. This module is about proving they keep working under production traffic. Because development hides the failures that production reveals: the input shape nobody tested, the rate limit at peak, the fetched page carrying a hidden instruction.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Module four", "text": "M4: Production, Evals & Security", "size": 72, "color": "ink", "at": { "x": 300, "y": 150, "w": 1350, "h": 110 } },
+        { "id": "tagline", "kind": "handtext", "cue": "development hides", "text": "dev hides what prod reveals", "size": 52, "color": "red", "boxed": true, "at": { "x": 520, "y": 360, "w": 900, "h": 130 } },
+        { "id": "examples", "kind": "bullets", "cue": "input shape", "size": 38, "color": "ink", "at": { "x": 440, "y": 580, "w": 1100, "h": 280 }, "items": [
+          { "text": "the input shape nobody tested", "cue": "input shape" },
+          { "text": "the rate limit at peak", "cue": "rate limit" },
+          { "text": "the fetched page with a hidden instruction", "cue": "hidden instruction" }
+        ] }
+      ]
+    },
+    {
+      "id": "abilities",
+      "narration": "By the end, five things. You'll write an eval suite that defines done before you ship, scored by a judge you calibrated. You'll build tests and traces that catch a regression and point at the exact step that broke. You'll separate retriable failures from terminal ones, so the system degrades instead of crashing. You'll keep everything inside a cost and latency budget, even with several agents coordinating. And you'll defend it all against prompt injection and untrusted input, well enough to survive a security review.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "five things", "text": "by the end: 5 abilities", "size": 56, "color": "blue", "at": { "x": 120, "y": 100, "w": 900, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "eval suite", "size": 40, "color": "ink", "at": { "x": 200, "y": 250, "w": 1550, "h": 620 }, "items": [
+          { "text": "1. evals + a calibrated judge", "cue": "eval suite" },
+          { "text": "2. tests + traces → the exact step that broke", "cue": "tests and traces" },
+          { "text": "3. retriable vs terminal failures", "cue": "retriable" },
+          { "text": "4. cost & latency budgets (multi-agent too)", "cue": "cost and latency budget" },
+          { "text": "5. security: injection + untrusted input", "cue": "prompt injection" }
+        ] }
+      ]
+    },
+    {
+      "id": "thread",
+      "narration": "One idea runs through everything here. When production fails, it's almost never a bug in the code that ran. It's a decision that was never made. Success was never written down as a graded set. The retriable case was never given a path. The budget was never instrumented. The boundary was never enforced. So this module makes each decision on paper, before the failure shows up live.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "decision that was never made", "text": "the failure = a decision never made", "size": 52, "color": "red", "boxed": true, "at": { "x": 400, "y": 130, "w": 1120, "h": 130 } },
+        { "id": "list", "kind": "bullets", "cue": "graded set", "size": 40, "color": "ink", "at": { "x": 340, "y": 350, "w": 1300, "h": 400 }, "items": [
+          { "text": "success — never written as a graded set", "cue": "graded set" },
+          { "text": "retries — never given a path", "cue": "given a path" },
+          { "text": "budget — never instrumented", "cue": "never instrumented" },
+          { "text": "boundary — never enforced", "cue": "never enforced" }
+        ] },
+        { "id": "paper", "kind": "handtext", "cue": "on paper", "text": "→ decide on paper, before it's live", "size": 44, "color": "green", "at": { "x": 480, "y": 810, "w": 950, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "First stop: evals and judges. Turning 'it looks right' into a number you can defend.",
+      "elements": [
+        { "id": "next", "kind": "handtext", "cue": "First stop", "text": "→ first: evals & judges", "size": 56, "color": "green", "boxed": true, "at": { "x": 560, "y": 320, "w": 800, "h": 140 } },
+        { "id": "sub", "kind": "handtext", "cue": "looks right", "text": "\"looks right\" → a number you can defend", "size": 44, "color": "ink", "at": { "x": 440, "y": 580, "w": 1050, "h": 70 } }
+      ]
+    }
+  ]
+}

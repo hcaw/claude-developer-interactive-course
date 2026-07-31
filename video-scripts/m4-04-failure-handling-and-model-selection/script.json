@@ -1,0 +1,91 @@
+{
+  "sectionId": "m4-04-failure-handling-and-model-selection",
+  "title": "Failure Handling & Model Selection",
+  "subtitle": "retriable vs terminal, tiers by eval",
+  "source": "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/01-teaching.md + 02-watch-out.md + 04-teaching.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4106,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Your trace now points at the failing step. Next question: what does the system do the moment a failure happens in live traffic? Production throws failures development never shows you, and the difference between resilient and fragile is whether you decided in advance what each one gets.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "failing step", "text": "Failure Handling\n& Model Selection", "size": 72, "color": "ink", "at": { "x": 440, "y": 150, "w": 1050, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "decided in advance", "text": "decide each failure's fate IN ADVANCE", "size": 50, "color": "blue", "boxed": true, "at": { "x": 400, "y": 560, "w": 1150, "h": 140 } }
+      ]
+    },
+    {
+      "id": "buckets",
+      "narration": "Every failure starts with a single question: would waiting and retrying the exact same request plausibly work? If yes, it's retriable — a rate limit clears, an overload passes, a dropped connection comes back. If no, it's terminal — a malformed request fails identically forever, and an expired key doesn't heal. On the API, the status code sorts the bucket for you. And when you're unsure, default to terminal: a failure wrongly marked terminal fails loudly and gets fixed. Wrongly marked retriable, it hammers the service and hides the real problem behind a wall of retries.",
+      "elements": [
+        { "id": "q", "kind": "handtext", "cue": "single question", "text": "would waiting help?\nyes → retriable · no → terminal", "size": 48, "color": "ink", "at": { "x": 400, "y": 110, "w": 1150, "h": 150 } },
+        { "id": "code", "kind": "code", "cue": "status code", "lang": "python", "code": "RETRIABLE = {429, 529, 500, 502, 503, 504}\nTERMINAL  = {400, 401, 403, 404}", "at": { "x": 300, "y": 330, "w": 1300, "h": 150 } },
+        { "id": "unsure", "kind": "handtext", "cue": "default to terminal", "text": "unsure? default TERMINAL —\nloud beats hidden behind retries", "size": 46, "color": "red", "boxed": true, "at": { "x": 420, "y": 570, "w": 1100, "h": 180 } }
+      ]
+    },
+    {
+      "id": "refinements",
+      "narration": "Two refinements before you write a retry loop. First, the SDK already retries transient failures with progressive delays. Stacking your own loop on top multiplies attempts against the same rate limit — decide where the retry lives, and let exactly one layer own it. Second, a rate-limited response usually includes a retry-after value telling you exactly when capacity returns. Honor it first, and fall back to exponential backoff with jitter only when the header is absent.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Two refinements", "text": "before you write a retry loop", "size": 54, "color": "blue", "at": { "x": 120, "y": 100, "w": 1100, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "SDK already retries", "size": 42, "color": "ink", "at": { "x": 240, "y": 260, "w": 1500, "h": 380 }, "items": [
+          { "text": "the SDK already retries — don't stack loops", "cue": "SDK already retries" },
+          { "text": "exactly ONE layer owns the retry", "cue": "one layer" },
+          { "text": "honor retry-after · backoff is the fallback", "cue": "retry-after" }
+        ] },
+        { "id": "why", "kind": "handtext", "cue": "multiplies attempts", "text": "2 loops × same limit = deeper limit", "size": 44, "color": "red", "at": { "x": 460, "y": 700, "w": 1000, "h": 70 } }
+      ]
+    },
+    {
+      "id": "toolerrors",
+      "narration": "When a tool your code runs fails, return the error to the model with the error flag set — never a silent empty result. With the flag, the model can react: try another approach, ask, or stop. Without it, the model treats emptiness as valid data and builds a confident wrong answer on top. One more case the status code won't catch: a refusal arrives as a successful response with a refusal stop reason. That's a content decision, not a transient fault. Raise it, log it, never blind-retry it.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "error flag", "lang": "python", "code": "except Exception as e:\n    return {\"type\": \"tool_result\",\n            \"tool_use_id\": tool_use.id,\n            \"is_error\": True,            # <- the flag\n            \"content\": f\"Tool failed: {e}\"}", "at": { "x": 260, "y": 120, "w": 1150, "h": 290 } },
+        { "id": "silent", "kind": "handtext", "cue": "silent empty", "text": "empty result → confident wrong answer", "size": 46, "color": "red", "boxed": true, "at": { "x": 400, "y": 490, "w": 1150, "h": 140 } },
+        { "id": "refusal", "kind": "handtext", "cue": "refusal arrives", "text": "refusal = a 200 with stop_reason \"refusal\"\n→ fail fast, log, never blind-retry", "size": 42, "color": "ink", "at": { "x": 340, "y": 700, "w": 1250, "h": 140 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Now the classic. A developer called the API in a loop with no error path, because development had never failed. At the first traffic peak, the first rate-limit response took the whole request down. The instinct fix — instant retries in a tight loop — made it worse: every immediate retry counted against the same limit and deepened it. The real fix is everything above. Classify it retriable, back off exponentially with a cap, and honor retry-after when the response offers one. Development never produces this failure. You write the path before traffic finds the gap.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "the classic", "text": "watch out: the call that never failed in dev", "size": 52, "color": "red", "at": { "x": 120, "y": 90, "w": 1500, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "no error path", "lang": "python", "code": "for item in batch:\n    resp = client.messages.create(...)\n    results.append(resp.content)   # assumes 200, always", "at": { "x": 240, "y": 220, "w": 1250, "h": 200 } },
+        { "id": "worse", "kind": "handtext", "cue": "made it worse", "text": "instant retries = more requests\nagainst the SAME limit", "size": 46, "color": "red", "boxed": true, "at": { "x": 440, "y": 490, "w": 1050, "h": 180 } },
+        { "id": "fix", "kind": "handtext", "cue": "real fix", "text": "✓ retriable → backoff + cap → honor retry-after", "size": 42, "color": "green", "at": { "x": 320, "y": 750, "w": 1300, "h": 70 } }
+      ]
+    },
+    {
+      "id": "models",
+      "narration": "Part two of this section: choosing the model, because that choice sets the budget everything else optimizes within. Claude is a family of tiers trading cost, latency, and capability, and the same prompt runs on any of them. The discipline: start with the balanced default. Step up a tier only when your eval shows it missing the bar on the hardest cases and a wrong answer is expensive. Step down only when the eval shows the cheaper model still holding the bar. In both directions the eval is the gate, never vibes.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Part two", "text": "part 2 · model selection", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "balanced default", "size": 40, "color": "ink", "at": { "x": 200, "y": 240, "w": 1550, "h": 380 }, "items": [
+          { "text": "start: the balanced default", "cue": "balanced default" },
+          { "text": "step UP: eval misses the bar + mistakes are costly", "cue": "Step up" },
+          { "text": "step DOWN: eval shows the bar still holds", "cue": "Step down" }
+        ] },
+        { "id": "gate", "kind": "handtext", "cue": "is the gate", "text": "the eval is the gate — not vibes", "size": 50, "color": "green", "boxed": true, "at": { "x": 460, "y": 690, "w": 1000, "h": 140 } }
+      ]
+    },
+    {
+      "id": "routing",
+      "narration": "And for mixed traffic, the router idea returns, applied to models: a balanced default plus an override on a cheap signal — task type, input length, difficulty. You pay for the big model only on the requests that need it. Uniform traffic? Pin one model and skip the router.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "default plus an override", "lang": "text", "code": "default:  balanced tier      (bulk of traffic)\noverride: top tier           (hard cases only)\nsignal:   task type · length · difficulty", "at": { "x": 280, "y": 180, "w": 1250, "h": 220 } },
+        { "id": "pay", "kind": "handtext", "cue": "big model only", "text": "pay for the big model only where it's needed", "size": 44, "color": "blue", "at": { "x": 340, "y": 490, "w": 1250, "h": 70 } },
+        { "id": "pin", "kind": "handtext", "cue": "Pin one model", "text": "✓ uniform traffic → pin one model, no router", "size": 42, "color": "green", "at": { "x": 360, "y": 630, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex: sort every failure into retriable or terminal before traffic does it for you, and let the eval, not the price sheet, pick the tier. Two checkpoints follow — repair a broken retry loop, and choose models for three scenarios. One debrief covers both. Then: cost and orchestration.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "The reflex", "color": "green", "at": { "x": 320, "y": 290, "w": 1280, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "sort every failure", "delay": 0.2, "text": "sort failures in advance ·\nlet the eval pick the tier", "size": 46, "color": "green", "at": { "x": 460, "y": 340, "w": 1000, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "Two checkpoints", "text": "→ 2 checkpoints, then cost & orchestration", "size": 42, "color": "ink", "at": { "x": 400, "y": 630, "w": 1150, "h": 70 } }
+      ]
+    }
+  ]
+}

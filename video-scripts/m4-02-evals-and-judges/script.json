@@ -1,0 +1,99 @@
+{
+  "sectionId": "m4-02-evals-and-judges",
+  "title": "Evals & Judges",
+  "subtitle": "defining done before you ship",
+  "source": "course-content/module-4-production-engineering-evals-and-security/02-evals-and-judges/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4102,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Your agent answers correctly when you try it by hand. But 'I tried it a few times and it looked right' is not a signal you can track. This section builds the instrument that turns the feeling into a number: the eval. Think of a thermometer. It doesn't make the patient healthier — it gives you a number you can trust.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "answers correctly", "text": "Evals & Judges", "size": 80, "color": "ink", "at": { "x": 560, "y": 150, "w": 800, "h": 110 } },
+        { "id": "problem", "kind": "handtext", "cue": "not a signal", "text": "\"looked right\" ≠ a signal you can track", "size": 46, "color": "red", "at": { "x": 400, "y": 400, "w": 1150, "h": 70 } },
+        { "id": "thermo", "kind": "handtext", "cue": "thermometer", "text": "eval = a thermometer 🌡\n(measures — doesn't cure)", "size": 46, "color": "blue", "boxed": true, "at": { "x": 520, "y": 560, "w": 900, "h": 180 } }
+      ]
+    },
+    {
+      "id": "designdoc",
+      "narration": "Before any production code, write the design document. One markdown page, four decisions. Success criteria, concrete enough to grade — 'summarize the thread' can't be checked; 'two sentences, every action item and its owner' can. Failure handling — the errors production will throw, each marked retriable or terminal. The cost and latency budget, with the reliability floor you refuse to trade away. And the trust boundary — which inputs strangers can write, and the smallest set of actions the feature needs. Every layer in this module reads from this one page.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "design document", "text": "the design doc: 1 page, 4 decisions", "size": 56, "color": "blue", "at": { "x": 120, "y": 100, "w": 1250, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Success criteria", "size": 40, "color": "ink", "at": { "x": 200, "y": 250, "w": 1550, "h": 480 }, "items": [
+          { "text": "success criteria — concrete enough to grade", "cue": "Success criteria" },
+          { "text": "failure handling — retriable vs terminal", "cue": "Failure handling" },
+          { "text": "cost + latency budget — with a reliability floor", "cue": "cost and latency budget" },
+          { "text": "trust boundary — untrusted inputs · least privilege", "cue": "trust boundary" }
+        ] },
+        { "id": "reads", "kind": "handtext", "cue": "reads from this one page", "text": "every later layer reads from this page", "size": 42, "color": "green", "at": { "x": 400, "y": 800, "w": 1150, "h": 70 } }
+      ]
+    },
+    {
+      "id": "anatomy",
+      "narration": "The eval itself is small. Collect input cases, write down the expected behavior for each one, run the feature on every case, grade every output, and average. A first score of two or three out of ten is completely normal. The score isn't the point — the point is whether the number moves when you change the prompt, the tools, or the model. And you change one lever at a time, so you know what caused the move.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "eval itself is small", "lang": "python", "code": "def run_eval(dataset):\n    results = [run_test_case(c) for c in dataset]\n    avg = sum(r[\"score\"] for r in results) / len(results)\n    print(f\"Average score: {avg}\")", "at": { "x": 200, "y": 140, "w": 1300, "h": 240 } },
+        { "id": "normal", "kind": "handtext", "cue": "completely normal", "text": "first run at 2/10 = normal", "size": 44, "color": "green", "at": { "x": 460, "y": 480, "w": 1000, "h": 70 } },
+        { "id": "lever", "kind": "handtext", "cue": "one lever", "text": "does the number MOVE?\nchange ONE lever at a time", "size": 48, "color": "blue", "boxed": true, "at": { "x": 440, "y": 620, "w": 1050, "h": 190 } }
+      ]
+    },
+    {
+      "id": "graders",
+      "narration": "Grading has three methods, and the right one follows the shape of the output. Exact match, when there is one correct form. Cheapest, and wrong the moment an answer can be phrased two ways. Code-graded checks, when a rule can validate structure: does it parse as JSON, is the number in range, is the required field present. And LLM-as-judge for open-ended quality — the only method that can answer 'is this summary faithful', and also the priciest and the noisiest. Matches and code checks cost nothing, so run them on every commit. A judge is a second model call per case — reserve it for the scheduled quality pass.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "shape of the output", "text": "the grader follows the output's SHAPE", "size": 50, "color": "ink", "at": { "x": 240, "y": 100, "w": 1400, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Exact match", "size": 40, "color": "ink", "at": { "x": 200, "y": 260, "w": 1550, "h": 380 }, "items": [
+          { "text": "exact match — one correct form only", "cue": "Exact match" },
+          { "text": "code-graded — structure rules (parse · range · fields)", "cue": "Code-graded" },
+          { "text": "LLM-as-judge — open-ended quality", "cue": "LLM-as-judge" }
+        ] },
+        { "id": "cost", "kind": "handtext", "cue": "every commit", "text": "free checks → every commit\njudge → the scheduled quality pass", "size": 42, "color": "blue", "boxed": true, "at": { "x": 400, "y": 700, "w": 1150, "h": 180 } }
+      ]
+    },
+    {
+      "id": "judge",
+      "narration": "The judge is the only grader you build and tune. Ask it for a score alone, and models drift toward a safe six regardless of quality. Ask for strengths, weaknesses, and reasoning before the score, and the number anchors to something specific. Then calibrate it. Take cases a human already labeled, run the judge on the same ones, and measure agreement. A judge that disagrees with humans half the time is a confident-looking number that means nothing. If agreement is low, fix the rubric — tighten what each score means, add a good and a bad example — and measure again.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "build and tune", "text": "building the judge", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "drift", "kind": "handtext", "cue": "safe six", "text": "score alone → drifts to a safe 6", "size": 42, "color": "red", "at": { "x": 300, "y": 230, "w": 1150, "h": 65 } },
+        { "id": "code", "kind": "code", "cue": "strengths", "lang": "text", "code": "Return JSON with:\n  \"strengths\":   1-3 points\n  \"weaknesses\":  1-3 points\n  \"reasoning\":   ← BEFORE the score\n  \"score\":       1-10", "at": { "x": 260, "y": 340, "w": 1000, "h": 270 } },
+        { "id": "calib", "kind": "handtext", "cue": "measure agreement", "text": "calibrate: judge vs human labels\n→ agreement % you can defend", "size": 44, "color": "green", "boxed": true, "at": { "x": 380, "y": 680, "w": 1200, "h": 190 } }
+      ]
+    },
+    {
+      "id": "coverage",
+      "narration": "Last principle: coverage beats perfection. Twenty cases with slightly noisy automated grading reveal more than three hand-polished ones, because regressions live in the edge inputs. Let the model generate extra edge cases from your labeled seed set, spot-check them, keep the set honest. Then run the loop: score the set, read the per-case failures, change one thing, score it again. And watch the per-case view, not just the average — a steady average can hide a change that fixed three cases and broke three others.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "Twenty cases", "text": "20 noisy cases > 3 perfect ones", "size": 50, "color": "blue", "boxed": true, "at": { "x": 420, "y": 110, "w": 1080, "h": 140 } },
+        { "id": "loop", "kind": "bullets", "cue": "score the set", "size": 40, "color": "ink", "at": { "x": 340, "y": 330, "w": 1300, "h": 400 }, "items": [
+          { "text": "1. score the set", "cue": "score the set" },
+          { "text": "2. read the per-case failures", "cue": "per-case failures" },
+          { "text": "3. change ONE thing", "cue": "change one thing" },
+          { "text": "4. score it again", "cue": "score it again" }
+        ] },
+        { "id": "hide", "kind": "handtext", "cue": "steady average", "text": "a steady average can hide 3 fixed / 3 broken", "size": 40, "color": "red", "at": { "x": 300, "y": 810, "w": 1350, "h": 65 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Now the failure this section exists to prevent. A team shipped a field extractor after a dozen manual checks. Everything looked fine, and for two weeks it worked. Then a customer wrote: ordered March third, delivered April twelfth. Two dates in one sentence — and the feature extracted April twelfth as the order date. Every validation check passed, because validation confirms a value has the right shape. It can never confirm it's the right value. And the root cause wasn't the model. The dozen manual checks all used single-date messages — nobody had defined the two-date case as a graded example. The eval that followed didn't fix the extraction. It detected it, and that two-date message became case one in the set.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "failure this section", "text": "watch out: the demo that passed", "size": 56, "color": "red", "at": { "x": 120, "y": 90, "w": 1200, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "customer wrote", "lang": "text", "code": "\"I placed my order on March 3 but did not\n receive it until April 12.\"\n→ extracted order_date = April 12   ✗", "at": { "x": 240, "y": 230, "w": 1150, "h": 200 } },
+        { "id": "shape", "kind": "handtext", "cue": "right shape", "text": "validation checks SHAPE — never truth", "size": 46, "color": "red", "boxed": true, "at": { "x": 380, "y": 500, "w": 1180, "h": 140 } },
+        { "id": "fix", "kind": "handtext", "cue": "case one", "text": "✓ the 2-date message → case #1 of the eval", "size": 42, "color": "green", "at": { "x": 340, "y": 720, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex to build: write the graded set before you ship, and ask the model to hunt the edge cases you didn't think to test. Next up, the checkpoint hands you a half-finished eval to complete — then testing and tracing.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "reflex to build", "color": "green", "at": { "x": 360, "y": 300, "w": 1200, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "graded set", "delay": 0.2, "text": "the graded set comes BEFORE the ship —\nlet the model hunt your edge cases", "size": 44, "color": "green", "at": { "x": 440, "y": 350, "w": 1040, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "Next up", "text": "→ checkpoint, then testing & tracing", "size": 42, "color": "ink", "at": { "x": 480, "y": 640, "w": 1000, "h": 70 } }
+      ]
+    }
+  ]
+}

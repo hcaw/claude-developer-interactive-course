@@ -1,0 +1,73 @@
+{
+  "sectionId": "m4-03-testing-and-tracing",
+  "title": "Testing & Tracing",
+  "subtitle": "finding where a failure lives",
+  "source": "course-content/module-4-production-engineering-evals-and-security/03-testing-and-tracing/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4104,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Your eval now tells you what good looks like, as a number. What it cannot tell you is where a failure happened. That takes two more layers: tests that isolate each failure type, and traces that point at the exact step that broke.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "eval now tells", "text": "Testing & Tracing", "size": 80, "color": "ink", "at": { "x": 520, "y": 150, "w": 900, "h": 110 } },
+        { "id": "gap", "kind": "handtext", "cue": "where a failure happened", "text": "the eval says HOW GOOD — not WHERE it broke", "size": 46, "color": "red", "at": { "x": 300, "y": 400, "w": 1350, "h": 70 } },
+        { "id": "layers", "kind": "handtext", "cue": "two more layers", "text": "tests isolate · traces localize", "size": 50, "color": "blue", "boxed": true, "at": { "x": 480, "y": 570, "w": 960, "h": 140 } }
+      ]
+    },
+    {
+      "id": "levels",
+      "narration": "Four test levels, each catching a break the others miss. A unit test isolates one function — a parser, a tool wrapper — and says nothing about how pieces fit. A functional test checks that one model call returns the expected shape. An integration test exercises the handoff between two components, like retrieval passing into the model call. And an end-to-end test runs the whole flow the way a user would. It catches everything and localizes nothing. Keep your eye on the third level: most silent production breaks live at the seams.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Four test levels", "text": "4 levels, 4 different breaks", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "unit test", "size": 40, "color": "ink", "at": { "x": 200, "y": 230, "w": 1550, "h": 480 }, "items": [
+          { "text": "unit — one function, alone", "cue": "unit test" },
+          { "text": "functional — one call returns the right shape", "cue": "functional test" },
+          { "text": "integration — the HANDOFF between components ⚠", "cue": "integration test" },
+          { "text": "end-to-end — whole flow: catches all, localizes none", "cue": "end-to-end" }
+        ] },
+        { "id": "seams", "kind": "handtext", "cue": "at the seams", "text": "silent breaks live at the SEAMS", "size": 48, "color": "red", "boxed": true, "at": { "x": 440, "y": 740, "w": 1040, "h": 140 } }
+      ]
+    },
+    {
+      "id": "tracing",
+      "narration": "Tests say a failure exists. A trace says where. It records every step of a run — the prompt, the tool calls, the intermediate outputs, the timing. Read this one top to bottom: retrieval, fine. Prompt build, fine. Model call, fine. Step four, the parser, raises a key error on a field the model never returned. One glance and the failure is localized. That's the difference between a five-minute fix and a day spent walking the workflow by hand.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "trace says where", "text": "the trace: a timeline of the run", "size": 52, "color": "blue", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "records every step", "lang": "text", "code": "step 1  retrieve(query)       ok    ->  3 chunks\nstep 2  build_prompt(chunks)  ok    ->  1,240 tok\nstep 3  model.call(prompt)    ok    ->  answer \"...\"\nstep 4  parse(answer)         FAIL  ->  KeyError: amount", "at": { "x": 200, "y": 230, "w": 1400, "h": 280 } },
+        { "id": "localized", "kind": "handtext", "cue": "One glance", "text": "failure localized → step 4, the parser", "size": 44, "color": "ink", "at": { "x": 380, "y": 580, "w": 1200, "h": 70 } },
+        { "id": "diff", "kind": "handtext", "cue": "five-minute fix", "text": "5-minute fix  vs  a day of guessing", "size": 48, "color": "green", "boxed": true, "at": { "x": 440, "y": 700, "w": 1040, "h": 140 } }
+      ]
+    },
+    {
+      "id": "routing",
+      "narration": "One more pattern, for mixed traffic: routing. A cheap classification call reads each query and picks a path. Single-fact lookups take the fetch-once path. Multi-part questions take search across rounds. Default everything to iterative search and you inflate cost on questions one fetch would answer. Default everything to a static index and you get shallow answers where several passes were needed. And if all your traffic is one shape, skip the router and hardcode the path.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "routing", "text": "routing: pay for iteration only when needed", "size": 50, "color": "blue", "at": { "x": 160, "y": 90, "w": 1500, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "cheap classification", "lang": "python", "code": "def route(query):\n    kind = classify(query)     # \"lookup\" | \"multi_step\"\n    if kind == \"lookup\":\n        return fetch_once(query)\n    return agentic_search(query)", "at": { "x": 240, "y": 220, "w": 1200, "h": 290 } },
+        { "id": "mixed", "kind": "handtext", "cue": "inflate cost", "text": "wrong default: iterative-everything = cost,\nstatic-everything = shallow answers", "size": 42, "color": "red", "at": { "x": 320, "y": 590, "w": 1300, "h": 130 } },
+        { "id": "skip", "kind": "handtext", "cue": "skip the router", "text": "✓ uniform traffic? skip the router", "size": 42, "color": "green", "at": { "x": 440, "y": 790, "w": 1050, "h": 70 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Here's the seam failure in the wild. Every unit test green. The functional test green. End-to-end: red. The trace shows why: retrieval returns a list of chunk dictionaries, and the prompt builder expected a plain string. The context arrived malformed, so the model quietly answered from its own memory instead of the retrieved policy. Each side was correct in isolation. The contract between them was never defined, and no test ever drove the two together. Only an integration test on that exact handoff — real chunks into the real builder — surfaces the mismatch before a user does.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "seam failure", "text": "watch out: pieces passed, the seam broke", "size": 54, "color": "red", "at": { "x": 120, "y": 90, "w": 1450, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "trace shows why", "lang": "text", "code": "PASS  test_parser_unit\nPASS  test_extract_shape_functional\nFAIL  test_full_flow_e2e\n  cause: retrieve() -> [{\"content\": ...}]\n         build_prompt() expected a string", "at": { "x": 240, "y": 220, "w": 1200, "h": 300 } },
+        { "id": "memory", "kind": "handtext", "cue": "own memory", "text": "model answered from MEMORY, not the docs", "size": 46, "color": "red", "boxed": true, "at": { "x": 360, "y": 590, "w": 1250, "h": 140 } },
+        { "id": "fix", "kind": "handtext", "cue": "exact handoff", "text": "✓ one integration test on the handoff = caught", "size": 42, "color": "green", "at": { "x": 320, "y": 790, "w": 1300, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex: when the pieces pass and the flow fails, look at the seams — then put a test on every handoff you find. Next, the checkpoint hands you a trace to diagnose. After that: failure handling and model selection.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "The reflex", "color": "green", "at": { "x": 340, "y": 300, "w": 1240, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "pieces pass", "delay": 0.2, "text": "pieces pass + flow fails → check the SEAMS,\nthen test every handoff", "size": 44, "color": "green", "at": { "x": 420, "y": 350, "w": 1080, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "checkpoint hands", "text": "→ checkpoint, then failure handling", "size": 42, "color": "ink", "at": { "x": 480, "y": 640, "w": 1000, "h": 70 } }
+      ]
+    }
+  ]
+}

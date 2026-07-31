@@ -1,0 +1,37 @@
+{
+  "sectionId": "m4-05-checkpoint-debrief",
+  "title": "Checkpoint 5 Walkthrough",
+  "subtitle": "match task → agent type + lever",
+  "source": "course-content/module-4-production-engineering-evals-and-security/05-cost-and-orchestration/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4109,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint five: four tasks, four configuration snippets, each labeled with an agent type and a cost lever. If you haven't matched them yet, pause here and do it first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint five", "text": "Checkpoint 5: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause here", "text": "⏸ match the four first", "size": 46, "color": "red", "boxed": true, "at": { "x": 620, "y": 440, "w": 700, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answers",
+      "narration": "The single-fact lookup against a stable corpus takes C: fetch-once retrieval on the smallest model that works. No iteration, no fan-out, nothing extra to pay for. The broad research question that splits into independent parts is the one genuine home for A, orchestrator-worker — the fan-out multiplier finally buys parallel exploration. The user-facing request takes D, streaming: the reply feels instant because the first token arrives early. And the cost-sensitive, non-urgent job takes B: batches for roughly half the cost, caching for the context that recurs — latency is the one thing this job has to spare.",
+      "elements": [
+        { "id": "map", "kind": "code", "cue": "single-fact lookup", "lang": "text", "code": "lookup       →  C  fetch-once + smallest model\nresearch     →  A  orchestrator-worker\nuser-facing  →  D  streaming\nnon-urgent   →  B  batch + cache", "at": { "x": 260, "y": 130, "w": 1300, "h": 280 } },
+        { "id": "onlyA", "kind": "handtext", "cue": "genuine home", "text": "A fits ONLY where the work truly splits", "size": 46, "color": "green", "boxed": true, "at": { "x": 420, "y": 500, "w": 1100, "h": 140 } },
+        { "id": "spare", "kind": "handtext", "cue": "has to spare", "text": "batch jobs: latency is the currency you spend", "size": 42, "color": "ink", "at": { "x": 340, "y": 720, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The grading trick: the agent type and the lever are judged together, and the lever has to move the constraint that scenario actually has. Streaming a batch job moves nothing. Next: security.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "grading trick", "color": "green", "at": { "x": 320, "y": 290, "w": 1280, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "judged together", "delay": 0.2, "text": "the lever must move THAT scenario's\nconstraint — else it's decoration", "size": 46, "color": "green", "at": { "x": 420, "y": 340, "w": 1080, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "security", "text": "→ next: security", "size": 44, "color": "ink", "at": { "x": 660, "y": 630, "w": 600, "h": 70 } }
+      ]
+    }
+  ]
+}

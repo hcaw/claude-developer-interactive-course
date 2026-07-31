@@ -1,0 +1,62 @@
+{
+  "sectionId": "m4-07-cumulative-debrief",
+  "title": "Hardening Task Walkthrough",
+  "subtitle": "three defects, one application",
+  "source": "course-content/module-4-production-engineering-evals-and-security/07-cumulative-task/01-cumulative.md + 02-cumulative.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4112,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "The cumulative task hides three defects in one runnable application — one per layer of this module. If you haven't found and fixed all three, pause. Everything from here is spoilers.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "cumulative task", "text": "Hardening Task: Walkthrough", "size": 70, "color": "ink", "at": { "x": 380, "y": 170, "w": 1200, "h": 110 } },
+        { "id": "sub", "kind": "handtext", "cue": "one per layer", "text": "3 defects · 3 layers · 1 app", "size": 48, "color": "blue", "at": { "x": 560, "y": 400, "w": 820, "h": 70 } },
+        { "id": "pause", "kind": "handtext", "cue": "spoilers", "text": "⏸ find + fix all three first", "size": 44, "color": "red", "boxed": true, "at": { "x": 560, "y": 560, "w": 820, "h": 120 } }
+      ]
+    },
+    {
+      "id": "defect1",
+      "narration": "Defect one, the security layer, and it's the loudest: the write destination comes from the page's suggested path — a destination chosen by untrusted fetched content. That's prompt injection holding the pen. The fix: a fixed output path, with a pre-tool-use hook enforcing the boundary and logging the attempt.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Defect one", "text": "defect 1 · security", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "suggested path", "lang": "python", "code": "write_file(page.suggested_path, ...)          # ✗\nwrite_file(\"/workspace/output/summary.txt\")   # ✓ + hook", "at": { "x": 220, "y": 230, "w": 1350, "h": 160 } },
+        { "id": "why", "kind": "handtext", "cue": "holding the pen", "text": "the PAGE picks where the agent writes —\ninjection with a pen", "size": 46, "color": "red", "boxed": true, "at": { "x": 420, "y": 470, "w": 1100, "h": 180 } },
+        { "id": "fix", "kind": "handtext", "cue": "fixed output path", "text": "✓ fixed path + PreToolUse hook + audit", "size": 42, "color": "green", "at": { "x": 400, "y": 730, "w": 1150, "h": 70 } }
+      ]
+    },
+    {
+      "id": "defect2",
+      "narration": "Defect two, the failure layer: the retry loop sleeps for zero seconds and catches everything. No backoff, so each instant retry deepens a rate limit. No terminal detection, so a bad request burns all five attempts failing identically. The fix is the corrected loop from the checkpoint: honor retry-after, back off exponentially with a cap, and fail fast on terminal statuses.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Defect two", "text": "defect 2 · failure handling", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "sleeps for zero", "lang": "python", "code": "except Exception:     # ✗ retries terminal too\n    time.sleep(0)     # ✗ instant hammer", "at": { "x": 280, "y": 230, "w": 1150, "h": 160 } },
+        { "id": "why", "kind": "handtext", "cue": "burns all five", "text": "429 → deepened · 400 → 5 identical failures", "size": 44, "color": "red", "at": { "x": 320, "y": 470, "w": 1300, "h": 65 } },
+        { "id": "fix", "kind": "handtext", "cue": "corrected loop", "text": "✓ retry-after → capped backoff → terminal fails fast", "size": 42, "color": "green", "boxed": true, "at": { "x": 280, "y": 590, "w": 1380, "h": 140 } }
+      ]
+    },
+    {
+      "id": "defect3",
+      "narration": "Defect three is the quiet one, because it isn't in the code — it's missing from it. No eval exists. Success was judged by a few manual runs, so nothing fails when a prompt or model change regresses the feature. The fix: a graded holdout set that runs on every change, giving the module's first layer the last word.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Defect three", "text": "defect 3 · the eval", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "absence", "kind": "handtext", "cue": "missing from it", "text": "the defect is an ABSENCE —\nno graded set anywhere", "size": 50, "color": "red", "boxed": true, "at": { "x": 460, "y": 260, "w": 1000, "h": 190 } },
+        { "id": "why", "kind": "handtext", "cue": "manual runs", "text": "\"a few manual runs\" = nothing fails on regression", "size": 44, "color": "ink", "at": { "x": 300, "y": 540, "w": 1350, "h": 65 } },
+        { "id": "fix", "kind": "handtext", "cue": "holdout set", "text": "✓ graded holdout set, run on every change", "size": 44, "color": "green", "at": { "x": 360, "y": 680, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Three defects, and the module in miniature: the boundary enforced, the failure sorted, the success measured. If you caught all three, you're reading code the way production reads it. Next: the module's key takeaways.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "module in miniature", "size": 44, "color": "ink", "at": { "x": 380, "y": 230, "w": 1250, "h": 350 }, "items": [
+          { "text": "the boundary enforced", "cue": "boundary enforced" },
+          { "text": "the failure sorted", "cue": "failure sorted" },
+          { "text": "the success measured", "cue": "success measured" }
+        ] },
+        { "id": "next", "kind": "handtext", "cue": "key takeaways", "text": "→ next: key takeaways", "size": 46, "color": "green", "at": { "x": 620, "y": 680, "w": 700, "h": 70 } }
+      ]
+    }
+  ]
+}

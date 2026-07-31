@@ -82,6 +82,32 @@ import script_m3_07c from "../../video-scripts/m3-07-cumulative-debrief/script.j
 import timing_m3_07c from "../../public/audio/m3-07-cumulative-debrief/timing.json";
 import script_m3_08 from "../../video-scripts/m3-08-key-takeaways/script.json";
 import timing_m3_08 from "../../public/audio/m3-08-key-takeaways/timing.json";
+import script_m4_01 from "../../video-scripts/m4-01-module-introduction/script.json";
+import timing_m4_01 from "../../public/audio/m4-01-module-introduction/timing.json";
+import script_m4_02 from "../../video-scripts/m4-02-evals-and-judges/script.json";
+import timing_m4_02 from "../../public/audio/m4-02-evals-and-judges/timing.json";
+import script_m4_02c from "../../video-scripts/m4-02-checkpoint-debrief/script.json";
+import timing_m4_02c from "../../public/audio/m4-02-checkpoint-debrief/timing.json";
+import script_m4_03 from "../../video-scripts/m4-03-testing-and-tracing/script.json";
+import timing_m4_03 from "../../public/audio/m4-03-testing-and-tracing/timing.json";
+import script_m4_03c from "../../video-scripts/m4-03-checkpoint-debrief/script.json";
+import timing_m4_03c from "../../public/audio/m4-03-checkpoint-debrief/timing.json";
+import script_m4_04 from "../../video-scripts/m4-04-failure-handling-and-model-selection/script.json";
+import timing_m4_04 from "../../public/audio/m4-04-failure-handling-and-model-selection/timing.json";
+import script_m4_04c from "../../video-scripts/m4-04-checkpoint-debrief/script.json";
+import timing_m4_04c from "../../public/audio/m4-04-checkpoint-debrief/timing.json";
+import script_m4_05 from "../../video-scripts/m4-05-cost-and-orchestration/script.json";
+import timing_m4_05 from "../../public/audio/m4-05-cost-and-orchestration/timing.json";
+import script_m4_05c from "../../video-scripts/m4-05-checkpoint-debrief/script.json";
+import timing_m4_05c from "../../public/audio/m4-05-checkpoint-debrief/timing.json";
+import script_m4_06 from "../../video-scripts/m4-06-security/script.json";
+import timing_m4_06 from "../../public/audio/m4-06-security/timing.json";
+import script_m4_06c from "../../video-scripts/m4-06-checkpoint-debrief/script.json";
+import timing_m4_06c from "../../public/audio/m4-06-checkpoint-debrief/timing.json";
+import script_m4_07c from "../../video-scripts/m4-07-cumulative-debrief/script.json";
+import timing_m4_07c from "../../public/audio/m4-07-cumulative-debrief/timing.json";
+import script_m4_08 from "../../video-scripts/m4-08-key-takeaways/script.json";
+import timing_m4_08 from "../../public/audio/m4-08-key-takeaways/timing.json";
 
 // One entry per generated section. Batch generation will emit this list.
 const sections: { script: Script; timing: Timing }[] = [
@@ -124,6 +150,19 @@ const sections: { script: Script; timing: Timing }[] = [
   { script: script_m3_06c as unknown as Script, timing: timing_m3_06c as unknown as Timing },
   { script: script_m3_07c as unknown as Script, timing: timing_m3_07c as unknown as Timing },
   { script: script_m3_08 as unknown as Script, timing: timing_m3_08 as unknown as Timing },
+  { script: script_m4_01 as unknown as Script, timing: timing_m4_01 as unknown as Timing },
+  { script: script_m4_02 as unknown as Script, timing: timing_m4_02 as unknown as Timing },
+  { script: script_m4_02c as unknown as Script, timing: timing_m4_02c as unknown as Timing },
+  { script: script_m4_03 as unknown as Script, timing: timing_m4_03 as unknown as Timing },
+  { script: script_m4_03c as unknown as Script, timing: timing_m4_03c as unknown as Timing },
+  { script: script_m4_04 as unknown as Script, timing: timing_m4_04 as unknown as Timing },
+  { script: script_m4_04c as unknown as Script, timing: timing_m4_04c as unknown as Timing },
+  { script: script_m4_05 as unknown as Script, timing: timing_m4_05 as unknown as Timing },
+  { script: script_m4_05c as unknown as Script, timing: timing_m4_05c as unknown as Timing },
+  { script: script_m4_06 as unknown as Script, timing: timing_m4_06 as unknown as Timing },
+  { script: script_m4_06c as unknown as Script, timing: timing_m4_06c as unknown as Timing },
+  { script: script_m4_07c as unknown as Script, timing: timing_m4_07c as unknown as Timing },
+  { script: script_m4_08 as unknown as Script, timing: timing_m4_08 as unknown as Timing },
 ];
 
 export const RemotionRoot: React.FC = () => {

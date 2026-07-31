@@ -1,0 +1,50 @@
+{
+  "sectionId": "m4-02-checkpoint-debrief",
+  "title": "Checkpoint 2 Walkthrough",
+  "subtitle": "complete the partial eval",
+  "source": "course-content/module-4-production-engineering-evals-and-security/02-evals-and-judges/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4103,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint two: a summarization eval with two gaps. The dataset is missing expected behaviors, and the judge prompt has unlabeled score bands. If you haven't dragged your answers into place yet, pause here and take it first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint two", "text": "Checkpoint 2: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause here", "text": "⏸ take the checkpoint first", "size": 46, "color": "red", "boxed": true, "at": { "x": 560, "y": 440, "w": 820, "h": 120 } }
+      ]
+    },
+    {
+      "id": "dataset",
+      "narration": "The dataset first. The rule for expected behavior: name a concrete, gradable output — never restate the input. The meeting transcript assigns three action items, so its expected output is a summary listing all three action items with their owners. The bug report carries repro steps plus one unrelated aside, so its expected output names the bug and the repro steps and omits the aside. Both are specific enough for a judge to check.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "dataset first", "text": "gap 1 · the dataset", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "rule", "kind": "handtext", "cue": "never restate", "text": "concrete + gradable — never a restatement", "size": 42, "color": "ink", "at": { "x": 300, "y": 230, "w": 1300, "h": 65 } },
+        { "id": "code", "kind": "code", "cue": "meeting transcript", "lang": "text", "code": "transcript  → \"all 3 action items + their owners\"\nbug report  → \"bug + repro steps, aside OMITTED\"", "at": { "x": 220, "y": 350, "w": 1300, "h": 160 } },
+        { "id": "check", "kind": "handtext", "cue": "judge to check", "text": "✓ specific enough for a judge to grade", "size": 44, "color": "green", "boxed": true, "at": { "x": 400, "y": 600, "w": 1150, "h": 140 } }
+      ]
+    },
+    {
+      "id": "bands",
+      "narration": "Gap two, the score bands. One to three: misses required content. Four to seven: partial — some present, some missing. Eight to ten: complete and faithful to the expected behavior. Anchored bands are what stop the judge from drifting to a safe middle score, and what make a seven mean the same thing on every run.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "score bands", "text": "gap 2 · the judge's scale", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "One to three", "size": 42, "color": "ink", "at": { "x": 300, "y": 240, "w": 1400, "h": 340 }, "items": [
+          { "text": "1–3  → misses required content", "cue": "One to three" },
+          { "text": "4–7  → partial: some present, some missing", "cue": "Four to seven" },
+          { "text": "8–10 → complete + faithful", "cue": "Eight to ten" }
+        ] },
+        { "id": "why", "kind": "handtext", "cue": "Anchored bands", "text": "anchors stop the drift-to-6 —\na 7 means the same thing every run", "size": 44, "color": "green", "boxed": true, "at": { "x": 400, "y": 650, "w": 1150, "h": 190 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "That's the whole craft: name the output, anchor the scale. Next: testing and tracing — finding where a failure lives.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "name the output", "text": "name the output · anchor the scale", "size": 52, "color": "green", "boxed": true, "at": { "x": 420, "y": 320, "w": 1080, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "testing and tracing", "text": "→ next: testing & tracing", "size": 44, "color": "ink", "at": { "x": 560, "y": 600, "w": 800, "h": 70 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "sectionId": "m4-03-checkpoint-debrief",
+  "title": "Checkpoint 3 Walkthrough",
+  "subtitle": "which test level catches it",
+  "source": "course-content/module-4-production-engineering-evals-and-security/03-testing-and-tracing/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 4105,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint three: a trace where every component passes alone and the end-to-end run fails, plus three candidate fixes. If you haven't made your pick, pause and diagnose it yourself first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint three", "text": "Checkpoint 3: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ diagnose the trace yourself first", "size": 46, "color": "red", "boxed": true, "at": { "x": 480, "y": 440, "w": 980, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "Read the trace from the bottom. The final assertion fails because the policy phrase never made it into the answer. Step two is the tell: chunks were placed into the prompt without reading the content field, so the model answered without the documents. The failure lives in the handoff, and the answer is C. Extract the content field when building the prompt, then add an integration test that drives retrieval into the prompt builder on real chunks. Option A repairs the parser — but the parser already passes its unit test, and a component that passes alone is not where an end-to-end-only failure lives. Option B rewords the prompt — but the model call passes its functional test, and nicer wording cannot repair malformed context.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "Read the trace", "lang": "text", "code": "PASS  retrieve · unit     PASS  model call · functional\nFAIL  full_flow · e2e\n  step 2: chunks placed w/o .content   <- the tell", "at": { "x": 200, "y": 120, "w": 1400, "h": 200 } },
+        { "id": "where", "kind": "handtext", "cue": "lives in the handoff", "text": "both pass alone → the break is the handoff", "size": 42, "color": "ink", "at": { "x": 320, "y": 390, "w": 1300, "h": 65 } },
+        { "id": "verdict", "kind": "handtext", "cue": "answer is C", "text": "✓ C — extract .content + integration test on the seam", "size": 44, "color": "green", "boxed": true, "at": { "x": 260, "y": 500, "w": 1400, "h": 140 } },
+        { "id": "notA", "kind": "handtext", "cue": "passes its unit test", "text": "✗ A — the parser already passes alone; not the break", "size": 34, "color": "red", "at": { "x": 280, "y": 710, "w": 1400, "h": 55 } },
+        { "id": "notB", "kind": "handtext", "cue": "rewords the prompt", "text": "✗ B — wording can't repair malformed context", "size": 34, "color": "red", "at": { "x": 280, "y": 800, "w": 1350, "h": 55 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "And name the level: integration. It's the only level that watches the seam. Next: failure handling and model selection.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "name the level", "color": "green", "at": { "x": 380, "y": 300, "w": 1160, "h": 200 } },
+        { "id": "rule", "kind": "handtext", "cue": "integration", "delay": 0.2, "text": "the level that sees the seam = INTEGRATION", "size": 46, "color": "green", "at": { "x": 460, "y": 360, "w": 1000, "h": 80 } },
+        { "id": "next", "kind": "handtext", "cue": "failure handling", "text": "→ next: failure handling & model selection", "size": 42, "color": "ink", "at": { "x": 420, "y": 620, "w": 1100, "h": 70 } }
+      ]
+    }
+  ]
+}

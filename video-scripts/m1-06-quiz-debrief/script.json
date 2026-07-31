@@ -1,0 +1,88 @@
+{
+  "sectionId": "m1-06-quiz-debrief",
+  "title": "Quiz Walkthrough",
+  "subtitle": "every answer, explained",
+  "source": "course-content/module-1-mso-foundations/06-module-wrap-up/01-quiz.md + 02-exercise.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 1107,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Done with the quiz and the exercise? Great. Let's check your reasoning, not just your score. For every question, we'll look at why the right answer is right, and why the tempting wrong ones are wrong. And if you haven't taken them yet, pause this video and do that first. It works better that way.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "quiz and the exercise", "text": "Quiz Walkthrough", "size": 84, "color": "ink", "at": { "x": 500, "y": 180, "w": 950, "h": 120 } },
+        { "id": "what", "kind": "handtext", "cue": "reasoning", "text": "check your reasoning — not just your score", "size": 44, "color": "blue", "at": { "x": 460, "y": 400, "w": 1040, "h": 70 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause this video", "text": "haven't taken it yet? ⏸ pause — quiz first!", "size": 42, "color": "red", "boxed": true, "at": { "x": 460, "y": 580, "w": 1000, "h": 120 } }
+      ]
+    },
+    {
+      "id": "q12",
+      "narration": "Question one. A teammate insists that two identical prompts must return identical text. The right response is B: not necessarily. The model samples each next token from a probability distribution, so wording can vary even when both answers are correct. A says the model is deterministic. That's exactly what sampling breaks. And C and D blame streaming or model size. Neither one changes sampling. Question two. What separates model choice from reasoning mode? C: model choice picks which family member runs. Extended thinking is a per-call setting. B is the classic trap: extended thinking is not a different model. It's the same model, deciding to think. A and D make the levers one thing. They're two.",
+      "elements": [
+        { "id": "q1", "kind": "handtext", "cue": "Question one", "text": "Q1 · identical prompts → identical text?", "size": 40, "color": "ink", "boxed": true, "at": { "x": 140, "y": 170, "w": 800, "h": 100 } },
+        { "id": "q1right", "kind": "handtext", "cue": "right response", "text": "✓ B — sampling: wording varies,\n   both can still be correct", "size": 38, "color": "green", "at": { "x": 200, "y": 320, "w": 720, "h": 120 } },
+        { "id": "q1a", "kind": "handtext", "cue": "deterministic", "text": "✗ A \"deterministic\" — sampling breaks this", "size": 34, "color": "red", "at": { "x": 200, "y": 480, "w": 720, "h": 60 } },
+        { "id": "q1cd", "kind": "handtext", "cue": "streaming or model", "text": "✗ C/D — streaming & size don't change sampling", "size": 34, "color": "red", "at": { "x": 200, "y": 570, "w": 740, "h": 60 } },
+        { "id": "q2", "kind": "handtext", "cue": "Question two", "text": "Q2 · model choice vs reasoning mode", "size": 40, "color": "ink", "boxed": true, "at": { "x": 1000, "y": 170, "w": 790, "h": 100 } },
+        { "id": "q2right", "kind": "handtext", "cue": "per-call setting", "text": "✓ C — model = which member,\n   thinking = per-call setting", "size": 38, "color": "green", "at": { "x": 1060, "y": 320, "w": 720, "h": 120 } },
+        { "id": "q2b", "kind": "handtext", "cue": "classic trap", "text": "✗ B — thinking is NOT a different model", "size": 34, "color": "red", "at": { "x": 1060, "y": 480, "w": 720, "h": 60 } },
+        { "id": "q2ad", "kind": "handtext", "cue": "levers one", "text": "✗ A/D — two independent levers, not one", "size": 34, "color": "red", "at": { "x": 1060, "y": 570, "w": 720, "h": 60 } }
+      ]
+    },
+    {
+      "id": "q34",
+      "narration": "Question three. Your classification task already works zero-shot. What do three added examples do? B: they add token cost on every single call, for little or no gain. Remember the discipline: examples fix broken output shapes. They're not seasoning to sprinkle on working prompts. C is wrong because examples never change which model runs, and D is wrong because nothing in a prompt disables sampling. Question four. Thousands of inputs, offline, lowest cost. That's C: batch submission with polling. A synchronous loop hits rate limits and pays real-time prices. Streaming, answer B, only helps when someone is watching. And D, a bigger context window, is about fitting more in one request. Not about throughput.",
+      "elements": [
+        { "id": "q3", "kind": "handtext", "cue": "Question three", "text": "Q3 · add examples to a working prompt?", "size": 40, "color": "ink", "boxed": true, "at": { "x": 140, "y": 170, "w": 800, "h": 100 } },
+        { "id": "q3right", "kind": "handtext", "cue": "token cost on every", "text": "✓ B — cost on every call,\n   little or no gain", "size": 38, "color": "green", "at": { "x": 200, "y": 320, "w": 720, "h": 120 } },
+        { "id": "q3rule", "kind": "handtext", "cue": "seasoning", "text": "✗ examples fix broken shapes —\n   they're not seasoning", "size": 34, "color": "red", "at": { "x": 200, "y": 480, "w": 720, "h": 110 } },
+        { "id": "q3cd", "kind": "handtext", "cue": "never change which", "text": "✗ C/D — don't change the model, don't disable sampling", "size": 30, "color": "red", "at": { "x": 200, "y": 620, "w": 760, "h": 60 } },
+        { "id": "q4", "kind": "handtext", "cue": "Question four", "text": "Q4 · thousands offline, lowest cost", "size": 40, "color": "ink", "boxed": true, "at": { "x": 1000, "y": 170, "w": 790, "h": 100 } },
+        { "id": "q4right", "kind": "handtext", "cue": "batch submission", "text": "✓ C — batch + polling", "size": 38, "color": "green", "at": { "x": 1060, "y": 320, "w": 720, "h": 70 } },
+        { "id": "q4a", "kind": "handtext", "cue": "rate limits", "text": "✗ A — sync loop: rate limits + real-time prices", "size": 34, "color": "red", "at": { "x": 1060, "y": 440, "w": 740, "h": 60 } },
+        { "id": "q4b", "kind": "handtext", "cue": "someone is watching", "text": "✗ B — streaming needs a watcher", "size": 34, "color": "red", "at": { "x": 1060, "y": 530, "w": 720, "h": 60 } },
+        { "id": "q4d", "kind": "handtext", "cue": "bigger context", "text": "✗ D — window ≠ throughput", "size": 34, "color": "red", "at": { "x": 1060, "y": 620, "w": 720, "h": 60 } }
+      ]
+    },
+    {
+      "id": "s12",
+      "narration": "Now the scenarios. Scenario one: the same classification task at temperature zero, versus high temperature. The answer is A. Low temperature concentrates probability on the most likely tokens, so repeated runs agree far more often. But notice the fine print: never guaranteed, even at temperature zero. High temperature spreads the distribution, so labels and wording drift. B claims temperature only affects length. It doesn't. It shapes which tokens get picked. And one more thing worth repeating: on the newest models, you leave sampling parameters out entirely. Non-default values return an error. Scenario two: zero-shot keeps returning the wrong structure. Switching to multi-shot, answer B, shows the model the exact structure to match, and that usually beats another paragraph of instructions. A is the retraining trap. Examples are not training. Nothing persists between calls. And D has it backwards: examples add tokens. They never make calls cheaper.",
+      "elements": [
+        { "id": "s1", "kind": "handtext", "cue": "Scenario one", "text": "S1 · temp 0 vs high temp", "size": 40, "color": "ink", "boxed": true, "at": { "x": 140, "y": 170, "w": 800, "h": 100 } },
+        { "id": "s1right", "kind": "handtext", "cue": "concentrates probability", "text": "✓ A — low temp: consistent runs\n   (but never guaranteed)", "size": 38, "color": "green", "at": { "x": 200, "y": 320, "w": 720, "h": 120 } },
+        { "id": "s1b", "kind": "handtext", "cue": "affects length", "text": "✗ B — temp shapes token choice, not length", "size": 34, "color": "red", "at": { "x": 200, "y": 480, "w": 740, "h": 60 } },
+        { "id": "s1warn", "kind": "handtext", "cue": "return an error", "text": "newest models: leave sampling\nparams out — or get an error", "size": 34, "color": "red", "boxed": true, "at": { "x": 200, "y": 590, "w": 700, "h": 140 } },
+        { "id": "s2", "kind": "handtext", "cue": "Scenario two", "text": "S2 · wrong structure → multi-shot?", "size": 40, "color": "ink", "boxed": true, "at": { "x": 1000, "y": 170, "w": 790, "h": 100 } },
+        { "id": "s2right", "kind": "handtext", "cue": "exact structure", "text": "✓ B — examples show the exact\n   shape to match", "size": 38, "color": "green", "at": { "x": 1060, "y": 320, "w": 720, "h": 120 } },
+        { "id": "s2a", "kind": "handtext", "cue": "retraining trap", "text": "✗ A — not training; nothing persists", "size": 34, "color": "red", "at": { "x": 1060, "y": 480, "w": 720, "h": 60 } },
+        { "id": "s2d", "kind": "handtext", "cue": "has it backwards", "text": "✗ D — examples ADD tokens, never cheaper", "size": 34, "color": "red", "at": { "x": 1060, "y": 570, "w": 730, "h": 60 } }
+      ]
+    },
+    {
+      "id": "s34",
+      "narration": "Scenario three: fifty thousand documents overnight, nobody waiting. Answer C, the batch pattern: submit, poll, accept the latency, keep the savings. A synchronous loop would hit rate limits and tie up your application all night. And streaming buys you nothing, because there's no one watching the words appear. Scenario four: a long agent session where the context window keeps filling. Answer B, and this one matters in production. The window is a fixed budget. An oversized input is rejected before generation. Hitting the ceiling mid-generation returns truncated output with a stop reason. The trap is A: the model never silently drops old turns to make room. Nothing is dropped for you. Trimming or summarizing history is your application's job. And that's exactly why sessions that passed in testing can fail once real inputs grow.",
+      "elements": [
+        { "id": "s3", "kind": "handtext", "cue": "Scenario three", "text": "S3 · 50,000 docs overnight", "size": 40, "color": "ink", "boxed": true, "at": { "x": 140, "y": 170, "w": 800, "h": 100 } },
+        { "id": "s3right", "kind": "handtext", "cue": "batch pattern", "text": "✓ C — batch: submit · poll · save", "size": 38, "color": "green", "at": { "x": 200, "y": 320, "w": 720, "h": 70 } },
+        { "id": "s3a", "kind": "handtext", "cue": "rate limits", "text": "✗ A — sync loop: rate limits, ties up the app", "size": 34, "color": "red", "at": { "x": 200, "y": 440, "w": 740, "h": 60 } },
+        { "id": "s3b", "kind": "handtext", "cue": "no one watching", "text": "✗ B — streaming: nobody's watching", "size": 34, "color": "red", "at": { "x": 200, "y": 530, "w": 720, "h": 60 } },
+        { "id": "s4", "kind": "handtext", "cue": "Scenario four", "text": "S4 · context window keeps filling", "size": 40, "color": "ink", "boxed": true, "at": { "x": 1000, "y": 170, "w": 790, "h": 100 } },
+        { "id": "s4right", "kind": "handtext", "cue": "fixed budget", "text": "✓ B — fixed budget: reject up front,\n   or truncate + stop reason", "size": 38, "color": "green", "at": { "x": 1060, "y": 320, "w": 730, "h": 120 } },
+        { "id": "s4a", "kind": "handtext", "cue": "silently drops", "text": "✗ A — nothing is silently dropped for you", "size": 34, "color": "red", "at": { "x": 1060, "y": 480, "w": 730, "h": 60 } },
+        { "id": "s4job", "kind": "handtext", "cue": "application's job", "text": "trim / summarize history = YOUR job", "size": 36, "color": "blue", "at": { "x": 1060, "y": 570, "w": 730, "h": 60 } },
+        { "id": "s4prod", "kind": "handtext", "cue": "passed in testing", "text": "passed in testing ≠ safe in production", "size": 34, "color": "red", "at": { "x": 1060, "y": 660, "w": 730, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "If you missed one, go back to that section's video. The pattern behind all eight answers is the same: know what each budget is, know who's waiting, and let evals judge meaning. That's Module one. See you in Module two.",
+      "elements": [
+        { "id": "back", "kind": "handtext", "cue": "missed one", "text": "missed one? rewatch that section", "size": 44, "color": "blue", "at": { "x": 480, "y": 240, "w": 1000, "h": 70 } },
+        { "id": "patternbox", "kind": "sketch", "shape": "rect", "cue": "pattern behind", "color": "green", "at": { "x": 360, "y": 400, "w": 1200, "h": 240 } },
+        { "id": "pattern", "kind": "handtext", "cue": "know what each budget", "text": "know the budgets · know who's waiting ·\nlet evals judge meaning", "size": 44, "color": "green", "at": { "x": 440, "y": 450, "w": 1050, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "Module two", "text": "→ see you in Module 2", "size": 46, "color": "ink", "at": { "x": 680, "y": 760, "w": 640, "h": 70 } }
+      ]
+    }
+  ]
+}

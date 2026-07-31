@@ -4,6 +4,11 @@
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
+import { Agent, setGlobalDispatcher } from "undici";
+
+// Kokoro on a busy CPU can take >5 min for a long beat; fetch's default
+// headers timeout kills the request. Synthesis is legitimately slow, not hung.
+setGlobalDispatcher(new Agent({ headersTimeout: 0, bodyTimeout: 0 }));
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const sectionId = process.argv[2];

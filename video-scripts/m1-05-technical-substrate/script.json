@@ -1,0 +1,79 @@
+{
+  "sectionId": "m1-05-technical-substrate",
+  "title": "The Technical Substrate",
+  "subtitle": "SDK · REST · streaming · async",
+  "source": "course-content/module-1-mso-foundations/05-technical-substrate/01-teaching.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 1105,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Everything you build with Claude travels the same road: a web request to the Claude API. But there are four request patterns, for four different situations. Pick the wrong one, and you either leave users staring at a blank screen, or pay real-time prices for overnight work.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Everything", "text": "How your code reaches Claude", "size": 76, "color": "ink", "at": { "x": 320, "y": 150, "w": 1300, "h": 110 } },
+        { "id": "you", "kind": "handtext", "cue": "web request", "text": "your code", "size": 44, "color": "blue", "boxed": true, "at": { "x": 380, "y": 400, "w": 380, "h": 110 } },
+        { "id": "arrow", "kind": "sketch", "shape": "arrow", "cue": "Claude API", "color": "ink", "at": { "x": 800, "y": 440, "w": 300, "h": 20 } },
+        { "id": "api", "kind": "handtext", "cue": "Claude API", "delay": 0.3, "text": "Claude API", "size": 44, "color": "green", "boxed": true, "at": { "x": 1140, "y": 400, "w": 400, "h": 110 } },
+        { "id": "warn", "kind": "handtext", "cue": "blank screen", "text": "wrong pattern = blank screens, or overpaying", "size": 40, "color": "red", "at": { "x": 440, "y": 640, "w": 1100, "h": 70 } }
+      ]
+    },
+    {
+      "id": "sdk-rest",
+      "narration": "At its core, Claude is reached over a REST API. Your code sends a request to an endpoint, with your API key and a JSON body, and reads a JSON response back. You can call that endpoint directly with any HTTP client. More commonly, you use an official SDK. Python, TypeScript, and others. The SDK is a thin convenience layer over the same REST API: it handles authentication, request construction, retries, and response parsing, so you write less boilerplate. Same API, same models, either way. The SDK just saves you from assembling requests by hand.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "At its core", "text": "SDK vs raw REST", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "code", "kind": "handtext", "cue": "Your code sends", "text": "your code", "size": 38, "color": "ink", "boxed": true, "at": { "x": 180, "y": 300, "w": 360, "h": 100 } },
+        { "id": "req", "kind": "code", "cue": "JSON body", "lang": "text", "code": "POST /v1/messages\nx-api-key: sk-ant-...\n{ \"model\": ..., \"messages\": [...] }", "at": { "x": 620, "y": 260, "w": 640, "h": 180 } },
+        { "id": "claude", "kind": "handtext", "cue": "JSON response", "text": "Claude", "size": 38, "color": "green", "boxed": true, "at": { "x": 1360, "y": 300, "w": 320, "h": 100 } },
+        { "id": "sdk", "kind": "handtext", "cue": "official SDK", "text": "the SDK: a thin layer on the same API", "size": 44, "color": "blue", "at": { "x": 280, "y": 530, "w": 1000, "h": 70 } },
+        { "id": "handles", "kind": "bullets", "cue": "authentication", "size": 36, "color": "ink", "at": { "x": 340, "y": 630, "w": 800, "h": 260 }, "items": [
+          { "text": "auth + request construction", "cue": "authentication" },
+          { "text": "retries", "cue": "retries" },
+          { "text": "response parsing → less boilerplate", "cue": "parsing" }
+        ] },
+        { "id": "same", "kind": "handtext", "cue": "Same API", "text": "same API,\nsame models", "size": 42, "color": "green", "boxed": true, "at": { "x": 1300, "y": 620, "w": 460, "h": 160 } }
+      ]
+    },
+    {
+      "id": "sync-stream",
+      "narration": "Now, how does the response come back? A synchronous request is the simplest pattern: send the request, wait, and the complete response arrives in one piece. That's fine for short responses, and for backend jobs where nobody is watching. But when a response is long and a user is watching, waiting feels broken. Streaming fixes that: the response arrives in pieces as the model generates it, over the same connection, using server-sent events. Output appears immediately, and your code reassembles the pieces into the final message. The rule of thumb: someone watching? Stream it.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "come back", "text": "Sync vs streaming", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "sync", "kind": "handtext", "cue": "one piece", "text": "sync:  ask → wait ... → whole answer", "size": 44, "color": "ink", "at": { "x": 260, "y": 280, "w": 1200, "h": 70 } },
+        { "id": "syncok", "kind": "handtext", "cue": "backend jobs", "text": "fine for: short answers, backend jobs", "size": 36, "color": "ink", "at": { "x": 360, "y": 380, "w": 900, "h": 60 } },
+        { "id": "stream", "kind": "handtext", "cue": "Streaming fixes", "text": "stream:  ask → piece → piece → piece...", "size": 44, "color": "green", "at": { "x": 260, "y": 540, "w": 1200, "h": 70 } },
+        { "id": "sse", "kind": "handtext", "cue": "server-sent events", "text": "same connection — server-sent events", "size": 36, "color": "ink", "at": { "x": 360, "y": 640, "w": 950, "h": 60 } },
+        { "id": "rule", "kind": "handtext", "cue": "rule of thumb", "text": "someone watching? stream it", "size": 48, "color": "green", "boxed": true, "at": { "x": 520, "y": 760, "w": 880, "h": 130 } }
+      ]
+    },
+    {
+      "id": "async-batch",
+      "narration": "For high-volume work there are two patterns, and they solve different problems. First: concurrency. The Python SDK ships an async client that uses non-blocking async and await, so your application keeps working while requests are in flight. In TypeScript you don't need a separate client. The standard one is already promise-based. Second: bulk. The Message Batches API is for offline workloads: you submit a large set of requests in one call, get back an identifier, and poll for completion. Batch jobs can take up to twenty-four hours, and in exchange they run at a lower per-token cost. Perfect for offline pipelines, evaluation runs, and anywhere cost matters more than turnaround.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "high-volume", "text": "High volume: two different problems", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 1300, "h": 90 } },
+        { "id": "async", "kind": "handtext", "cue": "concurrency", "text": "1. concurrency", "size": 48, "color": "ink", "at": { "x": 200, "y": 260, "w": 500, "h": 70 } },
+        { "id": "asynccode", "kind": "code", "cue": "async client", "lang": "python", "code": "client = AsyncAnthropic()\nawait client.messages.create(...)\n# app keeps working meanwhile", "at": { "x": 200, "y": 360, "w": 700, "h": 190 } },
+        { "id": "tsnote", "kind": "handtext", "cue": "promise-based", "text": "TypeScript: standard client is already async", "size": 34, "color": "ink", "at": { "x": 220, "y": 600, "w": 800, "h": 60 } },
+        { "id": "batch", "kind": "handtext", "cue": "bulk", "text": "2. bulk offline", "size": 48, "color": "green", "at": { "x": 1080, "y": 260, "w": 500, "h": 70 } },
+        { "id": "batchbox", "kind": "handtext", "cue": "submit a large set", "text": "10,000 requests → one batch → poll", "size": 40, "color": "green", "boxed": true, "at": { "x": 1040, "y": 380, "w": 740, "h": 130 } },
+        { "id": "batchdeal", "kind": "handtext", "cue": "twenty-four", "text": "up to 24h · lower cost per token", "size": 40, "color": "ink", "at": { "x": 1100, "y": 570, "w": 660, "h": 60 } },
+        { "id": "batchuse", "kind": "handtext", "cue": "evaluation runs", "text": "pipelines · eval runs · nobody waiting", "size": 34, "color": "ink", "at": { "x": 1100, "y": 660, "w": 680, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "So ask one question: is anyone waiting? Short answer and nobody staring: synchronous. A user watching: stream. Many requests in flight at once: the async client. Thousands of requests overnight, where cost wins: batch. That's the whole map. You've now got all four foundations. Next: the module wrap-up.",
+      "elements": [
+        { "id": "q", "kind": "handtext", "cue": "one question", "text": "is anyone waiting?", "size": 64, "color": "blue", "boxed": true, "at": { "x": 560, "y": 130, "w": 800, "h": 140 } },
+        { "id": "map", "kind": "bullets", "cue": "Short answer", "size": 42, "color": "ink", "at": { "x": 340, "y": 340, "w": 1300, "h": 420 }, "items": [
+          { "text": "nobody staring → synchronous", "cue": "nobody staring" },
+          { "text": "user watching → stream", "cue": "user watching" },
+          { "text": "many in flight → async client", "cue": "in flight" },
+          { "text": "overnight bulk, cost wins → batch", "cue": "overnight" }
+        ] },
+        { "id": "next", "kind": "handtext", "cue": "wrap-up", "text": "→ next: module wrap-up", "size": 46, "color": "green", "at": { "x": 660, "y": 820, "w": 700, "h": 70 } }
+      ]
+    }
+  ]
+}

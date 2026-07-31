@@ -1,0 +1,65 @@
+{
+  "sectionId": "m1-04-prompting-modes",
+  "title": "Prompting Modes",
+  "subtitle": "zero-shot · one-shot · multi-shot",
+  "source": "course-content/module-1-mso-foundations/04-prompting-modes/01-teaching.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 1104,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Your prompt is clear, your instructions are detailed, and the output still comes back in the wrong shape. Before you write yet another paragraph of instructions, there's a cheaper trick: show, don't tell. That's what prompting modes are about.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "prompt is clear", "text": "Prompting Modes", "size": 88, "color": "ink", "at": { "x": 500, "y": 160, "w": 950, "h": 120 } },
+        { "id": "pain", "kind": "handtext", "cue": "wrong shape", "text": "output: wrong shape... again?!", "size": 46, "color": "red", "at": { "x": 400, "y": 400, "w": 800, "h": 70 } },
+        { "id": "trick", "kind": "handtext", "cue": "cheaper trick", "text": "show, don't tell", "size": 60, "color": "green", "boxed": true, "at": { "x": 640, "y": 560, "w": 640, "h": 130 } }
+      ]
+    },
+    {
+      "id": "modes",
+      "narration": "The modes differ by one thing: how many worked examples you put inside the prompt. Zero-shot is just the instruction. Describe the task, ask for the result. One-shot adds a single example: an input, paired with the output you want. Multi-shot, also called few-shot, includes several. And here's the key idea: these examples are not training data. The model doesn't learn from them permanently. They sit inside the prompt, and they show the model the exact shape of the answer you want. Which is precisely the thing a written description keeps failing to pin down.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "worked examples", "text": "How many examples in the prompt?", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 1200, "h": 90 } },
+        { "id": "zero", "kind": "handtext", "cue": "Zero-shot is just", "text": "zero-shot\ninstruction only", "size": 40, "color": "ink", "boxed": true, "at": { "x": 180, "y": 300, "w": 480, "h": 180 } },
+        { "id": "one", "kind": "handtext", "cue": "One-shot adds", "text": "one-shot\n+ 1 example", "size": 40, "color": "blue", "boxed": true, "at": { "x": 720, "y": 300, "w": 480, "h": 180 } },
+        { "id": "multi", "kind": "handtext", "cue": "Multi-shot", "text": "multi-shot\n+ several", "size": 40, "color": "green", "boxed": true, "at": { "x": 1260, "y": 300, "w": 480, "h": 180 } },
+        { "id": "nottraining", "kind": "handtext", "cue": "not training data", "text": "examples ≠ training data", "size": 48, "color": "red", "at": { "x": 480, "y": 590, "w": 900, "h": 70 } },
+        { "id": "shape", "kind": "handtext", "cue": "exact shape", "text": "they show the exact shape you want", "size": 42, "color": "blue", "at": { "x": 480, "y": 700, "w": 950, "h": 70 } }
+      ]
+    },
+    {
+      "id": "tradeoff",
+      "narration": "So why not always use examples? Because every example costs tokens on every single call, and eats into your context budget. It's a quality versus cost trade. Reach for zero-shot when the task is simple and the output shape is obvious. Move to one-shot or multi-shot when the output has a specific structure, casing, or edge case that your description keeps missing. In practice, one or two correct examples usually fix a shape problem faster than another paragraph of instructions. The discipline is: add the smallest amount of prompt that produces a reliable result.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "quality versus cost", "text": "The trade", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 600, "h": 90 } },
+        { "id": "cost", "kind": "handtext", "cue": "costs tokens", "text": "every example = tokens on EVERY call", "size": 42, "color": "red", "at": { "x": 480, "y": 220, "w": 1000, "h": 70 } },
+        { "id": "when", "kind": "bullets", "cue": "Reach for", "size": 40, "color": "ink", "at": { "x": 260, "y": 370, "w": 1450, "h": 300 }, "items": [
+          { "text": "simple task, obvious shape → zero-shot", "cue": "Reach for" },
+          { "text": "structure / casing / edge cases missing → add examples", "cue": "Move to" },
+          { "text": "1–2 good examples beat another paragraph", "cue": "one or two" }
+        ] },
+        { "id": "rule", "kind": "handtext", "cue": "smallest amount", "text": "smallest prompt that's reliable", "size": 48, "color": "green", "boxed": true, "at": { "x": 520, "y": 730, "w": 880, "h": 130 } }
+      ]
+    },
+    {
+      "id": "interact",
+      "narration": "One more lever interacts here: the model. A more capable model often succeeds zero-shot where a smaller model needs a few examples to match the structure. Flip that around: adding examples can let a cheaper model do the job. So make the two decisions together: the simplest model, the fewest examples, that pass your eval.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "lever interacts", "text": "Mode × model", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "r1", "kind": "handtext", "cue": "more capable model", "text": "capable model + 0 examples  ✓", "size": 44, "color": "ink", "at": { "x": 360, "y": 320, "w": 1200, "h": 70 } },
+        { "id": "r2", "kind": "handtext", "cue": "cheaper model", "text": "cheaper model + 2 examples  ✓  (same result)", "size": 44, "color": "green", "at": { "x": 360, "y": 450, "w": 1240, "h": 70 } },
+        { "id": "rule", "kind": "handtext", "cue": "decisions together", "text": "decide together — against your eval", "size": 44, "color": "blue", "at": { "x": 460, "y": 660, "w": 1000, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Here's something to try today: the next time output comes back in the wrong shape, paste in one correct example before you rewrite the instructions. Watch how often that's all it takes. Next up: how your code actually reaches Claude.",
+      "elements": [
+        { "id": "trybox", "kind": "sketch", "shape": "rect", "cue": "try today", "color": "green", "at": { "x": 300, "y": 300, "w": 1320, "h": 260 } },
+        { "id": "try", "kind": "handtext", "cue": "wrong shape", "delay": 0.2, "text": "try it: wrong shape? paste ONE correct example\nbefore rewriting the instructions", "size": 44, "color": "green", "at": { "x": 380, "y": 360, "w": 1180, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "Next up", "text": "→ next: SDKs, streaming & async", "size": 46, "color": "ink", "at": { "x": 560, "y": 680, "w": 850, "h": 70 } }
+      ]
+    }
+  ]
+}

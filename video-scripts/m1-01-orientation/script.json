@@ -1,0 +1,46 @@
+{
+  "sectionId": "m1-01-orientation",
+  "title": "Welcome: MSO Foundations",
+  "subtitle": "what you'll be able to do",
+  "source": "course-content/module-1-mso-foundations/01-orientation/01-orientation.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 1101,
+  "beats": [
+    {
+      "id": "welcome",
+      "narration": "Welcome to the Claude Developer course. Before you write a single line of code against Claude, it helps to know what the words mean. This first module gives you the vocabulary and the technical foundations that everything else in the course builds on. It's short, and by the end, four things will feel natural.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Welcome", "text": "Module 1: Foundations", "size": 88, "color": "ink", "at": { "x": 420, "y": 160, "w": 1100, "h": 120 } },
+        { "id": "underline", "kind": "sketch", "shape": "line", "cue": "code against Claude", "color": "blue", "at": { "x": 440, "y": 290, "w": 1040, "h": 12 } },
+        { "id": "vocab", "kind": "handtext", "cue": "vocabulary", "text": "the vocabulary everything else builds on", "size": 46, "color": "blue", "at": { "x": 520, "y": 420, "w": 900, "h": 70 } },
+        { "id": "four", "kind": "handtext", "cue": "four things", "text": "4 skills →", "size": 56, "color": "green", "at": { "x": 830, "y": 620, "w": 300, "h": 80 } }
+      ]
+    },
+    {
+      "id": "goals",
+      "narration": "Here's what you'll be able to do. First: explain how the model actually behaves. What a token is, how the context window acts as a fixed budget, why sampling makes outputs vary, and what that means for testing. Second: describe the Claude model family and its tiers, and keep model choice separate from reasoning modes like extended thinking. Third: choose between zero-shot, one-shot, and multi-shot prompting, and weigh the cost of adding examples. And fourth: describe how your code reaches Claude. SDK or raw REST, synchronous or streaming, and the async patterns for high-volume work.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "what you'll be able", "text": "By the end, you can...", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 100 } },
+        { "id": "goals", "kind": "bullets", "cue": "First", "size": 42, "color": "ink", "at": { "x": 200, "y": 260, "w": 1500, "h": 560 }, "items": [
+          { "text": "1. explain model behavior: tokens · context · sampling", "cue": "explain how the model" },
+          { "text": "2. pick models — and keep reasoning modes separate", "cue": "describe the Claude model" },
+          { "text": "3. choose zero-, one-, or multi-shot prompting", "cue": "zero-shot" },
+          { "text": "4. reach Claude: SDK · REST · streaming · async", "cue": "your code reaches" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Four sections, four foundations. Each one is short, and each ends with a quick way to check that it stuck. When you're ready, let's start with the big one: how language models actually behave.",
+      "elements": [
+        { "id": "b1", "kind": "handtext", "cue": "Four sections", "text": "behavior", "size": 40, "color": "ink", "boxed": true, "at": { "x": 220, "y": 380, "w": 330, "h": 110 } },
+        { "id": "b2", "kind": "handtext", "cue": "Four sections", "delay": 0.4, "text": "models", "size": 40, "color": "ink", "boxed": true, "at": { "x": 600, "y": 380, "w": 330, "h": 110 } },
+        { "id": "b3", "kind": "handtext", "cue": "four foundations", "delay": 0.2, "text": "prompting", "size": 40, "color": "ink", "boxed": true, "at": { "x": 980, "y": 380, "w": 330, "h": 110 } },
+        { "id": "b4", "kind": "handtext", "cue": "four foundations", "delay": 0.6, "text": "transport", "size": 40, "color": "ink", "boxed": true, "at": { "x": 1360, "y": 380, "w": 330, "h": 110 } },
+        { "id": "arrow", "kind": "sketch", "shape": "arrow", "cue": "start with", "color": "green", "at": { "x": 700, "y": 640, "w": 300, "h": 20 } },
+        { "id": "next", "kind": "handtext", "cue": "language models actually", "text": "next: how LLMs behave", "size": 46, "color": "green", "at": { "x": 1040, "y": 615, "w": 640, "h": 70 } }
+      ]
+    }
+  ]
+}

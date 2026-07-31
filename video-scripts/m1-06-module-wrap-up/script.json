@@ -1,0 +1,52 @@
+{
+  "sectionId": "m1-06-module-wrap-up",
+  "title": "Wrap-up: Five Takeaways",
+  "subtitle": "Module 1 recap",
+  "source": "course-content/module-1-mso-foundations/06-module-wrap-up/03-recap.md + 04-module-complete.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 1106,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "You've made it through the foundations. Before you take the quiz, let's lock in five takeaways. If you can say each of these in your own words, you're ready.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "foundations", "text": "Module 1: Wrap-up", "size": 84, "color": "ink", "at": { "x": 480, "y": 200, "w": 960, "h": 120 } },
+        { "id": "five", "kind": "handtext", "cue": "five takeaways", "text": "5 takeaways", "size": 56, "color": "blue", "boxed": true, "at": { "x": 720, "y": 420, "w": 480, "h": 130 } },
+        { "id": "ready", "kind": "handtext", "cue": "own words", "text": "can you say each one in your own words?", "size": 40, "color": "green", "at": { "x": 480, "y": 660, "w": 1000, "h": 70 } }
+      ]
+    },
+    {
+      "id": "takeaways",
+      "narration": "One: tokens are the unit of input, output, and cost. Think and budget in tokens, because that's what the API meters and the context window measures. Two: the context window is a fixed budget that holds the whole request at once. An oversized input errors before generation. Hitting the ceiling mid-generation returns truncated output with a stop reason. Either way, managing history is your application's job. Three: sampling makes generation non-deterministic. Same prompt, different wording. So test properties and meaning, not exact text. That's what evals are for. Four: model choice and reasoning mode are separate, composable levers. Pick the smallest model, and the simplest settings, that pass your eval. And five: you reach Claude over a REST API, usually through an SDK. And you pick sync, streaming, async, or batch, based on who's waiting.",
+      "elements": [
+        { "id": "list", "kind": "bullets", "cue": "tokens are the unit", "size": 42, "color": "ink", "at": { "x": 180, "y": 180, "w": 1580, "h": 680 }, "items": [
+          { "text": "1. tokens = the unit of input, output & cost", "cue": "tokens are the unit" },
+          { "text": "2. context window = fixed budget — managing history is YOUR job", "cue": "context window is a fixed" },
+          { "text": "3. sampling → non-determinism → test properties, use evals", "cue": "sampling makes" },
+          { "text": "4. model choice ⊥ reasoning mode — smallest that passes the eval", "cue": "separate, composable" },
+          { "text": "5. REST/SDK transport: sync · stream · async · batch — who's waiting?", "cue": "REST API" }
+        ] }
+      ]
+    },
+    {
+      "id": "map",
+      "narration": "That's the shared vocabulary for everything ahead. Module two puts it to work: prompting craft, tool schemas, streaming, and building agents. Module three moves into Claude Code and MCP integration. Module four covers evals, failure handling, cost, and security. And module five is about packaging accelerators and contributing back. Each one builds directly on what you just learned.",
+      "elements": [
+        { "id": "m1", "kind": "handtext", "cue": "shared vocabulary", "text": "M1 foundations ✓ (you are here)", "size": 38, "color": "green", "boxed": true, "at": { "x": 380, "y": 160, "w": 1160, "h": 100 } },
+        { "id": "m2", "kind": "handtext", "cue": "Module two", "text": "M2 prompting · tools · agents", "size": 38, "color": "ink", "boxed": true, "at": { "x": 380, "y": 300, "w": 1160, "h": 100 } },
+        { "id": "m3", "kind": "handtext", "cue": "Module three", "text": "M3 Claude Code · MCP", "size": 38, "color": "ink", "boxed": true, "at": { "x": 380, "y": 440, "w": 1160, "h": 100 } },
+        { "id": "m4", "kind": "handtext", "cue": "Module four", "text": "M4 evals · cost · security", "size": 38, "color": "ink", "boxed": true, "at": { "x": 380, "y": 580, "w": 1160, "h": 100 } },
+        { "id": "m5", "kind": "handtext", "cue": "module five", "text": "M5 accelerators · contribution", "size": 38, "color": "ink", "boxed": true, "at": { "x": 380, "y": 720, "w": 1160, "h": 100 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Up next: a short quiz, and a predict-the-behavior exercise. Take them first. Then watch the answer walkthrough video to check your reasoning. See you there.",
+      "elements": [
+        { "id": "box", "kind": "sketch", "shape": "rect", "cue": "Up next", "color": "green", "at": { "x": 340, "y": 340, "w": 1240, "h": 280 } },
+        { "id": "steps", "kind": "handtext", "cue": "Take them first", "text": "1. take the quiz + exercise\n2. then watch the answer walkthrough", "size": 46, "color": "green", "at": { "x": 440, "y": 400, "w": 1060, "h": 170 } }
+      ]
+    }
+  ]
+}

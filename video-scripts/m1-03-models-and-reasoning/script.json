@@ -1,0 +1,80 @@
+{
+  "sectionId": "m1-03-models-and-reasoning",
+  "title": "Models & Reasoning",
+  "subtitle": "four tiers · two levers",
+  "source": "course-content/module-1-mso-foundations/03-models-and-reasoning/01-teaching.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 1103,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Which model should I use? It's usually the first question developers ask, and Claude gives you a whole family to choose from. In the next three minutes you'll learn the four tiers, and a second lever that's just as important, and often confused with the first: reasoning.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Which model", "text": "Models & Reasoning", "size": 88, "color": "ink", "at": { "x": 460, "y": 160, "w": 1000, "h": 120 } },
+        { "id": "q1", "kind": "handtext", "cue": "first question", "text": "which model?", "size": 50, "color": "blue", "boxed": true, "at": { "x": 380, "y": 420, "w": 480, "h": 120 } },
+        { "id": "q2", "kind": "handtext", "cue": "second lever", "text": "reasoning on?", "size": 50, "color": "green", "boxed": true, "at": { "x": 1060, "y": 420, "w": 480, "h": 120 } },
+        { "id": "note", "kind": "handtext", "cue": "confused", "text": "two different levers!", "size": 44, "color": "red", "at": { "x": 700, "y": 640, "w": 600, "h": 70 } }
+      ]
+    },
+    {
+      "id": "family",
+      "narration": "The family spans four tiers. Haiku is built for speed and cost efficiency, when the task fits its capability envelope. Sonnet is the balanced default for most production work. Opus handles demanding work above the Sonnet envelope. And Fable is the most capable tier, built for the hardest reasoning, coding, and agentic work. Here's the practical rule: start with Sonnet. Move up a tier only when an eval shows the current tier missing your quality bar. And move down to Haiku only when an eval shows the quality drop is acceptable. Notice the pattern: evals make the call, not vibes. One more thing: the family evolves, so confirm the current lineup in the docs when you build.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "four tiers", "text": "The family", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 600, "h": 90 } },
+        { "id": "haiku", "kind": "handtext", "cue": "Haiku is built", "text": "Haiku — fast + cheap", "size": 38, "color": "green", "boxed": true, "at": { "x": 200, "y": 720, "w": 560, "h": 100 } },
+        { "id": "sonnet", "kind": "handtext", "cue": "Sonnet is the balanced", "text": "Sonnet — balanced default", "size": 38, "color": "blue", "boxed": true, "at": { "x": 200, "y": 580, "w": 560, "h": 100 } },
+        { "id": "opus", "kind": "handtext", "cue": "Opus handles", "text": "Opus — demanding work", "size": 38, "color": "ink", "boxed": true, "at": { "x": 200, "y": 440, "w": 560, "h": 100 } },
+        { "id": "fable", "kind": "handtext", "cue": "Fable is the most", "text": "Fable — most capable", "size": 38, "color": "ink", "boxed": true, "at": { "x": 200, "y": 300, "w": 560, "h": 100 } },
+        { "id": "rule", "kind": "handtext", "cue": "practical rule", "text": "start here →", "size": 44, "color": "green", "at": { "x": 830, "y": 600, "w": 340, "h": 60 } },
+        { "id": "up", "kind": "handtext", "cue": "Move up", "text": "↑ only when an eval says quality misses", "size": 36, "color": "ink", "at": { "x": 1000, "y": 400, "w": 800, "h": 60 } },
+        { "id": "down", "kind": "handtext", "cue": "move down", "text": "↓ only when an eval says the drop is OK", "size": 36, "color": "ink", "at": { "x": 1000, "y": 500, "w": 800, "h": 60 } },
+        { "id": "evals", "kind": "handtext", "cue": "not vibes", "text": "evals decide — not vibes", "size": 42, "color": "green", "at": { "x": 1060, "y": 640, "w": 700, "h": 60 } },
+        { "id": "verify", "kind": "handtext", "cue": "family evolves", "text": "lineup evolves: check docs at build time", "size": 34, "color": "red", "at": { "x": 1000, "y": 810, "w": 780, "h": 60 } }
+      ]
+    },
+    {
+      "id": "reasoning",
+      "narration": "Now the second lever. Whether the model reasons before answering is not a model choice. It's a separate setting you make on every call. On current models this is adaptive thinking: the model decides when and how much to think, and you tune the depth with an effort setting. Watch out if you've used this before: the old fixed token budget control is deprecated, and on the newest models it returns an error. Also, thinking content is hidden from responses by default now. If you need to show it, request the summarized display. So when does reasoning earn its cost? On hard, multi-step problems. On lookups and simple classification, it's wasted tokens.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "second lever", "text": "Reasoning: a per-call setting", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "modelbox", "kind": "handtext", "cue": "not a model choice", "text": "model choice", "size": 40, "color": "ink", "boxed": true, "at": { "x": 240, "y": 280, "w": 460, "h": 110 } },
+        { "id": "reasonbox", "kind": "handtext", "cue": "separate setting", "text": "reasoning — every call", "size": 40, "color": "green", "boxed": true, "at": { "x": 240, "y": 440, "w": 620, "h": 110 } },
+        { "id": "adaptive", "kind": "bullets", "cue": "adaptive thinking", "size": 36, "color": "ink", "at": { "x": 260, "y": 620, "w": 760, "h": 280 }, "items": [
+          { "text": "adaptive: model decides when to think", "cue": "model decides" },
+          { "text": "tune depth with an effort setting", "cue": "effort setting" },
+          { "text": "thinking hidden by default → summary on request", "cue": "hidden from responses" }
+        ] },
+        { "id": "warn", "kind": "sketch", "shape": "rect", "cue": "Watch out", "color": "red", "at": { "x": 1100, "y": 280, "w": 700, "h": 180 } },
+        { "id": "warntext", "kind": "handtext", "cue": "deprecated", "text": "old fixed token budget:\ndeprecated → error on newest", "size": 36, "color": "red", "at": { "x": 1150, "y": 310, "w": 620, "h": 130 } },
+        { "id": "worth", "kind": "handtext", "cue": "earn its cost", "text": "worth it: hard, multi-step problems", "size": 38, "color": "green", "at": { "x": 1100, "y": 560, "w": 720, "h": 60 } },
+        { "id": "waste", "kind": "handtext", "cue": "wasted", "text": "wasted: lookups, simple classification", "size": 38, "color": "red", "at": { "x": 1100, "y": 660, "w": 720, "h": 60 } }
+      ]
+    },
+    {
+      "id": "compose",
+      "narration": "Because the two levers are independent, they compose. A capable model with reasoning off is fast and direct. A smaller model with reasoning on spends extra tokens to think. And for the most demanding tasks, you pair a capable model with a higher effort setting. Module two teaches the mechanics of enabling reasoning, and module four takes up the full cost and quality decision.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "levers are independent", "text": "They compose", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "c1", "kind": "handtext", "cue": "fast and direct", "text": "capable model + reasoning off  →  fast & direct", "size": 40, "color": "blue", "at": { "x": 260, "y": 300, "w": 1400, "h": 70 } },
+        { "id": "c2", "kind": "handtext", "cue": "spends extra tokens", "text": "smaller model + reasoning on  →  pays tokens to think", "size": 40, "color": "ink", "at": { "x": 260, "y": 430, "w": 1400, "h": 70 } },
+        { "id": "c3", "kind": "handtext", "cue": "higher effort", "text": "capable model + high effort  →  the hardest work", "size": 40, "color": "green", "at": { "x": 260, "y": 560, "w": 1400, "h": 70 } },
+        { "id": "next", "kind": "handtext", "cue": "Module two", "text": "M2: the mechanics · M4: cost vs quality", "size": 36, "color": "ink", "at": { "x": 500, "y": 760, "w": 950, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "So remember: model choice picks the family member. Reasoning is configured per request. Start with Sonnet, let your evals move you up or down, and spend reasoning only where the problem is genuinely hard. Next up: prompting modes.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "remember", "text": "Remember", "size": 64, "color": "ink", "at": { "x": 120, "y": 90, "w": 500, "h": 90 } },
+        { "id": "recap", "kind": "bullets", "cue": "model choice picks", "size": 44, "color": "ink", "at": { "x": 300, "y": 280, "w": 1300, "h": 380 }, "items": [
+          { "text": "model choice = which family member", "cue": "family member" },
+          { "text": "reasoning = per request", "cue": "per request" },
+          { "text": "Sonnet first; evals move you", "cue": "Start with Sonnet" },
+          { "text": "reasoning only for genuinely hard problems", "cue": "genuinely hard" }
+        ] },
+        { "id": "next", "kind": "handtext", "cue": "Next up", "text": "→ next: prompting modes", "size": 46, "color": "green", "at": { "x": 640, "y": 760, "w": 700, "h": 70 } }
+      ]
+    }
+  ]
+}

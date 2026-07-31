@@ -24,10 +24,10 @@ export const TokenStrip: React.FC<{
       {chunks.map((chunk, i) => {
         const local = Math.max(0, Math.min(1, progress * n - i));
         const color = CHUNK_COLORS[i % CHUNK_COLORS.length];
-        const chunkW = Math.max(size * 1.1, (chunk.length / totalChars) * (w - n * 8));
+        const chunkW = Math.max(size * 1.1, (chunk.length / totalChars) * (w - n * 14));
         acc += chunk.length;
         return (
-          <div key={i} style={{ position: "relative", height: size * 1.8, width: chunkW, marginRight: 6 }}>
+          <div key={i} style={{ position: "relative", height: size * 1.8, width: chunkW, marginRight: 14 }}>
             {local > 0 ? (
               <>
                 <div style={{ position: "absolute", inset: 0 }}>

@@ -15,7 +15,9 @@ export const CodePanel: React.FC<{
   const boxProgress = Math.min(1, progress / 0.3);
   const codeProgress = Math.max(0, (progress - 0.3) / 0.7);
   const visibleLines = Math.ceil(codeProgress * lines.length);
-  const fontSize = Math.min(30, (h - 40) / lines.length / 1.5);
+  const maxLineLen = Math.max(...lines.map((l) => l.length), 1);
+  // Fit height AND width (monospace glyph ≈ 0.62em wide).
+  const fontSize = Math.min(30, (h - 40) / lines.length / 1.5, (w - 52) / (maxLineLen * 0.62));
   return (
     <div style={{ position: "relative", width: w, height: h }}>
       <div style={{ position: "absolute", inset: 0, background: "#ffffffcc", borderRadius: 8 }} />

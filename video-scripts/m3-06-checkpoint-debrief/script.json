@@ -1,0 +1,40 @@
+{
+  "sectionId": "m3-06-checkpoint-debrief",
+  "title": "Checkpoint 6 Walkthrough",
+  "subtitle": "diagnose the auth failure",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/06-enterprise-integration/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3111,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint six: a connection trace, an authentication failure, three candidate fixes. If you haven't picked yours, pause and read the trace first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint six", "text": "Checkpoint 6: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ diagnose it yourself first", "size": 46, "color": "red", "boxed": true, "at": { "x": 560, "y": 440, "w": 820, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "Read what the trace actually shows, because there are two defects stacked. First: unauthorized on the initial attempt, and unauthorized again on the retry. The key itself is rejected. No amount of resending fixes that. Second, quieter and worse: the client reads the credential from a plaintext JSON file at a well-known Jenkins path. That's the storage pattern this module keeps warning about. So the answer is B: rotate the rejected key, and move the new one out of the file, injected as a CI environment variable, with the config referencing the variable by name. Fix A rotates and then writes the fresh key straight back into the same plaintext file. The exposure pattern survives, and the next rotation reproduces it. Fix C switches to OAuth, but this is a service account, not a user signing in. Wrong identity model, and it doesn't touch what the trace showed anyway.",
+      "elements": [
+        { "id": "trace", "kind": "code", "cue": "trace actually shows", "lang": "text", "code": "GET /auth/token → 401\nreading: /home/jenkins/.config/mcp-credentials.json\nretry with credential → 401  (rejected again)", "at": { "x": 200, "y": 140, "w": 1150, "h": 200 } },
+        { "id": "d1", "kind": "handtext", "cue": "rejected", "text": "defect 1: the key itself is dead (401 × 2)", "size": 40, "color": "red", "at": { "x": 280, "y": 400, "w": 1150, "h": 60 } },
+        { "id": "d2", "kind": "handtext", "cue": "plaintext", "text": "defect 2: plaintext credential, well-known path", "size": 40, "color": "red", "at": { "x": 280, "y": 490, "w": 1150, "h": 60 } },
+        { "id": "verdict", "kind": "handtext", "cue": "answer is B", "text": "✓ B — rotate + move to a CI-injected env var", "size": 46, "color": "green", "boxed": true, "at": { "x": 300, "y": 600, "w": 1300, "h": 140 } },
+        { "id": "notA", "kind": "handtext", "cue": "straight back", "text": "✗ A — fresh key, same plaintext file: defect returns next rotation", "size": 34, "color": "red", "at": { "x": 260, "y": 790, "w": 1450, "h": 55 } },
+        { "id": "notC", "kind": "handtext", "cue": "Wrong identity model", "text": "✗ C — OAuth is for user identity; this is a service account", "size": 34, "color": "red", "at": { "x": 260, "y": 870, "w": 1400, "h": 55 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex to build: when an auth trace shows a rejected credential, fix the key and the home it lives in. Half a fix invites the same incident back. Next: the cumulative integration task, three bugs across three files.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "reflex to build", "color": "green", "at": { "x": 340, "y": 330, "w": 1240, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "the key and the home", "delay": 0.2, "text": "fix the key AND its home —\nhalf a fix re-invites the incident", "size": 46, "color": "green", "at": { "x": 440, "y": 380, "w": 1040, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "cumulative", "text": "→ next: the cumulative task (3 bugs, 3 files)", "size": 42, "color": "ink", "at": { "x": 460, "y": 670, "w": 1050, "h": 70 } }
+      ]
+    }
+  ]
+}

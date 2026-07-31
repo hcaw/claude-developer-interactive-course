@@ -1,0 +1,83 @@
+{
+  "sectionId": "m3-04-packaging-workflows",
+  "title": "Packaging Workflows",
+  "subtitle": "skills · commands · plugins",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/04-packaging-workflows/01-teaching.md + 03-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3106,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Your Claude directory now holds real engineering: rules, hooks, subagents, context. All of it works, on your machine. The next question is distribution: how does a teammate get your whole setup with one install command, instead of a page of manual steps? Three layers answer that: skills, commands, and plugins.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "real engineering", "text": "Packaging Workflows", "size": 84, "color": "ink", "at": { "x": 440, "y": 150, "w": 1050, "h": 120 } },
+        { "id": "q", "kind": "handtext", "cue": "one install command", "text": "your setup → their machine, one command", "size": 46, "color": "blue", "at": { "x": 400, "y": 400, "w": 1150, "h": 70 } },
+        { "id": "layers", "kind": "handtext", "cue": "Three layers", "text": "skills → commands → plugins", "size": 52, "color": "green", "boxed": true, "at": { "x": 520, "y": 560, "w": 880, "h": 140 } }
+      ]
+    },
+    {
+      "id": "runtimes",
+      "narration": "A skill is a portable markdown file, and portable is the interesting word: the same SKILL dot M D can run in four places, and each place discovers it differently. In Claude Code, it's found on the filesystem and runs in your terminal, under your permission rules. On the Messages API, it travels with the request and runs inside Anthropic's code execution container. No local files, no local tools, beta headers required. Under the Agent SDK, it only loads if setting sources is explicitly configured. That's the classic surprise: the skill that worked in the terminal does nothing in the SDK because nobody set that field. And on managed agents, the skill is listed in the agent's definition and runs in Anthropic's sandbox. Three portability rules keep you safe: the description is the matching criterion, assume no local environment inside the body, and subagents never inherit skills.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "portable is the interesting", "text": "One skill, four runtimes", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "r1", "kind": "handtext", "cue": "found on the filesystem", "text": "Claude Code: filesystem + your permissions", "size": 34, "color": "ink", "boxed": true, "at": { "x": 180, "y": 230, "w": 900, "h": 95 } },
+        { "id": "r2", "kind": "handtext", "cue": "execution container", "text": "Messages API: container — no local files!", "size": 34, "color": "ink", "boxed": true, "at": { "x": 180, "y": 360, "w": 900, "h": 95 } },
+        { "id": "r3", "kind": "handtext", "cue": "setting sources", "text": "Agent SDK: settingSources or NOTHING loads", "size": 34, "color": "red", "boxed": true, "at": { "x": 180, "y": 490, "w": 900, "h": 95 } },
+        { "id": "r4", "kind": "handtext", "cue": "managed agents", "text": "Managed Agents: listed on the resource, sandboxed", "size": 34, "color": "ink", "boxed": true, "at": { "x": 180, "y": 620, "w": 900, "h": 95 } },
+        { "id": "rules", "kind": "bullets", "cue": "portability rules", "size": 34, "color": "green", "at": { "x": 1160, "y": 300, "w": 700, "h": 350 }, "items": [
+          { "text": "description = the matcher", "cue": "matching criterion" },
+          { "text": "assume no local environment", "cue": "no local environment" },
+          { "text": "subagents inherit nothing", "cue": "never inherit" }
+        ] }
+      ]
+    },
+    {
+      "id": "commands",
+      "narration": "Sometimes you don't want the model deciding when a workflow runs. You want a button. Invoke any skill explicitly with slash and its name, and if a workflow should only ever run when called, set disable model invocation in its frontmatter. One naming detail that matters at scale: plugin commands are namespaced by the plugin's name. Run tests inside a payments plugin becomes slash payments colon run tests. That's why two plugins can ship the same command name without colliding, and it's also why renaming a plugin renames every command it ships.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "a button", "text": "Explicit entry points", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 90 } },
+        { "id": "invoke", "kind": "code", "cue": "slash and its name", "lang": "text", "code": "/review-checklist        ← by name\n\n---\ndisable-model-invocation: true   ← only when called", "at": { "x": 240, "y": 240, "w": 1000, "h": 240 } },
+        { "id": "ns", "kind": "handtext", "cue": "namespaced", "text": "plugin commands: /payments:run-tests", "size": 44, "color": "green", "at": { "x": 400, "y": 570, "w": 1100, "h": 70 } },
+        { "id": "warn", "kind": "handtext", "cue": "renames every command", "text": "the plugin name is part of the interface —\nrename it, rename every command", "size": 38, "color": "red", "at": { "x": 400, "y": 690, "w": 1150, "h": 130 } }
+      ]
+    },
+    {
+      "id": "plugins",
+      "narration": "The plugin is the packaging layer: one versioned bundle of skills, hooks, subagents, and MCP server configs, distributed through a marketplace. Anthropic's marketplace is built in, and third-party ones add with a single command pointing at a repository. A teammate installs, and a page of setup steps becomes one auditable operation. Enterprises can push plugins organization-wide through managed settings, and gate which marketplaces are even allowed. But hear the risk, because it's subtle: a plugin carries exactly what's bundled. The deny rule you rely on locally, the hook that guards your machine? If they're not listed in the bundle, your teammates install the workflow without the guardrails.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "packaging layer", "text": "Plugins: the bundle", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "bundle", "kind": "handtext", "cue": "versioned bundle", "text": "skills + hooks + subagents + MCP configs\n→ one versioned install", "size": 42, "color": "green", "boxed": true, "at": { "x": 300, "y": 240, "w": 1150, "h": 180 } },
+        { "id": "mkt", "kind": "handtext", "cue": "marketplace", "text": "/plugin marketplace add <owner/repo>", "size": 38, "color": "ink", "at": { "x": 440, "y": 490, "w": 1000, "h": 60 } },
+        { "id": "ent", "kind": "handtext", "cue": "organization-wide", "text": "enterprise: push org-wide + allowlist sources", "size": 36, "color": "ink", "at": { "x": 440, "y": 590, "w": 1050, "h": 60 } },
+        { "id": "risk", "kind": "handtext", "cue": "hear the risk", "text": "⚠ a bundle carries ONLY what's bundled —\nunbundled guardrails don't travel", "size": 44, "color": "red", "boxed": true, "at": { "x": 340, "y": 700, "w": 1250, "h": 180 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "And the incident: the plugin that installed everywhere and ran nowhere. A deployment skill, tested locally, shipped to the team. Every install succeeded. Every run failed. Cause one, sitting in plain text in the skill: a validation script at slash users slash alex morgan slash projects. A path that exists on exactly one machine in the world. Cause two, invisible: a second skill needed an environment variable the author had set in their own shell profile years ago, and the README never mentioned it. Three teammates, two hours, each. The moral: install and execution are different events. Reference scripts through the project directory variable, or the plugin root variable for bundled files. Document and validate every environment variable at install time. And always test on a clean machine, because your machine is hiding assumptions you can't see.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "incident", "text": "⚠ installs everywhere, runs nowhere", "size": 56, "color": "red", "at": { "x": 120, "y": 90, "w": 1300, "h": 90 } },
+        { "id": "bad", "kind": "code", "cue": "plain text in the skill", "lang": "text", "code": "1. Run: /Users/alexmorgan/projects/deploy-utils/\n        validate.sh     ← exists on ONE machine", "at": { "x": 200, "y": 230, "w": 1100, "h": 160 } },
+        { "id": "env", "kind": "handtext", "cue": "environment variable", "text": "+ invisible: $DEPLOY_TOKEN, set only in the\nauthor's shell, mentioned nowhere", "size": 40, "color": "red", "at": { "x": 280, "y": 450, "w": 1250, "h": 130 } },
+        { "id": "cost", "kind": "handtext", "cue": "two hours", "text": "3 teammates × 2 hours of debugging", "size": 38, "color": "ink", "at": { "x": 440, "y": 630, "w": 1000, "h": 60 } },
+        { "id": "fix", "kind": "bullets", "cue": "different events", "size": 34, "color": "green", "at": { "x": 280, "y": 730, "w": 1400, "h": 230 }, "items": [
+          { "text": "$CLAUDE_PROJECT_DIR / ${CLAUDE_PLUGIN_ROOT} for paths", "cue": "project directory variable" },
+          { "text": "document + validate env vars at install · test on a CLEAN machine", "cue": "clean machine" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Decision guide: on-demand procedure, make a skill. Predictable entry point, invoke it by name. Whole-team setup, bundle a plugin, with the guardrails inside. This section has two checkpoints: match the skill to four runtimes, and fix a broken plugin. Do both, then watch the walkthrough covering the pair.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "Decision guide", "size": 42, "color": "ink", "at": { "x": 340, "y": 220, "w": 1350, "h": 340 }, "items": [
+          { "text": "on-demand procedure → skill", "cue": "make a skill" },
+          { "text": "predictable trigger → /name", "cue": "by name" },
+          { "text": "team setup → plugin (guardrails inside!)", "cue": "bundle a plugin" }
+        ] },
+        { "id": "try", "kind": "handtext", "cue": "two checkpoints", "text": "checkpoints 3 + 4: runtimes match + plugin fix\n→ then one walkthrough for both", "size": 44, "color": "green", "boxed": true, "at": { "x": 380, "y": 640, "w": 1180, "h": 180 } }
+      ]
+    }
+  ]
+}

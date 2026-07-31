@@ -1,0 +1,39 @@
+{
+  "sectionId": "m3-03-checkpoint-debrief",
+  "title": "Checkpoint 2 Walkthrough",
+  "subtitle": "wire the blocking hook",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/03-durable-project-context/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3105,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint two gave you a hook configuration with two blanks: the lifecycle event, and the command that blocks reads of the production env file. If you haven't filled them, pause and pick yours first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint two", "text": "Checkpoint 2: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 180, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ fill both blanks first", "size": 46, "color": "red", "boxed": true, "at": { "x": 600, "y": 430, "w": 740, "h": 120 } },
+        { "id": "task", "kind": "handtext", "cue": "blocks reads", "text": "goal: block reads of .env.production — deterministically", "size": 40, "color": "blue", "at": { "x": 340, "y": 650, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "Blank one: the event is pre tool use. It's the only event that fires before the tool call executes, which is the only moment blocking is possible. Post tool use fires after the read has already happened. You'd be locking the door behind the burglar. Blank two: the command is the script that actually enforces: read the tool call from standard input, check the file path, and when it's the production env file, exit with code two, writing the reason to standard error. That exit code is the blocking signal, and the standard error text is what the agent sees as feedback. The decoys fail for one shared reason: a script that logs, or warns, and then exits zero, blocks nothing. Exit zero means proceed.",
+      "elements": [
+        { "id": "config", "kind": "code", "cue": "pre tool use", "lang": "json", "code": "\"hooks\": {\n  \"PreToolUse\": [{            // ✓ before = blockable\n    \"matcher\": \"Read\",\n    \"hooks\": [{ \"command\": \"check-path.sh\" }]\n  }]\n}", "at": { "x": 180, "y": 140, "w": 1050, "h": 300 } },
+        { "id": "script", "kind": "code", "cue": "standard input", "lang": "text", "code": "check-path.sh:\n  read tool call from stdin\n  if path == .env.production:\n    echo \"blocked: protected file\" >&2\n    exit 2   # ← THE blocking signal", "at": { "x": 180, "y": 490, "w": 1050, "h": 290 } },
+        { "id": "why", "kind": "handtext", "cue": "locking the door", "text": "PostToolUse = locking the door\nbehind the burglar", "size": 40, "color": "red", "boxed": true, "at": { "x": 1290, "y": 180, "w": 570, "h": 180 } },
+        { "id": "zero", "kind": "handtext", "cue": "exits zero", "text": "exit 0 = proceed —\nlogging ≠ blocking", "size": 40, "color": "red", "boxed": true, "at": { "x": 1290, "y": 530, "w": 570, "h": 170 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The mental model to keep: pre means preventable. Exit two means stop. Everything else is commentary. Next section: packaging workflows into skills, commands, and plugins.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "mental model", "color": "green", "at": { "x": 400, "y": 330, "w": 1120, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "preventable", "delay": 0.2, "text": "pre = preventable · exit 2 = stop\neverything else is commentary", "size": 46, "color": "green", "at": { "x": 480, "y": 380, "w": 980, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "packaging", "text": "→ next: packaging workflows", "size": 44, "color": "ink", "at": { "x": 580, "y": 670, "w": 800, "h": 70 } }
+      ]
+    }
+  ]
+}

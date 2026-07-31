@@ -1,0 +1,52 @@
+{
+  "sectionId": "m3-08-key-takeaways",
+  "title": "Module 3 Key Takeaways",
+  "subtitle": "seven, one per section",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/08-key-takeaways/01-recap.md + 09-module-complete/01-module-complete.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3113,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Module three, wrapped. Seven takeaways, one per section. Same test as always: if you can explain each one to a teammate, it's yours.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Module three", "text": "M3: Key Takeaways", "size": 84, "color": "ink", "at": { "x": 480, "y": 200, "w": 950, "h": 120 } },
+        { "id": "seven", "kind": "handtext", "cue": "Seven takeaways", "text": "7 takeaways", "size": 56, "color": "blue", "boxed": true, "at": { "x": 720, "y": 440, "w": 480, "h": 130 } },
+        { "id": "test", "kind": "handtext", "cue": "explain each", "text": "can you teach each one?", "size": 42, "color": "green", "at": { "x": 620, "y": 670, "w": 720, "h": 70 } }
+      ]
+    },
+    {
+      "id": "first4",
+      "narration": "One: permission mode is a risk decision, not a speed decision. Match the mode to the work, and let deny rules cover what modes can't. Two: an AI code review hands you findings to triage, not a verdict to apply. Trust what's provable in the diff, test what claims to know runtime behavior, and gate the irreversible. Three: a skill is portable, but runs-everywhere is designed, not free. Clear description, no local assumptions, and subagents always start clean. Four: durable context needs the right mechanism per concern. CLAUDE dot M D for universals, rules where they apply, hooks for what must always happen, subagents for the mess.",
+      "elements": [
+        { "id": "list", "kind": "bullets", "cue": "risk decision", "size": 40, "color": "ink", "at": { "x": 200, "y": 180, "w": 1550, "h": 620 }, "items": [
+          { "text": "1. permission mode = risk decision", "cue": "risk decision" },
+          { "text": "2. AI review = findings to triage, not a verdict", "cue": "findings to triage" },
+          { "text": "3. \"runs everywhere\" is designed, not free", "cue": "designed, not free" },
+          { "text": "4. right mechanism per concern (md · rules · hooks · agents)", "cue": "right mechanism" }
+        ] }
+      ]
+    },
+    {
+      "id": "second3",
+      "narration": "Five: a shareable setup is made of portable components. Project-relative paths, documented environment variables, and an install tested on a clean machine. Six: transport and scope are independent decisions with dependent consequences. Where the server runs picks the transport, who needs it picks the scope, and a stdio server in a committed config only looks shareable. Seven: enterprise integration means naming the security requirements before deployment. OAuth for user identity, environment variables for service keys, audit hooks for the log, managed settings for the lock. Easy to build in, brutal to retrofit.",
+      "elements": [
+        { "id": "list", "kind": "bullets", "cue": "portable components", "size": 40, "color": "ink", "at": { "x": 200, "y": 180, "w": 1550, "h": 520 }, "items": [
+          { "text": "5. shareable = portable (paths · env vars · clean-machine test)", "cue": "portable components" },
+          { "text": "6. transport ← where it runs · scope ← who needs it", "cue": "independent decisions" },
+          { "text": "7. security named BEFORE deployment — retrofits are brutal", "cue": "before deployment" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "You can now run Claude Code safely, share it as a team asset, and connect it to real systems without leaking credentials or failing a security review. Congratulations on module three. Next: module four. Production engineering, evals, and security: measuring whether all of this actually works at scale.",
+      "elements": [
+        { "id": "can", "kind": "handtext", "cue": "run Claude Code safely", "text": "run it safely · share it · connect it — audit-ready", "size": 44, "color": "blue", "at": { "x": 300, "y": 260, "w": 1350, "h": 70 } },
+        { "id": "congrats", "kind": "handtext", "cue": "Congratulations", "text": "🎉 Module 3 complete", "size": 56, "color": "green", "boxed": true, "at": { "x": 560, "y": 420, "w": 800, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "module four", "text": "→ next: M4 · production engineering, evals & security", "size": 44, "color": "ink", "at": { "x": 320, "y": 680, "w": 1350, "h": 70 } }
+      ]
+    }
+  ]
+}

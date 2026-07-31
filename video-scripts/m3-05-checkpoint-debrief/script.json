@@ -1,0 +1,40 @@
+{
+  "sectionId": "m3-05-checkpoint-debrief",
+  "title": "Checkpoint 5 Walkthrough",
+  "subtitle": "transport + scope, four scenarios",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/05-mcp-servers/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3109,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint five: four deployment scenarios, each needing a transport and a scope. Pause here if you haven't made your picks.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint five", "text": "Checkpoint 5: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "Pause", "text": "⏸ pick transport + scope for all four first", "size": 44, "color": "red", "boxed": true, "at": { "x": 440, "y": 440, "w": 1050, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answers",
+      "narration": "One: a local SQLite query tool, used only on your machine. Stdio, local scope. It's a subprocess with an audience of one. Two: a code search service on company infrastructure, for the whole engineering team. HTTP, project scope: it's remote, so stdio physically can't reach it, and committing the config shares it with every clone. Three: an experimental scraper you're testing this week. Either transport works, but the scope is local, because project scope would commit your experiment to everyone. And four: the security scanner IT wants on every developer's installation. HTTP, enterprise scope: pushed through managed settings, not left to individual developers. The two classic misses: stdio pointed at a remote server, which can't work because stdio spawns locally. And project scope on an experiment, which ships your test to the whole team.",
+      "elements": [
+        { "id": "s1", "kind": "handtext", "cue": "SQLite", "text": "1 · local SQLite tool → stdio + local", "size": 40, "color": "green", "at": { "x": 220, "y": 140, "w": 1200, "h": 60 } },
+        { "id": "s2", "kind": "handtext", "cue": "code search service", "text": "2 · team code search → HTTP + project", "size": 40, "color": "green", "at": { "x": 220, "y": 260, "w": 1200, "h": 60 } },
+        { "id": "s3", "kind": "handtext", "cue": "experimental", "text": "3 · this-week experiment → any transport + LOCAL", "size": 40, "color": "green", "at": { "x": 220, "y": 380, "w": 1300, "h": 60 } },
+        { "id": "s4", "kind": "handtext", "cue": "security scanner", "text": "4 · org-wide scanner → HTTP + enterprise", "size": 40, "color": "green", "at": { "x": 220, "y": 500, "w": 1200, "h": 60 } },
+        { "id": "m1", "kind": "handtext", "cue": "classic misses", "text": "✗ stdio → remote server: a subprocess can't cross the network", "size": 36, "color": "red", "at": { "x": 260, "y": 640, "w": 1400, "h": 60 } },
+        { "id": "m2", "kind": "handtext", "cue": "ships your test", "text": "✗ project scope on experiments: commits your test to the team", "size": 36, "color": "red", "at": { "x": 260, "y": 730, "w": 1400, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Same two questions, every time: where does the server run, and who needs it? Answer those and the config writes itself. Next section: enterprise integration.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "two questions", "color": "green", "at": { "x": 360, "y": 330, "w": 1200, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "writes itself", "delay": 0.2, "text": "where does it run? who needs it?\n→ the config writes itself", "size": 46, "color": "green", "at": { "x": 460, "y": 380, "w": 1000, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "enterprise integration", "text": "→ next: enterprise integration", "size": 44, "color": "ink", "at": { "x": 580, "y": 670, "w": 820, "h": 70 } }
+      ]
+    }
+  ]
+}

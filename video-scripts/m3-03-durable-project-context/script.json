@@ -1,0 +1,84 @@
+{
+  "sectionId": "m3-03-durable-project-context",
+  "title": "Durable Project Context",
+  "subtitle": "CLAUDE.md · rules · hooks · subagents",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/03-durable-project-context/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3104,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Permissions decide what the agent may do. This section decides what it knows, and makes that knowledge survive between sessions. Four mechanisms, each with a different loading behavior and a different cost: a file that always loads, rules that load where they apply, hooks that fire no matter what the model thinks, and subagents that keep their mess out of your context.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Permissions decide", "text": "Durable Project Context", "size": 76, "color": "ink", "at": { "x": 400, "y": 150, "w": 1150, "h": 110 } },
+        { "id": "four", "kind": "bullets", "cue": "Four mechanisms", "size": 40, "color": "blue", "at": { "x": 400, "y": 340, "w": 1200, "h": 420 }, "items": [
+          { "text": "CLAUDE.md — always loads", "cue": "always loads" },
+          { "text": "rules files — load where they apply", "cue": "where they apply" },
+          { "text": "hooks — fire regardless of the model", "cue": "no matter what" },
+          { "text": "subagents — mess stays elsewhere", "cue": "keep their mess" }
+        ] }
+      ]
+    },
+    {
+      "id": "claudemd",
+      "narration": "CLAUDE dot M D is the file Claude Code reads at the start of every session, prepended before your first message. Whatever lives there, testing commands, framework conventions, forbidden paths, is present from prompt one, every time. The init command generates a starter version. Validate it, then keep refining. And know the one failure mode that matters: size. Every line you add dilutes every other line, because a bigger file makes each instruction a smaller fraction of what loads. Keep it to constraints that change behavior. Everything else belongs elsewhere, and that's what the next three mechanisms are for.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "start of every session", "text": "CLAUDE.md: the always-on file", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "flow", "kind": "handtext", "cue": "prepended", "text": "session start → CLAUDE.md → your first prompt", "size": 42, "color": "ink", "at": { "x": 320, "y": 250, "w": 1250, "h": 70 } },
+        { "id": "what", "kind": "handtext", "cue": "testing commands", "text": "commands · conventions · forbidden paths", "size": 40, "color": "green", "at": { "x": 400, "y": 380, "w": 1100, "h": 60 } },
+        { "id": "init", "kind": "handtext", "cue": "init command", "text": "/init generates a starter — validate it", "size": 36, "color": "ink", "at": { "x": 440, "y": 490, "w": 1000, "h": 60 } },
+        { "id": "size", "kind": "handtext", "cue": "failure mode", "text": "the failure mode is SIZE:\nevery line dilutes every other line", "size": 46, "color": "red", "boxed": true, "at": { "x": 400, "y": 600, "w": 1150, "h": 190 } },
+        { "id": "keep", "kind": "handtext", "cue": "change behavior", "text": "keep only what changes behavior", "size": 38, "color": "green", "at": { "x": 500, "y": 850, "w": 900, "h": 60 } }
+      ]
+    },
+    {
+      "id": "rules",
+      "narration": "For guidance that only matters in one part of the codebase, rules files. They live in the claude rules directory, and a paths glob in their frontmatter scopes them: the rule enters context only when Claude works on matching files. A transaction-boundary rule for the database module loads when database files are touched, and never clutters anything else. One subtlety worth remembering: the scoping comes from the frontmatter, not from where the file sits. A rules file without a paths field loads unconditionally, just like CLAUDE dot M D, no matter how neatly you organized it into subdirectories. So the split is: universal constraints in CLAUDE dot M D, path-specific guidance in scoped rules.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "one part of the codebase", "text": "Rules files: scoped guidance", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "paths glob", "lang": "yaml", "code": "# .claude/rules/database.md\n---\npaths:\n  - \"src/db/**/*.sql\"\n---\nAll SQL must use explicit transactions.", "at": { "x": 220, "y": 230, "w": 900, "h": 300 } },
+        { "id": "when", "kind": "handtext", "cue": "matching files", "text": "loads ONLY when\nmatching files\nare touched", "size": 40, "color": "green", "boxed": true, "at": { "x": 1240, "y": 260, "w": 560, "h": 230 } },
+        { "id": "subtle", "kind": "handtext", "cue": "frontmatter, not", "text": "⚠ scoping = frontmatter, not folder;\nno paths field → loads like CLAUDE.md", "size": 40, "color": "red", "boxed": true, "at": { "x": 300, "y": 610, "w": 1250, "h": 170 } },
+        { "id": "split", "kind": "handtext", "cue": "universal constraints", "text": "universal → CLAUDE.md · path-specific → rules", "size": 38, "color": "ink", "at": { "x": 380, "y": 840, "w": 1200, "h": 60 } }
+      ]
+    },
+    {
+      "id": "hooks",
+      "narration": "Now the difference between a convention and a guardrail. Write run prettier after every edit into CLAUDE dot M D, and the agent follows it most of the time. Wire it as a hook, and it happens every time, because hooks fire independently of what the model decides. Each hook binds a lifecycle event, an optional matcher, and a command. The two you'll use most: pre tool use runs before a tool call, and can block it, exit code two, with the reason on standard error becoming feedback the agent sees. That's enforcement, not hope. Post tool use runs after: formatters, test triggers, audit logs. There are more events, session start and end, prompt submission, notifications, but the principle is the one to keep: rules the project cannot afford to lose belong in hooks, not in prose.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "convention and a guardrail", "text": "Hooks: guardrails, not conventions", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 1250, "h": 90 } },
+        { "id": "contrast", "kind": "handtext", "cue": "most of the time", "text": "CLAUDE.md: \"usually\" · hook: EVERY time", "size": 44, "color": "ink", "at": { "x": 360, "y": 240, "w": 1200, "h": 70 } },
+        { "id": "pre", "kind": "handtext", "cue": "pre tool use", "text": "PreToolUse — can BLOCK\n(exit 2 + stderr → agent feedback)", "size": 40, "color": "red", "boxed": true, "at": { "x": 240, "y": 380, "w": 720, "h": 180 } },
+        { "id": "post", "kind": "handtext", "cue": "Post tool use", "text": "PostToolUse — side effects\n(format · tests · audit)", "size": 40, "color": "green", "boxed": true, "at": { "x": 1040, "y": 380, "w": 720, "h": 180 } },
+        { "id": "others", "kind": "handtext", "cue": "session start", "text": "also: SessionStart/End · UserPromptSubmit · Stop · Notification", "size": 34, "color": "ink", "at": { "x": 300, "y": 640, "w": 1400, "h": 60 } },
+        { "id": "rule", "kind": "handtext", "cue": "cannot afford to lose", "text": "can't afford to lose it? → hook, not prose", "size": 44, "color": "green", "boxed": true, "at": { "x": 400, "y": 740, "w": 1150, "h": 140 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Here's dilution in the wild. A team's CLAUDE dot M D grew for two months. Every addition individually reasonable. Eight hundred forty-seven lines: framework preferences, style guide, dependency rules... and a historical decisions log spanning three hundred lines. Line three forty-seven said: do not modify the legacy tokens directory. The user even repeated it in the prompt. The agent read the auth module, and edited legacy tokens anyway. The rule was there. The agent had it. But eight hundred forty-six other lines had shrunk its weight until it stopped landing. The audit that follows is the fix: keep session-critical rules, move path-specific ones into scoped rules files, move history into reference docs. And the one rule you absolutely cannot afford to dilute? That's not a rule. That's a hook.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "dilution in the wild", "text": "⚠ 847 lines later...", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "pile", "kind": "code", "cue": "Eight hundred forty-seven", "lang": "text", "code": "CLAUDE.md: 847 lines\n  style guide ......... 120 lines\n  decisions log ....... 340 lines (?!)\n  line 347: \"do not modify /legacy/tokens/\"", "at": { "x": 200, "y": 230, "w": 1050, "h": 240 } },
+        { "id": "fail", "kind": "handtext", "cue": "edited legacy tokens", "text": "agent edits /legacy/tokens/ anyway —\nthe rule was there, its WEIGHT was gone", "size": 44, "color": "red", "boxed": true, "at": { "x": 300, "y": 540, "w": 1300, "h": 180 } },
+        { "id": "fix", "kind": "handtext", "cue": "audit that follows", "text": "audit: critical stays · path-specific → rules · history → docs", "size": 36, "color": "green", "at": { "x": 240, "y": 780, "w": 1450, "h": 60 } },
+        { "id": "hook", "kind": "handtext", "cue": "That's a hook", "text": "the un-dilutable rule = a hook", "size": 44, "color": "green", "at": { "x": 500, "y": 870, "w": 900, "h": 60 } }
+      ]
+    },
+    {
+      "id": "subagents",
+      "narration": "Last mechanism: subagents, the same isolation pattern you know from module two, built in. A subagent runs a task in its own context and returns only the output. Perfect for exploration that would bloat your session. But mind what each one loads. The built-in explore and plan subagents skip CLAUDE dot M D to stay fast, so your project rules are not in their heads. The general-purpose subagent loads them. And custom subagents don't see your skills unless the frontmatter lists them explicitly. When project constraints must hold, pick the subagent that actually carries them. Checkpoint two: wire a blocking hook. Fill the two blanks, then watch the walkthrough.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "subagents", "text": "Subagents: isolation, built in", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "iso", "kind": "handtext", "cue": "own context", "text": "own context → returns only the output", "size": 42, "color": "ink", "at": { "x": 380, "y": 240, "w": 1150, "h": 70 } },
+        { "id": "warn", "kind": "bullets", "cue": "mind what each one loads", "size": 38, "color": "red", "at": { "x": 300, "y": 380, "w": 1350, "h": 300 }, "items": [
+          { "text": "Explore/Plan skip CLAUDE.md (fast, ruleless)", "cue": "skip" },
+          { "text": "general-purpose loads your rules", "cue": "general-purpose" },
+          { "text": "custom agents: list skills explicitly", "cue": "frontmatter lists" }
+        ] },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint two", "text": "checkpoint 2: wire the blocking hook\n→ then the walkthrough", "size": 44, "color": "green", "boxed": true, "at": { "x": 440, "y": 740, "w": 1050, "h": 170 } }
+      ]
+    }
+  ]
+}

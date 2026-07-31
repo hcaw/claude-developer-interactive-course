@@ -1,0 +1,80 @@
+{
+  "sectionId": "m3-06-enterprise-integration",
+  "title": "Enterprise Integration",
+  "subtitle": "auth, secrets, and the audit",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/06-enterprise-integration/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3110,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "A prototype answers one question: does the connection work? A regulated production deployment answers four more. Who is the model acting as, and is that identity auditable? What data can it reach, and where does that data go? Can an administrator lock the configuration? And can every access be logged for a compliance audit? None of these are exotic. They're the same questions any system touching regulated data must answer. The discipline is answering them at design time.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "prototype answers", "text": "Enterprise Integration", "size": 78, "color": "ink", "at": { "x": 400, "y": 140, "w": 1150, "h": 110 } },
+        { "id": "qs", "kind": "bullets", "cue": "four more", "size": 40, "color": "blue", "at": { "x": 360, "y": 320, "w": 1250, "h": 440 }, "items": [
+          { "text": "acting as WHOM? (auditable)", "cue": "acting as" },
+          { "text": "what data, going WHERE?", "cue": "data can it reach" },
+          { "text": "can an admin LOCK the config?", "cue": "lock the configuration" },
+          { "text": "is every access LOGGED?", "cue": "logged for" }
+        ] }
+      ]
+    },
+    {
+      "id": "auth",
+      "narration": "Authentication follows the service's identity model. Remote service tied to user identity, a SaaS tool, a cloud product? OAuth. The server answers unauthorized, the client opens a browser sign-in, the user approves, and a token is issued and stored. Nobody copies a secret by hand. Remote service with a service identity, like an internal API? An API key, passed through an environment variable, injected at the point of execution. In CI, the pipeline runner supplies it as a secret. And a local service touching the filesystem? No network auth at all: stdio transport, with filesystem permissions and deny rules as the boundary.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "identity model", "text": "Auth follows identity", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 90 } },
+        { "id": "a1", "kind": "handtext", "cue": "OAuth", "text": "user identity → OAuth\n(401 → sign-in → token stored)", "size": 38, "color": "green", "boxed": true, "at": { "x": 220, "y": 250, "w": 720, "h": 180 } },
+        { "id": "a2", "kind": "handtext", "cue": "API key", "text": "service identity → API key\nin an env var, injected at runtime", "size": 38, "color": "blue", "boxed": true, "at": { "x": 1000, "y": 250, "w": 740, "h": 180 } },
+        { "id": "a3", "kind": "handtext", "cue": "local service", "text": "local → stdio + file permissions + deny rules", "size": 38, "color": "ink", "boxed": true, "at": { "x": 440, "y": 500, "w": 1050, "h": 120 } },
+        { "id": "note", "kind": "handtext", "cue": "copies a secret", "text": "the best secret is one nobody handles", "size": 40, "color": "green", "at": { "x": 480, "y": 700, "w": 1000, "h": 60 } }
+      ]
+    },
+    {
+      "id": "secrets",
+      "narration": "Keeping the credential safe is its own discipline, built on three practices. Separation: the config file holds a variable name, never the value. Config files get committed and cloned. Values that ride along enter history forever. Placement: a local, short-lived secret lives in an environment variable. A shared or audited one belongs in a secret store, which centralizes the value, logs who reads it, and lets one rotation update every consumer. And rotation: on a schedule, and immediately on any suspected exposure, because an exposed key cannot be made secret again. Two habits make rotation painless: scope each credential to the narrowest access its task needs, and keep a record of who uses it, so rotating doesn't become an outage hunt.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "three practices", "text": "Secrets: three practices", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "p1", "kind": "handtext", "cue": "Separation", "text": "① separation — file holds the NAME,\nnever the value", "size": 40, "color": "ink", "boxed": true, "at": { "x": 240, "y": 240, "w": 900, "h": 160 } },
+        { "id": "p2", "kind": "handtext", "cue": "Placement", "text": "② placement — env var (local) ·\nsecret store (shared, audited)", "size": 40, "color": "ink", "boxed": true, "at": { "x": 240, "y": 440, "w": 900, "h": 160 } },
+        { "id": "p3", "kind": "handtext", "cue": "rotation", "text": "③ rotation — scheduled + on exposure", "size": 40, "color": "ink", "boxed": true, "at": { "x": 240, "y": 640, "w": 900, "h": 120 } },
+        { "id": "habit", "kind": "handtext", "cue": "narrowest access", "text": "narrow scope +\nknown consumers =\npainless rotation", "size": 38, "color": "green", "boxed": true, "at": { "x": 1260, "y": 350, "w": 540, "h": 250 } }
+      ]
+    },
+    {
+      "id": "regulated",
+      "narration": "The three answers a regulated customer will actually check. Configuration control: enterprise managed settings deploy the auth setup organization-wide, and no individual developer can change it during an audit window. Access logging: a post tool use hook writes every tool call to an audit store. It fires deterministically, on every call. The model can't skip it, and that's precisely why an auditor accepts it. And data residency: an endpoint pinned to a region, on a platform deployment that keeps processing there, turns where does our data go from a shrug into a checkable answer.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "regulated customer", "text": "What the auditor checks", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "c1", "kind": "handtext", "cue": "Configuration control", "text": "config lock → enterprise managed settings", "size": 40, "color": "ink", "at": { "x": 260, "y": 260, "w": 1200, "h": 60 } },
+        { "id": "c2", "kind": "handtext", "cue": "Access logging", "text": "audit log → PostToolUse hook, every call,\nun-skippable by the model", "size": 40, "color": "green", "boxed": true, "at": { "x": 260, "y": 380, "w": 1150, "h": 170 } },
+        { "id": "c3", "kind": "handtext", "cue": "data residency", "text": "residency → region-pinned endpoint + platform", "size": 40, "color": "ink", "at": { "x": 260, "y": 620, "w": 1250, "h": 60 } },
+        { "id": "note", "kind": "handtext", "cue": "checkable answer", "text": "\"where does data go?\" — a checkable answer", "size": 38, "color": "blue", "at": { "x": 380, "y": 740, "w": 1150, "h": 60 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The watch-out story this time is quietly infuriating, because nothing was broken. An OAuth connection, tested end to end in staging, moved to production... and every sign-in loops back to the login screen with a redirect mismatch. The cause: OAuth redirect URIs are registered per host. The app was registered for staging dot my company dot com. Production wasn't on the list, so the provider rejected every attempt. And the security reviewer's second flag was just as important: most enterprise customers require separate OAuth app registrations per environment. Same app across staging and prod is itself a finding. The fix is procedural: the redirect registration goes on the deployment checklist, so it's done before the cutover, not discovered at the first failed sign-in.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "quietly infuriating", "text": "⚠ worked in staging, looped in prod", "size": 54, "color": "red", "at": { "x": 120, "y": 90, "w": 1300, "h": 90 } },
+        { "id": "trace", "kind": "code", "cue": "redirect mismatch", "lang": "text", "code": "prod sign-in → error: redirect URI mismatch\nregistered:  staging.mycompany.com  ✓\nproduction:  not on the allowed list ✗", "at": { "x": 220, "y": 230, "w": 1150, "h": 210 } },
+        { "id": "why", "kind": "handtext", "cue": "per host", "text": "OAuth redirects are registered PER HOST —\nstaging success proves nothing about prod", "size": 44, "color": "red", "boxed": true, "at": { "x": 300, "y": 500, "w": 1300, "h": 180 } },
+        { "id": "flag2", "kind": "handtext", "cue": "separate OAuth app", "text": "+ enterprises often require separate app registrations per env", "size": 36, "color": "ink", "at": { "x": 260, "y": 740, "w": 1450, "h": 60 } },
+        { "id": "fix", "kind": "handtext", "cue": "deployment checklist", "text": "fix = a checklist line, not code", "size": 40, "color": "green", "at": { "x": 520, "y": 840, "w": 900, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "This whole module compresses into three questions you ask before any high-risk agentic work, and code modernization is the perfect example: what's the blast radius if it goes wrong? How is every change audited? And who approves each phase before the next begins? Answer those, and the tools, plan mode, hooks, managed settings, slot themselves in. Checkpoint six: diagnose an authentication failure from a trace. Then the walkthrough.",
+      "elements": [
+        { "id": "qs", "kind": "bullets", "cue": "three questions", "size": 44, "color": "ink", "at": { "x": 340, "y": 220, "w": 1350, "h": 360 }, "items": [
+          { "text": "blast radius if wrong?", "cue": "blast radius" },
+          { "text": "how is every change audited?", "cue": "audited" },
+          { "text": "who approves each phase?", "cue": "approves each phase" }
+        ] },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint six", "text": "checkpoint 6: diagnose the auth trace\n→ then the walkthrough", "size": 44, "color": "green", "boxed": true, "at": { "x": 420, "y": 650, "w": 1080, "h": 180 } }
+      ]
+    }
+  ]
+}

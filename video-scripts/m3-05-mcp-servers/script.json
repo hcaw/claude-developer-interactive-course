@@ -1,0 +1,77 @@
+{
+  "sectionId": "m3-05-mcp-servers",
+  "title": "MCP Servers",
+  "subtitle": "transport · scope · secrets",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/05-mcp-servers/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3108,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Wire a tool directly into an application, and that application owns the schema and the execution. Three apps needing the same service means three integrations. MCP breaks that: tool definitions move out of your code and into a server process. Build the capability once, and every MCP client that connects gets it. Claude Code has a client built in. And a server exposes more than tools. Three primitives: tools, actions the model calls. Resources, read-only data the client fetches into context by address. And prompts, vetted instruction templates invoked by name, maintained in one place, reused everywhere.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Wire a tool", "text": "MCP Servers", "size": 88, "color": "ink", "at": { "x": 580, "y": 130, "w": 760, "h": 120 } },
+        { "id": "idea", "kind": "handtext", "cue": "server process", "text": "definitions out of your app → into a server\nbuild once, every client connects", "size": 44, "color": "blue", "at": { "x": 360, "y": 330, "w": 1250, "h": 140 } },
+        { "id": "p1", "kind": "handtext", "cue": "actions the model", "text": "tools\nactions", "size": 38, "color": "green", "boxed": true, "at": { "x": 280, "y": 560, "w": 400, "h": 160 } },
+        { "id": "p2", "kind": "handtext", "cue": "read-only data", "text": "resources\ndata by address", "size": 38, "color": "blue", "boxed": true, "at": { "x": 760, "y": 560, "w": 440, "h": 160 } },
+        { "id": "p3", "kind": "handtext", "cue": "instruction templates", "text": "prompts\nvetted templates", "size": 38, "color": "ink", "boxed": true, "at": { "x": 1280, "y": 560, "w": 440, "h": 160 } }
+      ]
+    },
+    {
+      "id": "transport",
+      "narration": "First decision: transport, which is just where the server runs. Stdio launches the server as a subprocess on your machine, talking over standard input and output. Right for local tools and personal scripts. Wrong for anything shared, because it only exists where it's launched. HTTP is the recommended transport for everything else: hosted servers, team services, remote integrations. You register a URL, the client connects over the network. And SSE? Legacy. If you see it in old configs, read it as history, not advice. On context cost: Claude Code defers tool definitions by default and discovers what a task needs, but every connected server still adds to the pool. Connect what you use, not what you might.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "First decision", "text": "Transport = where it runs", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "stdio", "kind": "handtext", "cue": "subprocess on your machine", "text": "stdio — local subprocess\npersonal tools & scripts", "size": 40, "color": "ink", "boxed": true, "at": { "x": 240, "y": 250, "w": 660, "h": 180 } },
+        { "id": "http", "kind": "handtext", "cue": "recommended transport", "text": "HTTP — everything remote\nteam & hosted servers", "size": 40, "color": "green", "boxed": true, "at": { "x": 1020, "y": 250, "w": 660, "h": 180 } },
+        { "id": "sse", "kind": "handtext", "cue": "Legacy", "text": "SSE: legacy — history, not advice", "size": 36, "color": "red", "at": { "x": 480, "y": 500, "w": 950, "h": 60 } },
+        { "id": "cost", "kind": "handtext", "cue": "context cost", "text": "definitions deferred + discovered on demand —\nstill: connect what you USE", "size": 42, "color": "blue", "boxed": true, "at": { "x": 360, "y": 620, "w": 1200, "h": 180 } }
+      ]
+    },
+    {
+      "id": "efficiency",
+      "narration": "Two efficiency patterns ride along here. Prompt caching: stable content you resend every request, long system prompts, big tool definition sets, can be cached at a breakpoint, so follow-ups pay a fraction. The content must match exactly, the default lifetime is five minutes from last read, and an hour is opt-in. Cache the parts that never change. And retrieval, RAG: instead of loading a whole library into context, store it outside, find the relevant slice per request, and supply only that. Classical RAG builds the index in advance, like a librarian with summary cards. Agentic search skips the index and goes looking at request time, which is exactly what Claude Code does with deferred tool definitions. Same principle everywhere: only the relevant slice enters the window.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "efficiency patterns", "text": "Paying less for context", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "cache", "kind": "handtext", "cue": "Prompt caching", "text": "caching: stable prefix + breakpoint\n= pay once (5 min default · 1h opt-in)", "size": 40, "color": "green", "boxed": true, "at": { "x": 260, "y": 240, "w": 1150, "h": 180 } },
+        { "id": "rag1", "kind": "handtext", "cue": "builds the index", "text": "classical RAG: index in advance\n(librarian with cards)", "size": 38, "color": "ink", "boxed": true, "at": { "x": 260, "y": 500, "w": 700, "h": 170 } },
+        { "id": "rag2", "kind": "handtext", "cue": "agentic search", "text": "agentic search: look it up live\n(what Claude Code does)", "size": 38, "color": "ink", "boxed": true, "at": { "x": 1020, "y": 500, "w": 700, "h": 170 } },
+        { "id": "rule", "kind": "handtext", "cue": "relevant slice", "text": "one principle: only the relevant slice enters the window", "size": 40, "color": "blue", "at": { "x": 280, "y": 760, "w": 1400, "h": 70 } }
+      ]
+    },
+    {
+      "id": "scope",
+      "narration": "Second decision: scope, which is who loads the server. Local scope: this project, your machine, not shared. User scope: all your projects, still personal. Project scope writes the config into the repo, so everyone who clones gets the server automatically. Just remember a project-scoped stdio server launches on each teammate's machine, so they need the runtime installed. And enterprise scope deploys through managed settings, for the servers an organization requires. Permissions extend down to individual tools: rules name a tool as MCP, server, tool, so you can allow one tool to run promptless while its siblings still ask, or deny the write-capable tool while reads flow. And the toolset's enabled flag controls whether the model even sees a tool. Visibility is one lever, permission to run is another. Use both.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Second decision", "text": "Scope = who loads it", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 90 } },
+        { "id": "s1", "kind": "handtext", "cue": "your machine, not shared", "text": "local — this project, just you", "size": 34, "color": "ink", "boxed": true, "at": { "x": 200, "y": 230, "w": 780, "h": 90 } },
+        { "id": "s2", "kind": "handtext", "cue": "all your projects", "text": "user — everywhere, still personal", "size": 34, "color": "ink", "boxed": true, "at": { "x": 200, "y": 350, "w": 780, "h": 90 } },
+        { "id": "s3", "kind": "handtext", "cue": "everyone who clones", "text": "project — .mcp.json in the repo", "size": 34, "color": "green", "boxed": true, "at": { "x": 200, "y": 470, "w": 780, "h": 90 } },
+        { "id": "s4", "kind": "handtext", "cue": "managed settings", "text": "enterprise — pushed by admins", "size": 34, "color": "ink", "boxed": true, "at": { "x": 200, "y": 590, "w": 780, "h": 90 } },
+        { "id": "perm", "kind": "code", "cue": "individual tools", "lang": "text", "code": "allow: mcp__github__create_issue\ndeny:  mcp__warehouse__delete_table", "at": { "x": 1050, "y": 300, "w": 760, "h": 160 } },
+        { "id": "two", "kind": "handtext", "cue": "Visibility is one lever", "text": "enabled flag = visibility\npermission rule = may it run\n→ use both", "size": 36, "color": "blue", "boxed": true, "at": { "x": 1080, "y": 520, "w": 700, "h": 220 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Now the classic disaster, and it's always the same one. A data warehouse server, connected in a hurry with a service account key pasted straight into the config file. The plan: move it to an environment variable later. Then the file was committed, so the team could share the setup. Within forty-eight hours the key lived in four places: the author's machine, the repository history, three teammates' clones, and a CI runner. Here's the part people miss: fixing the file later removes nothing. History keeps the key. So the credential is compromised the moment it's committed, and rotation is mandatory. This rotation broke two other services sharing that key. Three more hours. The pattern that prevents all of it: the config holds a variable reference, the variable holds the secret. And enforce it in depth: a convention line in CLAUDE dot M D, backed by a pre tool use hook that blocks any write to the config that looks like an inline credential.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "classic disaster", "text": "⚠ the committed API key", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "bad", "kind": "code", "cue": "pasted straight", "lang": "json", "code": "\"Authorization\": \"Bearer sk-abc123...\"  ✗\n\"Authorization\": \"Bearer ${WAREHOUSE_TOKEN}\"  ✓", "at": { "x": 200, "y": 230, "w": 1150, "h": 160 } },
+        { "id": "spread", "kind": "handtext", "cue": "four places", "text": "48h later: author + repo history + 3 clones + CI", "size": 40, "color": "red", "at": { "x": 280, "y": 450, "w": 1300, "h": 60 } },
+        { "id": "history", "kind": "handtext", "cue": "removes nothing", "text": "fixing the file ≠ fixing history —\ncommitted credential = compromised, rotate now", "size": 44, "color": "red", "boxed": true, "at": { "x": 280, "y": 550, "w": 1350, "h": 180 } },
+        { "id": "depth", "kind": "handtext", "cue": "enforce it in depth", "text": "defense in depth: CLAUDE.md convention\n+ PreToolUse hook scanning .mcp.json writes", "size": 38, "color": "green", "at": { "x": 320, "y": 790, "w": 1300, "h": 130 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The worked example to remember: GitHub's hosted server. Remote, so HTTP. Team repo tooling, so project scope. Personal access token, supplied through an environment variable, never inline. And services like Linear use OAuth instead: a browser sign-in, no credential handled by hand. Transport from where it runs, scope from who needs it, secrets never in the file. Checkpoint five: four deployment scenarios, pick transport and scope. Then the walkthrough.",
+      "elements": [
+        { "id": "gh", "kind": "handtext", "cue": "GitHub's hosted", "text": "GitHub server: HTTP + project + token-in-env\nLinear: OAuth sign-in instead", "size": 42, "color": "ink", "at": { "x": 320, "y": 230, "w": 1300, "h": 140 } },
+        { "id": "recap", "kind": "handtext", "cue": "Transport from where", "text": "transport ← where it runs\nscope ← who needs it\nsecrets ← never in the file", "size": 46, "color": "green", "boxed": true, "at": { "x": 460, "y": 440, "w": 1000, "h": 260 } },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint five", "text": "checkpoint 5: 4 scenarios → then the walkthrough", "size": 42, "color": "ink", "at": { "x": 360, "y": 790, "w": 1250, "h": 70 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "sectionId": "m3-07-cumulative-debrief",
+  "title": "Integration Task Walkthrough",
+  "subtitle": "three bugs, three files",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/07-cumulative-integration-task/01-cumulative.md + 02-cumulative.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3112,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "The cumulative task planted one bug in each of three files: the settings, a skill, and the MCP config. Every bug is a failure mode you've now seen in this module. If you haven't found and fixed all three, pause. This walkthrough spoils every one of them.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "cumulative task", "text": "Integration Task: Walkthrough", "size": 72, "color": "ink", "at": { "x": 360, "y": 160, "w": 1250, "h": 110 } },
+        { "id": "files", "kind": "handtext", "cue": "three files", "text": "settings.json · SKILL.md · .mcp.json", "size": 46, "color": "blue", "at": { "x": 460, "y": 390, "w": 1000, "h": 70 } },
+        { "id": "pause", "kind": "handtext", "cue": "spoils every", "text": "⏸ find + fix all three first — spoilers ahead", "size": 42, "color": "red", "boxed": true, "at": { "x": 420, "y": 540, "w": 1080, "h": 120 } }
+      ]
+    },
+    {
+      "id": "bug1",
+      "narration": "File one, the settings. The deny rule protecting the production env file is correct. Keep it. The bug is the mode: bypass permissions, on a production workstation, for migration work. That removes every confirmation prompt, including the ones guarding destructive operations, and it drops the protected-path guard too. The fix is accept edits: file edits flow, destructive shell commands still prompt. Exactly the trade a migration workstation wants.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "File one", "text": "Bug 1 · settings.json", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "the mode", "lang": "json", "code": "\"defaultMode\": \"bypassPermissions\"  ✗ on prod?!\n\"defaultMode\": \"acceptEdits\"        ✓ fixed\n\"deny\": [\"Read(.env.production)\"]   ✓ keep this", "at": { "x": 200, "y": 230, "w": 1150, "h": 210 } },
+        { "id": "why", "kind": "handtext", "cue": "every confirmation prompt", "text": "bypass = zero prompts + no path guard —\non the machine running MIGRATIONS", "size": 44, "color": "red", "boxed": true, "at": { "x": 300, "y": 510, "w": 1300, "h": 180 } },
+        { "id": "fix", "kind": "handtext", "cue": "accept edits", "text": "✓ acceptEdits: edits flow, destruction prompts", "size": 40, "color": "green", "at": { "x": 340, "y": 760, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "bug2",
+      "narration": "File two, the skill. Step one runs a validation script at slash users slash priya. You know this one by heart now: that path resolves on the author's machine and no other. Every teammate's install succeeds, and every teammate's run fails. The fix is the project directory variable, so the script resolves from the repo root wherever the project lands.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "File two", "text": "Bug 2 · SKILL.md", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "validation script", "lang": "text", "code": "1. Run: /Users/priya/scripts/validate-migration.sh  ✗\n1. Run: $CLAUDE_PROJECT_DIR/scripts/\n        validate-migration.sh                        ✓", "at": { "x": 200, "y": 240, "w": 1150, "h": 220 } },
+        { "id": "why", "kind": "handtext", "cue": "by heart", "text": "installs everywhere · runs on ONE machine", "size": 44, "color": "red", "at": { "x": 340, "y": 540, "w": 1200, "h": 70 } },
+        { "id": "fix", "kind": "handtext", "cue": "repo root", "text": "✓ resolve from the project root, any machine", "size": 40, "color": "green", "at": { "x": 340, "y": 660, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "bug3",
+      "narration": "File three, the MCP config. A production warehouse key, inline, in the authorization header, in a committed file. The moment that commit landed, the key entered repository history, where later edits can't reach it. So the fix has two parts, and both are mandatory: reference an environment variable in the config, and treat the committed key as compromised. Rotate it. If you only fixed the file, you fixed the future and left the past exposed.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "File three", "text": "Bug 3 · .mcp.json", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "inline", "lang": "json", "code": "\"Authorization\": \"Bearer sk-prod-warehouse-abc123\" ✗\n\"Authorization\": \"Bearer ${WAREHOUSE_MCP_TOKEN}\"   ✓", "at": { "x": 200, "y": 240, "w": 1200, "h": 160 } },
+        { "id": "why", "kind": "handtext", "cue": "repository history", "text": "committed = in history forever —\nediting the file later removes nothing", "size": 44, "color": "red", "boxed": true, "at": { "x": 300, "y": 470, "w": 1300, "h": 180 } },
+        { "id": "fix", "kind": "handtext", "cue": "two parts", "text": "✓ env var reference + ROTATE the exposed key\n(file-only fix = future fixed, past exposed)", "size": 40, "color": "green", "at": { "x": 300, "y": 720, "w": 1350, "h": 130 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Three files, and the module in miniature: modes matched to risk, paths that resolve anywhere, secrets that never touch a committed file. If you caught all three, you're thinking like the reviewer. Next: the module's key takeaways.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "module in miniature", "size": 44, "color": "ink", "at": { "x": 340, "y": 230, "w": 1350, "h": 350 }, "items": [
+          { "text": "modes matched to risk", "cue": "matched to risk" },
+          { "text": "paths that resolve anywhere", "cue": "resolve anywhere" },
+          { "text": "secrets never in committed files", "cue": "never touch" }
+        ] },
+        { "id": "next", "kind": "handtext", "cue": "key takeaways", "text": "→ next: key takeaways", "size": 46, "color": "green", "at": { "x": 620, "y": 680, "w": 700, "h": 70 } }
+      ]
+    }
+  ]
+}

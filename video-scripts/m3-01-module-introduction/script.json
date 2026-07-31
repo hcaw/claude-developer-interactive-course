@@ -1,0 +1,54 @@
+{
+  "sectionId": "m3-01-module-introduction",
+  "title": "Module 3: Claude Code, MCP & Integration",
+  "subtitle": "from your machine to real systems",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/01-module-introduction/01-orientation.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3101,
+  "beats": [
+    {
+      "id": "hook",
+      "narration": "Module three moves the work into your terminal. Claude Code runs the same model, and the same agent loop you built in module two, but adds three things around it: a permission layer that gates every action, a configuration system, and team-oriented sharing. Plus MCP, the protocol for connecting to external services securely. And it's all organized around one recurring problem: code that works on your machine now has to hold up when someone else runs it, against real company systems.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Module three", "text": "M3: Claude Code, MCP & Integration", "size": 72, "color": "ink", "at": { "x": 300, "y": 140, "w": 1350, "h": 110 } },
+        { "id": "adds", "kind": "bullets", "cue": "three things", "size": 40, "color": "blue", "at": { "x": 340, "y": 320, "w": 1100, "h": 300 }, "items": [
+          { "text": "a permission layer on every action", "cue": "permission layer" },
+          { "text": "a configuration system + sharing", "cue": "configuration system" },
+          { "text": "MCP: safe external connections", "cue": "external services" }
+        ] },
+        { "id": "theme", "kind": "handtext", "cue": "your machine", "text": "\"works on my machine\" → must survive everyone else's", "size": 44, "color": "red", "at": { "x": 300, "y": 700, "w": 1350, "h": 70 } }
+      ]
+    },
+    {
+      "id": "map",
+      "narration": "Six skills by the end. Run the explore, plan, code loop, under a permission mode matched to the risk of the work. Review AI-generated code with calibrated trust, and place human gates where wrong calls are expensive. Give the agent durable project context: CLAUDE dot M D, rules files, hooks, and subagents. Package a workflow as skills, commands, and plugins that teammates can install. Build an MCP server, and pick its transport and scope. And connect Claude to enterprise systems with authentication a regulated customer will accept.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Six skills", "text": "The map", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 500, "h": 90 } },
+        { "id": "left", "kind": "bullets", "cue": "explore, plan", "size": 36, "color": "ink", "at": { "x": 180, "y": 250, "w": 800, "h": 500 }, "items": [
+          { "text": "1. permission modes + the EPC loop", "cue": "explore, plan" },
+          { "text": "2. calibrated review + human gates", "cue": "calibrated trust" },
+          { "text": "3. durable context: CLAUDE.md · rules · hooks", "cue": "durable project context" }
+        ] },
+        { "id": "right", "kind": "bullets", "cue": "Package a workflow", "size": 36, "color": "ink", "at": { "x": 1020, "y": 250, "w": 800, "h": 500 }, "items": [
+          { "text": "4. packaging: skills · commands · plugins", "cue": "Package a workflow" },
+          { "text": "5. MCP servers: transport + scope", "cue": "MCP server" },
+          { "text": "6. enterprise auth + modernization", "cue": "enterprise systems" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Every convenience on your machine can become a failure on someone else's: the permission mode that deletes out-of-scope files, the rule buried under eight hundred lines, the skill pointing at a path only you have, the committed key that leaks in hours. This module teaches which configuration decision prevents which failure. Let's start with permissions.",
+      "elements": [
+        { "id": "warn", "kind": "bullets", "cue": "convenience", "size": 38, "color": "red", "at": { "x": 300, "y": 200, "w": 1400, "h": 400 }, "items": [
+          { "text": "the mode that deletes out-of-scope files", "cue": "deletes" },
+          { "text": "the rule buried under 800 lines", "cue": "buried" },
+          { "text": "the path only your machine has", "cue": "only you have" },
+          { "text": "the committed key that leaks", "cue": "committed key" }
+        ] },
+        { "id": "next", "kind": "handtext", "cue": "start with permissions", "text": "→ first: permission modes", "size": 48, "color": "green", "at": { "x": 580, "y": 700, "w": 800, "h": 80 } }
+      ]
+    }
+  ]
+}

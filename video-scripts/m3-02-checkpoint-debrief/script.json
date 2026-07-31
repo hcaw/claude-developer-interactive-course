@@ -1,0 +1,57 @@
+{
+  "sectionId": "m3-02-checkpoint-debrief",
+  "title": "Checkpoint 1 Walkthrough",
+  "subtitle": "settings + the human gate",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/02-permission-modes-and-human-gates/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3103,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint one had two parts: assemble the settings for a trusted payments refactor, and place a human gate. The requirements: auto-approve edits, never run destructive shell commands, and the production env file must never be readable. Haven't done it? Pause here first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint one", "text": "Checkpoint 1: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 160, "w": 1150, "h": 110 } },
+        { "id": "reqs", "kind": "bullets", "cue": "requirements", "size": 38, "color": "blue", "at": { "x": 420, "y": 340, "w": 1150, "h": 300 }, "items": [
+          { "text": "auto-approve edits", "cue": "auto-approve" },
+          { "text": "no destructive shell commands", "cue": "destructive" },
+          { "text": ".env.production: never readable", "cue": "never be readable" }
+        ] },
+        { "id": "pause", "kind": "handtext", "cue": "Pause here", "text": "⏸ solve it first", "size": 44, "color": "red", "boxed": true, "at": { "x": 680, "y": 700, "w": 580, "h": 120 } }
+      ]
+    },
+    {
+      "id": "part1",
+      "narration": "Part one: the correct assembly is pieces C and D. C allows the safe npm run commands, and denies R M and git push. That's the deterministic shell gate. D denies reads of the production env file, which holds at the settings layer no matter what the session asks for. Why not the others? Piece A sets default mode, which prompts on nearly every edit. The scenario demanded auto-approved edits. Piece B is bypass: it removes the exact oversight the scenario requires, plus the protected-path guard. And piece E allows every shell command outright. The opposite of a gate. Notice one nuance: a classifier mode could also catch destructive commands, but the scenario asked for predictable, deterministic gating. That's what explicit deny rules give you: no judgment call involved.",
+      "elements": [
+        { "id": "verdict", "kind": "handtext", "cue": "pieces C and D", "text": "✓ C + D", "size": 64, "color": "green", "at": { "x": 160, "y": 100, "w": 400, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "npm run", "lang": "text", "code": "C: allow [\"Bash(npm run:*)\"]\n   deny  [\"Bash(rm:*)\", \"Bash(git push:*)\"]\nD: deny  [\"Read(.env.production)\"]", "at": { "x": 180, "y": 220, "w": 1050, "h": 200 } },
+        { "id": "why", "kind": "handtext", "cue": "settings layer", "text": "deterministic shell gate + path denial\nthat holds all session", "size": 38, "color": "green", "at": { "x": 1280, "y": 240, "w": 580, "h": 170 } },
+        { "id": "notA", "kind": "handtext", "cue": "Piece A", "text": "✗ A default — prompts everything ≠ auto-approve", "size": 34, "color": "red", "at": { "x": 240, "y": 490, "w": 1200, "h": 55 } },
+        { "id": "notB", "kind": "handtext", "cue": "Piece B", "text": "✗ B bypass — removes oversight AND the path guard", "size": 34, "color": "red", "at": { "x": 240, "y": 570, "w": 1200, "h": 55 } },
+        { "id": "notE", "kind": "handtext", "cue": "piece E", "text": "✗ E allow-everything — the opposite of a gate", "size": 34, "color": "red", "at": { "x": 240, "y": 650, "w": 1200, "h": 55 } },
+        { "id": "nuance", "kind": "handtext", "cue": "deterministic gating", "text": "explicit deny > classifier when you need predictability", "size": 36, "color": "blue", "at": { "x": 280, "y": 770, "w": 1350, "h": 60 } }
+      ]
+    },
+    {
+      "id": "part2",
+      "narration": "Part two: mid-refactor, the agent proposes a change to a deployment configuration file that several production services read. Where's the gate? Answer B: a human reviews and approves before the write executes. The settings auto-approve edits, sure. But the session default doesn't answer the per-action question. A wrong value in that file is hard to undo, and its blast radius reaches far beyond the file. Option A treats the default as the answer. Option C removes every prompt. And option D, reviewing at the next pull request, reviews a change that already reached production. After is too late.",
+      "elements": [
+        { "id": "q", "kind": "handtext", "cue": "deployment configuration", "text": "deploy config file, read by prod services — gate where?", "size": 42, "color": "blue", "at": { "x": 240, "y": 130, "w": 1450, "h": 70 } },
+        { "id": "verdict", "kind": "handtext", "cue": "Answer B", "text": "✓ B — human approves BEFORE the write executes", "size": 46, "color": "green", "boxed": true, "at": { "x": 300, "y": 260, "w": 1320, "h": 140 } },
+        { "id": "why", "kind": "handtext", "cue": "blast radius", "text": "hard to undo + blast radius beyond the file\n= the worst-case question says: gate it", "size": 40, "color": "ink", "at": { "x": 360, "y": 470, "w": 1200, "h": 130 } },
+        { "id": "notA", "kind": "handtext", "cue": "treats the default", "text": "✗ A — session default ≠ per-action answer", "size": 34, "color": "red", "at": { "x": 360, "y": 660, "w": 1100, "h": 55 } },
+        { "id": "notD", "kind": "handtext", "cue": "too late", "text": "✗ D — PR review happens AFTER production felt it", "size": 34, "color": "red", "at": { "x": 360, "y": 740, "w": 1150, "h": 55 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The two-part pattern: deny rules make the floor deterministic, and the worst-case question places the one gate the defaults can't. Next section: durable project context.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "two-part pattern", "color": "green", "at": { "x": 320, "y": 330, "w": 1280, "h": 230 } },
+        { "id": "rule", "kind": "handtext", "cue": "deterministic", "delay": 0.2, "text": "deny rules = the floor ·\nworst-case question = the gate", "size": 48, "color": "green", "at": { "x": 440, "y": 380, "w": 1050, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "durable project", "text": "→ next: durable project context", "size": 44, "color": "ink", "at": { "x": 560, "y": 680, "w": 850, "h": 70 } }
+      ]
+    }
+  ]
+}

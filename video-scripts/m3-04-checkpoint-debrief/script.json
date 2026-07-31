@@ -1,0 +1,55 @@
+{
+  "sectionId": "m3-04-checkpoint-debrief",
+  "title": "Checkpoints 3+4 Walkthrough",
+  "subtitle": "runtimes match + the broken plugin",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/04-packaging-workflows/02-checkpoint.md + 04-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3107,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "This walkthrough covers both packaging checkpoints: matching a skill to four runtimes, and fixing the broken plugin definition. If either is still undone, pause and finish them first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "both packaging", "text": "Checkpoints 3 + 4: Walkthrough", "size": 72, "color": "ink", "at": { "x": 350, "y": 170, "w": 1250, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ finish both first", "size": 46, "color": "red", "boxed": true, "at": { "x": 640, "y": 420, "w": 660, "h": 120 } },
+        { "id": "two", "kind": "handtext", "cue": "four runtimes", "text": "① where does the skill load? ② why does the plugin break?", "size": 40, "color": "blue", "at": { "x": 300, "y": 640, "w": 1350, "h": 70 } }
+      ]
+    },
+    {
+      "id": "cp3",
+      "narration": "Checkpoint three: the same review skill, four homes. The terminal developer: put SKILL dot M D in the skills directory with a description that matches review requests. That's filesystem discovery. The API service: send the code execution and skills beta headers, and write the skill free of local dependencies, because it runs in Anthropic's container, not your machine. The headless SDK job: set setting sources explicitly, or the skill never loads. And the hosted long-running agent: list the skill on the agent resource, with the managed agents beta header, sandbox-safe. If you mixed any up, here's the sorting question: where does the skill physically execute? Your files, their container, your process, or their sandbox. The configuration follows from the answer.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "four homes", "text": "CP3 · one skill, four homes", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "m1", "kind": "handtext", "cue": "filesystem discovery", "text": "terminal → .claude/skills + matching description", "size": 36, "color": "green", "at": { "x": 220, "y": 230, "w": 1300, "h": 60 } },
+        { "id": "m2", "kind": "handtext", "cue": "beta headers", "text": "API → code-exec + skills headers, no local deps", "size": 36, "color": "green", "at": { "x": 220, "y": 330, "w": 1300, "h": 60 } },
+        { "id": "m3", "kind": "handtext", "cue": "setting sources explicitly", "text": "SDK → settingSources set explicitly", "size": 36, "color": "green", "at": { "x": 220, "y": 430, "w": 1300, "h": 60 } },
+        { "id": "m4", "kind": "handtext", "cue": "agent resource", "text": "managed → listed on the agent resource + header", "size": 36, "color": "green", "at": { "x": 220, "y": 530, "w": 1300, "h": 60 } },
+        { "id": "sort", "kind": "handtext", "cue": "sorting question", "text": "the sorting question:\nWHERE does it physically execute?", "size": 46, "color": "blue", "boxed": true, "at": { "x": 400, "y": 660, "w": 1150, "h": 180 } }
+      ]
+    },
+    {
+      "id": "cp4",
+      "narration": "Checkpoint four: the deploy-validate skill that works for exactly one person. The defect is C, the absolute path: slash users slash alex morgan. On any other machine, that path is fiction. Not the name, not the description, not who gets the error report. The fix is A: reference the script through the project directory variable, so it resolves from the repo root wherever the project is cloned. The wrong fixes are instructive. A network-drive absolute path just moves the machine dependency. The home-directory shortcut still assumes someone's layout. And deleting the validation step fixes the path by deleting the feature. Portability means resolving from a root every machine shares.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "exactly one person", "text": "CP4 · the one-person plugin", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "defect", "kind": "code", "cue": "defect is C", "lang": "text", "code": "1. Run: /Users/alexmorgan/…/validate.sh   ✗ fiction\n1. Run: $CLAUDE_PROJECT_DIR/deploy-utils/\n        validate.sh                        ✓ resolves", "at": { "x": 200, "y": 220, "w": 1150, "h": 220 } },
+        { "id": "verdict", "kind": "handtext", "cue": "fix is A", "text": "✓ C (the path) + A (project-root variable)", "size": 46, "color": "green", "at": { "x": 300, "y": 500, "w": 1200, "h": 70 } },
+        { "id": "wrong", "kind": "bullets", "cue": "wrong fixes", "size": 34, "color": "red", "at": { "x": 300, "y": 610, "w": 1400, "h": 260 }, "items": [
+          { "text": "network drive = same dependency, new place", "cue": "network-drive" },
+          { "text": "~/ shortcut = still someone's layout", "cue": "home-directory" },
+          { "text": "deleting the step = deleting the feature", "cue": "deleting the validation" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "One idea joins both checkpoints: a skill is portable text, but execution has an address. Configure for where it runs, and reference only what every machine can resolve. Next section: MCP servers.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "joins both", "color": "green", "at": { "x": 340, "y": 330, "w": 1240, "h": 230 } },
+        { "id": "rule", "kind": "handtext", "cue": "execution has an address", "delay": 0.2, "text": "portable text, located execution:\nconfigure for WHERE it runs", "size": 46, "color": "green", "at": { "x": 440, "y": 380, "w": 1050, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "MCP servers", "text": "→ next: MCP servers", "size": 44, "color": "ink", "at": { "x": 660, "y": 680, "w": 640, "h": 70 } }
+      ]
+    }
+  ]
+}

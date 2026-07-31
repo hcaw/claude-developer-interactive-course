@@ -56,6 +56,32 @@ import script_m2_10c from "../../video-scripts/m2-10-checkpoint-debrief/script.j
 import timing_m2_10c from "../../public/audio/m2-10-checkpoint-debrief/timing.json";
 import script_m2_11 from "../../video-scripts/m2-11-module-wrap-up/script.json";
 import timing_m2_11 from "../../public/audio/m2-11-module-wrap-up/timing.json";
+import script_m3_01 from "../../video-scripts/m3-01-module-introduction/script.json";
+import timing_m3_01 from "../../public/audio/m3-01-module-introduction/timing.json";
+import script_m3_02 from "../../video-scripts/m3-02-permission-modes/script.json";
+import timing_m3_02 from "../../public/audio/m3-02-permission-modes/timing.json";
+import script_m3_02c from "../../video-scripts/m3-02-checkpoint-debrief/script.json";
+import timing_m3_02c from "../../public/audio/m3-02-checkpoint-debrief/timing.json";
+import script_m3_03 from "../../video-scripts/m3-03-durable-project-context/script.json";
+import timing_m3_03 from "../../public/audio/m3-03-durable-project-context/timing.json";
+import script_m3_03c from "../../video-scripts/m3-03-checkpoint-debrief/script.json";
+import timing_m3_03c from "../../public/audio/m3-03-checkpoint-debrief/timing.json";
+import script_m3_04 from "../../video-scripts/m3-04-packaging-workflows/script.json";
+import timing_m3_04 from "../../public/audio/m3-04-packaging-workflows/timing.json";
+import script_m3_04c from "../../video-scripts/m3-04-checkpoint-debrief/script.json";
+import timing_m3_04c from "../../public/audio/m3-04-checkpoint-debrief/timing.json";
+import script_m3_05 from "../../video-scripts/m3-05-mcp-servers/script.json";
+import timing_m3_05 from "../../public/audio/m3-05-mcp-servers/timing.json";
+import script_m3_05c from "../../video-scripts/m3-05-checkpoint-debrief/script.json";
+import timing_m3_05c from "../../public/audio/m3-05-checkpoint-debrief/timing.json";
+import script_m3_06 from "../../video-scripts/m3-06-enterprise-integration/script.json";
+import timing_m3_06 from "../../public/audio/m3-06-enterprise-integration/timing.json";
+import script_m3_06c from "../../video-scripts/m3-06-checkpoint-debrief/script.json";
+import timing_m3_06c from "../../public/audio/m3-06-checkpoint-debrief/timing.json";
+import script_m3_07c from "../../video-scripts/m3-07-cumulative-debrief/script.json";
+import timing_m3_07c from "../../public/audio/m3-07-cumulative-debrief/timing.json";
+import script_m3_08 from "../../video-scripts/m3-08-key-takeaways/script.json";
+import timing_m3_08 from "../../public/audio/m3-08-key-takeaways/timing.json";
 
 // One entry per generated section. Batch generation will emit this list.
 const sections: { script: Script; timing: Timing }[] = [
@@ -85,6 +111,19 @@ const sections: { script: Script; timing: Timing }[] = [
   { script: script_m2_10 as unknown as Script, timing: timing_m2_10 as unknown as Timing },
   { script: script_m2_10c as unknown as Script, timing: timing_m2_10c as unknown as Timing },
   { script: script_m2_11 as unknown as Script, timing: timing_m2_11 as unknown as Timing },
+  { script: script_m3_01 as unknown as Script, timing: timing_m3_01 as unknown as Timing },
+  { script: script_m3_02 as unknown as Script, timing: timing_m3_02 as unknown as Timing },
+  { script: script_m3_02c as unknown as Script, timing: timing_m3_02c as unknown as Timing },
+  { script: script_m3_03 as unknown as Script, timing: timing_m3_03 as unknown as Timing },
+  { script: script_m3_03c as unknown as Script, timing: timing_m3_03c as unknown as Timing },
+  { script: script_m3_04 as unknown as Script, timing: timing_m3_04 as unknown as Timing },
+  { script: script_m3_04c as unknown as Script, timing: timing_m3_04c as unknown as Timing },
+  { script: script_m3_05 as unknown as Script, timing: timing_m3_05 as unknown as Timing },
+  { script: script_m3_05c as unknown as Script, timing: timing_m3_05c as unknown as Timing },
+  { script: script_m3_06 as unknown as Script, timing: timing_m3_06 as unknown as Timing },
+  { script: script_m3_06c as unknown as Script, timing: timing_m3_06c as unknown as Timing },
+  { script: script_m3_07c as unknown as Script, timing: timing_m3_07c as unknown as Timing },
+  { script: script_m3_08 as unknown as Script, timing: timing_m3_08 as unknown as Timing },
 ];
 
 export const RemotionRoot: React.FC = () => {

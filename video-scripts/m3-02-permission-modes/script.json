@@ -1,0 +1,85 @@
+{
+  "sectionId": "m3-02-permission-modes",
+  "title": "Permission Modes & Human Gates",
+  "subtitle": "explore · plan · code — under guard",
+  "source": "course-content/module-3-claude-code-mcp-and-integration/02-permission-modes-and-human-gates/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 3102,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Claude Code runs the agent loop you already know, in your terminal, with one addition that changes everything: a permission system that gates every action the agent wants to take. Before configuring anything, you need two mental models: how the work loop runs, and what each permission mode actually controls.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Claude Code", "text": "Permission Modes & Human Gates", "size": 72, "color": "ink", "at": { "x": 320, "y": 160, "w": 1300, "h": 110 } },
+        { "id": "same", "kind": "handtext", "cue": "agent loop you already", "text": "same loop + a gate on EVERY action", "size": 48, "color": "blue", "at": { "x": 440, "y": 420, "w": 1050, "h": 70 } },
+        { "id": "two", "kind": "handtext", "cue": "two mental models", "text": "① the work loop  ② what each mode controls", "size": 42, "color": "green", "at": { "x": 400, "y": 600, "w": 1150, "h": 70 } }
+      ]
+    },
+    {
+      "id": "epc",
+      "narration": "First, how Claude Code approaches a task. It doesn't start typing. It explores: reads files, traces logic, builds a picture. Then it plans: a structured description of the edits it intends to make. Only after you approve the plan does it code. This matters twice over. Understanding before touching means fewer wrong assumptions. And the sequence is where permission modes plug in: plan mode holds the agent in the explore phase, blocking every edit and command until you release it. That's your default for unfamiliar codebases and high-stakes work.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "approaches a task", "text": "Explore → Plan → Code", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "e", "kind": "handtext", "cue": "explores", "text": "explore\nread · trace · learn", "size": 40, "color": "ink", "boxed": true, "at": { "x": 180, "y": 280, "w": 480, "h": 170 } },
+        { "id": "p", "kind": "handtext", "cue": "it plans", "text": "plan\nproposed edits", "size": 40, "color": "blue", "boxed": true, "at": { "x": 720, "y": 280, "w": 480, "h": 170 } },
+        { "id": "c", "kind": "handtext", "cue": "does it code", "text": "code\n(after approval)", "size": 40, "color": "green", "boxed": true, "at": { "x": 1260, "y": 280, "w": 480, "h": 170 } },
+        { "id": "plan", "kind": "handtext", "cue": "plan mode holds", "text": "plan mode = parked at explore until YOU release it", "size": 44, "color": "green", "boxed": true, "at": { "x": 340, "y": 560, "w": 1250, "h": 140 } },
+        { "id": "use", "kind": "handtext", "cue": "unfamiliar codebases", "text": "default for: unfamiliar code, high-stakes work", "size": 38, "color": "ink", "at": { "x": 440, "y": 770, "w": 1050, "h": 60 } }
+      ]
+    },
+    {
+      "id": "modes",
+      "narration": "Six modes, one dial: how often the agent stops to ask. Default: prompts before nearly every edit and command. Slow, safe, the baseline for anything new. Accept edits: file edits and common filesystem commands inside the working directory go through. Other shell commands still prompt. Plan: reads only, as we said. Auto: everything can run, but a separate classifier reviews each action and blocks anything that escalates beyond your request. Fewer prompts, with a safety net. Don't ask: the inverse. Only pre-approved tools run. Everything else is denied outright. Built for locked-down CI. And bypass permissions: no prompts, no checks, and the protected-path guard is gone too. That one belongs in a disposable container, never on your workstation.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Six modes", "text": "The six modes", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Default: prompts", "size": 34, "color": "ink", "at": { "x": 180, "y": 230, "w": 1080, "h": 620 }, "items": [
+          { "text": "default — prompt almost everything (baseline)", "cue": "Default: prompts" },
+          { "text": "acceptEdits — edits + fs cmds in working dir", "cue": "Accept edits" },
+          { "text": "plan — reads only, propose don't touch", "cue": "Plan: reads" },
+          { "text": "auto — classifier reviews each action", "cue": "classifier" },
+          { "text": "dontAsk — allowlist or DENIED (CI)", "cue": "inverse" },
+          { "text": "bypassPermissions — nothing gated at all", "cue": "bypass permissions" }
+        ] },
+        { "id": "warn", "kind": "handtext", "cue": "disposable container", "text": "bypass: disposable\ncontainers ONLY —\nnever your workstation", "size": 38, "color": "red", "boxed": true, "at": { "x": 1320, "y": 380, "w": 520, "h": 230 } }
+      ]
+    },
+    {
+      "id": "settings",
+      "narration": "Where does this configuration live? Four levels. Your user settings follow you to every project. Project settings are committed to the repo, and apply to everyone who clones it: team conventions, allow rules, deny rules. Local project settings are your personal overrides, automatically git-ignored. And enterprise managed settings, set by administrators, can't be overridden by anyone. Two rules to remember about the layering: a deny rule always beats an allow rule, in every mode. And the most durable control in the whole system is an enterprise-level deny: no developer can remove it, and it holds even under bypass.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "configuration live", "text": "Where settings live", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "l1", "kind": "handtext", "cue": "user settings", "text": "user ~/.claude — follows you", "size": 36, "color": "ink", "boxed": true, "at": { "x": 200, "y": 230, "w": 800, "h": 95 } },
+        { "id": "l2", "kind": "handtext", "cue": "committed to the repo", "text": "project .claude/ — the whole team", "size": 36, "color": "ink", "boxed": true, "at": { "x": 200, "y": 360, "w": 800, "h": 95 } },
+        { "id": "l3", "kind": "handtext", "cue": "personal overrides", "text": "local .local.json — just you, git-ignored", "size": 36, "color": "ink", "boxed": true, "at": { "x": 200, "y": 490, "w": 800, "h": 95 } },
+        { "id": "l4", "kind": "handtext", "cue": "administrators", "text": "enterprise managed — no overrides", "size": 36, "color": "red", "boxed": true, "at": { "x": 200, "y": 620, "w": 800, "h": 95 } },
+        { "id": "deny", "kind": "handtext", "cue": "deny rule always beats", "text": "DENY beats allow.\nalways. every mode.", "size": 44, "color": "red", "boxed": true, "at": { "x": 1180, "y": 300, "w": 620, "h": 180 } },
+        { "id": "durable", "kind": "handtext", "cue": "most durable control", "text": "enterprise deny =\nholds even under bypass", "size": 38, "color": "green", "at": { "x": 1180, "y": 560, "w": 620, "h": 130 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Now the story that earns the caution. A developer, three days into a routine cleanup: I'm switching to bypass permissions, it's just renaming old endpoint references. Nothing risky. The agent scans for the legacy pattern, finds forty-seven files, updates references, runs a cleanup script... and deletes three files in the production deploy config. The pattern matched more than the developer's mental scope. The one prompt that would have surfaced the script before it ran was exactly the prompt bypass turned off. And note the fine print: it was the script invocation that would have prompted. Accept edits auto-approves file commands in the working directory, so direct deletions would have slipped through even there. Two lessons: set deny rules on sensitive directories before loosening any mode. And when prompts annoy you, the answer is the classifier-gated mode. Not bypass.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "earns the caution", "text": "⚠ \"nothing risky\"", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "trace", "kind": "code", "cue": "renaming old endpoint", "lang": "text", "code": "Dev: switching to bypassPermissions — just renames\n[47 files matched /v1/legacy/]\n[running cleanup.sh ...]\n[Deleted 3 files in /deploy/config/prod/]  💥", "at": { "x": 180, "y": 230, "w": 1150, "h": 250 } },
+        { "id": "why", "kind": "handtext", "cue": "mental scope", "text": "pattern matched wider than the plan —\nand the prompt that would've caught it was OFF", "size": 42, "color": "red", "boxed": true, "at": { "x": 280, "y": 540, "w": 1300, "h": 170 } },
+        { "id": "l1", "kind": "handtext", "cue": "deny rules on sensitive", "text": "① deny sensitive dirs BEFORE loosening modes", "size": 38, "color": "green", "at": { "x": 320, "y": 770, "w": 1250, "h": 60 } },
+        { "id": "l2", "kind": "handtext", "cue": "classifier-gated", "text": "② fewer prompts? → auto, never bypass", "size": 38, "color": "green", "at": { "x": 320, "y": 860, "w": 1250, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The whole section reduces to one question: what's the worst outcome if this action runs unchecked? Cheap and reversible flows freely. Hard to undo gets a gate. And code your team marked sensitive always gets human review, no matter how confident the agent sounds. Checkpoint one: assemble a settings file, and place a human gate. Then watch the walkthrough.",
+      "elements": [
+        { "id": "q", "kind": "handtext", "cue": "one question", "text": "\"worst outcome if this runs unchecked?\"", "size": 52, "color": "blue", "boxed": true, "at": { "x": 380, "y": 220, "w": 1160, "h": 150 } },
+        { "id": "ladder", "kind": "bullets", "cue": "reversible", "size": 40, "color": "ink", "at": { "x": 380, "y": 450, "w": 1250, "h": 300 }, "items": [
+          { "text": "cheap + reversible → flows", "cue": "flows freely" },
+          { "text": "hard to undo → gate", "cue": "gets a gate" },
+          { "text": "marked sensitive → human. always.", "cue": "human review" }
+        ] },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint one", "text": "checkpoint 1: settings + gate → then walkthrough", "size": 42, "color": "green", "at": { "x": 340, "y": 820, "w": 1250, "h": 70 } }
+      ]
+    }
+  ]
+}

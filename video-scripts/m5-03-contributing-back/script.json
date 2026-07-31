@@ -1,0 +1,76 @@
+{
+  "sectionId": "m5-03-contributing-back",
+  "title": "Contributing Back",
+  "subtitle": "what a maintainer can accept",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/03-contributing-back/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5104,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Good news first: if you packaged the asset, you've already done most of the contribution work. The parameters show it configures. The documented assumptions tell a maintainer what it expects. The bundled eval lets them confirm it still works. Contributing back is moving that asset from private reuse to shared infrastructure — through the channel built for it.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Good news", "text": "Contributing Back", "size": 78, "color": "ink", "at": { "x": 500, "y": 150, "w": 950, "h": 110 } },
+        { "id": "ready", "kind": "handtext", "cue": "already done", "text": "packaged asset ≈ contribution-ready", "size": 48, "color": "green", "boxed": true, "at": { "x": 440, "y": 400, "w": 1050, "h": 140 } },
+        { "id": "move", "kind": "handtext", "cue": "shared infrastructure", "text": "private reuse → shared infrastructure", "size": 44, "color": "blue", "at": { "x": 460, "y": 640, "w": 1000, "h": 70 } }
+      ]
+    },
+    {
+      "id": "channels",
+      "narration": "Channel matching first, because it's where most contributions die. The Claude Cookbook is a repository of focused reference implementations — one self-contained pattern, demonstrated end to end. A tool or a fix belongs in that tool's own repository, under its own conventions. And a full multi-component application fits neither. A review process built for one focused pattern can't process an entire app, so the submission stalls unreviewed. Strip the reusable pattern out, and contribute that instead.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Channel matching", "text": "match the channel first", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Cookbook", "size": 42, "color": "ink", "at": { "x": 220, "y": 240, "w": 1500, "h": 380 }, "items": [
+          { "text": "focused pattern → the Cookbook", "cue": "Cookbook" },
+          { "text": "tool or fix → its own repository", "cue": "own repository" },
+          { "text": "full application → fits NOWHERE whole", "cue": "fits neither" }
+        ] },
+        { "id": "die", "kind": "handtext", "cue": "stalls unreviewed", "text": "wrong channel = stalls unreviewed,\nregardless of code quality", "size": 46, "color": "red", "boxed": true, "at": { "x": 440, "y": 660, "w": 1050, "h": 180 } }
+      ]
+    },
+    {
+      "id": "bar",
+      "narration": "A maintainer accepts what they can verify. The bar is what they need to check, not how clever the code is. Four things clear it: the code does one thing. An example shows it running. A test proves the behavior. And a short statement names the assumptions. Miss one, and the reviewer has to reconstruct your intent — and a contribution that needs reconstruction always goes to the back of the queue.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "can verify", "text": "the bar = verifiability", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "one thing", "size": 42, "color": "ink", "at": { "x": 240, "y": 240, "w": 1450, "h": 470 }, "items": [
+          { "text": "the code does ONE thing", "cue": "one thing" },
+          { "text": "an example shows it running", "cue": "example shows" },
+          { "text": "a test proves the behavior", "cue": "test proves" },
+          { "text": "a statement names the assumptions", "cue": "names the assumptions" }
+        ] },
+        { "id": "queue", "kind": "handtext", "cue": "back of the queue", "text": "needs reconstruction → back of the queue", "size": 44, "color": "red", "at": { "x": 340, "y": 780, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "rights",
+      "narration": "Before any technical review comes the gate that decides whether a contribution can be accepted at all: rights and attribution. Code carried out of a customer engagement may be constrained in where it can go. Confirm you have the right to contribute it, and attribute what you built on. When a licensing constraint can't be cleared, don't contribute — escalate to the owner. Skipping this gate is how a merge becomes a problem the legal team has to unwind.",
+      "elements": [
+        { "id": "gate", "kind": "handtext", "cue": "rights and attribution", "text": "the rights check comes BEFORE\nthe technical review", "size": 50, "color": "blue", "boxed": true, "at": { "x": 440, "y": 140, "w": 1050, "h": 190 } },
+        { "id": "engage", "kind": "handtext", "cue": "customer engagement", "text": "engagement code can carry constraints", "size": 44, "color": "ink", "at": { "x": 440, "y": 440, "w": 1050, "h": 70 } },
+        { "id": "esc", "kind": "handtext", "cue": "escalate", "text": "✗ can't clear the license? escalate — don't contribute", "size": 44, "color": "red", "at": { "x": 300, "y": 570, "w": 1350, "h": 70 } },
+        { "id": "legal", "kind": "handtext", "cue": "legal team", "text": "skipped gate = a merge legal must unwind", "size": 40, "color": "red", "at": { "x": 420, "y": 700, "w": 1100, "h": 65 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The watch-out is a stalled pull request. Three weeks open, no review. The developer: the code works, I use it every day. The maintainer: it probably works for you — the problem is I can't tell. No test I can run, no example proving the behavior, nothing saying what it assumes. The code was correct. That was never the issue. The author already has all the missing context in their head, which is exactly why the gap is invisible to them. A focused PR with a test and an example gets reviewed fast, because it leaves the maintainer nothing to reverse-engineer.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "stalled pull request", "text": "watch out: the PR nobody could verify", "size": 54, "color": "red", "at": { "x": 140, "y": 90, "w": 1400, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "Three weeks", "lang": "text", "code": "dev:        \"it works — I use it every day\"\nmaintainer: \"for YOU. I can't tell:\n             no test · no example · no assumptions\"", "at": { "x": 260, "y": 220, "w": 1250, "h": 220 } },
+        { "id": "issue", "kind": "handtext", "cue": "never the issue", "text": "correct code still stalls\nif it can't be VERIFIED", "size": 48, "color": "red", "boxed": true, "at": { "x": 480, "y": 510, "w": 980, "h": 180 } },
+        { "id": "fast", "kind": "handtext", "cue": "reviewed fast", "text": "✓ test + example + assumptions = fast review", "size": 42, "color": "green", "at": { "x": 340, "y": 760, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex: before you open the PR, hand the maintainer the three things they can't reconstruct — the example, the test, the assumptions — and clear the rights gate first. Next, the checkpoint matches three contributions to their channels. Then: requirements and lifecycle.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "The reflex", "color": "green", "at": { "x": 320, "y": 270, "w": 1280, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "can't reconstruct", "delay": 0.2, "text": "hand over what they can't reconstruct:\nexample · test · assumptions (+ rights first)", "size": 44, "color": "green", "at": { "x": 400, "y": 320, "w": 1120, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "checkpoint matches", "text": "→ checkpoint, then requirements & lifecycle", "size": 42, "color": "ink", "at": { "x": 420, "y": 620, "w": 1100, "h": 70 } }
+      ]
+    }
+  ]
+}

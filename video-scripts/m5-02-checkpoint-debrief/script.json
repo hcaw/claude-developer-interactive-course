@@ -1,0 +1,36 @@
+{
+  "sectionId": "m5-02-checkpoint-debrief",
+  "title": "Checkpoint 1 Walkthrough",
+  "subtitle": "fix the broken template",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/02-packaging-for-reuse/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5103,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint one: a supposedly reusable code-review agent with one defect hiding in it. If you haven't found and fixed it, pause here and do that first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint one", "text": "Checkpoint 1: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause here", "text": "⏸ find the defect yourself first", "size": 46, "color": "red", "boxed": true, "at": { "x": 500, "y": 440, "w": 920, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "The defect is the repo path — a specific customer's repository, hardcoded where a parameter belongs. The fix moves it into the function signature, so the next engagement passes its own path and configures the asset instead of editing the loop. Notice what stays put: the model, the prompt, the tools — that's the reusable core. Not every value becomes a parameter. Only the ones that change per customer.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "repo path", "lang": "python", "code": "repo_path=\"/home/acme/checkout-service\"   # ✗ hardcoded\n\ndef build_review_agent(repo_path):        # ✓ parameter\n    ...\n    repo_path=repo_path,   # set per engagement", "at": { "x": 240, "y": 130, "w": 1300, "h": 290 } },
+        { "id": "rule", "kind": "handtext", "cue": "reusable core", "text": "parameterize what CHANGES per customer —\nkeep the core fixed", "size": 46, "color": "green", "boxed": true, "at": { "x": 400, "y": 500, "w": 1150, "h": 180 } },
+        { "id": "note", "kind": "handtext", "cue": "Only the ones", "text": "not every value → a parameter", "size": 42, "color": "ink", "at": { "x": 540, "y": 770, "w": 850, "h": 65 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "That's the whole packaging test in one question: could a stranger configure this without reading the loop? Next: contributing back.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "packaging test", "text": "could a stranger configure it\nwithout reading the loop?", "size": 50, "color": "green", "boxed": true, "at": { "x": 460, "y": 300, "w": 1000, "h": 190 } },
+        { "id": "next", "kind": "handtext", "cue": "contributing back", "text": "→ next: contributing back", "size": 44, "color": "ink", "at": { "x": 560, "y": 630, "w": 800, "h": 70 } }
+      ]
+    }
+  ]
+}

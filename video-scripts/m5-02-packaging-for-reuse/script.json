@@ -1,0 +1,69 @@
+{
+  "sectionId": "m5-02-packaging-for-reuse",
+  "title": "Packaging for Reuse",
+  "subtitle": "configure, don't rewrite",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/02-packaging-for-reuse/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5102,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Your build runs. The most expensive thing on a team is the engineering time spent rebuilding that same thing for the next customer. The fix is the accelerator: a solution packaged so the next engagement starts from a working foundation instead of a blank repository. Take the working build, separate what's customer-specific, and expose those values as parameters with documented defaults. Configure — don't rewrite.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "build runs", "text": "Packaging for Reuse", "size": 78, "color": "ink", "at": { "x": 460, "y": 150, "w": 1000, "h": 110 } },
+        { "id": "cost", "kind": "handtext", "cue": "most expensive", "text": "the priciest line item: rebuilding the same thing", "size": 44, "color": "red", "at": { "x": 260, "y": 390, "w": 1400, "h": 70 } },
+        { "id": "acc", "kind": "handtext", "cue": "accelerator", "text": "accelerator = configure, don't rewrite", "size": 50, "color": "green", "boxed": true, "at": { "x": 420, "y": 540, "w": 1080, "h": 140 } }
+      ]
+    },
+    {
+      "id": "types",
+      "narration": "Reusable work comes in three shapes, and each packages differently. The agent template bundles the system prompt, tool schemas, and loop structure — packaging means pulling the domain values into configuration, so a new team sets values instead of editing the loop. The MCP server package bundles the tools and their scopes — packaging means documenting every input and letting the installing team set the scope, so it installs with zero code edits. And the eval suite bundles the graded set and judge rubric, shipped together so a new team proves the asset still works in their context. That same suite doubles as the deployment gate later. The classic wrong shape is a pile of loose scripts. They run, so they look reusable — but every value hides in a different file, and the next team copies and diverges.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "three shapes", "text": "3 asset shapes, 3 packagings", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "agent template", "size": 40, "color": "ink", "at": { "x": 200, "y": 230, "w": 1550, "h": 400 }, "items": [
+          { "text": "agent template — domain values → config", "cue": "agent template" },
+          { "text": "MCP server — documented inputs, installer sets scope", "cue": "MCP server package" },
+          { "text": "eval suite — dataset + rubric travel together", "cue": "eval suite" }
+        ] },
+        { "id": "wrong", "kind": "handtext", "cue": "loose scripts", "text": "✗ loose scripts: they RUN, so they LOOK reusable —\nthen every team copies and diverges", "size": 42, "color": "red", "boxed": true, "at": { "x": 340, "y": 680, "w": 1300, "h": 180 } }
+      ]
+    },
+    {
+      "id": "docs",
+      "narration": "Two more things go in the box. Documentation covers what nobody can infer from the source: the environment assumptions, the expected inputs, the failure modes already handled, and the eval that defines working. Without it, the next team treats the asset as a black box and rebuilds it anyway. And the audit bundle: what data the asset touches, what identity it acts under, what log it leaves. An accelerator without those passes the demo and stalls at the first security review.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "in the box", "text": "also in the box: docs + audit", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Documentation covers", "size": 42, "color": "ink", "at": { "x": 240, "y": 240, "w": 1500, "h": 300 }, "items": [
+          { "text": "docs = what source can't say: assumptions · inputs · handled failures", "cue": "Documentation covers" },
+          { "text": "audit = data touched · identity used · log left", "cue": "audit bundle" }
+        ] },
+        { "id": "stall", "kind": "handtext", "cue": "stalls", "text": "no audit bundle → passes the demo,\nstalls at the security review", "size": 46, "color": "red", "boxed": true, "at": { "x": 440, "y": 620, "w": 1050, "h": 180 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The watch-out is a postmortem. A team hardcoded the demo values to hit a deadline — the repo path, the model name, the thresholds, some prompt fragments — shipped on time, and labeled the build reusable. Months later a second team picked it up and found nothing to configure: every changing value was baked into the loop, no document said which values were customer-specific, and there was no bundled eval to confirm anything after they guessed at edits. They rewrote it from scratch. The trap is that a working template doesn't announce that it can't be reused. The cost appears only when the second team pays it.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "postmortem", "text": "watch out: shipped fast, reused never", "size": 54, "color": "red", "at": { "x": 140, "y": 90, "w": 1350, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "nothing to configure", "size": 42, "color": "ink", "at": { "x": 260, "y": 240, "w": 1450, "h": 300 }, "items": [
+          { "text": "no parameters — values baked into the loop", "cue": "nothing to configure" },
+          { "text": "no doc naming what's customer-specific", "cue": "no document" },
+          { "text": "no bundled eval to confirm the guesses", "cue": "no bundled eval" }
+        ] },
+        { "id": "trap", "kind": "handtext", "cue": "doesn't announce", "text": "a working template never announces\nit can't be reused", "size": 46, "color": "red", "boxed": true, "at": { "x": 440, "y": 620, "w": 1050, "h": 180 } },
+        { "id": "cost", "kind": "handtext", "cue": "second team pays", "text": "the cost lands on the NEXT team", "size": 42, "color": "ink", "at": { "x": 500, "y": 850, "w": 950, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex: package while the build is fresh, because the knowledge of what's customer-specific is the most expensive thing to reconstruct later. One honest exception — a true one-off nobody will reuse: skip the overhead and just ship. Next, the checkpoint hands you a broken template. Then: contributing back.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "The reflex", "color": "green", "at": { "x": 340, "y": 260, "w": 1240, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "build is fresh", "delay": 0.2, "text": "package while the build is FRESH —\nreconstruction is the expensive path", "size": 46, "color": "green", "at": { "x": 440, "y": 310, "w": 1040, "h": 140 } },
+        { "id": "exception", "kind": "handtext", "cue": "one-off", "text": "true one-off? skip the overhead, ship it", "size": 40, "color": "ink", "at": { "x": 460, "y": 560, "w": 1000, "h": 65 } },
+        { "id": "next", "kind": "handtext", "cue": "checkpoint hands", "text": "→ checkpoint, then contributing back", "size": 42, "color": "ink", "at": { "x": 460, "y": 700, "w": 1000, "h": 70 } }
+      ]
+    }
+  ]
+}

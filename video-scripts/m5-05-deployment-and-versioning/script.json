@@ -1,0 +1,72 @@
+{
+  "sectionId": "m5-05-deployment-and-versioning",
+  "title": "Deployment & Versioning",
+  "subtitle": "where it runs, what pins it",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/05-deployment-and-versioning/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5108,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "A packaged asset is just code until something runs it. Two questions decide its fate in production: where does it run, and how is its version locked so an upstream change can't silently change your output. And the platform question is rarely about technical merit. It's usually about where the customer already has cloud infrastructure, identity, and compliance agreements in place.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "packaged asset", "text": "Deployment & Versioning", "size": 72, "color": "ink", "at": { "x": 400, "y": 150, "w": 1150, "h": 110 } },
+        { "id": "qs", "kind": "handtext", "cue": "Two questions", "text": "where does it run? · what pins the version?", "size": 48, "color": "blue", "at": { "x": 340, "y": 400, "w": 1250, "h": 70 } },
+        { "id": "cloud", "kind": "handtext", "cue": "customer already has", "text": "the customer's existing cloud\nusually decides", "size": 46, "color": "ink", "boxed": true, "at": { "x": 540, "y": 560, "w": 850, "h": 180 } }
+      ]
+    },
+    {
+      "id": "platforms",
+      "narration": "The menu. The first-party Claude API: Anthropic's own environment, new features first — for customers with no binding cloud or residency constraint. Claude in Amazon Bedrock: the Messages API inside the customer's AWS boundary — AWS identity, data stays in their configured boundary. Google Vertex AI: the same idea inside Google Cloud, with regional endpoints for residency. And third-party platforms like Microsoft Foundry embed Claude inside a product the customer already runs — with hosting forms that differ per model, so residency gets confirmed per model at build time. The key: identity and residency are answered by the platform, not your code. Matching the platform to the customer's existing compliance agreement is what avoids a residency review from scratch.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "The menu", "text": "the platform menu", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "first-party", "size": 40, "color": "ink", "at": { "x": 200, "y": 230, "w": 1550, "h": 480 }, "items": [
+          { "text": "first-party API — newest features, Anthropic identity", "cue": "first-party" },
+          { "text": "Amazon Bedrock — AWS identity, data in the AWS boundary", "cue": "Amazon Bedrock" },
+          { "text": "Google Vertex — GCP identity, regional endpoints", "cue": "Vertex" },
+          { "text": "3rd-party (Foundry) — hosting form varies PER MODEL", "cue": "Foundry" }
+        ] },
+        { "id": "key", "kind": "handtext", "cue": "not your code", "text": "identity + residency: answered by the\nPLATFORM, not your code", "size": 46, "color": "green", "boxed": true, "at": { "x": 440, "y": 740, "w": 1050, "h": 180 } }
+      ]
+    },
+    {
+      "id": "pinning",
+      "narration": "Versioning. An alias is convenient and moving — it can resolve to a different snapshot tomorrow, and differently across platforms. A pinned full model ID is a fixed snapshot, so an upstream update becomes a deliberate adoption instead of a silent production change. Version the prompt and the asset alongside the code. And keep the prior pinned version available, so a regression is a rollback, not a hotfix.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "alias is convenient", "lang": "python", "code": "model = \"claude-haiku-4-5\"            # alias: MOVES\nmodel = \"claude-haiku-4-5-20251001\"   # pinned snapshot", "at": { "x": 240, "y": 130, "w": 1300, "h": 160 } },
+        { "id": "silent", "kind": "handtext", "cue": "silent production change", "text": "unpinned = every upstream update\nquietly edits production", "size": 48, "color": "red", "boxed": true, "at": { "x": 460, "y": 380, "w": 1000, "h": 180 } },
+        { "id": "also", "kind": "handtext", "cue": "alongside the code", "text": "version prompt + asset with the code", "size": 42, "color": "ink", "at": { "x": 460, "y": 650, "w": 1000, "h": 65 } },
+        { "id": "retain", "kind": "handtext", "cue": "prior pinned version", "text": "✓ retain the prior pin → regression = rollback", "size": 42, "color": "green", "at": { "x": 360, "y": 770, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "gate",
+      "narration": "Promotion runs through the eval. Send the new version to a slice of traffic, compare against the pinned baseline score, and promote or roll back on the result. This is the moment the eval suite you packaged stops being a one-time test and becomes the deployment gate.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "slice of traffic", "lang": "text", "code": "new version → 10% of traffic\n  score vs pinned baseline\n  ≥ baseline → promote\n  < baseline → roll back", "at": { "x": 420, "y": 140, "w": 1050, "h": 280 } },
+        { "id": "rule", "kind": "handtext", "cue": "deployment gate", "text": "the packaged eval = the deployment gate", "size": 50, "color": "green", "boxed": true, "at": { "x": 400, "y": 530, "w": 1150, "h": 140 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The watch-out is a production log. The team deployed on the alias — convenient, latest model for free. Then the alias advanced with no application change. The output shape shifted, the parser hit a key error, and the rollback attempt found nothing to roll back to, because no pinned prior version existed. The hotfix repaired the parser and left the real defect, the unpinned deployment, in place. This section reverses that log line by line: pin the snapshot, retain the prior, and gate through the eval so a shape change shows up in a test run instead of an incident.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "production log", "text": "watch out: the alias that moved", "size": 54, "color": "red", "at": { "x": 140, "y": 90, "w": 1200, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "deployed on the alias", "lang": "text", "code": "deploy: model=\"opus\"              ok\nalias advanced (no app change)\nparser: KeyError \"summary\"\nrollback -> NO pinned prior       ✗\nincident: hotfix parser only", "at": { "x": 300, "y": 220, "w": 1150, "h": 300 } },
+        { "id": "left", "kind": "handtext", "cue": "real defect", "text": "the hotfix fixed the parser —\nnot the unpinned deployment", "size": 46, "color": "red", "boxed": true, "at": { "x": 460, "y": 590, "w": 1000, "h": 180 } },
+        { "id": "fix", "kind": "handtext", "cue": "line by line", "text": "✓ pin · retain · gate", "size": 44, "color": "green", "at": { "x": 640, "y": 830, "w": 650, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex: the customer's cloud picks the platform, the pin makes updates deliberate, and the eval decides promotion. Prototypes can ride the alias — pinning is for what ships. Next, the checkpoint assembles a deployment configuration. Then: comparing platforms.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "The reflex", "color": "green", "at": { "x": 300, "y": 270, "w": 1320, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "picks the platform", "delay": 0.2, "text": "cloud picks the platform · pin makes it deliberate ·\neval decides promotion", "size": 44, "color": "green", "at": { "x": 380, "y": 320, "w": 1160, "h": 140 } },
+        { "id": "proto", "kind": "handtext", "cue": "ride the alias", "text": "prototypes may ride the alias — SHIPPED code pins", "size": 40, "color": "ink", "at": { "x": 360, "y": 570, "w": 1250, "h": 65 } },
+        { "id": "next", "kind": "handtext", "cue": "checkpoint assembles", "text": "→ checkpoint, then comparing platforms", "size": 42, "color": "ink", "at": { "x": 440, "y": 700, "w": 1050, "h": 70 } }
+      ]
+    }
+  ]
+}

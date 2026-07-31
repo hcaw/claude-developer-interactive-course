@@ -1,0 +1,38 @@
+{
+  "sectionId": "m5-05-checkpoint-debrief",
+  "title": "Checkpoint 5 Walkthrough",
+  "subtitle": "assemble the deployment config",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/05-deployment-and-versioning/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5109,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint five: an AWS customer with a residency requirement and a rollback requirement. Assemble the minimal configuration — one piece from each of four groups. If you haven't built yours, pause here first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint five", "text": "Checkpoint 5: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause here", "text": "⏸ assemble your config first", "size": 46, "color": "red", "boxed": true, "at": { "x": 540, "y": 440, "w": 860, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "Platform: Amazon Bedrock — it keeps identity and data inside the AWS boundary the customer already cleared. Identity: the AWS identity reference, for the same reason. An Anthropic API key would move identity outside that boundary and fail residency. Model reference: the pinned full model ID, so an upstream change is something you adopt deliberately. Rollback: retain the prior pinned version. And note the coupling — a pin without retention still has nothing to roll back to, and retention behind a moving alias still drifts. The two pieces only work together.",
+      "elements": [
+        { "id": "map", "kind": "code", "cue": "Amazon Bedrock", "lang": "text", "code": "platform:  Bedrock            identity: AWS reference\nmodel:     pinned full ID     rollback: retain prior", "at": { "x": 220, "y": 130, "w": 1400, "h": 160 } },
+        { "id": "why", "kind": "handtext", "cue": "already cleared", "text": "Bedrock = the boundary the customer\nalready cleared review for", "size": 44, "color": "ink", "at": { "x": 440, "y": 380, "w": 1050, "h": 130 } },
+        { "id": "key", "kind": "handtext", "cue": "fail residency", "text": "✗ Anthropic key → identity leaves the AWS boundary", "size": 42, "color": "red", "at": { "x": 320, "y": 570, "w": 1300, "h": 65 } },
+        { "id": "couple", "kind": "handtext", "cue": "only work together", "text": "pin without retention = no rollback\nretention behind an alias = drift", "size": 46, "color": "green", "boxed": true, "at": { "x": 420, "y": 680, "w": 1100, "h": 180 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Test each piece by what it would break: anything that moves identity or data off AWS fails residency, and anything unpinned or unretained fails rollback. Next: comparing platforms.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "Test each piece", "color": "green", "at": { "x": 340, "y": 280, "w": 1240, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "would break", "delay": 0.2, "text": "judge every piece by\nwhat it would break", "size": 48, "color": "green", "at": { "x": 560, "y": 330, "w": 800, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "comparing platforms", "text": "→ next: comparing platforms", "size": 44, "color": "ink", "at": { "x": 520, "y": 630, "w": 880, "h": 70 } }
+      ]
+    }
+  ]
+}

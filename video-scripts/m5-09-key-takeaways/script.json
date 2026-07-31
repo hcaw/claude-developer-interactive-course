@@ -1,0 +1,42 @@
+{
+  "sectionId": "m5-09-key-takeaways",
+  "title": "Module 5 Key Takeaways",
+  "subtitle": "five, and the course complete",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/09-key-takeaways/01-recap.md + 03-module-complete.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5115,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "The final module, wrapped. Five takeaways. Same test, one last time: if you can teach each one to a teammate, it's yours.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "final module", "text": "M5: Key Takeaways", "size": 84, "color": "ink", "at": { "x": 480, "y": 200, "w": 950, "h": 120 } },
+        { "id": "five", "kind": "handtext", "cue": "Five takeaways", "text": "5 takeaways · one last time", "size": 56, "color": "blue", "boxed": true, "at": { "x": 540, "y": 440, "w": 850, "h": 130 } },
+        { "id": "test", "kind": "handtext", "cue": "teach each one", "text": "can you teach each one?", "size": 42, "color": "green", "at": { "x": 620, "y": 670, "w": 720, "h": 70 } }
+      ]
+    },
+    {
+      "id": "takeaways",
+      "narration": "One: package while the build is fresh — parameters, docs, eval, and audit log travel together, because reconstruction is the expensive path. Two: a maintainer accepts what they can verify — focused code, a runnable example, a test, named assumptions, and the rights cleared first. Three: pin what ships — the platform follows the customer's cloud, the pinned ID makes an upstream change deliberate, and the prior version stays as the rollback. Four: measure the dimension that decides the placement — latency from the customer's region, compliance as pass-or-fail, cost as the total per call. Five: mark every seam as a boundary — the app is only as contained as its most privileged seam, and trust never carries over.",
+      "elements": [
+        { "id": "list", "kind": "bullets", "cue": "build is fresh", "size": 40, "color": "ink", "at": { "x": 180, "y": 160, "w": 1580, "h": 680 }, "items": [
+          { "text": "1. package fresh — params · docs · eval · audit together", "cue": "build is fresh" },
+          { "text": "2. maintainers accept what they can VERIFY", "cue": "can verify" },
+          { "text": "3. pin what ships — prior version = the rollback", "cue": "pin what ships" },
+          { "text": "4. measure what decides — region · pass/fail · total cost", "cue": "measure the dimension" },
+          { "text": "5. every seam = a boundary — trust never carries over", "cue": "every seam" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "And that completes the arc — and the course. From tokens and context windows, through production prompting and agents, Claude Code and MCP, evals and security, to assets a regulated customer can audit and a team can reuse. Five modules, one developer track. Congratulations — you made it to the end.",
+      "elements": [
+        { "id": "arc", "kind": "code", "cue": "completes the arc", "lang": "text", "code": "M1 foundations → M2 agents → M3 Claude Code\n     → M4 production → M5 accelerators ✓", "at": { "x": 300, "y": 140, "w": 1300, "h": 170 } },
+        { "id": "congrats", "kind": "handtext", "cue": "Congratulations", "text": "🎉 COURSE COMPLETE", "size": 72, "color": "green", "boxed": true, "at": { "x": 460, "y": 420, "w": 1000, "h": 170 } },
+        { "id": "end", "kind": "handtext", "cue": "made it", "text": "five modules · one developer track · done", "size": 44, "color": "ink", "at": { "x": 420, "y": 700, "w": 1100, "h": 70 } }
+      ]
+    }
+  ]
+}

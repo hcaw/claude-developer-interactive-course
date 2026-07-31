@@ -1,0 +1,52 @@
+{
+  "sectionId": "m5-04-checkpoint-debrief",
+  "title": "Checkpoints 3 & 4 Walkthrough",
+  "subtitle": "requirements + lifecycle placement",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/02-checkpoint.md + 04-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5107,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Section four has two checkpoints: extract requirements from the EU bank scenario, and place five activities on the lifecycle. If you haven't done both, pause — answers ahead.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "two checkpoints", "text": "Checkpoints 3 + 4: Walkthrough", "size": 68, "color": "ink", "at": { "x": 340, "y": 190, "w": 1300, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ do both first — answers ahead", "size": 44, "color": "red", "boxed": true, "at": { "x": 500, "y": 440, "w": 950, "h": 120 } }
+      ]
+    },
+    {
+      "id": "requirements",
+      "narration": "The bank scenario first. The valid functional requirement is B: a human approves each summary before it's stored. Checkable, and it names a business-process behavior. A — fast and accurate — fails because it can't be checked. C and D name infrastructure, not function. Question two flips it: the valid infrastructure requirement is C, transcript data is processed in the EU. Checkable, and tied to a named regulation. The human-review option is the functional requirement you already placed, and the prompt template is a design choice, not a constraint.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "bank scenario", "text": "3 · the EU bank scenario", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "map", "kind": "code", "cue": "functional requirement is B", "lang": "text", "code": "Q1 functional      → B  human approves before storage\nQ2 infrastructure  → C  data processed in the EU", "at": { "x": 220, "y": 230, "w": 1400, "h": 160 } },
+        { "id": "vague", "kind": "handtext", "cue": "can't be checked", "text": "✗ \"fast and accurate\" — not checkable", "size": 44, "color": "red", "at": { "x": 400, "y": 470, "w": 1100, "h": 65 } },
+        { "id": "rule", "kind": "handtext", "cue": "named regulation", "text": "a requirement = checkable + names its source\n(process rule or regulation)", "size": 44, "color": "green", "boxed": true, "at": { "x": 360, "y": 590, "w": 1220, "h": 180 } }
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "narration": "Now the lifecycle placements. Pinning the full model ID and keeping the prior version: deploy. Gating promotion on the eval result: also deploy. Deciding data must be processed in a specific region: requirements. Instrumenting token cost and latency per call: operate. And choosing Bedrock because the customer's compliance posture lives there: design. The pattern to keep: the residency rule is a requirement — the platform that satisfies it is a design choice.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "lifecycle placements", "text": "4 · place the work", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Pinning", "size": 40, "color": "ink", "at": { "x": 240, "y": 230, "w": 1500, "h": 500 }, "items": [
+          { "text": "pin ID + retain prior → deploy", "cue": "Pinning" },
+          { "text": "eval gate on promotion → deploy", "cue": "Gating" },
+          { "text": "region rule → requirements", "cue": "specific region" },
+          { "text": "cost + latency instrumentation → operate", "cue": "Instrumenting" },
+          { "text": "Bedrock for compliance → design", "cue": "choosing Bedrock" }
+        ] },
+        { "id": "pattern", "kind": "handtext", "cue": "pattern to keep", "text": "the rule = a requirement ·\nits satisfier = a design choice", "size": 44, "color": "green", "boxed": true, "at": { "x": 480, "y": 760, "w": 1000, "h": 170 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Requirements name the what, design names the how, deploy pins the when. Next: deployment and versioning.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "Requirements name", "text": "requirements = what · design = how ·\ndeploy = when (pinned)", "size": 48, "color": "green", "boxed": true, "at": { "x": 420, "y": 300, "w": 1080, "h": 190 } },
+        { "id": "next", "kind": "handtext", "cue": "deployment and versioning", "text": "→ next: deployment & versioning", "size": 44, "color": "ink", "at": { "x": 480, "y": 630, "w": 950, "h": 70 } }
+      ]
+    }
+  ]
+}

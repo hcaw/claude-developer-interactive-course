@@ -1,0 +1,61 @@
+{
+  "sectionId": "m5-07-trust-boundaries",
+  "title": "Trust Boundaries",
+  "subtitle": "the seams between components",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/07-trust-boundaries/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5112,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "The final teaching section. Accelerators, deployments, trade-offs — now they connect into one application. And every connection between components is a place where identity, secrets, and untrusted input can cross. The discipline: identify every boundary before connecting anything.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "final teaching", "text": "Trust Boundaries", "size": 78, "color": "ink", "at": { "x": 520, "y": 160, "w": 880, "h": 110 } },
+        { "id": "cross", "kind": "handtext", "cue": "every connection", "text": "every connection = a crossing point\nfor identity · secrets · untrusted input", "size": 46, "color": "red", "at": { "x": 380, "y": 400, "w": 1200, "h": 130 } },
+        { "id": "rule", "kind": "handtext", "cue": "before connecting", "text": "map the boundaries BEFORE wiring", "size": 48, "color": "blue", "boxed": true, "at": { "x": 460, "y": 610, "w": 1000, "h": 140 } }
+      ]
+    },
+    {
+      "id": "map",
+      "narration": "A multi-component app coordinates capabilities. An API request triggers a Claude Code task, which reaches a customer system through an MCP server. Three components, three contributions — and two seams. The trust boundary is where data or instructions move from one deployment environment to another. Content fetched by the Claude Code task is untrusted when it reaches the next component, no matter how well the task itself tested. Never assume a component is trusted just because it worked on its own.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "coordinates capabilities", "lang": "text", "code": "API  ->  Claude Code task  ->  MCP server\n    ^seam 1               ^seam 2\n  entry request        fetched content\n                       (UNTRUSTED)", "at": { "x": 280, "y": 130, "w": 1250, "h": 270 } },
+        { "id": "def", "kind": "handtext", "cue": "one deployment environment", "text": "boundary = where data crosses environments", "size": 44, "color": "blue", "at": { "x": 340, "y": 490, "w": 1250, "h": 70 } },
+        { "id": "trap", "kind": "handtext", "cue": "worked on its own", "text": "worked alone ≠ trusted downstream", "size": 50, "color": "red", "boxed": true, "at": { "x": 460, "y": 620, "w": 1000, "h": 140 } }
+      ]
+    },
+    {
+      "id": "leastpriv",
+      "narration": "Least privilege applies to the whole application, and the math is unforgiving: the app is only as contained as its most privileged seam. One component scoped too broadly becomes the weak point even when every other one is perfect. So scope each to what its role needs. The API entry validates input and runs under its own identity. The code task's fetched output is treated as data at the next seam. And the MCP server — the most privileged piece — gets least privilege, with every access logged.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "most privileged seam", "text": "containment = your MOST\nprivileged seam", "size": 52, "color": "red", "boxed": true, "at": { "x": 500, "y": 120, "w": 950, "h": 190 } },
+        { "id": "list", "kind": "bullets", "cue": "API entry", "size": 42, "color": "ink", "at": { "x": 240, "y": 400, "w": 1500, "h": 380 }, "items": [
+          { "text": "API entry — validate input, own identity", "cue": "API entry" },
+          { "text": "code task output — DATA at the next seam", "cue": "treated as data" },
+          { "text": "MCP server — least privilege + every access logged", "cue": "most privileged piece" }
+        ] },
+        { "id": "sum", "kind": "handtext", "cue": "access logged", "text": "one broad scope = the whole app's weak point", "size": 40, "color": "ink", "at": { "x": 380, "y": 810, "w": 1200, "h": 65 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The watch-out is a pairing session. Dev A: all three components pass their own tests — I just wired them up. Dev B: where does the task send what it fetched? Straight into the next call, as part of the prompt. And there it is: that content is untrusted, and if it carries instructions, the next component runs them — because nobody marked that seam as a boundary. Each component was trusted alone. The seam between them was not. The boundary existed in the data flow all along; it just had no control on it. The seam nobody identifies is the one a steered action crosses.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "pairing session", "text": "watch out: the unmarked seam", "size": 54, "color": "red", "at": { "x": 140, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "wired them up", "lang": "text", "code": "A: \"all 3 pass their tests — I wired them up\"\nB: \"where does the fetched content go?\"\nA: \"straight into the next prompt...\"\nB: \"...as INSTRUCTIONS. no control on that seam.\"", "at": { "x": 260, "y": 220, "w": 1300, "h": 270 } },
+        { "id": "carry", "kind": "handtext", "cue": "trusted alone", "text": "trust does NOT carry over a seam", "size": 48, "color": "red", "boxed": true, "at": { "x": 480, "y": 560, "w": 960, "h": 140 } },
+        { "id": "steer", "kind": "handtext", "cue": "nobody identifies", "text": "the unmarked seam is the one that gets crossed", "size": 42, "color": "ink", "at": { "x": 340, "y": 780, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex: mark every place data crosses environments as a boundary, put a control on each one, and when a seam can't be secured — don't ship around it. Escalate to a human owner. Next, the checkpoint completes a boundary configuration. Then: the module's cumulative task.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "The reflex", "color": "green", "at": { "x": 320, "y": 270, "w": 1280, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "mark every place", "delay": 0.2, "text": "every crossing = a boundary + a control ·\nunsecurable seam → a human owner", "size": 44, "color": "green", "at": { "x": 400, "y": 320, "w": 1120, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "checkpoint completes", "text": "→ checkpoint, then the cumulative task", "size": 42, "color": "ink", "at": { "x": 440, "y": 620, "w": 1050, "h": 70 } }
+      ]
+    }
+  ]
+}

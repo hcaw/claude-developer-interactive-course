@@ -1,0 +1,75 @@
+{
+  "sectionId": "m5-06-comparing-platforms",
+  "title": "Comparing Platforms",
+  "subtitle": "latency, compliance, cost",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/06-comparing-platforms/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5110,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "You chose a platform and pinned its version. But 'right for their cloud' is not yet an argument a procurement and security team will sign off on. That takes measurement, on three dimensions: latency, compliance, and cost.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "chose a platform", "text": "Comparing Platforms", "size": 76, "color": "ink", "at": { "x": 460, "y": 160, "w": 1000, "h": 110 } },
+        { "id": "gap", "kind": "handtext", "cue": "sign off on", "text": "\"right for their cloud\" ≠ a defensible argument", "size": 46, "color": "red", "at": { "x": 300, "y": 410, "w": 1350, "h": 70 } },
+        { "id": "dims", "kind": "handtext", "cue": "three dimensions", "text": "measure: latency · compliance · cost", "size": 50, "color": "blue", "boxed": true, "at": { "x": 440, "y": 560, "w": 1050, "h": 140 } }
+      ]
+    },
+    {
+      "id": "latency",
+      "narration": "Latency first. A platform in the customer's cloud region shortens the round trip, while the first-party API tends to receive new features earliest — that's the trade. But the number only counts when it's measured from the customer's actual region, against their actual payload. A measurement from your laptop hides the round-trip penalty that appears once the workload runs where the customer is. And inside Bedrock, the global-versus-regional endpoint choice is also the primary residency control — measure both before committing.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Latency first", "text": "latency: measure where the customer IS", "size": 52, "color": "blue", "at": { "x": 160, "y": 90, "w": 1450, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "shortens the round trip", "size": 42, "color": "ink", "at": { "x": 240, "y": 240, "w": 1450, "h": 300 }, "items": [
+          { "text": "in-region platform → shorter round trip", "cue": "shortens the round trip" },
+          { "text": "first-party API → earliest feature access", "cue": "new features earliest" }
+        ] },
+        { "id": "laptop", "kind": "handtext", "cue": "your laptop", "text": "laptop numbers lie —\nmeasure from the customer's region + payload", "size": 46, "color": "red", "boxed": true, "at": { "x": 400, "y": 590, "w": 1150, "h": 180 } },
+        { "id": "bedrock", "kind": "handtext", "cue": "primary residency control", "text": "Bedrock: global vs regional = residency control too", "size": 38, "color": "ink", "at": { "x": 340, "y": 830, "w": 1300, "h": 60 } }
+      ]
+    },
+    {
+      "id": "compliance",
+      "narration": "Compliance is the dimension that usually ends the debate. Data residency is a rule — the customer's data must be processed in a specific country or region — and a regulated customer treats it as pass or fail, never as a trade-off to balance. A customer certified on one cloud won't re-certify on another. EU-only residency typically means Bedrock or Vertex, and on third-party platforms the hosting form varies per model, so it gets confirmed per model. Raise the constraint during scoping — or it surfaces at contract review, after the work is done.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "ends the debate", "text": "compliance: the debate-ender", "size": 52, "color": "blue", "at": { "x": 140, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "pf", "kind": "handtext", "cue": "pass or fail", "text": "residency = PASS / FAIL — not a trade-off", "size": 48, "color": "red", "boxed": true, "at": { "x": 400, "y": 230, "w": 1150, "h": 140 } },
+        { "id": "list", "kind": "bullets", "cue": "certified on one cloud", "size": 40, "color": "ink", "at": { "x": 260, "y": 440, "w": 1450, "h": 300 }, "items": [
+          { "text": "the already-certified cloud wins (no re-cert)", "cue": "certified on one cloud" },
+          { "text": "EU-only → typically Bedrock or Vertex", "cue": "Bedrock or Vertex" },
+          { "text": "3rd-party: hosting varies PER MODEL", "cue": "per model" }
+        ] },
+        { "id": "scope", "kind": "handtext", "cue": "during scoping", "text": "✓ raise it at scoping — not at contract review", "size": 42, "color": "green", "at": { "x": 340, "y": 790, "w": 1250, "h": 70 } }
+      ]
+    },
+    {
+      "id": "cost",
+      "narration": "Cost, last. Per-token rates are broadly aligned across platforms — total cost moves on egress, platform fees, and integration effort, so a lower token price can cost more in total. Instrument the cost per call, per platform, for the actual workload. The cheapest token is not always the cheapest platform.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "total cost moves", "lang": "text", "code": "total cost = tokens (≈ aligned)\n           + egress\n           + platform fees\n           + integration effort", "at": { "x": 440, "y": 130, "w": 1000, "h": 280 } },
+        { "id": "rule", "kind": "handtext", "cue": "cheapest token", "text": "cheapest token ≠ cheapest platform", "size": 50, "color": "green", "boxed": true, "at": { "x": 440, "y": 520, "w": 1050, "h": 140 } },
+        { "id": "per", "kind": "handtext", "cue": "actual workload", "text": "instrument per call · per platform · real workload", "size": 42, "color": "ink", "at": { "x": 340, "y": 750, "w": 1250, "h": 65 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The watch-out: a team picked the platform they already knew. Easy migration, deadline looming. The build passed every functional test. Then the security review asked one question — where is the data processed? The platform failed the customer's residency requirement, the placement was rejected, and the integration was rebuilt on the platform that met the constraint. Familiarity optimized for the wrong test: easy-to-build answers whether the team ships quickly. It never answers whether the customer is allowed to run it. Checking early costs a scoping conversation. Checking late costs the rebuild.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "already knew", "text": "watch out: familiar ≠ allowed", "size": 54, "color": "red", "at": { "x": 140, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "security review", "lang": "text", "code": "functional tests:  PASS\nsecurity review:   \"where is data processed?\"\nplacement:         REJECTED -> full rebuild", "at": { "x": 300, "y": 220, "w": 1250, "h": 210 } },
+        { "id": "test", "kind": "handtext", "cue": "wrong test", "text": "easy-to-BUILD ≠ allowed-to-SHIP", "size": 50, "color": "red", "boxed": true, "at": { "x": 480, "y": 500, "w": 960, "h": 140 } },
+        { "id": "early", "kind": "handtext", "cue": "Checking early", "text": "✓ early = a conversation · late = a rebuild", "size": 44, "color": "green", "at": { "x": 380, "y": 720, "w": 1200, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex: measure the three dimensions where the customer actually lives, and when a pass-or-fail compliance constraint exists, let it decide alone. Next, the checkpoint hands you a comparison trace to diagnose. Then: trust boundaries.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "The reflex", "color": "green", "at": { "x": 320, "y": 280, "w": 1280, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "customer actually lives", "delay": 0.2, "text": "measure where the customer lives ·\npass/fail constraints decide alone", "size": 46, "color": "green", "at": { "x": 440, "y": 330, "w": 1040, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "checkpoint hands", "text": "→ checkpoint, then trust boundaries", "size": 42, "color": "ink", "at": { "x": 460, "y": 630, "w": 1000, "h": 70 } }
+      ]
+    }
+  ]
+}

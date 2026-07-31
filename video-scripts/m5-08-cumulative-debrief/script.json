@@ -1,0 +1,60 @@
+{
+  "sectionId": "m5-08-cumulative-debrief",
+  "title": "Cumulative Task Walkthrough",
+  "subtitle": "three defects, one accelerator",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/08-cumulative-task/01-cumulative.md + 02-cumulative.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5114,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "The cumulative task plants three defects in one deployed accelerator — one per layer of this module: packaging, versioning, and the boundary. If you haven't found and corrected all three, pause. Spoilers from here.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "cumulative task", "text": "Cumulative Task: Walkthrough", "size": 68, "color": "ink", "at": { "x": 360, "y": 170, "w": 1250, "h": 110 } },
+        { "id": "sub", "kind": "handtext", "cue": "one per layer", "text": "packaging · versioning · boundary", "size": 48, "color": "blue", "at": { "x": 480, "y": 400, "w": 980, "h": 70 } },
+        { "id": "pause", "kind": "handtext", "cue": "Spoilers", "text": "⏸ find + fix all three first", "size": 44, "color": "red", "boxed": true, "at": { "x": 560, "y": 550, "w": 820, "h": 120 } }
+      ]
+    },
+    {
+      "id": "defect1",
+      "narration": "Defect one, packaging: the repo path is hardcoded to one customer's checkout directory, so the next engagement can't configure the asset without editing the loop. The fix is checkpoint one all over again, now in context — lift the path into the function signature and let each engagement pass its own.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Defect one", "text": "defect 1 · packaging", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "hardcoded", "lang": "python", "code": "repo_path=\"/home/acme/checkout\"    # ✗ one customer\ndef build_agent(repo_path):        # ✓ parameterized", "at": { "x": 260, "y": 230, "w": 1250, "h": 160 } },
+        { "id": "fix", "kind": "handtext", "cue": "function signature", "text": "✓ configure per engagement — never edit the loop", "size": 44, "color": "green", "boxed": true, "at": { "x": 340, "y": 490, "w": 1250, "h": 140 } }
+      ]
+    },
+    {
+      "id": "defect2",
+      "narration": "Defect two, versioning: the model is the moving alias, opus, and no prior version is retained. When the alias advances, production changes silently, with nothing to roll back to. The fix: pin the full Bedrock model ID, keep the previous pin as the rollback target, and gate the promotion on the bundled eval beating the pinned baseline.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Defect two", "text": "defect 2 · versioning", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "moving alias", "lang": "python", "code": "model=\"opus\"                            # ✗ alias moves\nmodel=\"us.anthropic.claude-opus-4-8\"    # ✓ pinned\nretain_previous_pinned_version=True     # ✓ rollback\nassert eval_suite.run(...) >= baseline  # ✓ gate", "at": { "x": 240, "y": 230, "w": 1300, "h": 270 } },
+        { "id": "why", "kind": "handtext", "cue": "changes silently", "text": "alias advance = silent prod change, no rollback", "size": 42, "color": "red", "at": { "x": 320, "y": 590, "w": 1300, "h": 65 } },
+        { "id": "fix", "kind": "handtext", "cue": "pinned baseline", "text": "✓ pin + retain + eval-gate the promotion", "size": 44, "color": "green", "boxed": true, "at": { "x": 400, "y": 700, "w": 1150, "h": 140 } }
+      ]
+    },
+    {
+      "id": "defect3",
+      "narration": "Defect three, the boundary: fetched content from the code task flows straight into the next call, as instructions. One wrapper closes it — treat as data — so a page that carries instructions gets read, not obeyed. The exact seam the trust-boundaries section marked.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Defect three", "text": "defect 3 · the boundary", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "flows straight", "lang": "python", "code": "next_call(input=fetched)                 # ✗ instructions\nnext_call(input=treat_as_data(fetched))  # ✓ data", "at": { "x": 260, "y": 230, "w": 1300, "h": 160 } },
+        { "id": "why", "kind": "handtext", "cue": "read, not obeyed", "text": "✓ injected page → read, never obeyed", "size": 46, "color": "green", "boxed": true, "at": { "x": 440, "y": 490, "w": 1050, "h": 140 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "One accelerator, the module in miniature: parameterized, pinned, and bounded — with the eval gating the ship. If you caught all three, you're reviewing deployments the way a customer's auditor will. Next: the final takeaways.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "module in miniature", "size": 44, "color": "ink", "at": { "x": 400, "y": 230, "w": 1200, "h": 350 }, "items": [
+          { "text": "parameterized (packaging)", "cue": "parameterized" },
+          { "text": "pinned + gated (versioning)", "cue": "pinned" },
+          { "text": "bounded (the seam)", "cue": "bounded" }
+        ] },
+        { "id": "next", "kind": "handtext", "cue": "final takeaways", "text": "→ next: the final key takeaways", "size": 46, "color": "green", "at": { "x": 520, "y": 680, "w": 900, "h": 70 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "sectionId": "m5-07-checkpoint-debrief",
+  "title": "Checkpoint 7 Walkthrough",
+  "subtitle": "complete the boundary config",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/07-trust-boundaries/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5113,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint seven: a wired multi-component app with two blanks — the control on the seam receiving fetched content, and the identity scope on the most privileged component. Four tokens in the bank, two are distractors. Pause if you haven't placed yours.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint seven", "text": "Checkpoint 7: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ place your two tokens first", "size": 46, "color": "red", "boxed": true, "at": { "x": 520, "y": 440, "w": 880, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "Blank one takes treat as data: it wraps the fetched content so the next component reads it as data, never as instructions — that's the injection seam closed. Blank two takes least privilege, read only: the MCP server touches the customer system, which makes it the most privileged component, and scoping it down means a steered action can't reach beyond its task. The distractors are the two failure modes this module keeps warning about: run as instructions is the unmarked seam, and full access is the over-broad scope that makes one component the whole app's weak point.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "Blank one", "lang": "python", "code": "next_call(input=treat_as_data(fetched))    # blank 1 ✓\n\nmcp_server = MCPServer(\n    system=customer_db,\n    scope=least_privilege_read_only,       # blank 2 ✓\n)", "at": { "x": 260, "y": 120, "w": 1300, "h": 290 } },
+        { "id": "b1", "kind": "handtext", "cue": "injection seam closed", "text": "blank 1 → the injection seam closes", "size": 42, "color": "green", "at": { "x": 420, "y": 480, "w": 1100, "h": 65 } },
+        { "id": "b2", "kind": "handtext", "cue": "beyond its task", "text": "blank 2 → a steered action stays contained", "size": 42, "color": "green", "at": { "x": 420, "y": 580, "w": 1100, "h": 65 } },
+        { "id": "distract", "kind": "handtext", "cue": "distractors", "text": "✗ run_as_instructions = the unmarked seam\n✗ full_access = the weak-point scope", "size": 40, "color": "red", "boxed": true, "at": { "x": 400, "y": 690, "w": 1150, "h": 170 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Both blanks matter together: close one boundary and leave the other, and the app is still only as contained as its weakest seam. Next: the cumulative task — three defects across the whole module.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "Both blanks", "color": "green", "at": { "x": 340, "y": 280, "w": 1240, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "weakest seam", "delay": 0.2, "text": "one closed boundary isn't containment —\nBOTH must hold", "size": 46, "color": "green", "at": { "x": 440, "y": 330, "w": 1040, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "cumulative task", "text": "→ next: the cumulative task (3 defects)", "size": 42, "color": "ink", "at": { "x": 460, "y": 630, "w": 1000, "h": 70 } }
+      ]
+    }
+  ]
+}

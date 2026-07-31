@@ -1,0 +1,56 @@
+{
+  "sectionId": "m5-01-module-introduction",
+  "title": "Module 5: Accelerators & IP Contribution",
+  "subtitle": "making a build last",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/01-module-introduction/01-orientation.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5101,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Module five — the last one. Your builds work: a production agent, a hardened Claude Code setup, MCP connections that pass review. This module is about what happens after a build works. You either rebuild it from scratch on the next engagement, or you package it once and the next team just configures it. The second path is this whole module.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Module five", "text": "M5: Accelerators & IP Contribution", "size": 66, "color": "ink", "at": { "x": 280, "y": 150, "w": 1400, "h": 110 } },
+        { "id": "fork", "kind": "handtext", "cue": "rebuild it from scratch", "text": "after it works:\nrebuild every time? or package ONCE?", "size": 50, "color": "blue", "boxed": true, "at": { "x": 400, "y": 380, "w": 1150, "h": 190 } },
+        { "id": "path", "kind": "handtext", "cue": "second path", "text": "→ the second path frees you for NEW work", "size": 44, "color": "green", "at": { "x": 400, "y": 680, "w": 1150, "h": 70 } }
+      ]
+    },
+    {
+      "id": "abilities",
+      "narration": "Five abilities by the end. Package a working solution as an accelerator — a parameterized template, a configurable MCP server, or a portable eval suite. Contribute assets back through channels a maintainer can accept. Choose where a workload runs — the first-party API, Amazon Bedrock, or Google Vertex — and version what ships. Compare platforms on latency, compliance, and cost, well enough for procurement to sign off. And coordinate several deployments in one workflow without breaking a trust boundary.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Five abilities", "text": "by the end: 5 abilities", "size": 56, "color": "blue", "at": { "x": 120, "y": 100, "w": 900, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Package a working", "size": 40, "color": "ink", "at": { "x": 200, "y": 250, "w": 1550, "h": 620 }, "items": [
+          { "text": "1. package accelerators (template · server · eval suite)", "cue": "Package a working" },
+          { "text": "2. contribute back — maintainer-acceptable", "cue": "Contribute assets" },
+          { "text": "3. choose the platform + version what ships", "cue": "Choose where" },
+          { "text": "4. compare on latency · compliance · cost", "cue": "Compare platforms" },
+          { "text": "5. coordinate deployments, hold the boundaries", "cue": "coordinate several" }
+        ] }
+      ]
+    },
+    {
+      "id": "gap",
+      "narration": "One recurring gap runs through it all: a build that works is not yet a build that survives reuse, review, or deployment. The template must configure for a team that never spoke to you. The contribution must verify without reconstruction. The model must be pinned, so an upstream change is a decision instead of a surprise. The platform must clear residency and compliance. The point where code starts working is where this module's work begins.",
+      "elements": [
+        { "id": "rule", "kind": "handtext", "cue": "recurring gap", "text": "works ≠ survives reuse, review, deployment", "size": 48, "color": "red", "boxed": true, "at": { "x": 340, "y": 120, "w": 1240, "h": 140 } },
+        { "id": "list", "kind": "bullets", "cue": "never spoke to you", "size": 40, "color": "ink", "at": { "x": 300, "y": 340, "w": 1400, "h": 400 }, "items": [
+          { "text": "configures for a team that never met you", "cue": "never spoke to you" },
+          { "text": "verifies without reconstruction", "cue": "without reconstruction" },
+          { "text": "pinned: upstream change = a decision", "cue": "pinned" },
+          { "text": "clears residency + compliance review", "cue": "residency" }
+        ] },
+        { "id": "begin", "kind": "handtext", "cue": "work begins", "text": "\"it works\" is where the work begins", "size": 44, "color": "green", "at": { "x": 460, "y": 800, "w": 1000, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "First stop: packaging for reuse — turning one delivery into an asset the next engagement configures in hours.",
+      "elements": [
+        { "id": "next", "kind": "handtext", "cue": "First stop", "text": "→ first: packaging for reuse", "size": 56, "color": "green", "boxed": true, "at": { "x": 480, "y": 320, "w": 960, "h": 140 } },
+        { "id": "sub", "kind": "handtext", "cue": "configures in hours", "text": "one delivery → an asset configured in hours", "size": 44, "color": "ink", "at": { "x": 400, "y": 580, "w": 1150, "h": 70 } }
+      ]
+    }
+  ]
+}

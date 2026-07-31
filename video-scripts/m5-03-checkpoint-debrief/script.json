@@ -1,0 +1,37 @@
+{
+  "sectionId": "m5-03-checkpoint-debrief",
+  "title": "Checkpoint 2 Walkthrough",
+  "subtitle": "channel + readiness for 3 cases",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/03-contributing-back/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5105,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint two: three contributions, and two matches for each — the channel built for it, and the readiness item it's missing. If you haven't made your matches, pause here first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint two", "text": "Checkpoint 2: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause here", "text": "⏸ match all three first", "size": 46, "color": "red", "boxed": true, "at": { "x": 600, "y": 440, "w": 720, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answers",
+      "narration": "Case A, the focused API wrapper: it goes to the tool's own repository, and what's missing is a test proving the wrapper behaves — focused isn't enough by itself. Case B, the full customer-service application: it fits no channel whole. The reusable pattern has to be stripped out first, and only that focused example goes to the Cookbook. Case C, the one-line fix carried from an engagement: it goes to the example's own repository, and what's missing is the rights check — engagement code can carry a licensing constraint that blocks the merge before any technical review even starts.",
+      "elements": [
+        { "id": "map", "kind": "code", "cue": "Case A", "lang": "text", "code": "A  API wrapper  → tool's own repo        + a test\nB  full app     → strip the pattern      → Cookbook\nC  1-line fix   → example's own repo     + rights check", "at": { "x": 200, "y": 130, "w": 1450, "h": 220 } },
+        { "id": "b", "kind": "handtext", "cue": "no channel whole", "text": "B is the trap: a whole app fits nowhere —\nonly the extracted pattern travels", "size": 46, "color": "red", "boxed": true, "at": { "x": 420, "y": 440, "w": 1100, "h": 180 } },
+        { "id": "c", "kind": "handtext", "cue": "blocks the merge", "text": "C: licensing blocks BEFORE technical review", "size": 42, "color": "ink", "at": { "x": 380, "y": 700, "w": 1200, "h": 70 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The coupling is the lesson: the channel follows the contribution's shape, and readiness fills what the maintainer can't verify. A wrong channel stalls regardless of quality — and a missing rights check can un-merge a merge. Next: requirements and lifecycle.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "coupling", "color": "green", "at": { "x": 320, "y": 280, "w": 1280, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "channel follows", "delay": 0.2, "text": "channel follows the SHAPE ·\nreadiness fills the verify-gap", "size": 46, "color": "green", "at": { "x": 460, "y": 330, "w": 1000, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "requirements and lifecycle", "text": "→ next: requirements & lifecycle", "size": 42, "color": "ink", "at": { "x": 500, "y": 630, "w": 950, "h": 70 } }
+      ]
+    }
+  ]
+}

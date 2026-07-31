@@ -1,0 +1,63 @@
+{
+  "sectionId": "m5-04-requirements-and-lifecycle",
+  "title": "Requirements & Lifecycle",
+  "subtitle": "what to build, in which phase",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/01-teaching.md + 03-teaching.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5106,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Before any platform decision comes the question of where requirements come from. A business problem — help support agents answer faster — is not a requirement yet. This section turns it into requirements a deployment decision can be defended against, then places all of this module's work on one lifecycle.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "requirements come from", "text": "Requirements & Lifecycle", "size": 72, "color": "ink", "at": { "x": 400, "y": 160, "w": 1150, "h": 110 } },
+        { "id": "not", "kind": "handtext", "cue": "not a requirement", "text": "\"answer faster\" is not a requirement — yet", "size": 48, "color": "red", "at": { "x": 340, "y": 420, "w": 1250, "h": 70 } },
+        { "id": "goal", "kind": "handtext", "cue": "defended against", "text": "goal: requirements a decision\ncan be DEFENDED against", "size": 46, "color": "blue", "boxed": true, "at": { "x": 500, "y": 570, "w": 950, "h": 180 } }
+      ]
+    },
+    {
+      "id": "functional",
+      "narration": "A functional requirement names what the system must do, stated with enough detail to check. From help agents answer faster, you derive: classify each ticket into one of four queues. Draft a reply citing the relevant policy. Never auto-send without human approval. Each one is a checkable statement of behavior — a line in an eval, a criterion at review. If it can't be checked, it can't be designed against.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "functional requirement", "text": "functional: what it must DO", "size": 54, "color": "blue", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "classify each ticket", "lang": "text", "code": "\"help support agents answer faster\"      <- problem\n → classify tickets into 4 queues        <- functional\n → draft replies citing the policy\n → never auto-send w/o human approval", "at": { "x": 220, "y": 230, "w": 1350, "h": 260 } },
+        { "id": "rule", "kind": "handtext", "cue": "checkable statement", "text": "checkable = a line in the eval,\na criterion at review", "size": 46, "color": "green", "boxed": true, "at": { "x": 480, "y": 570, "w": 980, "h": 180 } },
+        { "id": "no", "kind": "handtext", "cue": "designed against", "text": "can't check it → can't design against it", "size": 40, "color": "red", "at": { "x": 440, "y": 820, "w": 1050, "h": 65 } }
+      ]
+    },
+    {
+      "id": "infra",
+      "narration": "Infrastructure requirements are the constraints the deployment must satisfy — and most are never stated. You derive them by asking what the business problem implies. Latency: how fast, measured where the user is. Scale: how many requests, at what peak. Residency: where the data must be processed, and under which regulation. Identity: who acts, under what credentials, with what audit. These four most often decide the platform, and they're cheapest to capture before a platform gets chosen for other reasons. Then write the record down — behaviors, constraints, and the regulation each comes from — because the decision will be reviewed by people who didn't gather them.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Infrastructure requirements", "text": "infrastructure: what deployment must satisfy", "size": 48, "color": "blue", "at": { "x": 160, "y": 90, "w": 1550, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Latency", "size": 42, "color": "ink", "at": { "x": 240, "y": 230, "w": 1450, "h": 470 }, "items": [
+          { "text": "latency — how fast, where the user is", "cue": "Latency" },
+          { "text": "scale — how many, at what peak", "cue": "Scale" },
+          { "text": "residency — where, under which regulation", "cue": "Residency" },
+          { "text": "identity — who acts, what's auditable", "cue": "Identity" }
+        ] },
+        { "id": "decide", "kind": "handtext", "cue": "decide the platform", "text": "these 4 pick the platform", "size": 46, "color": "green", "boxed": true, "at": { "x": 560, "y": 730, "w": 820, "h": 130 } }
+      ]
+    },
+    {
+      "id": "lifecycle",
+      "narration": "Second half: the systems lifecycle, the arc all of this module's work sits on. Requirements, design, build, test, deploy, operate, iterate — the same phases the earlier modules taught one at a time. The connection is the gates. You don't move from design to build until the platform satisfies the residency requirement. You don't promote a deployment until the new version clears the eval against the pinned baseline. Placing work in its phase, and refusing to skip a gate, is what keeps the application reviewable. A one-off experiment may collapse phases. A regulated deployment cannot.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "systems lifecycle", "lang": "text", "code": "requirements → design → build → test\n      → deploy → operate → iterate ↺", "at": { "x": 300, "y": 130, "w": 1250, "h": 170 } },
+        { "id": "gates", "kind": "handtext", "cue": "the gates", "text": "the GATES between phases\n= where control lives", "size": 50, "color": "blue", "boxed": true, "at": { "x": 500, "y": 380, "w": 950, "h": 190 } },
+        { "id": "ex", "kind": "handtext", "cue": "pinned baseline", "text": "design→build: residency satisfied first\ndeploy→prod: eval beats the baseline first", "size": 42, "color": "ink", "at": { "x": 380, "y": 650, "w": 1200, "h": 130 } },
+        { "id": "reg", "kind": "handtext", "cue": "cannot", "text": "experiments collapse phases · regulated builds don't", "size": 40, "color": "red", "at": { "x": 340, "y": 840, "w": 1300, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The reflex: derive the constraints before anyone names a platform, and let every phase change pass its gate. Two checkpoints follow — extract requirements from a bank scenario, and place activities on the lifecycle. One debrief covers both. Then: deployment and versioning.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "The reflex", "color": "green", "at": { "x": 320, "y": 280, "w": 1280, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "derive the constraints", "delay": 0.2, "text": "constraints before platforms ·\nno phase change skips its gate", "size": 46, "color": "green", "at": { "x": 460, "y": 330, "w": 1000, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "Two checkpoints", "text": "→ 2 checkpoints, then deployment & versioning", "size": 42, "color": "ink", "at": { "x": 380, "y": 630, "w": 1200, "h": 70 } }
+      ]
+    }
+  ]
+}

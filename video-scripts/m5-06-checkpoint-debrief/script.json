@@ -1,0 +1,38 @@
+{
+  "sectionId": "m5-06-checkpoint-debrief",
+  "title": "Checkpoint 6 Walkthrough",
+  "subtitle": "diagnose the platform mismatch",
+  "source": "course-content/module-5-accelerators-and-ip-contribution/06-comparing-platforms/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 5111,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint six: a comparison trace where a familiar platform got rejected, and three candidate fixes. If you haven't picked yours, pause and read the trace first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint six", "text": "Checkpoint 6: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ diagnose the trace yourself first", "size": 46, "color": "red", "boxed": true, "at": { "x": 480, "y": 440, "w": 980, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "Read the rejection reason: data processed outside the EU on the selected platform. That names the failed dimension — residency. So the answer is B: re-measure latency from EU-west, and select the platform whose region satisfies EU-only residency. The platform itself has to change. Option A optimizes the laptop-measured latency — a number measured from the wrong place, about a dimension that was never the problem. Option C adds caching to cut cost — also never the problem. Both treat dimensions the review didn't reject.",
+      "elements": [
+        { "id": "code", "kind": "code", "cue": "rejection reason", "lang": "text", "code": "latency: measured from dev laptop      (wrong place)\nreject:  \"data processed outside EU\"   <- the dimension", "at": { "x": 220, "y": 130, "w": 1400, "h": 160 } },
+        { "id": "verdict", "kind": "handtext", "cue": "answer is B", "text": "✓ B — change the platform to one that\nmeets EU-only residency (+ re-measure from EU)", "size": 44, "color": "green", "boxed": true, "at": { "x": 320, "y": 380, "w": 1300, "h": 180 } },
+        { "id": "notA", "kind": "handtext", "cue": "Option A", "text": "✗ A — speed was never the problem", "size": 36, "color": "red", "at": { "x": 380, "y": 650, "w": 1150, "h": 55 } },
+        { "id": "notC", "kind": "handtext", "cue": "Option C", "text": "✗ C — cost was never the problem", "size": 36, "color": "red", "at": { "x": 380, "y": 740, "w": 1150, "h": 55 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The pattern to carry: fix the dimension named in the rejection, not the one that's easiest to improve. Next: trust boundaries.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "pattern to carry", "color": "green", "at": { "x": 340, "y": 290, "w": 1240, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "named in the rejection", "delay": 0.2, "text": "fix the dimension the review NAMED —\nnot the easiest one", "size": 46, "color": "green", "at": { "x": 440, "y": 340, "w": 1040, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "trust boundaries", "text": "→ next: trust boundaries", "size": 44, "color": "ink", "at": { "x": 560, "y": 630, "w": 800, "h": 70 } }
+      ]
+    }
+  ]
+}

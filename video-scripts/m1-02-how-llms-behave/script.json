@@ -1,0 +1,111 @@
+{
+  "sectionId": "m1-02-how-llms-behave",
+  "title": "How LLMs Behave",
+  "subtitle": "tokens · context window · sampling · non-determinism",
+  "source": "course-content/module-1-mso-foundations/02-how-llms-behave/01-teaching.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 1102,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Here's a fun experiment. Ask Claude the exact same question twice, and you'll often get two different answers. Is that a bug? It's actually a window into how language models work. In the next few minutes we'll unpack four ideas: tokens, the context window, sampling, and non-determinism. Get these four, and the model's quirks start making sense.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "experiment", "text": "How LLMs Behave", "size": 92, "color": "ink", "at": { "x": 460, "y": 120, "w": 1000, "h": 120 } },
+        { "id": "q1", "kind": "handtext", "cue": "question twice", "text": "same question ×2", "size": 44, "color": "blue", "at": { "x": 300, "y": 330, "w": 420, "h": 60 } },
+        { "id": "a1", "kind": "handtext", "cue": "different answers", "text": "two different answers?!", "size": 44, "color": "red", "at": { "x": 1150, "y": 330, "w": 520, "h": 60 } },
+        { "id": "arrow1", "kind": "sketch", "shape": "arrow", "cue": "different answers", "color": "ink", "at": { "x": 760, "y": 355, "w": 350, "h": 10 } },
+        { "id": "roadmap", "kind": "bullets", "cue": "four ideas", "size": 40, "color": "ink", "at": { "x": 560, "y": 500, "w": 800, "h": 400 }, "items": [
+          { "text": "1. tokens", "cue": "tokens" },
+          { "text": "2. the context window", "cue": "context window" },
+          { "text": "3. sampling", "cue": "sampling" },
+          { "text": "4. non-determinism", "cue": "non-determinism" }
+        ] }
+      ]
+    },
+    {
+      "id": "tokens",
+      "narration": "First: tokens. Claude doesn't read characters or words. It reads tokens: small chunks of text. How many characters fit in one token? That depends on the model's tokenizer, so treat any rule of thumb with suspicion, and confirm how the current model behaves when you build. Here's why tokens matter: everything is counted in them. Your prompt. The conversation history. Tool definitions and tool results. Even the answer the model writes back. Tokens are the unit of pricing, and the unit of budget. So when you estimate cost, don't count words. Think in tokens.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "First", "text": "1. Tokens", "size": 72, "color": "blue", "at": { "x": 120, "y": 90, "w": 500, "h": 100 } },
+        { "id": "strip", "kind": "tokenstrip", "cue": "chunks of text", "text": "Cl|aude| reads| tok|ens", "size": 52, "at": { "x": 480, "y": 260, "w": 960, "h": 100 } },
+        { "id": "warn", "kind": "handtext", "cue": "suspicion", "text": "chars per token = model-dependent!", "size": 38, "color": "red", "at": { "x": 520, "y": 400, "w": 880, "h": 60 } },
+        { "id": "counted", "kind": "bullets", "cue": "counted in them", "size": 38, "color": "ink", "at": { "x": 260, "y": 540, "w": 640, "h": 380 }, "items": [
+          { "text": "prompt", "cue": "Your prompt" },
+          { "text": "conversation history", "cue": "history" },
+          { "text": "tool definitions + results", "cue": "Tool definitions" },
+          { "text": "the response itself", "cue": "writes back" }
+        ] },
+        { "id": "box", "kind": "sketch", "shape": "rect", "cue": "unit of pricing", "color": "green", "at": { "x": 1080, "y": 560, "w": 620, "h": 220 } },
+        { "id": "price", "kind": "handtext", "cue": "unit of pricing", "delay": 0.3, "text": "tokens = $ + budget", "size": 46, "color": "green", "at": { "x": 1140, "y": 630, "w": 520, "h": 70 } },
+        { "id": "think", "kind": "handtext", "cue": "Think in tokens", "text": "→ think in tokens", "size": 44, "color": "ink", "at": { "x": 1140, "y": 850, "w": 520, "h": 60 } }
+      ]
+    },
+    {
+      "id": "context",
+      "narration": "Second: the context window. Think of it as a fixed-size whiteboard. Everything has to fit on it at once: the system prompt, the whole conversation so far, any documents you inject, every tool result, and the output being generated. Two different things happen at the edges. If your input is already bigger than the window, the request is rejected before generation even starts. But if the input fits, the model can still hit the ceiling while writing. Current models then stop, and return what they have, with a stop reason telling you the window was exceeded. In development your test inputs are short, so the window feels infinite. In production, real conversations fill it fast. Keeping a long session alive means trimming or summarizing history before each call.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Second", "text": "2. The Context Window", "size": 72, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 100 } },
+        { "id": "window", "kind": "sketch", "shape": "rect", "cue": "fixed-size whiteboard", "color": "ink", "at": { "x": 220, "y": 260, "w": 700, "h": 640 } },
+        { "id": "b1", "kind": "handtext", "cue": "system prompt", "text": "system prompt", "size": 34, "color": "blue", "boxed": true, "at": { "x": 270, "y": 300, "w": 600, "h": 70 } },
+        { "id": "b2", "kind": "handtext", "cue": "conversation so far", "text": "conversation history", "size": 34, "color": "blue", "boxed": true, "at": { "x": 270, "y": 390, "w": 600, "h": 70 } },
+        { "id": "b3", "kind": "handtext", "cue": "documents", "text": "injected documents", "size": 34, "color": "blue", "boxed": true, "at": { "x": 270, "y": 480, "w": 600, "h": 70 } },
+        { "id": "b4", "kind": "handtext", "cue": "tool result", "text": "tool results", "size": 34, "color": "blue", "boxed": true, "at": { "x": 270, "y": 570, "w": 600, "h": 70 } },
+        { "id": "b5", "kind": "handtext", "cue": "output being generated", "text": "output ...", "size": 34, "color": "green", "boxed": true, "at": { "x": 270, "y": 660, "w": 600, "h": 70 } },
+        { "id": "edge1", "kind": "handtext", "cue": "rejected", "text": "input > window → rejected up front", "size": 38, "color": "red", "at": { "x": 1020, "y": 380, "w": 780, "h": 60 } },
+        { "id": "edge2", "kind": "handtext", "cue": "ceiling", "text": "fills while writing → stops + stop reason", "size": 38, "color": "red", "at": { "x": 1020, "y": 480, "w": 800, "h": 60 } },
+        { "id": "stopcode", "kind": "code", "cue": "exceeded", "lang": "text", "code": "stop_reason:\n  model_context_window_exceeded", "at": { "x": 1060, "y": 570, "w": 700, "h": 130 } },
+        { "id": "fix", "kind": "handtext", "cue": "trimming", "text": "long sessions: trim or summarize history", "size": 38, "color": "green", "at": { "x": 1020, "y": 790, "w": 820, "h": 60 } }
+      ]
+    },
+    {
+      "id": "sampling",
+      "narration": "Third: sampling. At each step, the model doesn't pick one fixed next token. It builds a probability distribution over many candidates, then samples from it. A weighted roll of the dice. Settings like temperature reshape those weights. Low temperature piles probability onto the favorites, so output gets more repeatable. High temperature spreads it out, so output gets more varied. One thing to watch: sampling controls are model-dependent. The newest Claude models don't accept custom sampling settings at all. Set temperature there, and the API returns an error. You steer those models with prompting instead. And even where temperature is accepted, temperature zero makes output more repeatable, but it never guarantees identical answers.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Third", "text": "3. Sampling", "size": 72, "color": "blue", "at": { "x": 120, "y": 90, "w": 500, "h": 100 } },
+        { "id": "bars", "kind": "bars", "cue": "probability distribution", "at": { "x": 240, "y": 300, "w": 620, "h": 380 }, "values": [0.45, 0.25, 0.15, 0.1, 0.05], "labels": ["the", "a", "one", "its", "..."], "color": "blue" },
+        { "id": "dice", "kind": "handtext", "cue": "roll of the dice", "text": "weighted 🎲", "size": 44, "color": "ink", "at": { "x": 420, "y": 740, "w": 300, "h": 60 } },
+        { "id": "lowt", "kind": "bars", "cue": "Low temperature", "at": { "x": 1030, "y": 300, "w": 340, "h": 240 }, "values": [0.8, 0.12, 0.05, 0.03], "labels": ["", "", "", ""], "color": "green" },
+        { "id": "lowlabel", "kind": "handtext", "cue": "repeatable", "text": "low temp: repeatable", "size": 34, "color": "green", "at": { "x": 1030, "y": 570, "w": 400, "h": 50 } },
+        { "id": "hight", "kind": "bars", "cue": "High temperature", "at": { "x": 1460, "y": 300, "w": 340, "h": 240 }, "values": [0.3, 0.28, 0.22, 0.2], "labels": ["", "", "", ""], "color": "red" },
+        { "id": "highlabel", "kind": "handtext", "cue": "varied", "text": "high temp: varied", "size": 34, "color": "red", "at": { "x": 1460, "y": 570, "w": 400, "h": 50 } },
+        { "id": "warnbox", "kind": "sketch", "shape": "rect", "cue": "newest Claude models", "color": "red", "at": { "x": 1000, "y": 680, "w": 820, "h": 260 } },
+        { "id": "warn1", "kind": "handtext", "cue": "returns an error", "text": "newest models: temperature → 400 error", "size": 36, "color": "red", "at": { "x": 1050, "y": 720, "w": 740, "h": 55 } },
+        { "id": "warn2", "kind": "handtext", "cue": "prompting instead", "text": "steer with prompting instead", "size": 36, "color": "ink", "at": { "x": 1050, "y": 790, "w": 740, "h": 55 } },
+        { "id": "warn3", "kind": "handtext", "cue": "never guarantees", "text": "temp 0 ≠ identical outputs", "size": 36, "color": "ink", "at": { "x": 1050, "y": 860, "w": 740, "h": 55 } }
+      ]
+    },
+    {
+      "id": "nondet",
+      "narration": "Which brings us to the punchline: non-determinism. Identical inputs do not guarantee identical outputs. And that changes how you test. If your test asserts the exact wording of a response, it will pass one day and fail the next, because the model can phrase the same correct answer a dozen ways. So assert on properties that must hold. The required field is present. The value is in range. The structure parses. And when you need to judge meaning rather than structure, use an eval with a model-graded judge. That's why evals, not string comparisons, are how you know a Claude feature is actually correct.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "punchline", "text": "4. Non-determinism", "size": 72, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 100 } },
+        { "id": "law", "kind": "handtext", "cue": "Identical inputs", "text": "same input ≠ same output", "size": 52, "color": "ink", "at": { "x": 560, "y": 250, "w": 800, "h": 80 } },
+        { "id": "badcode", "kind": "code", "cue": "exact wording", "lang": "python", "code": "assert answer == \"Paris is the capital\"  # flaky!", "at": { "x": 240, "y": 400, "w": 900, "h": 90 } },
+        { "id": "cross", "kind": "sketch", "shape": "cross", "cue": "fail the next", "color": "red", "at": { "x": 1180, "y": 395, "w": 100, "h": 100 } },
+        { "id": "goodlist", "kind": "bullets", "cue": "properties that must hold", "size": 38, "color": "green", "at": { "x": 300, "y": 570, "w": 760, "h": 300 }, "items": [
+          { "text": "required field is present", "cue": "field is present" },
+          { "text": "value is in range", "cue": "in range" },
+          { "text": "structure parses", "cue": "structure parses" }
+        ] },
+        { "id": "judgebox", "kind": "sketch", "shape": "ellipse", "cue": "model-graded judge", "color": "blue", "at": { "x": 1240, "y": 600, "w": 560, "h": 220 } },
+        { "id": "judge", "kind": "handtext", "cue": "model-graded judge", "delay": 0.4, "text": "meaning? →\nmodel-graded judge", "size": 40, "color": "blue", "at": { "x": 1320, "y": 650, "w": 460, "h": 130 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "So: think in tokens, because that's what you're billed in. Respect the context window; it's a hard budget. Expect sampled output to vary. And test properties, not exact words. Here's something to try today: run the same prompt twice, and diff the answers. Notice what stays the same across both runs. That invariant is exactly what your tests should be checking.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "So", "text": "Remember", "size": 72, "color": "ink", "at": { "x": 120, "y": 90, "w": 500, "h": 100 } },
+        { "id": "recap", "kind": "bullets", "cue": "think in tokens", "size": 44, "color": "ink", "at": { "x": 300, "y": 260, "w": 1100, "h": 420 }, "items": [
+          { "text": "think in tokens ($)", "cue": "think in tokens" },
+          { "text": "the context window is a hard budget", "cue": "context window" },
+          { "text": "sampled output varies — by design", "cue": "vary" },
+          { "text": "test properties, not exact words", "cue": "test properties" }
+        ] },
+        { "id": "trybox", "kind": "sketch", "shape": "rect", "cue": "try today", "color": "green", "at": { "x": 340, "y": 740, "w": 1240, "h": 200 } },
+        { "id": "try", "kind": "handtext", "cue": "try today", "delay": 0.4, "text": "try it: same prompt ×2 → diff the answers → what survives?", "size": 40, "color": "green", "at": { "x": 400, "y": 800, "w": 1120, "h": 70 } }
+      ]
+    }
+  ]
+}

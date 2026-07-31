@@ -1,0 +1,28 @@
+{
+  "name": "claude-developer-interactive-course",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Pipeline that turns the Claude Developer course markdown into whiteboard-style narrated videos",
+  "scripts": {
+    "parse": "node pipeline/parse.mjs",
+    "tts": "node pipeline/tts.mjs",
+    "studio": "remotion studio video/src/index.ts",
+    "render": "remotion render video/src/index.ts"
+  },
+  "dependencies": {
+    "@remotion/captions": "4.0.503",
+    "@remotion/cli": "4.0.503",
+    "@remotion/google-fonts": "4.0.503",
+    "@remotion/paths": "4.0.503",
+    "gray-matter": "^4.0.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "remotion": "4.0.503",
+    "roughjs": "^4.6.6"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.8.0"
+  }
+}

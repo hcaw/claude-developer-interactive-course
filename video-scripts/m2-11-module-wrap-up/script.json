@@ -1,0 +1,53 @@
+{
+  "sectionId": "m2-11-module-wrap-up",
+  "title": "Module 2 Wrap-up",
+  "subtitle": "eight takeaways",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/11-module-wrap-up/01-recap.md + 03-module-complete.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2119,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "That's the whole production module. Eight sections, eight failure modes, and now, eight takeaways. If you can explain each one to a teammate, you're ready for what's next.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "production module", "text": "Module 2: Wrap-up", "size": 84, "color": "ink", "at": { "x": 480, "y": 190, "w": 950, "h": 120 } },
+        { "id": "eight", "kind": "handtext", "cue": "eight takeaways", "text": "8 takeaways", "size": 56, "color": "blue", "boxed": true, "at": { "x": 720, "y": 430, "w": 480, "h": 130 } },
+        { "id": "test", "kind": "handtext", "cue": "teammate", "text": "the test: explain each to a teammate", "size": 40, "color": "green", "at": { "x": 500, "y": 660, "w": 950, "h": 70 } }
+      ]
+    },
+    {
+      "id": "first4",
+      "narration": "One: when a prompt fails, the failure type names the missing technique. Diagnose, don't reword, and when the parser truly can't be trusted to luck, move the constraint into the API with structured outputs. Two: match reasoning depth to the task. Enable thinking where a reasoning pass changes the answer, and carry thinking blocks back untouched. Three: a stream ending is not a message completing. Act on closed blocks, commit on message stop, discard partials. Four: every wrong-tool selection traces to the schema, usually the description. The exclusion sentence, when not to call this, resolves most of them. And MCP gives you maintained tools, at a context price.",
+      "elements": [
+        { "id": "list", "kind": "bullets", "cue": "failure type names", "size": 40, "color": "ink", "at": { "x": 200, "y": 180, "w": 1550, "h": 620 }, "items": [
+          { "text": "1. diagnose the prompt failure — don't reword", "cue": "failure type names" },
+          { "text": "2. reasoning depth follows the task · blocks untouched", "cue": "reasoning depth" },
+          { "text": "3. stream end ≠ message complete", "cue": "stream ending" },
+          { "text": "4. wrong tool = description — add the exclusion", "cue": "wrong-tool" }
+        ] }
+      ]
+    },
+    {
+      "id": "second4",
+      "narration": "Five: context is a fixed budget, and tool outputs spend it fastest. When selection degrades after a fixed number of turns, check the window before the schema. Six: the workflow-or-agent decision sets the cost of everything after it, and human checkpoints belong in the design, before any irreversible tool runs. Seven: memory scope follows the shape of the session, not the easiest implementation. And repeatable instructions belong in Skills, loaded on demand. Eight: run the image cost formula before writing ingestion code, and match the API to the workload. A loop over the synchronous endpoint is not a batch.",
+      "elements": [
+        { "id": "list", "kind": "bullets", "cue": "fixed budget", "size": 40, "color": "ink", "at": { "x": 200, "y": 180, "w": 1550, "h": 620 }, "items": [
+          { "text": "5. context: check the window before the schema", "cue": "fixed budget" },
+          { "text": "6. workflow vs agent first · HITL in the design", "cue": "workflow-or-agent" },
+          { "text": "7. memory scope = session shape · Skills on demand", "cue": "memory scope" },
+          { "text": "8. price images first · a sync loop ≠ a batch", "cue": "image cost" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "These eight patterns are the primitive library every later module draws from. You can now take a Claude prototype into production: prompts that hold, loops that recover, context that stays in budget, and agents with human gates where it matters. Congratulations on finishing the biggest module of the course. Next up: Module three. Claude Code, MCP, and integration.",
+      "elements": [
+        { "id": "lib", "kind": "handtext", "cue": "primitive library", "text": "your primitive library for everything ahead", "size": 46, "color": "blue", "at": { "x": 380, "y": 240, "w": 1200, "h": 70 } },
+        { "id": "congrats", "kind": "handtext", "cue": "Congratulations", "text": "🎉 biggest module of the course — done", "size": 50, "color": "green", "boxed": true, "at": { "x": 440, "y": 400, "w": 1050, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "Module three", "text": "→ next: M3 · Claude Code, MCP & integration", "size": 46, "color": "ink", "at": { "x": 420, "y": 660, "w": 1150, "h": 70 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "sectionId": "m2-02-prompting-craft",
+  "title": "Prompting Craft",
+  "subtitle": "diagnose the failure, add the missing piece",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/02-prompting-craft/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2102,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Your prompt worked perfectly in the chat window. Then it hit production traffic, and now the parser is on fire. The instinct is to add more words and run it again. Resist it. Rewording changes how you say things. It doesn't add the structural piece that's missing. This section is about finding that piece, and adding exactly that.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "chat window", "text": "Prompting Craft", "size": 88, "color": "ink", "at": { "x": 520, "y": 150, "w": 900, "h": 120 } },
+        { "id": "fire", "kind": "handtext", "cue": "parser is on fire", "text": "worked in chat → broke in production", "size": 46, "color": "red", "at": { "x": 440, "y": 390, "w": 1050, "h": 70 } },
+        { "id": "resist", "kind": "handtext", "cue": "Resist", "text": "instinct: \"add more words\" ← resist!", "size": 44, "color": "red", "boxed": true, "at": { "x": 440, "y": 530, "w": 1040, "h": 120 } },
+        { "id": "find", "kind": "handtext", "cue": "structural piece", "text": "find the missing structural piece", "size": 44, "color": "green", "at": { "x": 500, "y": 740, "w": 920, "h": 70 } }
+      ]
+    },
+    {
+      "id": "diagnose",
+      "narration": "The failure tells you what's missing. Learn to read it. Output in the wrong shape, a sentence where you expected JSON? That's a missing output constraint. The content drifts, tone shifts, scope creeps as the conversation runs on? Your system prompt is too vague to hold the contract. The task is right, but the structure is invented? Claude can't infer exact structure from a description. It needs few-shot examples. And output that's clean until one weird input breaks it? You're missing a constraint that names that variant. Four failures, four techniques. Diagnose first, then add the one that matches.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "failure tells you", "text": "Read the failure → find the fix", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "rows", "kind": "bullets", "cue": "wrong shape", "size": 38, "color": "ink", "at": { "x": 180, "y": 250, "w": 1600, "h": 480 }, "items": [
+          { "text": "wrong shape → output constraint", "cue": "wrong shape" },
+          { "text": "scope / tone drift → sharper system prompt", "cue": "content drifts" },
+          { "text": "invented structure → few-shot examples", "cue": "structure is invented" },
+          { "text": "breaks on one variant → constraint naming it", "cue": "weird input" }
+        ] },
+        { "id": "rule", "kind": "handtext", "cue": "Diagnose first", "text": "diagnose first — then add ONE technique", "size": 46, "color": "green", "boxed": true, "at": { "x": 440, "y": 770, "w": 1040, "h": 120 } }
+      ]
+    },
+    {
+      "id": "example",
+      "narration": "Watch it play out. A support classifier: billing, technical, or escalation. The first prompt is a bare instruction. You are a support classifier. Classify the ticket. Claude returns capital B billing on some runs, lowercase on others, and occasionally a whole sentence. The router downstream breaks. Wrong shape. So: missing output constraint. Here's the fix. The system prompt now demands exactly one of three labels, in capitals, and nothing else. Two few-shot pairs show the exact casing. And XML tags fence the examples off from the instruction, so Claude doesn't read them as part of the task. Three techniques, each doing distinct work, and the output is now consistent enough to route programmatically.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "play out", "text": "Worked example: the classifier", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "before", "kind": "code", "cue": "bare instruction", "lang": "text", "code": "System: \"You are a support classifier.\n         Classify the ticket.\"", "at": { "x": 160, "y": 240, "w": 780, "h": 140 } },
+        { "id": "drift", "kind": "handtext", "cue": "whole sentence", "text": "\"Billing\" / \"billing\" / \"This looks like...\" 💥", "size": 38, "color": "red", "at": { "x": 220, "y": 430, "w": 800, "h": 60 } },
+        { "id": "after", "kind": "code", "cue": "Here's the fix", "lang": "text", "code": "System: \"Classify into exactly one of:\n  BILLING, TECHNICAL, ESCALATION.\n  Return only the label. No other text.\"\n\n<sample_input>charged twice...</sample_input>\n<ideal_output>BILLING</ideal_output>", "at": { "x": 160, "y": 540, "w": 880, "h": 330 } },
+        { "id": "t1", "kind": "handtext", "cue": "exactly one of three", "text": "① constraint: the contract", "size": 38, "color": "green", "at": { "x": 1130, "y": 560, "w": 660, "h": 60 } },
+        { "id": "t2", "kind": "handtext", "cue": "exact casing", "text": "② few-shot: exact casing shown", "size": 38, "color": "green", "at": { "x": 1130, "y": 660, "w": 660, "h": 60 } },
+        { "id": "t3", "kind": "handtext", "cue": "fence the examples", "text": "③ XML tags: examples ≠ task", "size": 38, "color": "green", "at": { "x": 1130, "y": 760, "w": 660, "h": 60 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Now the cautionary tale: the prompt that grew longer instead of better. Six revision passes on that same classifier. Pass one adds instructions. Pass two says be concise. Pass three adds three paragraphs describing each category. Pass four bans double labels. Pass five adds edge-case paragraphs, and now the verbose prompt produces verbose output: two thousand characters per call, latency way up, accuracy flat. Pass six deletes it all, and replaces it with an output constraint and two examples. Parser fixed. Latency drops. Every pass described the problem more precisely. None of them added the missing constraint. So here's the rule: three re-prompts in a row haven't worked? Stop adding text. Diagnose.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "cautionary tale", "text": "⚠ longer ≠ better", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "passes", "kind": "bullets", "cue": "Pass one", "size": 34, "color": "ink", "at": { "x": 180, "y": 240, "w": 1000, "h": 560 }, "items": [
+          { "text": "pass 1-2: instructions + \"be concise\" — still drifts", "cue": "Pass one" },
+          { "text": "pass 3: 3 paragraphs of description — \"billing/technical\"", "cue": "three paragraphs" },
+          { "text": "pass 4: ban double labels — explanations instead", "cue": "double labels" },
+          { "text": "pass 5: verbose prompt → verbose output (2,000 chars!)", "cue": "verbose output" },
+          { "text": "pass 6: DELETE. constraint + 2 examples → fixed ✓", "cue": "deletes it all" }
+        ] },
+        { "id": "insight", "kind": "handtext", "cue": "more precisely", "text": "described the problem better...\nnever added the constraint", "size": 40, "color": "red", "at": { "x": 1240, "y": 340, "w": 560, "h": 140 } },
+        { "id": "rule", "kind": "handtext", "cue": "Stop adding text", "text": "3 failed re-prompts → stop. diagnose.", "size": 42, "color": "green", "boxed": true, "at": { "x": 1200, "y": 560, "w": 620, "h": 160 } }
+      ]
+    },
+    {
+      "id": "structured",
+      "narration": "One more level: move the constraint out of the prompt, and into the API. Structured outputs. You hand the API a JSON schema, and generation itself is constrained. Token by token, output that violates the schema simply cannot be produced. Two flavors. JSON outputs constrain the final response your code consumes. Strict tool use validates the arguments Claude passes to your tools. But know the costs before you enable it everywhere. The first request on a new schema pays a compilation delay, cached for twenty-four hours. Input tokens rise a little. A guaranteed schema is not a guaranteed answer: refusals and max token truncations still happen, so keep checking the stop reason. And it can't combine with prefilling the assistant message.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "into the API", "text": "Structured outputs: the API enforces it", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 1350, "h": 90 } },
+        { "id": "how", "kind": "handtext", "cue": "Token by token", "text": "schema in → invalid tokens can't be generated", "size": 42, "color": "ink", "at": { "x": 300, "y": 240, "w": 1200, "h": 70 } },
+        { "id": "f1", "kind": "handtext", "cue": "JSON outputs constrain", "text": "JSON outputs:\nthe final response", "size": 40, "color": "green", "boxed": true, "at": { "x": 260, "y": 380, "w": 620, "h": 160 } },
+        { "id": "f2", "kind": "handtext", "cue": "Strict tool use", "text": "strict: true →\nvalid tool arguments", "size": 40, "color": "green", "boxed": true, "at": { "x": 1040, "y": 380, "w": 620, "h": 160 } },
+        { "id": "costs", "kind": "bullets", "cue": "know the costs", "size": 34, "color": "red", "at": { "x": 300, "y": 620, "w": 1400, "h": 300 }, "items": [
+          { "text": "first call compiles the schema (cached 24h)", "cue": "compilation delay" },
+          { "text": "input tokens rise a little", "cue": "tokens rise" },
+          { "text": "still check stop_reason: refusal / max_tokens", "cue": "stop reason" },
+          { "text": "incompatible with prefilling", "cue": "prefilling" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "So: never re-prompt blind. Name the failure. Wrong shape, drifting scope, invented structure, or a broken edge case. Add the one missing technique. And when the format truly must be machine-readable, let the API enforce the schema. Now take the checkpoint: fix a broken prompt yourself. Then watch the walkthrough to compare answers.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "Name the failure", "size": 44, "color": "ink", "at": { "x": 300, "y": 220, "w": 1350, "h": 340 }, "items": [
+          { "text": "name the failure (shape · scope · structure · edge)", "cue": "Wrong shape" },
+          { "text": "add ONE missing technique", "cue": "one missing" },
+          { "text": "machine-readable? → structured outputs", "cue": "machine-readable" }
+        ] },
+        { "id": "trybox", "kind": "sketch", "shape": "rect", "cue": "checkpoint", "color": "green", "at": { "x": 340, "y": 640, "w": 1240, "h": 220 } },
+        { "id": "try", "kind": "handtext", "cue": "fix a broken prompt", "delay": 0.2, "text": "checkpoint: fix the broken prompt →\nthen watch the walkthrough", "size": 44, "color": "green", "at": { "x": 440, "y": 690, "w": 1060, "h": 140 } }
+      ]
+    }
+  ]
+}

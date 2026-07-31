@@ -1,0 +1,40 @@
+{
+  "sectionId": "m2-04-checkpoint-debrief",
+  "title": "Checkpoint 3 Walkthrough",
+  "subtitle": "spot the schema bug",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/04-tool-use-and-schema-design/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2107,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint three gave you a session trace: an agent calls a tool, gets a perfectly good result, and then the next request explodes with a validation error. One bug. If you haven't found it yet, pause and read the trace first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint three", "text": "Checkpoint 3: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 160, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ find the bug yourself first", "size": 44, "color": "red", "boxed": true, "at": { "x": 560, "y": 400, "w": 820, "h": 120 } },
+        { "id": "hint", "kind": "handtext", "cue": "validation error", "text": "good schema · good result · failing request?!", "size": 42, "color": "blue", "at": { "x": 440, "y": 630, "w": 1060, "h": 70 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "Here's the trace. The assistant issues a tool use block with ID toolu zero one. Then look at the tool result: it references toolu zero two. That's the bug. The answer is B: correct the tool use ID on the result block. The API matches results to calls by ID, not by position. A mismatched ID reads as a reference to a call that never existed, hence: unknown tool use ID. Why not A, the description fix? Claude picked the right tool on the first try. Routing was never the problem. And why not C, the required array? Required fields control what Claude must pass when calling. They have nothing to do with how results are matched afterward.",
+      "elements": [
+        { "id": "trace", "kind": "code", "cue": "the trace", "lang": "text", "code": "Assistant: [tool_use]    id=\"toolu_01\"  ...\nUser:      [tool_result] tool_use_id=\"toolu_02\" ✗\nAPI: error — unknown tool_use_id", "at": { "x": 180, "y": 150, "w": 1100, "h": 210 } },
+        { "id": "verdict", "kind": "handtext", "cue": "answer is B", "text": "✓ B — fix the id: toolu_02 → toolu_01", "size": 48, "color": "green", "at": { "x": 280, "y": 430, "w": 1100, "h": 80 } },
+        { "id": "rule", "kind": "handtext", "cue": "by ID", "text": "results match calls BY ID, not by position", "size": 44, "color": "blue", "boxed": true, "at": { "x": 340, "y": 550, "w": 1200, "h": 130 } },
+        { "id": "nota", "kind": "handtext", "cue": "right tool on the first", "text": "✗ A — routing worked; description isn't the defect", "size": 36, "color": "red", "at": { "x": 340, "y": 740, "w": 1150, "h": 60 } },
+        { "id": "notc", "kind": "handtext", "cue": "nothing to do with how results", "text": "✗ C — required[] shapes calls, not result matching", "size": 36, "color": "red", "at": { "x": 340, "y": 830, "w": 1150, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The takeaway: when a tool-use request fails validation, check the block pairing before you touch the schema. IDs first, descriptions second. Next section: streaming responses.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "takeaway", "color": "green", "at": { "x": 360, "y": 340, "w": 1200, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "block pairing", "delay": 0.2, "text": "validation error? check pairing first:\nIDs → then descriptions", "size": 46, "color": "green", "at": { "x": 460, "y": 390, "w": 1000, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "streaming", "text": "→ next: streaming responses", "size": 44, "color": "ink", "at": { "x": 600, "y": 680, "w": 760, "h": 70 } }
+      ]
+    }
+  ]
+}

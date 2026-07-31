@@ -1,0 +1,40 @@
+{
+  "sectionId": "m2-06-checkpoint-debrief",
+  "title": "Checkpoint 5 Walkthrough",
+  "subtitle": "diagnose the context failure",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/06-context-engineering/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2111,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint five showed you a session trace where tool selection goes wrong at turn five. Which turn triggered it, what's the mechanism, and what's the one-line fix? If you haven't made your call yet, pause and read the trace first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint five", "text": "Checkpoint 5: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 170, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ make your diagnosis first", "size": 44, "color": "red", "boxed": true, "at": { "x": 560, "y": 410, "w": 820, "h": 120 } },
+        { "id": "hint", "kind": "handtext", "cue": "turn five", "text": "4 correct turns... then it all goes wrong", "size": 42, "color": "blue", "at": { "x": 480, "y": 640, "w": 1000, "h": 70 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "The trace: turns one through four call fetch policy document, correctly, each returning twenty-four hundred tokens. By turn four, nearly ten thousand tokens of tool output sit in the window, crowding the instructions. Turn five: the agent picks search knowledge base instead of apply coverage rule. Turn six repeats the mistake. The session dies without a result. The answer is B: prune the document results after each turn, and compact before turn five. Here's the reasoning. Four correct selections prove the schema works, which eliminates answer A. The description didn't suddenly get worse at turn five. The context got heavier. And answer C, raising max tokens? That parameter controls how much Claude can write in one response. It does nothing about how much it can read.",
+      "elements": [
+        { "id": "trace", "kind": "code", "cue": "The trace", "lang": "text", "code": "turns 1-4: fetch_policy_document ✓  (2,400 tok each)\nturn 5:    search_knowledge_base  ✗ (wrong tool!)\nturn 6:    search_knowledge_base  ✗ (again)\nturn 7:    session ends — no result", "at": { "x": 180, "y": 140, "w": 1150, "h": 250 } },
+        { "id": "verdict", "kind": "handtext", "cue": "answer is B", "text": "✓ B — prune results per turn + compact before turn 5", "size": 44, "color": "green", "at": { "x": 240, "y": 460, "w": 1400, "h": 70 } },
+        { "id": "why", "kind": "handtext", "cue": "prove the schema works", "text": "turns 1–4 correct = schema fine →\nthe CONTEXT got heavier, not the description worse", "size": 40, "color": "blue", "boxed": true, "at": { "x": 300, "y": 580, "w": 1300, "h": 170 } },
+        { "id": "nota", "kind": "handtext", "cue": "eliminates answer", "text": "✗ A — no routing bug to fix", "size": 36, "color": "red", "at": { "x": 340, "y": 800, "w": 700, "h": 60 } },
+        { "id": "notc", "kind": "handtext", "cue": "how much it can read", "text": "✗ C — max_tokens = writing room, not reading room", "size": 36, "color": "red", "at": { "x": 340, "y": 880, "w": 1150, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The takeaway is the same one from the lesson: when good selections turn bad after a fixed number of turns, the schema is innocent until the window is proven empty. Next section: agent construction.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "takeaway", "color": "green", "at": { "x": 320, "y": 330, "w": 1280, "h": 230 } },
+        { "id": "rule", "kind": "handtext", "cue": "schema is innocent", "delay": 0.2, "text": "good→bad after N turns:\nthe schema is innocent until the window is checked", "size": 44, "color": "green", "at": { "x": 400, "y": 380, "w": 1130, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "agent construction", "text": "→ next: agent construction", "size": 44, "color": "ink", "at": { "x": 600, "y": 680, "w": 760, "h": 70 } }
+      ]
+    }
+  ]
+}

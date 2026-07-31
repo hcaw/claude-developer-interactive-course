@@ -1,0 +1,47 @@
+{
+  "sectionId": "m2-02-checkpoint-debrief",
+  "title": "Checkpoint 1 Walkthrough",
+  "subtitle": "fix the broken prompt",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/02-prompting-craft/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2103,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "This is the walkthrough for checkpoint one: fix the broken prompt. If you haven't written your corrected prompt yet, pause here and try it first. Ready? The prompt extracts three fields from a support ticket: category, urgency, and a one-sentence summary. It contains exactly one defect. Did you spot it?",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "walkthrough", "text": "Checkpoint 1: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 150, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause here", "text": "not done yet? ⏸ pause — try it first", "size": 42, "color": "red", "boxed": true, "at": { "x": 500, "y": 360, "w": 920, "h": 120 } },
+        { "id": "task", "kind": "handtext", "cue": "three fields", "text": "extract: category · urgency · summary\none defect hidden inside", "size": 42, "color": "blue", "at": { "x": 480, "y": 600, "w": 1000, "h": 140 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "The defect is a missing output constraint. The exact failure mode from the lesson. The original system prompt says: extract the key information. It never says which fields, what values they're allowed to take, or what format the answer comes back in. So Claude returns something plausible, and different, every single run. The fix names everything. Return only a JSON object with exactly three fields. Category: one of billing, technical, escalation. Urgency: one of low, medium, high, critical. Summary: a single sentence. Return only the JSON. No other text. Now every run yields one predictable object: category technical, urgency critical, and a one-line summary.",
+      "elements": [
+        { "id": "verdict", "kind": "handtext", "cue": "missing output constraint", "text": "the defect: missing output constraint", "size": 52, "color": "red", "at": { "x": 240, "y": 110, "w": 1200, "h": 80 } },
+        { "id": "broken", "kind": "code", "cue": "extract the key information", "lang": "text", "code": "System: \"You are a support ticket processor.\nExtract the key information from the ticket.\"\n        ^ which fields? what values? what format?", "at": { "x": 160, "y": 240, "w": 1000, "h": 190 } },
+        { "id": "fixed", "kind": "code", "cue": "fix names everything", "lang": "text", "code": "\"...return ONLY a JSON object with exactly:\n  category: billing | technical | escalation\n  urgency:  low | medium | high | critical\n  summary:  a single sentence\n Return only the JSON. No other text.\"", "at": { "x": 160, "y": 490, "w": 1000, "h": 300 } },
+        { "id": "checks", "kind": "bullets", "cue": "predictable object", "size": 36, "color": "green", "at": { "x": 1240, "y": 500, "w": 580, "h": 280 }, "items": [
+          { "text": "fields named ✓", "cue": "three fields" },
+          { "text": "values enumerated ✓", "cue": "billing" },
+          { "text": "\"nothing else\" ✓", "cue": "No other text" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "If you wrote something different, run this check: did you name the fields? Enumerate the allowed values? Forbid extra text? A constraint that leaves any of those open, leaves room to drift. That's the whole craft: close every opening. Next section: extended thinking.",
+      "elements": [
+        { "id": "checklist", "kind": "bullets", "cue": "run this check", "size": 44, "color": "ink", "at": { "x": 380, "y": 240, "w": 1250, "h": 340 }, "items": [
+          { "text": "fields named?", "cue": "name the fields" },
+          { "text": "allowed values enumerated?", "cue": "allowed values" },
+          { "text": "extra text forbidden?", "cue": "Forbid extra" }
+        ] },
+        { "id": "rule", "kind": "handtext", "cue": "close every opening", "text": "the craft = close every opening", "size": 50, "color": "green", "boxed": true, "at": { "x": 460, "y": 640, "w": 1000, "h": 130 } },
+        { "id": "next", "kind": "handtext", "cue": "extended thinking", "text": "→ next: extended thinking", "size": 44, "color": "ink", "at": { "x": 620, "y": 840, "w": 700, "h": 60 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "sectionId": "m2-09-cumulative-debrief",
+  "title": "Debug Task Walkthrough",
+  "subtitle": "four bugs, four layers",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/09-cumulative-debug-task/01-cumulative.md + 02-cumulative.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2116,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "This is the walkthrough for the cumulative debug task: one agent implementation, four planted bugs, one in each layer you've studied. Schema, streaming, context, and memory. If you haven't done both stages, finding the bugs and writing the fixes, pause now. This video spoils everything.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "walkthrough", "text": "Debug Task: Walkthrough", "size": 76, "color": "ink", "at": { "x": 440, "y": 150, "w": 1100, "h": 110 } },
+        { "id": "layers", "kind": "handtext", "cue": "four planted bugs", "text": "schema · streaming · context · memory", "size": 46, "color": "blue", "at": { "x": 440, "y": 380, "w": 1050, "h": 70 } },
+        { "id": "pause", "kind": "handtext", "cue": "spoils everything", "text": "⏸ both stages first — this spoils everything", "size": 42, "color": "red", "boxed": true, "at": { "x": 420, "y": 540, "w": 1080, "h": 120 } }
+      ]
+    },
+    {
+      "id": "bug1",
+      "narration": "Bug one lives in the schema layer, and it's hiding in plain sight: the tool description is, quote, gets data. Two words. Claude routes on descriptions, so this tool is indistinguishable from every other retrieval tool the agent might carry. Selection collapses to surface-level guessing. The fix is the description discipline from earlier: state the intent, then the exclusion. Use this to retrieve full account and contact details for a customer, by customer ID. Do not use it for order history or transaction records.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Bug one", "text": "Bug 1 · schema layer", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "bad", "kind": "code", "cue": "gets data", "lang": "text", "code": "\"description\": \"Gets data.\"   ← two words?!", "at": { "x": 220, "y": 240, "w": 900, "h": 110 } },
+        { "id": "why", "kind": "handtext", "cue": "surface-level guessing", "text": "indistinguishable → selection becomes guessing", "size": 42, "color": "red", "at": { "x": 300, "y": 420, "w": 1250, "h": 70 } },
+        { "id": "fix", "kind": "code", "cue": "state the intent", "lang": "text", "code": "\"Use this to retrieve full account and contact\n details for a customer by customer ID.\n Do not use for order history or transactions.\"", "at": { "x": 220, "y": 550, "w": 1050, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "exclusion", "text": "intent + exclusion ✓", "size": 44, "color": "green", "at": { "x": 1330, "y": 630, "w": 500, "h": 70 } }
+      ]
+    },
+    {
+      "id": "bug23",
+      "narration": "Bugs two and three share a crime scene. In the streaming layer, the code appends the assistant turn right after the read loop, with no check that message stop ever arrived, and worse, it filters out the thinking blocks while doing it. Two violations at once: an interrupted stream commits a half-built turn, and stripping thinking breaks the signature, so the API rejects the next request. Bug three is the context-layer consequence: the tool result that follows now references a tool use block the API never received as part of a complete assistant turn. Pairing rule, violated. The fix: assemble all blocks, thinking included, gate the append on stop seen, and raise on interruption. And here's the satisfying part: fix bug two properly, and bug three disappears with it. The layers aren't independent. Streaming discipline is what makes the context structure valid.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "share a crime scene", "text": "Bugs 2 + 3 · streaming → context", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 1250, "h": 90 } },
+        { "id": "bad", "kind": "code", "cue": "appends the assistant turn", "lang": "python", "code": "content = [b for b in assemble(blocks)\n           if b[\"type\"] != \"thinking\"]  # ✗ stripped!\nmessages.append(...)  # ✗ no stop_seen gate!", "at": { "x": 200, "y": 230, "w": 1100, "h": 200 } },
+        { "id": "v1", "kind": "handtext", "cue": "half-built turn", "text": "✗ interrupted stream → partial turn in history", "size": 36, "color": "red", "at": { "x": 260, "y": 490, "w": 1150, "h": 60 } },
+        { "id": "v2", "kind": "handtext", "cue": "breaks the signature", "text": "✗ stripped thinking → signature mismatch → rejected", "size": 36, "color": "red", "at": { "x": 260, "y": 580, "w": 1250, "h": 60 } },
+        { "id": "v3", "kind": "handtext", "cue": "Pairing rule", "text": "✗ bug 3: tool_result → orphaned (pairing violated)", "size": 36, "color": "red", "at": { "x": 260, "y": 670, "w": 1250, "h": 60 } },
+        { "id": "fix", "kind": "handtext", "cue": "satisfying part", "text": "fix 2 (keep all blocks + gate on stop_seen)\n→ bug 3 vanishes. layers connect!", "size": 42, "color": "green", "boxed": true, "at": { "x": 340, "y": 760, "w": 1240, "h": 170 } }
+      ]
+    },
+    {
+      "id": "bug4",
+      "narration": "Bug four is the memory layer. Build session history concatenates every prior session's full transcript into context. Session one is fine. By session four or five, the window fills before the agent processes the current request. This is the exact failure from the agent memory section, written as code. The fix: external storage. Persist sessions to a store, and at session start, inject only a summary of the last session, one compact user message, instead of the whole archaeology of everything ever said.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Bug four", "text": "Bug 4 · memory layer", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 880, "h": 90 } },
+        { "id": "bad", "kind": "code", "cue": "concatenates", "lang": "python", "code": "for session in prior_sessions:\n    full_history.extend(session[\"messages\"])  # ✗ ALL of it", "at": { "x": 200, "y": 230, "w": 1150, "h": 150 } },
+        { "id": "why", "kind": "handtext", "cue": "window fills", "text": "session 4-5: window full before the request", "size": 42, "color": "red", "at": { "x": 300, "y": 450, "w": 1200, "h": 70 } },
+        { "id": "fix", "kind": "code", "cue": "external storage", "lang": "python", "code": "summary = load_session_summary(last_session_id)\nreturn [{\"role\": \"user\",\n         \"content\": f\"Session context: {summary}\"}]", "at": { "x": 200, "y": 570, "w": 1150, "h": 200 } },
+        { "id": "rule", "kind": "handtext", "cue": "compact user message", "text": "store everything,\ninject one summary ✓", "size": 40, "color": "green", "boxed": true, "at": { "x": 1400, "y": 590, "w": 440, "h": 180 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Step back and look at what the four bugs spell out: write descriptions Claude can route on. Commit only complete streamed turns, thinking included. Keep the block pairing intact. And never let history grow unbounded. That's the whole module, in one code review. Next: multimodal input and batch processing, then the module wrap-up.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "four bugs spell", "size": 42, "color": "ink", "at": { "x": 300, "y": 210, "w": 1400, "h": 420 }, "items": [
+          { "text": "descriptions Claude can route on", "cue": "route on" },
+          { "text": "commit complete turns only (+ thinking)", "cue": "complete streamed" },
+          { "text": "block pairing: intact, always", "cue": "pairing intact" },
+          { "text": "history never grows unbounded", "cue": "unbounded" }
+        ] },
+        { "id": "whole", "kind": "handtext", "cue": "one code review", "text": "= the whole module, in one code review", "size": 46, "color": "green", "boxed": true, "at": { "x": 440, "y": 680, "w": 1040, "h": 130 } },
+        { "id": "next", "kind": "handtext", "cue": "multimodal", "text": "→ next: multimodal + batch", "size": 42, "color": "ink", "at": { "x": 620, "y": 870, "w": 760, "h": 60 } }
+      ]
+    }
+  ]
+}

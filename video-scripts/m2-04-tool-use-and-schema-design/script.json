@@ -1,0 +1,106 @@
+{
+  "sectionId": "m2-04-tool-use-and-schema-design",
+  "title": "Tool Use & Schema Design",
+  "subtitle": "the loop, the blocks, the descriptions",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/04-tool-use-and-schema-design/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2106,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "With tool use, you're not steering language anymore. You hand Claude a set of actions, and you trust it to pick the right one. And that pick is driven almost entirely by one thing: what you wrote in the schema. Let's earn that trust properly.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "tool use", "text": "Tool Use & Schema Design", "size": 80, "color": "ink", "at": { "x": 380, "y": 160, "w": 1200, "h": 110 } },
+        { "id": "hand", "kind": "handtext", "cue": "set of actions", "text": "you hand Claude actions — it picks", "size": 46, "color": "blue", "at": { "x": 440, "y": 400, "w": 1050, "h": 70 } },
+        { "id": "driver", "kind": "handtext", "cue": "wrote in the schema", "text": "the pick is driven by YOUR schema", "size": 50, "color": "green", "boxed": true, "at": { "x": 480, "y": 560, "w": 960, "h": 130 } }
+      ]
+    },
+    {
+      "id": "loop",
+      "narration": "First, the misconception to clear: Claude does not run your tools. Ever. Here's the real loop. You define a schema. Your code sends a message with the tool definitions. Claude answers with a tool use block: the tool name, a unique ID, and the arguments, with a stop reason of tool use. Then it's your turn: your application executes the tool. Claude is not waiting on a connection. The model is stateless between calls. You send a fresh request containing the history plus a tool result block, and Claude continues. That fourth step is yours. The loop is not automatic, and if results never come back, the loop is broken.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "misconception", "text": "Claude does NOT run your tools", "size": 56, "color": "red", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "steps", "kind": "bullets", "cue": "real loop", "size": 36, "color": "ink", "at": { "x": 180, "y": 240, "w": 1050, "h": 560 }, "items": [
+          { "text": "1. you define the schema", "cue": "define a schema" },
+          { "text": "2. send message + tool definitions", "cue": "sends a message" },
+          { "text": "3. Claude → tool_use block (name · id · args)", "cue": "tool use block" },
+          { "text": "4. YOUR code executes the tool", "cue": "your turn" },
+          { "text": "5. send back tool_result (same id)", "cue": "tool result block" },
+          { "text": "6. Claude continues with the data", "cue": "Claude continues" }
+        ] },
+        { "id": "stateless", "kind": "handtext", "cue": "stateless", "text": "stateless between calls —\nno connection held open", "size": 38, "color": "blue", "boxed": true, "at": { "x": 1300, "y": 330, "w": 520, "h": 160 } },
+        { "id": "yours", "kind": "handtext", "cue": "not automatic", "text": "step 4 is YOURS — not automatic", "size": 40, "color": "red", "at": { "x": 1280, "y": 580, "w": 560, "h": 110 } }
+      ]
+    },
+    {
+      "id": "blocks",
+      "narration": "A tool-use conversation is built from structured blocks, not plain text. Text blocks carry prose. Tool use blocks carry calls. Tool result blocks carry what your code returned. Thinking blocks appear when extended thinking is on. And one invariant rules them all: every tool use block must be answered by a tool result with a matching ID, in the immediately following user turn. Mismatched ID, missing result, wrong order: the API rejects the request. You cannot prompt your way out of this. It's structural. Two more rules while we're here: when a text block arrives alongside a tool use block, keep both in history. And thinking blocks carry back untouched.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "structured blocks", "text": "The message blocks", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "b1", "kind": "handtext", "cue": "Text blocks", "text": "text", "size": 36, "color": "ink", "boxed": true, "at": { "x": 180, "y": 260, "w": 340, "h": 95 } },
+        { "id": "b2", "kind": "handtext", "cue": "carry calls", "text": "tool_use (id!)", "size": 36, "color": "blue", "boxed": true, "at": { "x": 580, "y": 260, "w": 400, "h": 95 } },
+        { "id": "b3", "kind": "handtext", "cue": "your code returned", "text": "tool_result (id!)", "size": 36, "color": "green", "boxed": true, "at": { "x": 1040, "y": 260, "w": 430, "h": 95 } },
+        { "id": "b4", "kind": "handtext", "cue": "Thinking blocks", "text": "thinking", "size": 36, "color": "ink", "boxed": true, "at": { "x": 1530, "y": 260, "w": 290, "h": 95 } },
+        { "id": "inv", "kind": "handtext", "cue": "invariant", "text": "every tool_use → matching-ID tool_result,\nin the VERY NEXT user turn", "size": 46, "color": "red", "boxed": true, "at": { "x": 340, "y": 440, "w": 1240, "h": 180 } },
+        { "id": "structural", "kind": "handtext", "cue": "prompt your way", "text": "not fixable by prompting — structural", "size": 38, "color": "red", "at": { "x": 460, "y": 690, "w": 1000, "h": 60 } },
+        { "id": "extra", "kind": "handtext", "cue": "keep both", "text": "text next to tool_use? keep both · thinking: untouched", "size": 34, "color": "ink", "at": { "x": 380, "y": 800, "w": 1200, "h": 60 } }
+      ]
+    },
+    {
+      "id": "schema",
+      "narration": "Now the schema itself: name, description, input schema. Make the name specific. Get account balance beats get data. The description is what Claude actually routes on, so always write it in two parts: when to use this tool, and when not to. Three or four sentences. Too short, and Claude guesses. Too long, and the trigger conditions drown. In the input schema, mark a field required only when the call makes no sense without it. Mark everything required, and Claude fabricates values it doesn't have. Optional fields let it omit instead of guess. And a note on parallelism: independent calls can run in one turn, together. A real dependency means separate turns, so the first result exists before the next call is built.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "schema itself", "text": "Schema anatomy", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "name", "kind": "handtext", "cue": "name specific", "text": "name: get_account_balance ✓  get_data ✗", "size": 38, "color": "ink", "at": { "x": 220, "y": 230, "w": 1100, "h": 60 } },
+        { "id": "desc", "kind": "handtext", "cue": "routes on", "text": "description = the routing signal:\nwhen to use + when NOT to", "size": 44, "color": "green", "boxed": true, "at": { "x": 200, "y": 340, "w": 900, "h": 170 } },
+        { "id": "len", "kind": "handtext", "cue": "Three or four sentences", "text": "3–4 sentences: short → guessing, long → buried", "size": 34, "color": "ink", "at": { "x": 220, "y": 570, "w": 1050, "h": 60 } },
+        { "id": "req", "kind": "bullets", "cue": "required only when", "size": 36, "color": "ink", "at": { "x": 220, "y": 680, "w": 1000, "h": 220 }, "items": [
+          { "text": "required = call is meaningless without it", "cue": "no sense without" },
+          { "text": "all-required → fabricated values", "cue": "fabricates" }
+        ] },
+        { "id": "par", "kind": "handtext", "cue": "independent calls", "text": "independent → parallel, one turn\ndependent → separate turns", "size": 38, "color": "blue", "boxed": true, "at": { "x": 1280, "y": 380, "w": 560, "h": 190 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Here's how this fails in real life. A developer, three hours into debugging: why does Claude keep calling search docs when the answer is already in the context? A senior colleague asks one question: what do the descriptions say? Search docs: use this to find information about the product. Get context summary: use this to retrieve relevant information from the current session. From Claude's perspective, those are the same sentence. Both say find information. The fix is two sentences per tool: when to use it, and when not to. Search docs gains: do not call this if the answer is already in the session. The other tool gets the mirror-image boundary. And if two tools can't be separated even with exclusions, merge them into one tool with a type parameter.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "fails in real life", "text": "⚠ the wrong-tool mystery", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "q", "kind": "handtext", "cue": "keep calling", "text": "\"why does Claude keep picking the wrong tool?!\"", "size": 40, "color": "ink", "at": { "x": 260, "y": 230, "w": 1200, "h": 60 } },
+        { "id": "d1", "kind": "code", "cue": "find information about", "lang": "text", "code": "search_docs:        \"use this to find information...\"\nget_context_summary: \"use this to retrieve information...\"", "at": { "x": 200, "y": 340, "w": 1250, "h": 150 } },
+        { "id": "same", "kind": "handtext", "cue": "same sentence", "text": "to Claude: identical!", "size": 44, "color": "red", "at": { "x": 620, "y": 540, "w": 700, "h": 70 } },
+        { "id": "fix", "kind": "handtext", "cue": "two sentences per tool", "text": "the fix: one sentence when to use,\none sentence when NOT to — on BOTH tools", "size": 42, "color": "green", "boxed": true, "at": { "x": 300, "y": 650, "w": 1150, "h": 170 } },
+        { "id": "merge", "kind": "handtext", "cue": "merge them", "text": "still inseparable? merge + type param", "size": 34, "color": "blue", "at": { "x": 480, "y": 870, "w": 900, "h": 55 } }
+      ]
+    },
+    {
+      "id": "mcp",
+      "narration": "One more thing: sometimes your tools are already written. The Model Context Protocol, MCP, moves tool definitions and execution into dedicated servers. Need GitHub? An MCP server already defines those tools, maintained against the real API. Your client asks the server for its tool list and hands it to Claude, and from there it's the exact same loop and the exact same description-based routing. To Claude, those tools look like yours. Two cautions. Tool definitions consume context even when unused, so connect only the servers you need, and defer or disable tools you don't. And note the transports: local servers speak stdio, remote ones streamable HTTP, and the API's MCP connector supports remote servers only. Best practice: MCP for coverage, your own description tuning for precision.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "already written", "text": "MCP: tools someone else wrote", "size": 56, "color": "blue", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "flow", "kind": "handtext", "cue": "tool list", "text": "your app ← tool list ← MCP server (e.g. GitHub)", "size": 42, "color": "ink", "at": { "x": 300, "y": 250, "w": 1300, "h": 70 } },
+        { "id": "sameloop", "kind": "handtext", "cue": "same loop", "text": "same loop · same routing · different author", "size": 40, "color": "green", "at": { "x": 400, "y": 370, "w": 1100, "h": 60 } },
+        { "id": "cost", "kind": "bullets", "cue": "Two cautions", "size": 36, "color": "red", "at": { "x": 300, "y": 490, "w": 1250, "h": 230 }, "items": [
+          { "text": "definitions eat context even unused → connect less, defer_loading", "cue": "consume context" },
+          { "text": "transports: local = stdio · remote = HTTP (API connector: remote only)", "cue": "transports" }
+        ] },
+        { "id": "best", "kind": "handtext", "cue": "coverage", "text": "MCP for coverage + your descriptions for precision", "size": 42, "color": "green", "boxed": true, "at": { "x": 340, "y": 760, "w": 1240, "h": 130 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Remember: your code owns half the loop. The description is the routing signal, and exclusions are what make it sharp. Require only what's truly required. And check M C P before writing schemas by hand. Now, checkpoint three: a session trace with one bug in it. Find it, then watch the walkthrough.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "your code owns", "size": 42, "color": "ink", "at": { "x": 300, "y": 220, "w": 1350, "h": 400 }, "items": [
+          { "text": "your code owns half the loop", "cue": "half the loop" },
+          { "text": "description + exclusions = routing", "cue": "routing signal" },
+          { "text": "require only the non-negotiable", "cue": "truly required" },
+          { "text": "check MCP before hand-writing", "cue": "writing schemas" }
+        ] },
+        { "id": "trybox", "kind": "sketch", "shape": "rect", "cue": "checkpoint three", "color": "green", "at": { "x": 380, "y": 680, "w": 1160, "h": 190 } },
+        { "id": "try", "kind": "handtext", "cue": "Find it", "delay": 0.2, "text": "checkpoint 3: find the bug in the trace\n→ then the walkthrough", "size": 44, "color": "green", "at": { "x": 470, "y": 720, "w": 980, "h": 130 } }
+      ]
+    }
+  ]
+}

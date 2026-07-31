@@ -1,0 +1,74 @@
+{
+  "sectionId": "m2-10-multimodal-and-batch",
+  "title": "Multimodal & Batch",
+  "subtitle": "images, PDFs, and volume",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/10-multimodal-and-batch-ingestion/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2117,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "So far we've managed what Claude remembers. This section is about what you send in. Every image and PDF consumes context budget before Claude reads a single character of your prompt. And at the other end of the same problem: when you have thousands of inputs, sending one request at a time stops making sense entirely.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "send in", "text": "Multimodal & Batch", "size": 84, "color": "ink", "at": { "x": 460, "y": 150, "w": 1000, "h": 120 } },
+        { "id": "fact", "kind": "handtext", "cue": "single character", "text": "images cost budget BEFORE your prompt is read", "size": 44, "color": "red", "at": { "x": 360, "y": 400, "w": 1250, "h": 70 } },
+        { "id": "other", "kind": "handtext", "cue": "thousands of inputs", "text": "…and 1,000s of inputs ≠ 1,000s of requests", "size": 44, "color": "blue", "at": { "x": 400, "y": 560, "w": 1150, "h": 70 } }
+      ]
+    },
+    {
+      "id": "cost",
+      "narration": "First, what an image costs. Claude reads images in twenty-eight by twenty-eight pixel patches, and each patch is one visual token. So the price is: width over twenty-eight, times height over twenty-eight, rounded up. A one-thousand-square image runs about thirteen hundred tokens. Ten high-resolution screenshots? That's a whole system prompt's worth of context. Each model tier caps image resolution differently, and oversized images get downscaled before the formula runs, so check current limits when you build. Run this math at design time, against the largest image production will send, because the fix at design time is often a ten-minute resize step. After deployment, it's a incident.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "image costs", "text": "The image bill", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "formula", "kind": "code", "cue": "patches", "lang": "text", "code": "tokens = ⌈w/28⌉ × ⌈h/28⌉\n1000×1000 px  →  36 × 36  ≈ 1,296 tokens", "at": { "x": 240, "y": 240, "w": 1000, "h": 170 } },
+        { "id": "scale", "kind": "handtext", "cue": "screenshots", "text": "10 screenshots ≈ one entire system prompt", "size": 44, "color": "red", "at": { "x": 320, "y": 480, "w": 1200, "h": 70 } },
+        { "id": "limits", "kind": "handtext", "cue": "caps image resolution", "text": "per-tier caps + auto-downscale → check at build time", "size": 36, "color": "ink", "at": { "x": 340, "y": 600, "w": 1250, "h": 60 } },
+        { "id": "design", "kind": "handtext", "cue": "design time", "text": "measure at design time:\na resize step beats an incident", "size": 44, "color": "green", "boxed": true, "at": { "x": 440, "y": 710, "w": 1050, "h": 180 } }
+      ]
+    },
+    {
+      "id": "methods",
+      "narration": "Three ways to send an image, and the right one depends on reuse. Inline base sixty-four: encode the bytes into the message. Perfect for one-offs, but the full payload travels with every request, so repetition multiplies the cost. A URL reference: Claude fetches it at request time. Right when you control a stable public URL. Wrong for anything behind auth or signed with an expiry. And the Files API: upload once, get a file ID, reference it forever. The payload cost drops to near zero, which makes it the choice for assets reused across requests or turns. PDFs work the same way, just with a document block instead of an image block, and the same three source options.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Three ways", "text": "Three ways in", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "m1", "kind": "handtext", "cue": "one-offs", "text": "base64 — one-offs\n(payload travels every time)", "size": 38, "color": "ink", "boxed": true, "at": { "x": 180, "y": 250, "w": 560, "h": 190 } },
+        { "id": "m2", "kind": "handtext", "cue": "fetches it", "text": "URL — stable + public\n(no auth, no expiry)", "size": 38, "color": "ink", "boxed": true, "at": { "x": 800, "y": 250, "w": 540, "h": 190 } },
+        { "id": "m3", "kind": "handtext", "cue": "upload once", "text": "Files API — upload once,\nfile_id forever", "size": 38, "color": "green", "boxed": true, "at": { "x": 1390, "y": 250, "w": 460, "h": 190 } },
+        { "id": "rule", "kind": "handtext", "cue": "reused across", "text": "reuse → Files API, every time", "size": 44, "color": "green", "at": { "x": 520, "y": 540, "w": 900, "h": 70 } },
+        { "id": "pdf", "kind": "handtext", "cue": "document block", "text": "PDFs: type \"document\", same three sources", "size": 38, "color": "blue", "at": { "x": 440, "y": 680, "w": 1050, "h": 60 } }
+      ]
+    },
+    {
+      "id": "batch",
+      "narration": "Now volume. Thousands of inputs against the synchronous API means burning threads, or running a thousand concurrent connections into rate limits. The Message Batches API is a different submission model: up to one hundred thousand requests, or two hundred fifty-six megabytes, in one call. You get a batch ID, you poll, you download results. Per-token cost is lower. The trade is latency: up to twenty-four hours, usually much less, and non-deterministic. That's built for nightly pipelines, evaluation runs, and data jobs. Never for a user staring at a screen.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "volume", "text": "The Batches API", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 750, "h": 90 } },
+        { "id": "sync", "kind": "handtext", "cue": "burning threads", "text": "sync × 1,000s = threads + rate limits ✗", "size": 42, "color": "red", "at": { "x": 300, "y": 240, "w": 1100, "h": 70 } },
+        { "id": "how", "kind": "handtext", "cue": "different submission model", "text": "one call: up to 100k requests / 256 MB\n→ batch_id → poll → download", "size": 44, "color": "green", "boxed": true, "at": { "x": 300, "y": 370, "w": 1200, "h": 190 } },
+        { "id": "deal", "kind": "handtext", "cue": "cost is lower", "text": "cheaper per token · up to 24h · non-deterministic", "size": 40, "color": "ink", "at": { "x": 320, "y": 630, "w": 1250, "h": 60 } },
+        { "id": "for", "kind": "handtext", "cue": "nightly pipelines", "text": "pipelines · eval runs · data jobs — never live users", "size": 40, "color": "blue", "at": { "x": 300, "y": 740, "w": 1300, "h": 60 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "And the trap with a great name: the batch job that was not actually a batch. A developer's nightly job kept hitting rate limits, three nights running. They'd already split the list into smaller chunks. What else could they do? Well, here's what the API saw: a loop, calling the synchronous endpoint once per item. Chunking the list changes nothing about that. It's serialization with extra steps. The rate limit fires because thousands of individual requests are thousands of individual requests, however you slice the list. Real batching is the different submission model: one call, one batch ID, one poll loop. And one detail that saves you a headache: results come back in arbitrary order. Set a custom ID on each request so you can match results to inputs.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "great name", "text": "⚠ \"the batch that wasn't\"", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "story", "kind": "handtext", "cue": "three nights", "text": "nightly job → rate limits, ×3 nights\n\"but I already chunked the list!\"", "size": 42, "color": "ink", "at": { "x": 300, "y": 240, "w": 1100, "h": 140 } },
+        { "id": "reality", "kind": "handtext", "cue": "what the API saw", "text": "the API sees: one sync request per item.\nchunking = serialization with extra steps", "size": 44, "color": "red", "boxed": true, "at": { "x": 300, "y": 440, "w": 1250, "h": 180 } },
+        { "id": "real", "kind": "handtext", "cue": "Real batching", "text": "real batch: 1 call · 1 batch_id · 1 poll loop", "size": 42, "color": "green", "at": { "x": 340, "y": 690, "w": 1150, "h": 70 } },
+        { "id": "custom", "kind": "handtext", "cue": "arbitrary order", "text": "results arrive unordered → use custom_id!", "size": 38, "color": "blue", "at": { "x": 400, "y": 810, "w": 1050, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The textbook combination: Files API removes repeated uploads, the Batches API absorbs the latency, and structured outputs keep results machine-readable. Just measure image cost on production-scale inputs first, and keep batch away from anything user-facing. Checkpoint eight: three inputs, three encoding choices. Make yours, then watch the walkthrough. After that: the module wrap-up.",
+      "elements": [
+        { "id": "combo", "kind": "handtext", "cue": "textbook combination", "text": "Files API + Batches + structured outputs\n= the offline pipeline stack", "size": 46, "color": "green", "boxed": true, "at": { "x": 400, "y": 260, "w": 1150, "h": 190 } },
+        { "id": "guard", "kind": "handtext", "cue": "production-scale inputs", "text": "measure real image cost · batch ≠ user-facing", "size": 40, "color": "red", "at": { "x": 400, "y": 540, "w": 1150, "h": 70 } },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint eight", "text": "checkpoint 8: pick 3 encodings\n→ then the walkthrough", "size": 44, "color": "ink", "at": { "x": 520, "y": 680, "w": 900, "h": 140 } }
+      ]
+    }
+  ]
+}

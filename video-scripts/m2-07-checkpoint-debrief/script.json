@@ -1,0 +1,62 @@
+{
+  "sectionId": "m2-07-checkpoint-debrief",
+  "title": "Checkpoint 6 Walkthrough",
+  "subtitle": "complete the agent wiring",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/07-agent-construction/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2113,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint six gave you a partial agent with two gaps: the description for update record, and the human checkpoint before it executes. If yours aren't written yet, pause and write them first. Then let's compare.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint six", "text": "Checkpoint 6: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 170, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ write both gaps first", "size": 44, "color": "red", "boxed": true, "at": { "x": 600, "y": 410, "w": 740, "h": 120 } },
+        { "id": "gaps", "kind": "handtext", "cue": "two gaps", "text": "gap 1: the description · gap 2: the human gate", "size": 42, "color": "blue", "at": { "x": 400, "y": 640, "w": 1150, "h": 70 } }
+      ]
+    },
+    {
+      "id": "gap1",
+      "narration": "Gap one, the description for update record. The model answer has three moving parts. What it does: update a specific field on a customer record. What must be true first: only call after read record has confirmed the current value, and the change has been reviewed. And what it's never for: no bulk updates, no schema changes. Compare that to a bare description like: use this to update records. With the bare version, the agent can call update record whenever it feels an update is needed, before reading the current value, on fields nobody intended to touch. The restrictive description is the routing contract from the tool-use section, applied to a dangerous tool.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Gap one", "text": "Gap 1: the description", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "answer", "kind": "code", "cue": "three moving parts", "lang": "text", "code": "\"Use this to update a specific field on a\n customer record. Only call after read_record\n confirmed the current value and the change\n was reviewed. Not for bulk or schema changes.\"", "at": { "x": 180, "y": 230, "w": 1080, "h": 260 } },
+        { "id": "parts", "kind": "bullets", "cue": "What it does", "size": 36, "color": "green", "at": { "x": 1300, "y": 240, "w": 540, "h": 280 }, "items": [
+          { "text": "what it does", "cue": "What it does" },
+          { "text": "preconditions", "cue": "must be true" },
+          { "text": "never-use cases", "cue": "never for" }
+        ] },
+        { "id": "bare", "kind": "handtext", "cue": "bare version", "text": "✗ bare description = agent updates whenever it\n   \"feels\" like it — before reading, on any field", "size": 38, "color": "red", "at": { "x": 240, "y": 560, "w": 1350, "h": 130 } },
+        { "id": "link", "kind": "handtext", "cue": "routing contract", "text": "same routing discipline — higher stakes", "size": 38, "color": "blue", "at": { "x": 440, "y": 760, "w": 1000, "h": 60 } }
+      ]
+    },
+    {
+      "id": "gap2",
+      "narration": "Gap two, the checkpoint code. Three placement decisions make it correct. It sits inside the loop, gated on the tool name, so read record passes through freely and only update record pauses. It runs before execute tool, because approving after execution means the irreversible work already happened. And on a no, it doesn't just skip: it appends a tool result saying the update was rejected, so the conversation stays valid and the agent knows the outcome. One more subtlety: a single up-front approval at session start can't do this job. You can't approve a change the model hasn't proposed yet. The gate has to see the concrete proposal: this customer, this field, this new value.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Gap two", "text": "Gap 2: the human gate", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "code", "kind": "code", "cue": "checkpoint code", "lang": "python", "code": "if block.name == \"update_record\":\n    print(proposed_change)          # show it\n    if input(\"Approve? \") != \"yes\":\n        tool_results.append(rejected_result)\n        continue\nresult = execute_tool(block.name, block.input)", "at": { "x": 180, "y": 230, "w": 1080, "h": 320 } },
+        { "id": "rules", "kind": "bullets", "cue": "placement decisions", "size": 36, "color": "green", "at": { "x": 1300, "y": 240, "w": 560, "h": 400 }, "items": [
+          { "text": "inside the loop, per tool name", "cue": "gated on the tool" },
+          { "text": "BEFORE execute_tool", "cue": "before execute" },
+          { "text": "\"no\" → rejected tool_result", "cue": "rejected" }
+        ] },
+        { "id": "upfront", "kind": "handtext", "cue": "up-front approval", "text": "✗ session-start approval can't gate a change\n   that hasn't been proposed yet", "size": 38, "color": "red", "at": { "x": 240, "y": 620, "w": 1350, "h": 130 } },
+        { "id": "concrete", "kind": "handtext", "cue": "concrete proposal", "text": "the gate must see: this customer · this field · this value", "size": 38, "color": "blue", "at": { "x": 280, "y": 800, "w": 1350, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Self-assess against three questions. Does your description say when not to call the tool? Does your gate fire before execution? And does a rejection keep the conversation valid? Three yeses, and you've wired it right. Next section: agent memory.",
+      "elements": [
+        { "id": "checks", "kind": "bullets", "cue": "three questions", "size": 42, "color": "ink", "at": { "x": 340, "y": 230, "w": 1350, "h": 360 }, "items": [
+          { "text": "description says when NOT to call?", "cue": "when not to call" },
+          { "text": "gate fires BEFORE execution?", "cue": "before execution" },
+          { "text": "rejection keeps the conversation valid?", "cue": "conversation valid" }
+        ] },
+        { "id": "next", "kind": "handtext", "cue": "agent memory", "text": "→ next: agent memory", "size": 46, "color": "green", "at": { "x": 640, "y": 680, "w": 700, "h": 70 } }
+      ]
+    }
+  ]
+}

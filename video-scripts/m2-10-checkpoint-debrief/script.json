@@ -1,0 +1,40 @@
+{
+  "sectionId": "m2-10-checkpoint-debrief",
+  "title": "Checkpoint 8 Walkthrough",
+  "subtitle": "pick the right input encoding",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/10-multimodal-and-batch-ingestion/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2118,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint eight: three input scenarios, three encoding choices. If yours aren't picked yet, pause and decide first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint eight", "text": "Checkpoint 8: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ pick your three first", "size": 46, "color": "red", "boxed": true, "at": { "x": 620, "y": 440, "w": 700, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answers",
+      "narration": "Scenario one: a reference product diagram used in every request your pipeline makes. Files API. Upload once, reference the file ID everywhere. Inline base sixty-four would re-send the same payload on every single call, paying transfer and latency each time for bytes Claude has already seen. Scenario two: a one-off screenshot of a UI bug, sent once by a support engineer. Inline base sixty-four. It's used exactly once, so an upload round-trip buys nothing. Encode it, send it, done. Scenario three: classifying five thousand customer feedback responses. The Message Batches API. One batch call, poll for completion, lower cost per token. A synchronous loop would either crawl through them one by one or slam thousands of connections into rate limits.",
+      "elements": [
+        { "id": "s1", "kind": "handtext", "cue": "Scenario one", "text": "1 · diagram in EVERY request", "size": 40, "color": "ink", "boxed": true, "at": { "x": 160, "y": 130, "w": 800, "h": 100 } },
+        { "id": "s1v", "kind": "handtext", "cue": "Upload once", "text": "✓ Files API — base64 would re-pay per call", "size": 38, "color": "green", "at": { "x": 220, "y": 270, "w": 1000, "h": 60 } },
+        { "id": "s2", "kind": "handtext", "cue": "Scenario two", "text": "2 · one-off bug screenshot", "size": 40, "color": "ink", "boxed": true, "at": { "x": 160, "y": 400, "w": 800, "h": 100 } },
+        { "id": "s2v", "kind": "handtext", "cue": "exactly once", "text": "✓ inline base64 — an upload buys nothing here", "size": 38, "color": "green", "at": { "x": 220, "y": 540, "w": 1050, "h": 60 } },
+        { "id": "s3", "kind": "handtext", "cue": "Scenario three", "text": "3 · classify 5,000 responses", "size": 40, "color": "ink", "boxed": true, "at": { "x": 160, "y": 670, "w": 800, "h": 100 } },
+        { "id": "s3v", "kind": "handtext", "cue": "Batches API", "text": "✓ Batches — sync loop = crawl or rate-limit wall", "size": 38, "color": "green", "at": { "x": 220, "y": 810, "w": 1100, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The decision rule in one line: reuse decides the upload, volume decides the API. Reused asset: Files. Single use: inline. Thousands offline: batch. That's the last checkpoint of the module. Next: the wrap-up.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "decision rule", "color": "green", "at": { "x": 340, "y": 330, "w": 1240, "h": 220 } },
+        { "id": "rule", "kind": "handtext", "cue": "reuse decides", "delay": 0.2, "text": "reuse decides the upload ·\nvolume decides the API", "size": 48, "color": "green", "at": { "x": 480, "y": 380, "w": 980, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "wrap-up", "text": "→ next: module wrap-up", "size": 44, "color": "ink", "at": { "x": 640, "y": 670, "w": 680, "h": 70 } }
+      ]
+    }
+  ]
+}

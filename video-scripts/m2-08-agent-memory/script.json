@@ -1,0 +1,71 @@
+{
+  "sectionId": "m2-08-agent-memory",
+  "title": "Agent Memory",
+  "subtitle": "what survives when the session ends",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/08-agent-memory/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2114,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Your agent now runs beautifully, within a session. When that session ends, it remembers nothing. Memory scope is the design decision about what the agent knows when the next session starts, and what carrying that knowledge costs. Get it wrong and you fail in one of two opposite directions: too much state in context inflates every single call, and too little in storage means the agent greets a two-week customer like a stranger.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "runs beautifully", "text": "Agent Memory", "size": 88, "color": "ink", "at": { "x": 560, "y": 150, "w": 800, "h": 120 } },
+        { "id": "q", "kind": "handtext", "cue": "next session starts", "text": "what does it know next session — at what cost?", "size": 44, "color": "blue", "at": { "x": 380, "y": 390, "w": 1250, "h": 70 } },
+        { "id": "f1", "kind": "handtext", "cue": "inflates every", "text": "too much in-context\n→ every call pays", "size": 40, "color": "red", "boxed": true, "at": { "x": 300, "y": 540, "w": 620, "h": 180 } },
+        { "id": "f2", "kind": "handtext", "cue": "stranger", "text": "too little stored\n→ amnesia", "size": 40, "color": "red", "boxed": true, "at": { "x": 1020, "y": 540, "w": 620, "h": 180 } }
+      ]
+    },
+    {
+      "id": "scopes",
+      "narration": "Four scopes, four trade-offs. In-context memory: state lives in the conversation, survives turns, and dies with the session. Zero retrieval overhead, but the token bill grows with every turn. External storage: state goes to a database and comes back at session start. It survives sessions, moves between users, scales across instances, and you pay in retrieval latency and read-write engineering. Summarized memory: a condensed version injected at the next session. Cheaper than replaying history, but the agent only knows what the summarizer kept. And stateless: nothing persists, perfect for jobs that finish and close. Here's the part teams learn the hard way: make this call at design time. The default, shipping the full messages array, works in the prototype, then token cost scales, latency climbs, and the refactor lands under production pressure with a deadline attached.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Four scopes", "text": "Four scopes", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 600, "h": 90 } },
+        { "id": "s1", "kind": "handtext", "cue": "dies with the session", "text": "in-context — free now, grows, dies at end", "size": 36, "color": "ink", "boxed": true, "at": { "x": 180, "y": 230, "w": 900, "h": 100 } },
+        { "id": "s2", "kind": "handtext", "cue": "External storage", "text": "external — survives everything, costs latency", "size": 36, "color": "green", "boxed": true, "at": { "x": 180, "y": 370, "w": 900, "h": 100 } },
+        { "id": "s3", "kind": "handtext", "cue": "Summarized", "text": "summarized — cheap, keeps only what's kept", "size": 36, "color": "ink", "boxed": true, "at": { "x": 180, "y": 510, "w": 900, "h": 100 } },
+        { "id": "s4", "kind": "handtext", "cue": "stateless", "text": "stateless — for jobs that finish + close", "size": 36, "color": "ink", "boxed": true, "at": { "x": 180, "y": 650, "w": 900, "h": 100 } },
+        { "id": "design", "kind": "handtext", "cue": "design time", "text": "choose at DESIGN time —\nthe prototype default refactors\nunder production pressure", "size": 40, "color": "red", "boxed": true, "at": { "x": 1180, "y": 350, "w": 640, "h": 260 } }
+      ]
+    },
+    {
+      "id": "skills",
+      "narration": "A related problem with a different answer: repeatable instructions. How do you teach the agent a recurring task without paying for the lesson in every session? That's what a Skill is: a markdown file with a name, a description, and instructions. Only the name and description are always loaded. The full instructions enter context only when a request matches. Compare the three patterns: a Skill loads on demand. CLAUDE dot M D loads every session, unconditionally: right for always-on project standards, and a fixed tax on everything else. In-context instructions live and die with the session. One trap to remember: subagents do not inherit Skills from the parent. A delegated task needs its Skills registered explicitly. Permissions, on the other hand, do carry over.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "repeatable instructions", "text": "Skills: instructions on demand", "size": 58, "color": "blue", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "skill", "kind": "handtext", "cue": "markdown file", "text": "SKILL.md: name + description always visible,\nbody loads only on match", "size": 42, "color": "green", "boxed": true, "at": { "x": 260, "y": 240, "w": 1100, "h": 180 } },
+        { "id": "compare", "kind": "bullets", "cue": "three patterns", "size": 38, "color": "ink", "at": { "x": 280, "y": 490, "w": 1250, "h": 300 }, "items": [
+          { "text": "Skill → loads when matched", "cue": "on demand" },
+          { "text": "CLAUDE.md → every session, fixed tax", "cue": "unconditionally" },
+          { "text": "in-context → dies with the session", "cue": "live and die" }
+        ] },
+        { "id": "trap", "kind": "handtext", "cue": "do not inherit", "text": "⚠ subagents: Skills NOT inherited (permissions are)", "size": 38, "color": "red", "at": { "x": 300, "y": 830, "w": 1300, "h": 60 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The postmortem. An escalation-support agent. Development ran one long continuous session, ten to fifteen turns. In-context memory held everything, flawlessly. Production ran many short sessions, day after day, with state accumulating across them. By session four, the injected history crossed forty thousand tokens before the agent had processed one tool call. Add the system prompt and the tool schemas, and the budget was nearly gone before the first productive turn. The symptom? Incomplete results that looked exactly like a tool-selection failure. Sound familiar? The fix took one hour: move history to external storage, inject only the relevant subset. But it was an hour spent under production fire, plus the storage, retrieval, and session decisions that should have been made at design time. The lesson: development and production have different session shapes. Measure state size, history plus prompt plus schemas, against the window, before you default to in-context.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "postmortem", "text": "⚠ full window at session four", "size": 58, "color": "red", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "dev", "kind": "handtext", "cue": "one long continuous", "text": "dev: 1 long session ✓", "size": 40, "color": "green", "at": { "x": 260, "y": 240, "w": 640, "h": 60 } },
+        { "id": "prod", "kind": "handtext", "cue": "many short sessions", "text": "prod: many sessions, state piling up", "size": 40, "color": "red", "at": { "x": 260, "y": 340, "w": 950, "h": 60 } },
+        { "id": "math", "kind": "handtext", "cue": "forty thousand", "text": "session 4: 40k tokens of history\nBEFORE the first productive turn", "size": 44, "color": "red", "boxed": true, "at": { "x": 300, "y": 450, "w": 1150, "h": 180 } },
+        { "id": "symptom", "kind": "handtext", "cue": "Sound familiar", "text": "symptom: \"tool-selection failure\" — again!", "size": 38, "color": "blue", "at": { "x": 340, "y": 700, "w": 1100, "h": 60 } },
+        { "id": "lesson", "kind": "handtext", "cue": "different session shapes", "text": "measure: history + prompt + schemas vs window — at design time", "size": 36, "color": "green", "at": { "x": 240, "y": 800, "w": 1500, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Memory scope is a design-time decision: match it to the session shape, measure the real state size, and reach for Skills when instructions repeat but sessions don't. Checkpoint seven gives you three agents to match to three scopes. Make your calls, then watch the walkthrough.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "design-time decision", "size": 44, "color": "ink", "at": { "x": 320, "y": 230, "w": 1350, "h": 340 }, "items": [
+          { "text": "scope follows session shape", "cue": "session shape" },
+          { "text": "measure real state, not hopes", "cue": "measure" },
+          { "text": "repeating instructions → Skills", "cue": "instructions repeat" }
+        ] },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint seven", "text": "checkpoint 7: match 3 agents to 3 scopes\n→ then the walkthrough", "size": 44, "color": "green", "boxed": true, "at": { "x": 400, "y": 640, "w": 1120, "h": 180 } }
+      ]
+    }
+  ]
+}

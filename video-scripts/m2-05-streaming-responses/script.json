@@ -1,0 +1,86 @@
+{
+  "sectionId": "m2-05-streaming-responses",
+  "title": "Streaming Responses",
+  "subtitle": "assemble the pieces, survive the cut",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/05-streaming-responses/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2108,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Waiting for a complete response is fine, until the response is long and a user is staring at a blank screen. Streaming sends the response in pieces, as the model generates them. Feels faster. But it hands your code two new jobs: you assemble the final message yourself, and you decide what happens when the pieces stop coming early.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "complete response", "text": "Streaming Responses", "size": 84, "color": "ink", "at": { "x": 440, "y": 150, "w": 1050, "h": 120 } },
+        { "id": "pieces", "kind": "handtext", "cue": "in pieces", "text": "response → piece · piece · piece ...", "size": 46, "color": "blue", "at": { "x": 460, "y": 400, "w": 1000, "h": 70 } },
+        { "id": "jobs", "kind": "bullets", "cue": "two new jobs", "size": 42, "color": "ink", "at": { "x": 460, "y": 550, "w": 1100, "h": 240 }, "items": [
+          { "text": "1. YOU assemble the message", "cue": "assemble" },
+          { "text": "2. YOU handle the early stop", "cue": "stop coming" }
+        ] }
+      ]
+    },
+    {
+      "id": "events",
+      "narration": "A streamed response is a series of events describing the message as it's being built. Message start opens the shell. Content block start opens a block at an index: text, tool use, or thinking. Content block delta appends fragments to it. Content block stop closes that block. Message delta carries the stop reason, and message stop says: the message is whole. Your handler applies each event to the partial state it's building. The end result is identical to a non-streamed response. The difference is that you assembled it, event by event.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "series of events", "text": "The event sequence", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 800, "h": 90 } },
+        { "id": "seq", "kind": "bullets", "cue": "Message start", "size": 36, "color": "ink", "at": { "x": 220, "y": 240, "w": 1100, "h": 560 }, "items": [
+          { "text": "message_start — the shell", "cue": "opens the shell" },
+          { "text": "content_block_start — block opens @ index", "cue": "opens a block" },
+          { "text": "content_block_delta — fragments append", "cue": "appends fragments" },
+          { "text": "content_block_stop — block complete", "cue": "closes that block" },
+          { "text": "message_delta — stop_reason arrives", "cue": "stop reason" },
+          { "text": "message_stop — the message is WHOLE", "cue": "message is whole" }
+        ] },
+        { "id": "note", "kind": "handtext", "cue": "identical", "text": "same final message —\nbut YOU built it", "size": 42, "color": "green", "boxed": true, "at": { "x": 1380, "y": 400, "w": 440, "h": 170 } }
+      ]
+    },
+    {
+      "id": "partial",
+      "narration": "Now the rule that keeps state clean: never act on a partial block. The dangerous one is tool use. Its input arrives as a partial JSON string, spread across many deltas. Until the block stop event, that string is not valid JSON. Parse it early and you choke, or worse, you run a tool with half its arguments. So collect deltas, act after the block closes. Same discipline one level up: append the assistant turn to history only after message stop, with every block fully assembled.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "state clean", "text": "Never act on a partial block", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "json", "kind": "code", "cue": "partial JSON", "lang": "text", "code": "deltas:  {\"account_i   ← not JSON yet!\n         {\"account_id\": \"A-44   ← still not!\nstop →   {\"account_id\": \"A-4471\"}  ✓ parse now", "at": { "x": 200, "y": 250, "w": 1100, "h": 220 } },
+        { "id": "rule1", "kind": "handtext", "cue": "act after the block", "text": "collect deltas → act on block_stop", "size": 44, "color": "green", "at": { "x": 320, "y": 550, "w": 1000, "h": 70 } },
+        { "id": "rule2", "kind": "handtext", "cue": "only after message stop", "text": "history append: only after message_stop", "size": 44, "color": "green", "boxed": true, "at": { "x": 300, "y": 680, "w": 1150, "h": 130 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Here's the postmortem that makes it real. An agent streamed responses so operators could watch. The handler collected deltas, and appended the turn to history when its read loop ended. In testing, on a fast local network, every stream ran to completion, so that worked every time. Then production. A network blip killed one stream after a tool use block had opened, but before it closed. The read loop ended, like always. The handler appended, like always. Except now history contained a tool call with truncated JSON inside. The operator retried, the retry carried the corrupted turn, and the API rejected it, pointing at the retry. The team spent an afternoon debugging schemas and retry logic. The bug was upstream: the loop ending and the message completing are not the same thing.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "postmortem", "text": "⚠ the half-written tool call", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 1050, "h": 90 } },
+        { "id": "story", "kind": "bullets", "cue": "streamed responses", "size": 36, "color": "ink", "at": { "x": 200, "y": 240, "w": 1150, "h": 460 }, "items": [
+          { "text": "handler appends when read loop ends", "cue": "read loop ended" },
+          { "text": "local testing: streams always complete ✓", "cue": "ran to completion" },
+          { "text": "prod: blip kills stream mid-block", "cue": "network blip" },
+          { "text": "append runs anyway → truncated JSON in history", "cue": "truncated JSON" },
+          { "text": "retry carries the corrupted turn → rejected", "cue": "rejected" }
+        ] },
+        { "id": "misdir", "kind": "handtext", "cue": "afternoon debugging", "text": "error points at the retry —\ncause was one turn earlier", "size": 38, "color": "red", "boxed": true, "at": { "x": 1400, "y": 320, "w": 420, "h": 190 } },
+        { "id": "moral", "kind": "handtext", "cue": "not the same thing", "text": "loop ended ≠ message complete", "size": 48, "color": "red", "at": { "x": 400, "y": 760, "w": 1100, "h": 80 } }
+      ]
+    },
+    {
+      "id": "rules",
+      "narration": "So the survival rules. Gate the history append on message stop, explicitly. When a stream is interrupted, throw the partial turn away and retry from the last complete turn. Check the stop reason before continuing any loop: tool use means your calls are ready to run, anything else is a different path. And when a tool-use error shows up on a retry, ask whether the previous turn came from a stream, before you touch the schema.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "survival rules", "text": "Survival rules", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "list", "kind": "bullets", "cue": "Gate the history", "size": 40, "color": "ink", "at": { "x": 240, "y": 250, "w": 1450, "h": 480 }, "items": [
+          { "text": "gate the append on message_stop", "cue": "Gate the history" },
+          { "text": "interrupted? discard partial + retry from last complete turn", "cue": "throw the partial" },
+          { "text": "check stop_reason before continuing the loop", "cue": "stop reason before" },
+          { "text": "error on retry? suspect the stream first, schema second", "cue": "touch the schema" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Streaming buys responsiveness, and the price is assembly discipline: whole blocks, whole messages, nothing partial in history. Checkpoint four hands you a stream handler with exactly this bug. Repair it, then watch the walkthrough.",
+      "elements": [
+        { "id": "recap", "kind": "handtext", "cue": "assembly discipline", "text": "whole blocks · whole messages ·\nnothing partial in history", "size": 52, "color": "green", "boxed": true, "at": { "x": 420, "y": 300, "w": 1080, "h": 200 } },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint four", "text": "checkpoint 4: repair the handler\n→ then the walkthrough", "size": 44, "color": "ink", "at": { "x": 520, "y": 640, "w": 900, "h": 140 } }
+      ]
+    }
+  ]
+}

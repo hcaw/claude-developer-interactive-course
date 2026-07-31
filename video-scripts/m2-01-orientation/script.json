@@ -1,0 +1,68 @@
+{
+  "sectionId": "m2-01-orientation",
+  "title": "Module 2: Production-Grade Claude",
+  "subtitle": "prompting · agents · tool use",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/01-orientation/01-orientation.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2101,
+  "beats": [
+    {
+      "id": "hook",
+      "narration": "Here's a distinction that sets up this whole module. Writing code that uses Claude is different from using Claude to write code. You've prompted Claude interactively: type, read, adjust, repeat. But production code can't adjust. This module is about everything after the chat window: tool schemas, context management, streaming, and agent loops.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "distinction", "text": "Module 2: Production-Grade", "size": 80, "color": "ink", "at": { "x": 380, "y": 140, "w": 1250, "h": 110 } },
+        { "id": "b1", "kind": "handtext", "cue": "code that uses Claude", "text": "code that USES Claude", "size": 42, "color": "blue", "boxed": true, "at": { "x": 260, "y": 380, "w": 640, "h": 120 } },
+        { "id": "neq", "kind": "handtext", "cue": "different", "text": "≠", "size": 80, "color": "red", "at": { "x": 930, "y": 400, "w": 90, "h": 90 } },
+        { "id": "b2", "kind": "handtext", "cue": "write code", "text": "Claude that writes code", "size": 42, "color": "ink", "boxed": true, "at": { "x": 1050, "y": 380, "w": 640, "h": 120 } },
+        { "id": "note", "kind": "handtext", "cue": "can't adjust", "text": "production can't type, read & adjust", "size": 42, "color": "red", "at": { "x": 540, "y": 620, "w": 900, "h": 70 } }
+      ]
+    },
+    {
+      "id": "theme",
+      "narration": "And it's organized around one recurring problem: an integration that worked beautifully in development now has to hold up in production. In development, the prompt looked solid, the tool call worked, sessions stayed short, and the inputs were manageable. Production is where longer sessions, larger tool outputs, interrupted streams, tighter cost constraints, and irreversible actions show up. Every topic in this module targets one of those failure modes, and teaches which implementation decision prevents it.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "recurring problem", "text": "The build: dev → production", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "dev", "kind": "bullets", "cue": "development", "size": 36, "color": "green", "at": { "x": 200, "y": 280, "w": 760, "h": 420 }, "items": [
+          { "text": "dev: prompt looked solid", "cue": "prompt looked solid" },
+          { "text": "dev: the tool call worked", "cue": "tool call worked" },
+          { "text": "dev: short sessions, tame inputs", "cue": "sessions stayed short" }
+        ] },
+        { "id": "prod", "kind": "bullets", "cue": "Production is where", "size": 36, "color": "red", "at": { "x": 1020, "y": 280, "w": 780, "h": 420 }, "items": [
+          { "text": "prod: longer sessions, bigger outputs", "cue": "longer sessions" },
+          { "text": "prod: interrupted streams", "cue": "interrupted streams" },
+          { "text": "prod: cost limits + irreversible actions", "cue": "irreversible actions" }
+        ] },
+        { "id": "rule", "kind": "handtext", "cue": "failure modes", "text": "each topic = one failure mode, prevented", "size": 42, "color": "ink", "at": { "x": 460, "y": 780, "w": 1000, "h": 70 } }
+      ]
+    },
+    {
+      "id": "topics",
+      "narration": "Eight topics, eight failure modes. Prompts that hold under inputs you never tested. Extended thinking, and when it earns its cost. Tool schemas that Claude selects correctly. Streaming you can recover when it breaks mid-response. Context engineering, to keep long sessions inside budget. Agent construction, with human checkpoints where actions can't be undone. Agent memory that survives across sessions. And finally, images, PDFs, and high-volume batch ingestion.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Eight topics", "text": "The map", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 500, "h": 90 } },
+        { "id": "left", "kind": "bullets", "cue": "Prompts that hold", "size": 36, "color": "ink", "at": { "x": 180, "y": 250, "w": 800, "h": 560 }, "items": [
+          { "text": "1. prompting craft", "cue": "Prompts that hold" },
+          { "text": "2. extended thinking", "cue": "Extended thinking" },
+          { "text": "3. tool use + schemas", "cue": "Tool schemas" },
+          { "text": "4. streaming (+ recovery)", "cue": "Streaming" }
+        ] },
+        { "id": "right", "kind": "bullets", "cue": "Context engineering", "size": 36, "color": "ink", "at": { "x": 1020, "y": 250, "w": 800, "h": 560 }, "items": [
+          { "text": "5. context engineering", "cue": "Context engineering" },
+          { "text": "6. agent construction + HITL", "cue": "Agent construction" },
+          { "text": "7. agent memory", "cue": "Agent memory" },
+          { "text": "8. multimodal + batch", "cue": "high-volume" }
+        ] }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "It's a big module, so take it one section at a time, and try each checkpoint as you go. Ready? We start with the craft that everything else builds on: prompting.",
+      "elements": [
+        { "id": "note", "kind": "handtext", "cue": "one section", "text": "one section at a time + checkpoints", "size": 48, "color": "ink", "at": { "x": 460, "y": 380, "w": 1000, "h": 80 } },
+        { "id": "arrow", "kind": "sketch", "shape": "arrow", "cue": "start with", "color": "green", "at": { "x": 660, "y": 560, "w": 260, "h": 20 } },
+        { "id": "next", "kind": "handtext", "cue": "prompting", "text": "first: prompting craft", "size": 48, "color": "green", "at": { "x": 960, "y": 535, "w": 640, "h": 80 } }
+      ]
+    }
+  ]
+}

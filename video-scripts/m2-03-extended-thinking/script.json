@@ -1,0 +1,81 @@
+{
+  "sectionId": "m2-03-extended-thinking",
+  "title": "Extended Thinking",
+  "subtitle": "when reasoning earns its cost",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/03-extended-thinking/01-teaching.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2104,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Prompting shapes what Claude produces. Extended thinking shapes how much work Claude does before it answers. Turn it on, and the model reasons step by step first, then gives the final answer. That leaves you two jobs: decide when the extra work is worth paying for, and handle the reasoning that comes back. Especially that second one.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Prompting shapes", "text": "Extended Thinking", "size": 88, "color": "ink", "at": { "x": 480, "y": 150, "w": 1000, "h": 120 } },
+        { "id": "contrast", "kind": "handtext", "cue": "how much work", "text": "prompting = WHAT  ·  thinking = HOW MUCH WORK", "size": 44, "color": "blue", "at": { "x": 340, "y": 400, "w": 1250, "h": 70 } },
+        { "id": "jobs", "kind": "bullets", "cue": "two jobs", "size": 42, "color": "ink", "at": { "x": 460, "y": 560, "w": 1100, "h": 240 }, "items": [
+          { "text": "1. when is it worth paying for?", "cue": "worth paying" },
+          { "text": "2. handle the reasoning that comes back", "cue": "comes back" }
+        ] }
+      ]
+    },
+    {
+      "id": "mechanics",
+      "narration": "Mechanics first. With thinking on, the response carries a thinking block, positioned just ahead of the answer. On the newest models the content is omitted by default. Request the summarized display if you need to read it. Reasoning is adaptive on current models: you enable it, the model decides how much to think, and you tune depth with an effort setting. The old fixed token budget is deprecated, and on the newest generations it returns an error. And watch the meter: thinking tokens are billed like output tokens. High effort on a simple task is paying for accuracy you don't need.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Mechanics", "text": "Mechanics", "size": 64, "color": "blue", "at": { "x": 120, "y": 90, "w": 500, "h": 90 } },
+        { "id": "block1", "kind": "handtext", "cue": "thinking block", "text": "thinking block", "size": 38, "color": "blue", "boxed": true, "at": { "x": 240, "y": 280, "w": 520, "h": 110 } },
+        { "id": "block2", "kind": "handtext", "cue": "ahead of the answer", "text": "answer", "size": 38, "color": "green", "boxed": true, "at": { "x": 240, "y": 430, "w": 520, "h": 110 } },
+        { "id": "hidden", "kind": "handtext", "cue": "omitted by default", "text": "hidden by default → request summary", "size": 36, "color": "ink", "at": { "x": 240, "y": 590, "w": 760, "h": 60 } },
+        { "id": "adaptive", "kind": "bullets", "cue": "adaptive", "size": 36, "color": "ink", "at": { "x": 1040, "y": 280, "w": 760, "h": 300 }, "items": [
+          { "text": "adaptive: model decides how much", "cue": "model decides" },
+          { "text": "you tune with effort", "cue": "effort setting" },
+          { "text": "old token budget → deprecated, errors", "cue": "deprecated" }
+        ] },
+        { "id": "meter", "kind": "handtext", "cue": "billed like output", "text": "thinking tokens = output prices!", "size": 42, "color": "red", "boxed": true, "at": { "x": 1060, "y": 640, "w": 720, "h": 120 } }
+      ]
+    },
+    {
+      "id": "when",
+      "narration": "So when does it earn its cost? Enable it for multi-step reasoning: derivations, dependent plans, problems that hold several constraints at once. Enable it in agentic loops too, and budget for the planning step, because reasoning before a plan reduces wrong tool selection downstream. But leave it off for classification, extraction, format conversion, and lookups. There, a bare prompt with an output constraint is cheaper, and just as accurate.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "earn its cost", "text": "When it earns its cost", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 900, "h": 90 } },
+        { "id": "yes", "kind": "bullets", "cue": "multi-step reasoning", "size": 38, "color": "green", "at": { "x": 200, "y": 260, "w": 780, "h": 400 }, "items": [
+          { "text": "✓ multi-step reasoning & derivations", "cue": "multi-step reasoning" },
+          { "text": "✓ dependent plans, many constraints", "cue": "dependent plans" },
+          { "text": "✓ agent loops — budget the planning step", "cue": "agentic loops" }
+        ] },
+        { "id": "no", "kind": "bullets", "cue": "leave it off", "size": 38, "color": "red", "at": { "x": 1040, "y": 260, "w": 760, "h": 400 }, "items": [
+          { "text": "✗ classification", "cue": "classification" },
+          { "text": "✗ extraction, format conversion", "cue": "extraction" },
+          { "text": "✗ lookups — constrained prompt wins", "cue": "lookups" }
+        ] }
+      ]
+    },
+    {
+      "id": "carryback",
+      "narration": "Now the rule that breaks people. When thinking is on and your conversation uses tools, every thinking block must go back to the API exactly as it arrived. Each block carries a signature proving the reasoning wasn't tampered with. Edit it, summarize it, or drop it, and the signature stops matching. The API rejects your next request. Redacted thinking blocks follow the same rule: encrypted, unreadable, and still returned untouched. The classic slip is stripping thinking blocks to save context. That's not an optimization. That's a broken next turn. If accumulated reasoning is bloating your context, the answer is context engineering, which is coming later in this module.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "rule that breaks", "text": "The carry-back rule", "size": 60, "color": "red", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "flow", "kind": "handtext", "cue": "exactly as it arrived", "text": "thinking block → your app → back UNCHANGED", "size": 44, "color": "ink", "at": { "x": 300, "y": 260, "w": 1300, "h": 70 } },
+        { "id": "sig", "kind": "handtext", "cue": "signature", "text": "each block is signed — edits break the match", "size": 40, "color": "blue", "at": { "x": 360, "y": 380, "w": 1150, "h": 60 } },
+        { "id": "reject", "kind": "handtext", "cue": "rejects your next", "text": "edit / summarize / drop → next request REJECTED", "size": 42, "color": "red", "boxed": true, "at": { "x": 340, "y": 490, "w": 1240, "h": 120 } },
+        { "id": "redacted", "kind": "handtext", "cue": "Redacted", "text": "redacted blocks: unreadable, same rule", "size": 36, "color": "ink", "at": { "x": 400, "y": 680, "w": 950, "h": 60 } },
+        { "id": "slip", "kind": "handtext", "cue": "stripping thinking", "text": "\"strip to save context\" = broken next turn\n(the real fix: context engineering)", "size": 38, "color": "red", "at": { "x": 400, "y": 780, "w": 1150, "h": 130 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Remember: thinking is a per-call dial, not a default. Match effort to the depth of the problem. And thinking blocks are cargo: carry them back untouched. Now take checkpoint two. Three tasks, three calls to make. Then watch the walkthrough.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "per-call dial", "size": 44, "color": "ink", "at": { "x": 340, "y": 240, "w": 1300, "h": 340 }, "items": [
+          { "text": "a per-call dial, not a default", "cue": "per-call dial" },
+          { "text": "effort follows problem depth", "cue": "Match effort" },
+          { "text": "thinking blocks = cargo, untouched", "cue": "cargo" }
+        ] },
+        { "id": "trybox", "kind": "sketch", "shape": "rect", "cue": "checkpoint two", "color": "green", "at": { "x": 400, "y": 640, "w": 1120, "h": 200 } },
+        { "id": "try", "kind": "handtext", "cue": "Three tasks", "delay": 0.2, "text": "checkpoint 2: three tasks, three calls\n→ then the walkthrough", "size": 44, "color": "green", "at": { "x": 490, "y": 680, "w": 950, "h": 130 } }
+      ]
+    }
+  ]
+}

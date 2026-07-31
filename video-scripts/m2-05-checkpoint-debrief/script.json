@@ -1,0 +1,41 @@
+{
+  "sectionId": "m2-05-checkpoint-debrief",
+  "title": "Checkpoint 4 Walkthrough",
+  "subtitle": "repair the stream handler",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/05-streaming-responses/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2109,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint four gave you a stream handler with one defect that only bites when a stream is interrupted. If you haven't written your fix yet, pause here and repair it first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint four", "text": "Checkpoint 4: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 180, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ repair the handler yourself first", "size": 44, "color": "red", "boxed": true, "at": { "x": 500, "y": 430, "w": 920, "h": 120 } },
+        { "id": "hint", "kind": "handtext", "cue": "interrupted", "text": "the bug only fires when the stream dies early", "size": 40, "color": "blue", "at": { "x": 440, "y": 650, "w": 1050, "h": 70 } }
+      ]
+    },
+    {
+      "id": "answer",
+      "narration": "The handler tracks message stop in a flag, stop seen. It even sets it correctly. Then it ignores it. The append to history runs after the loop, unconditionally, whether the stream finished or died. That's the defect. On an interrupted stream, a half-built turn, possibly with a truncated tool call inside, goes straight into history, and the next request fails validation. The fix is three lines of control flow: if stop seen, append. Otherwise, raise a stream interrupted error and retry from the last complete turn. Nothing partial ever touches history.",
+      "elements": [
+        { "id": "broken", "kind": "code", "cue": "handler tracks", "lang": "python", "code": "        elif event.type == \"message_stop\":\n            stop_seen = True\n# loop ends...\nmessages.append(assemble(blocks))  # ← ALWAYS runs!", "at": { "x": 180, "y": 140, "w": 1050, "h": 250 } },
+        { "id": "verdict", "kind": "handtext", "cue": "That's the defect", "text": "✗ append is unconditional — flag ignored", "size": 44, "color": "red", "at": { "x": 300, "y": 450, "w": 1100, "h": 70 } },
+        { "id": "fixed", "kind": "code", "cue": "three lines", "lang": "python", "code": "if stop_seen:\n    messages.append(assemble(blocks))\nelse:\n    raise StreamInterruptedError(  # retry from\n        \"discarding partial turn\")  # last turn", "at": { "x": 180, "y": 560, "w": 1050, "h": 300 } },
+        { "id": "why", "kind": "handtext", "cue": "Nothing partial", "text": "✓ gate on stop_seen:\nnothing partial touches history", "size": 42, "color": "green", "boxed": true, "at": { "x": 1290, "y": 590, "w": 560, "h": 200 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "If your fix looked different, check that it does two things: only complete messages enter history, and interruption leads to a retry from the last complete turn, not a silent continue. That's the whole game. Next section: context engineering.",
+      "elements": [
+        { "id": "checks", "kind": "bullets", "cue": "two things", "size": 44, "color": "ink", "at": { "x": 360, "y": 260, "w": 1300, "h": 280 }, "items": [
+          { "text": "only complete messages enter history", "cue": "complete messages" },
+          { "text": "interruption → retry, not silent continue", "cue": "silent continue" }
+        ] },
+        { "id": "next", "kind": "handtext", "cue": "context engineering", "text": "→ next: context engineering", "size": 46, "color": "green", "at": { "x": 580, "y": 640, "w": 800, "h": 70 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "sectionId": "m2-03-checkpoint-debrief",
+  "title": "Checkpoint 2 Walkthrough",
+  "subtitle": "when thinking earns its cost",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/03-extended-thinking/02-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2105,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint two asked you to make three extended-thinking calls. If you haven't decided yours yet, pause and do that first. The three tasks: bulk classification, a dependent refactor plan, and one very tempting context optimization.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint two", "text": "Checkpoint 2: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 160, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ decide your three calls first", "size": 42, "color": "red", "boxed": true, "at": { "x": 560, "y": 380, "w": 820, "h": 120 } },
+        { "id": "tasks", "kind": "handtext", "cue": "three tasks", "text": "bulk classify · refactor plan · a tempting \"optimization\"", "size": 40, "color": "blue", "at": { "x": 340, "y": 620, "w": 1280, "h": 70 } }
+      ]
+    },
+    {
+      "id": "answers",
+      "narration": "Task one: classify fifty thousand tickets into three labels, overnight. Leave thinking off. A one-word label needs no reasoning pass, and reasoning tokens on every ticket multiply your output cost fifty thousand times, with zero accuracy gain. Task two: plan a multi-step refactor where each step depends on the previous one. Enable it, and budget for the planning step. Skip the reasoning pass, and the model commits to a plan before working through the dependencies. The first dependent step fails. Task three: strip the thinking block out of history to save context before the next tool call. Never do this. The signature stops matching, and your next request is rejected. Manage accumulated reasoning with context engineering. Never by editing blocks.",
+      "elements": [
+        { "id": "t1", "kind": "handtext", "cue": "Task one", "text": "1 · 50,000 tickets overnight", "size": 40, "color": "ink", "boxed": true, "at": { "x": 160, "y": 140, "w": 760, "h": 100 } },
+        { "id": "t1v", "kind": "handtext", "cue": "Leave thinking off", "text": "✓ leave it off — cost ×50,000, gain ×0", "size": 38, "color": "green", "at": { "x": 220, "y": 280, "w": 740, "h": 60 } },
+        { "id": "t2", "kind": "handtext", "cue": "Task two", "text": "2 · multi-step dependent refactor", "size": 40, "color": "ink", "boxed": true, "at": { "x": 160, "y": 400, "w": 760, "h": 100 } },
+        { "id": "t2v", "kind": "handtext", "cue": "budget for the planning", "text": "✓ enable + budget the planning step", "size": 38, "color": "green", "at": { "x": 220, "y": 540, "w": 740, "h": 60 } },
+        { "id": "t2w", "kind": "handtext", "cue": "commits to a plan", "text": "✗ without it: plan first, deps later, step 1 fails", "size": 32, "color": "red", "at": { "x": 220, "y": 630, "w": 760, "h": 60 } },
+        { "id": "t3", "kind": "handtext", "cue": "Task three", "text": "3 · strip thinking blocks to save context", "size": 40, "color": "ink", "boxed": true, "at": { "x": 1000, "y": 140, "w": 800, "h": 100 } },
+        { "id": "t3v", "kind": "handtext", "cue": "Never do this", "text": "✓ NEVER — signature breaks,\n   next request rejected", "size": 38, "color": "red", "at": { "x": 1060, "y": 280, "w": 740, "h": 120 } },
+        { "id": "t3fix", "kind": "handtext", "cue": "context engineering", "text": "bloated context? → context engineering,\nnot block surgery", "size": 34, "color": "blue", "at": { "x": 1060, "y": 450, "w": 720, "h": 110 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "The pattern behind all three: effort follows problem depth, and thinking blocks are untouchable. If you missed one, rewatch the extended thinking video. Next section: tool use, and schema design.",
+      "elements": [
+        { "id": "patternbox", "kind": "sketch", "shape": "rect", "cue": "pattern behind", "color": "green", "at": { "x": 340, "y": 320, "w": 1240, "h": 220 } },
+        { "id": "pattern", "kind": "handtext", "cue": "effort follows", "delay": 0.2, "text": "effort follows depth ·\nthinking blocks are untouchable", "size": 46, "color": "green", "at": { "x": 440, "y": 370, "w": 1060, "h": 140 } },
+        { "id": "next", "kind": "handtext", "cue": "tool use", "text": "→ next: tool use & schema design", "size": 44, "color": "ink", "at": { "x": 560, "y": 660, "w": 860, "h": 70 } }
+      ]
+    }
+  ]
+}

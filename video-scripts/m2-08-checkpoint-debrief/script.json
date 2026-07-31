@@ -1,0 +1,40 @@
+{
+  "sectionId": "m2-08-checkpoint-debrief",
+  "title": "Checkpoint 7 Walkthrough",
+  "subtitle": "choose the right memory pattern",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/08-agent-memory/03-checkpoint.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2115,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Checkpoint seven asked you to match three agents to three memory scopes. If your matches aren't made yet, pause here first.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Checkpoint seven", "text": "Checkpoint 7: Walkthrough", "size": 76, "color": "ink", "at": { "x": 420, "y": 190, "w": 1150, "h": 110 } },
+        { "id": "pause", "kind": "handtext", "cue": "pause", "text": "⏸ match yours first", "size": 46, "color": "red", "boxed": true, "at": { "x": 640, "y": 440, "w": 660, "h": 120 } }
+      ]
+    },
+    {
+      "id": "answers",
+      "narration": "Agent one: a support agent helping the same user across daily check-ins for two weeks. External storage. In-context state resets when a session ends, so day two would open as a first contact, and the user re-explains everything. Write at session end, read at session start. Agent two: a document formatter. File in, transform, file out, terminate. Stateless. There's no continuity to preserve, so external storage would just tax every job with reads and writes it never benefits from. Agent three: a coding assistant across one multi-hour session that won't continue afterward. In-context. External storage is overhead for state that dies tonight anyway, and summarizing would compress away exactly the code detail the developer still needs an hour later, in the same session.",
+      "elements": [
+        { "id": "a1", "kind": "handtext", "cue": "Agent one", "text": "1 · same user, 2 weeks of check-ins", "size": 40, "color": "ink", "boxed": true, "at": { "x": 160, "y": 130, "w": 850, "h": 100 } },
+        { "id": "a1v", "kind": "handtext", "cue": "External storage", "text": "✓ external — else day 2 = first contact", "size": 38, "color": "green", "at": { "x": 220, "y": 270, "w": 900, "h": 60 } },
+        { "id": "a2", "kind": "handtext", "cue": "Agent two", "text": "2 · formatter: in → transform → out", "size": 40, "color": "ink", "boxed": true, "at": { "x": 160, "y": 400, "w": 850, "h": 100 } },
+        { "id": "a2v", "kind": "handtext", "cue": "Stateless", "text": "✓ stateless — storage = tax with no benefit", "size": 38, "color": "green", "at": { "x": 220, "y": 540, "w": 950, "h": 60 } },
+        { "id": "a3", "kind": "handtext", "cue": "Agent three", "text": "3 · one multi-hour coding session", "size": 40, "color": "ink", "boxed": true, "at": { "x": 160, "y": 670, "w": 850, "h": 100 } },
+        { "id": "a3v", "kind": "handtext", "cue": "In-context", "text": "✓ in-context — summaries would drop the code detail", "size": 38, "color": "green", "at": { "x": 220, "y": 810, "w": 1100, "h": 60 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "One question decides all three: does state need to outlive the session? Yes means storage. No means in-context or stateless, whichever the session shape wants. Next up: the module's cumulative debug task. Four bugs are waiting for you.",
+      "elements": [
+        { "id": "rulebox", "kind": "sketch", "shape": "rect", "cue": "One question", "color": "green", "at": { "x": 340, "y": 320, "w": 1240, "h": 230 } },
+        { "id": "rule", "kind": "handtext", "cue": "outlive the session", "delay": 0.2, "text": "\"must state outlive the session?\"\nyes → storage · no → in-context / stateless", "size": 44, "color": "green", "at": { "x": 420, "y": 370, "w": 1090, "h": 150 } },
+        { "id": "next", "kind": "handtext", "cue": "Four bugs", "text": "→ next: cumulative debug task (4 bugs!)", "size": 44, "color": "ink", "at": { "x": 480, "y": 670, "w": 1000, "h": 70 } }
+      ]
+    }
+  ]
+}

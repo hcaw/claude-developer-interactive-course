@@ -1,0 +1,83 @@
+{
+  "sectionId": "m2-06-context-engineering",
+  "title": "Context Engineering",
+  "subtitle": "keeping long sessions in budget",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/06-context-engineering/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2110,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "Here's a quiet fact with loud consequences: every tool result Claude returns gets appended to the context window, and stays there for the rest of the session. In a single-turn prompt, that's invisible. In an agent running twenty tool calls, the window fills fast, and when it fills, the agent compacts, or stalls. Context engineering means deciding, in advance, what enters the window, what comes back out as a summary, and what never enters at all.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "quiet fact", "text": "Context Engineering", "size": 84, "color": "ink", "at": { "x": 440, "y": 140, "w": 1050, "h": 120 } },
+        { "id": "fact", "kind": "handtext", "cue": "stays there", "text": "every tool result stays — all session long", "size": 44, "color": "red", "at": { "x": 420, "y": 380, "w": 1100, "h": 70 } },
+        { "id": "def", "kind": "bullets", "cue": "deciding, in advance", "size": 40, "color": "blue", "at": { "x": 420, "y": 520, "w": 1200, "h": 320 }, "items": [
+          { "text": "what ENTERS the window", "cue": "what enters" },
+          { "text": "what leaves as a SUMMARY", "cue": "summary" },
+          { "text": "what NEVER enters at all", "cue": "never enters" }
+        ] }
+      ]
+    },
+    {
+      "id": "budget",
+      "narration": "Treat the window as working memory with a bill attached. Every token in it costs money on input, and adds latency, on every single turn. And here's the trap: in development the window rarely fills, because test inputs are small and sessions are short. In production, tool outputs run three to five times longer than your fixtures, sessions run longer, and the window that held twenty turns cleanly now fills at turn eight. Failing to plan for that is a production outage on a timer.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "working memory", "text": "A budget, not a free resource", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 1100, "h": 90 } },
+        { "id": "cost", "kind": "handtext", "cue": "bill attached", "text": "every token = input cost + latency, every turn", "size": 42, "color": "ink", "at": { "x": 320, "y": 250, "w": 1250, "h": 70 } },
+        { "id": "dev", "kind": "handtext", "cue": "rarely fills", "text": "dev: small fixtures,\nshort sessions ✓", "size": 40, "color": "green", "boxed": true, "at": { "x": 280, "y": 420, "w": 580, "h": 180 } },
+        { "id": "prod", "kind": "handtext", "cue": "three to five times", "text": "prod: outputs 3–5×,\nfills at turn EIGHT", "size": 40, "color": "red", "boxed": true, "at": { "x": 1060, "y": 420, "w": 580, "h": 180 } },
+        { "id": "warn", "kind": "handtext", "cue": "production outage", "text": "unplanned = an outage on a timer", "size": 42, "color": "red", "at": { "x": 480, "y": 700, "w": 950, "h": 70 } }
+      ]
+    },
+    {
+      "id": "strategies",
+      "narration": "Four strategies keep a session in budget, and each trades away a different kind of continuity. Pruning rewinds to an earlier message and drops the dead end after it. Compaction summarizes the history into fewer tokens. In Claude Code that's the compact command, and in the API there's server-side compaction, or you write the summarizer yourself. And if you do write it: tell it to preserve file paths, decisions, and errors, or it will drop exactly the state your agent needs. Clearing starts fresh when the next task is unrelated. And subagent handoffs give a subtask its own isolated window: the subagent explores, the journey stays in its context, and only the short answer comes back.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Four strategies", "text": "Four strategies", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "s1", "kind": "handtext", "cue": "rewinds", "text": "pruning — rewind past the dead end", "size": 38, "color": "ink", "boxed": true, "at": { "x": 180, "y": 240, "w": 780, "h": 100 } },
+        { "id": "s2", "kind": "handtext", "cue": "summarizes the history", "text": "compaction — history → summary", "size": 38, "color": "ink", "boxed": true, "at": { "x": 180, "y": 380, "w": 780, "h": 100 } },
+        { "id": "s2note", "kind": "handtext", "cue": "preserve file paths", "text": "summarizer must keep:\npaths · decisions · errors!", "size": 34, "color": "red", "at": { "x": 1020, "y": 380, "w": 640, "h": 110 } },
+        { "id": "s3", "kind": "handtext", "cue": "starts fresh", "text": "clearing — new task, new session", "size": 38, "color": "ink", "boxed": true, "at": { "x": 180, "y": 520, "w": 780, "h": 100 } },
+        { "id": "s4", "kind": "handtext", "cue": "isolated window", "text": "subagents — explore elsewhere,\nreturn only the answer", "size": 38, "color": "green", "boxed": true, "at": { "x": 180, "y": 660, "w": 780, "h": 150 } },
+        { "id": "trade", "kind": "handtext", "cue": "trades away", "text": "each trades some continuity —\nchoose deliberately", "size": 38, "color": "blue", "at": { "x": 1060, "y": 600, "w": 640, "h": 130 } }
+      ]
+    },
+    {
+      "id": "levers",
+      "narration": "Two more levers reduce what you pay for what's already in the window. Prompt caching: mark a cache breakpoint on your stable prefix, the long system prompt, the tool definitions, and follow-up requests reuse the processing at a fraction of the cost. For multi-turn sessions, caching stable prefixes is the highest-leverage cost reduction available. And token counting: the count tokens endpoint takes a request body and returns its size without running inference. Measure your context budget against real production outputs, not test fixtures, and gate requests before they fail instead of after.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "Two more levers", "text": "Pay less for what's there", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 1000, "h": 90 } },
+        { "id": "cache", "kind": "handtext", "cue": "cache breakpoint", "text": "prompt caching: stable prefix →\ncache_control breakpoint → ~fraction of cost", "size": 40, "color": "green", "boxed": true, "at": { "x": 240, "y": 260, "w": 1000, "h": 180 } },
+        { "id": "cachenote", "kind": "handtext", "cue": "highest-leverage", "text": "the #1 cost lever for multi-turn", "size": 36, "color": "green", "at": { "x": 340, "y": 490, "w": 800, "h": 60 } },
+        { "id": "count", "kind": "handtext", "cue": "count tokens", "text": "count_tokens: measure before it fails", "size": 40, "color": "ink", "boxed": true, "at": { "x": 240, "y": 610, "w": 1000, "h": 120 } },
+        { "id": "real", "kind": "handtext", "cue": "real production outputs", "text": "against REAL outputs, not fixtures", "size": 36, "color": "red", "at": { "x": 340, "y": 790, "w": 850, "h": 60 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "The postmortem that ties it together. A receipts-processing agent, built under a forty thousand token budget cap, a cost control the team chose. In development: twenty test receipts, each tool result about eight hundred tokens. Everything green. In production, receipts arrived with transaction records and correspondence attached. Tool outputs averaged three thousand two hundred tokens. Eight turns filled the budget, and here's the interesting part: the failure looked like bad tool selection. The agent started picking wrong tools and returning half-finished analyses, because accumulated outputs had crowded its original instructions out of view. The team found the real cause two days later, in a token audit. So burn this in: if tool selection degrades after a fixed number of turns, check whether the window is filling before you debug the schema.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "postmortem", "text": "⚠ fine in dev, ceiling in prod", "size": 58, "color": "red", "at": { "x": 120, "y": 90, "w": 1150, "h": 90 } },
+        { "id": "dev", "kind": "handtext", "cue": "twenty test receipts", "text": "dev: 20 × 800 tokens → fits easily", "size": 40, "color": "green", "at": { "x": 260, "y": 240, "w": 1000, "h": 60 } },
+        { "id": "prod", "kind": "handtext", "cue": "three thousand two hundred", "text": "prod: outputs 3,200 tokens → cap at turn 8", "size": 40, "color": "red", "at": { "x": 260, "y": 350, "w": 1100, "h": 60 } },
+        { "id": "mask", "kind": "handtext", "cue": "looked like bad tool", "text": "symptom: \"bad tool selection\"\nreal cause: instructions crowded out", "size": 44, "color": "red", "boxed": true, "at": { "x": 300, "y": 470, "w": 1150, "h": 180 } },
+        { "id": "audit", "kind": "handtext", "cue": "two days later", "text": "found by token audit — 2 days post-deploy", "size": 36, "color": "ink", "at": { "x": 380, "y": 710, "w": 950, "h": 60 } },
+        { "id": "rule", "kind": "handtext", "cue": "burn this in", "text": "selection degrades after N turns?\ncheck the window BEFORE the schema", "size": 40, "color": "green", "boxed": true, "at": { "x": 340, "y": 800, "w": 1150, "h": 150 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Decide what enters, what leaves as a summary, and what never enters. Cache the stable prefix, count tokens against real data, and when behavior drifts late in a session, suspect the window first. Checkpoint five gives you a degrading session trace to diagnose. Then watch the walkthrough.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "what enters", "size": 44, "color": "ink", "at": { "x": 320, "y": 240, "w": 1350, "h": 340 }, "items": [
+          { "text": "curate: enters · summarized · excluded", "cue": "never enters" },
+          { "text": "cache stable prefixes, count real tokens", "cue": "Cache the stable" },
+          { "text": "late-session drift = window, first suspect", "cue": "suspect the window" }
+        ] },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint five", "text": "checkpoint 5: diagnose the trace\n→ then the walkthrough", "size": 44, "color": "green", "boxed": true, "at": { "x": 420, "y": 660, "w": 1080, "h": 180 } }
+      ]
+    }
+  ]
+}

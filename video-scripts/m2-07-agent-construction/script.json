@@ -1,0 +1,95 @@
+{
+  "sectionId": "m2-07-agent-construction",
+  "title": "Agent Construction",
+  "subtitle": "the loop, the wiring, the human gate",
+  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/07-agent-construction/01-teaching.md + 02-watch-out.md",
+  "voice": "af_heart",
+  "speed": 1.0,
+  "seed": 2112,
+  "beats": [
+    {
+      "id": "intro",
+      "narration": "An agent is a multi-step tool-use loop, with managed context and a defined goal. You've already built every piece: the schemas, the streaming, the context strategies. This section wires them together. But before a single line gets written, ask the question most teams skip: does this problem need an agent at all?",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "multi-step", "text": "Agent Construction", "size": 84, "color": "ink", "at": { "x": 460, "y": 150, "w": 1000, "h": 120 } },
+        { "id": "def", "kind": "handtext", "cue": "defined goal", "text": "agent = tool loop + managed context + a goal", "size": 44, "color": "blue", "at": { "x": 360, "y": 400, "w": 1250, "h": 70 } },
+        { "id": "q", "kind": "handtext", "cue": "teams skip", "text": "first question:\ndoes this even need an agent?", "size": 52, "color": "red", "boxed": true, "at": { "x": 460, "y": 550, "w": 1000, "h": 190 } }
+      ]
+    },
+    {
+      "id": "pattern",
+      "narration": "Here's the decision. If you can enumerate the exact steps in code, if the inputs are well constrained and every run follows the same sequence, write a workflow. Cheaper, testable, observable with normal tooling. Reach for an agent when you can specify the goal and the tools, but not the path. When inputs vary unpredictably, and the task needs creative sequencing. Agents buy that flexibility with coordination overhead, context cost, and a bigger failure surface. So climb the ladder deliberately: a single API call, then a workflow, then an agent. Move up only when the simpler pattern can't handle the variability.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "the decision", "text": "Workflow or agent?", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "wf", "kind": "handtext", "cue": "enumerate the exact steps", "text": "steps enumerable in code\n→ WORKFLOW", "size": 42, "color": "green", "boxed": true, "at": { "x": 220, "y": 260, "w": 680, "h": 190 } },
+        { "id": "ag", "kind": "handtext", "cue": "goal and the tools", "text": "goal + tools, path unknown\n→ AGENT", "size": 42, "color": "blue", "boxed": true, "at": { "x": 1030, "y": 260, "w": 680, "h": 190 } },
+        { "id": "price", "kind": "handtext", "cue": "coordination overhead", "text": "agents cost: coordination · context · failure surface", "size": 38, "color": "red", "at": { "x": 340, "y": 540, "w": 1250, "h": 60 } },
+        { "id": "ladder", "kind": "handtext", "cue": "climb the ladder", "text": "API call → workflow → agent\n(move up only when forced)", "size": 44, "color": "green", "boxed": true, "at": { "x": 420, "y": 660, "w": 1080, "h": 190 } }
+      ]
+    },
+    {
+      "id": "wiring",
+      "narration": "Once it's an agent, the loop is the constant. The wiring path is the choice, and it's really a question of how much runtime you want to own. Path one: the raw Messages API. Your code runs every iteration. Full control, full responsibility, everything is yours to maintain. Path two: the Agent SDK. The loop, context management, and tool scaffolding come built, running in your own process, and your code still executes the tools. Path three: Claude Managed Agents. Anthropic runs the loop and the sandbox. You define the agent once as a versioned API resource, and stream events. Built for runs measured in minutes or hours. One constraint outranks convenience: managed sessions are stored server-side, so workloads under strict data retention or health-privacy rules route to the SDK or the raw loop instead. The governing constraint picks the path before preference does.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "loop is the constant", "text": "Three wiring paths", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 850, "h": 90 } },
+        { "id": "p1", "kind": "handtext", "cue": "raw Messages", "text": "1 · raw API — you own everything", "size": 40, "color": "ink", "boxed": true, "at": { "x": 200, "y": 240, "w": 900, "h": 110 } },
+        { "id": "p2", "kind": "handtext", "cue": "Agent SDK", "text": "2 · Agent SDK — loop given, tools yours", "size": 40, "color": "ink", "boxed": true, "at": { "x": 200, "y": 390, "w": 900, "h": 110 } },
+        { "id": "p3", "kind": "handtext", "cue": "Managed Agents", "text": "3 · Managed Agents — Anthropic runs loop + sandbox", "size": 40, "color": "ink", "boxed": true, "at": { "x": 200, "y": 540, "w": 1100, "h": 110 } },
+        { "id": "long", "kind": "handtext", "cue": "minutes or hours", "text": "long runs: minutes → hours", "size": 34, "color": "green", "at": { "x": 1340, "y": 570, "w": 520, "h": 60 } },
+        { "id": "constraint", "kind": "handtext", "cue": "stored server-side", "text": "⚠ managed sessions live server-side:\nstrict retention / PHI → SDK or raw loop", "size": 40, "color": "red", "boxed": true, "at": { "x": 300, "y": 710, "w": 1200, "h": 170 } }
+      ]
+    },
+    {
+      "id": "loop",
+      "narration": "Whatever the path, four steps make the loop work. Register the tools. Scope the system prompt to the task, and to the tools that exist. Broad prompts produce broad, unreliable routing. Handle the loop: every tool call Claude issues, your code executes and answers, all of them, before the next turn. And define exit conditions. Decide when done means done, because the agent won't volunteer to stop. Two more disciplines. Over-tooling is real: register the minimum set, because selection quality degrades as the tool surface grows. And place human-in-the-loop checkpoints by asking one question: what's the worst outcome if this step runs unchecked? Before destructive calls: always. After a plan: when a wrong plan is expensive. On weird output: when retries won't save you.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "four steps", "text": "Wiring the loop", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 700, "h": 90 } },
+        { "id": "steps", "kind": "bullets", "cue": "Register the tools", "size": 38, "color": "ink", "at": { "x": 180, "y": 240, "w": 950, "h": 400 }, "items": [
+          { "text": "1. register tools", "cue": "Register the tools" },
+          { "text": "2. scope the system prompt to task + tools", "cue": "Scope the system" },
+          { "text": "3. execute + answer EVERY call", "cue": "Handle the loop" },
+          { "text": "4. exit conditions: when is done, done?", "cue": "exit conditions" }
+        ] },
+        { "id": "overtool", "kind": "handtext", "cue": "Over-tooling", "text": "over-tooling: more tools =\nworse selection. minimum set!", "size": 38, "color": "red", "boxed": true, "at": { "x": 1200, "y": 250, "w": 620, "h": 180 } },
+        { "id": "hitl", "kind": "handtext", "cue": "worst outcome", "text": "HITL: \"worst outcome if unchecked?\"", "size": 44, "color": "green", "at": { "x": 300, "y": 700, "w": 1100, "h": 70 } },
+        { "id": "hitl2", "kind": "handtext", "cue": "destructive calls", "text": "destructive → always · post-plan → if plans are costly · weird output → if retries won't help", "size": 32, "color": "ink", "at": { "x": 220, "y": 800, "w": 1500, "h": 60 } }
+      ]
+    },
+    {
+      "id": "watchout",
+      "narration": "Now the incident that makes the checkpoint non-negotiable. A config-editing agent: read file, write file, validate config, loop until validation passes. Tested in a scratch directory, it converged in two or three iterations, every time. Deployed to a customer environment, it found a rate limit out of range, corrected it, validated, passed, and exited cleanly. Perfect run. Minutes later, the customer's application was choking, because their systems depended on the old rate limit. Validation checked the file. Nothing checked the consequences. The loop did exactly what it was told. What was missing was a state between change proposed and change committed, a pause for human review before the write hit a live system. Nothing in testing ever demanded that state, because in a scratch directory, no wrong write matters. Ask the design question before deployment: what's the worst outcome if this write runs without a check?",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "incident", "text": "⚠ the agent that edited production", "size": 56, "color": "red", "at": { "x": 120, "y": 90, "w": 1300, "h": 90 } },
+        { "id": "loop", "kind": "handtext", "cue": "read file", "text": "read → write → validate → exit on pass", "size": 40, "color": "ink", "at": { "x": 300, "y": 230, "w": 1100, "h": 60 } },
+        { "id": "test", "kind": "handtext", "cue": "scratch directory", "text": "scratch dir: perfect ✓", "size": 38, "color": "green", "at": { "x": 300, "y": 330, "w": 640, "h": 60 } },
+        { "id": "prod", "kind": "handtext", "cue": "choking", "text": "prod: valid file, broken customer ✗", "size": 38, "color": "red", "at": { "x": 1000, "y": 330, "w": 800, "h": 60 } },
+        { "id": "gap", "kind": "handtext", "cue": "checked the consequences", "text": "validation checked the FILE —\nnobody checked the CONSEQUENCES", "size": 46, "color": "red", "boxed": true, "at": { "x": 340, "y": 450, "w": 1240, "h": 180 } },
+        { "id": "missing", "kind": "handtext", "cue": "change proposed", "text": "missing state: proposed → [human review] → committed", "size": 40, "color": "green", "at": { "x": 260, "y": 700, "w": 1400, "h": 70 } },
+        { "id": "q", "kind": "handtext", "cue": "design question", "text": "ask at design time, not after the incident", "size": 38, "color": "blue", "at": { "x": 420, "y": 810, "w": 1080, "h": 60 } }
+      ]
+    },
+    {
+      "id": "compliance",
+      "narration": "One last gate before you wire anything: regulated data. Attorney-client privilege, health information, European residency, government workloads. Each of those decides which endpoint your code may call, which credentials it carries, and where logs land, before prompts and tools are even discussed. Name the governing constraint at the start. A wrong client configuration is far more expensive to undo after the agent ships.",
+      "elements": [
+        { "id": "title", "kind": "handtext", "cue": "regulated data", "text": "Compliance picks first", "size": 60, "color": "blue", "at": { "x": 120, "y": 90, "w": 950, "h": 90 } },
+        { "id": "list", "kind": "handtext", "cue": "privilege", "text": "privilege · PHI · residency · government", "size": 44, "color": "ink", "at": { "x": 400, "y": 280, "w": 1150, "h": 70 } },
+        { "id": "decides", "kind": "handtext", "cue": "decides which endpoint", "text": "→ decides endpoint + credentials + log destination", "size": 42, "color": "red", "at": { "x": 340, "y": 420, "w": 1300, "h": 70 } },
+        { "id": "rule", "kind": "handtext", "cue": "Name the governing", "text": "name the constraint BEFORE wiring —\nundoing config later is expensive", "size": 44, "color": "green", "boxed": true, "at": { "x": 380, "y": 570, "w": 1180, "h": 190 } }
+      ]
+    },
+    {
+      "id": "outro",
+      "narration": "Recap: climb the pattern ladder deliberately. Let constraints pick the wiring path. Scope the prompt, cap the tools, define done. And gate every irreversible action on a human. Checkpoint six hands you a partial agent with two gaps: a tool description, and a missing checkpoint. Fill them in, then watch the walkthrough.",
+      "elements": [
+        { "id": "recap", "kind": "bullets", "cue": "pattern ladder", "size": 42, "color": "ink", "at": { "x": 300, "y": 200, "w": 1400, "h": 420 }, "items": [
+          { "text": "call → workflow → agent, deliberately", "cue": "ladder" },
+          { "text": "constraints pick the wiring path", "cue": "constraints pick" },
+          { "text": "scoped prompt · minimum tools · defined done", "cue": "Scope the prompt" },
+          { "text": "irreversible? human gate. always.", "cue": "irreversible" }
+        ] },
+        { "id": "try", "kind": "handtext", "cue": "Checkpoint six", "text": "checkpoint 6: fill the two gaps\n→ then the walkthrough", "size": 44, "color": "green", "boxed": true, "at": { "x": 440, "y": 680, "w": 1040, "h": 180 } }
+      ]
+    }
+  ]
+}

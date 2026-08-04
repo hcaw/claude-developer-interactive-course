@@ -224,6 +224,37 @@ function cleanBlock(b) {
 
 const normalizeTitle = (s) => String(s).replace(/\s+/g, " ").trim();
 
+/** Comparison form for two titles: case, punctuation and emphasis markers don't count. */
+const titleKey = (s) =>
+  normalizeTitle(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+/**
+ * Nothing on a lesson page may print its own title twice.
+ *
+ * Two mechanical repeats have reached the reading surface: a leading H1 that restates the
+ * frontmatter title (stripped below), and a callout that kept the bold line the parser had already
+ * lifted into `label`. Both are shapes of authored markdown, so they are caught here — where content
+ * anomalies fail the build — rather than papered over in the renderer.
+ */
+function checkRepeatedTitles(key, blocks, report) {
+  blocks.forEach((b, i) => {
+    if (b.type === "callout" && b.label) {
+      const firstLine = String(b.text).split("\n")[0].replace(/\*\*/g, "");
+      if (titleKey(firstLine) === titleKey(b.label))
+        flag(report, `${key}: callout body repeats its label "${b.label}" — the label is lifted out of the body, not copied`);
+    }
+
+    // A heading whose only content is a deeper heading saying the same thing: the reader sees the
+    // title, then the title again. Give the parent a distinct meaning or drop one of the two.
+    const next = blocks[i + 1];
+    if (b.type === "heading" && next?.type === "heading" && next.level > b.level) {
+      const [parent, child] = [titleKey(b.text), titleKey(next.text)];
+      if (child === parent || child.startsWith(parent + " "))
+        flag(report, `${key}: heading "${b.text}" is immediately restated by "${next.text}"`);
+    }
+  });
+}
+
 /**
  * Drop the leading `# Title` every article opens with.
  *
@@ -286,6 +317,7 @@ function generate() {
       const type = a.frontmatter.article_type;
       const title = a.frontmatter.title;
       const blocks = stripTitleHeading(a.blocks, title, key, report);
+      checkRepeatedTitles(key, blocks, report);
 
       const base = {
         key,

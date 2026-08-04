@@ -73,13 +73,17 @@ function parseBlocks(body) {
         buf.push(lines[i].replace(/^>\s?/, ""));
         i++;
       }
-      const text = buf.join("\n").trim();
-      const label = /^\*\*(.+?)\*\*/.exec(text)?.[1] ?? null;
+      const raw = buf.join("\n").trim();
+      // A bold line of its own IS the callout's title: it becomes `label` and leaves `text`, so a
+      // renderer that prints both does not print the title twice. Bold that merely opens a sentence
+      // (`**Note** the rest of it…`) is emphasis, not a title, and stays in the body.
+      const title = /^\*\*(.+?)\*\*[ \t]*(?:\n|$)/.exec(raw);
       blocks.push({
         type: "callout",
-        label,
-        text,
-        disclaimer: DISCLAIMER_RE.test(text),
+        label: title ? title[1].trim() : null,
+        text: title ? raw.slice(title[0].length).trim() : raw,
+        // Classified on the whole quote, title included, so lifting the title cannot change it.
+        disclaimer: DISCLAIMER_RE.test(raw),
       });
       continue;
     }

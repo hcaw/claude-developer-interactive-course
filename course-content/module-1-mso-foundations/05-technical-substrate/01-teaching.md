@@ -12,21 +12,15 @@ screen_id: "S05"
 
 # The technical substrate: SDKs, REST, streaming, async
 
-## SDK vs. REST
-
-### How a developer reaches Claude: SDK versus raw REST
+## How a developer reaches Claude: SDK versus raw REST
 
 At its core, Claude is reached over an HTTP REST API: your code sends a request to an endpoint with your API key and a JSON body, and reads a JSON response back. You can call that endpoint directly with any HTTP client. More commonly you use an official SDK, available for Python and TypeScript among others, which is a thin convenience layer over the same REST API. It handles authentication, request construction, retries, and response parsing so you write less boilerplate. The SDK and raw REST reach the same API and the same model. The SDK saves you from assembling requests by hand. Module 2 builds against the SDK and the Messages API, which sits on this same foundation.
 
-## Sync, Streaming & Real-time
-
-### Synchronous, streaming, and real-time responses
+## Synchronous, streaming, and real-time responses
 
 A **synchronous** request is the simplest pattern: you send the request and wait for the complete response to come back in one piece, then act on it. That is fine for short responses and backend jobs where no one is waiting. When a response is long or a user is watching, **streaming** sends the response in pieces as the model generates it. Output appears immediately rather than after a blank-screen wait, and your code reassembles the pieces into the final message. Claude exposes streaming over the same HTTP connection using server-sent events. Module 2 teaches how to consume a stream safely and recover when it is interrupted.
 
-## Async for High-Volume Work
-
-### Asynchronous patterns for high-volume work
+## Asynchronous patterns for high-volume work
 
 Two patterns address high-volume work, and they solve different problems.
 

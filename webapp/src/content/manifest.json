@@ -184,7 +184,7 @@
         {
           "type": "callout",
           "label": "Disclaimer / Notice for Educational Content",
-          "text": "**Disclaimer / Notice for Educational Content**\n\nWe built this Developer course Module 1: MSO Foundations to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
+          "text": "We built this Developer course Module 1: MSO Foundations to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
           "disclaimer": false
         }
       ]
@@ -211,11 +211,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Tokens"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "Tokens: the unit of input, output, and cost"
         },
         {
@@ -225,11 +220,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Context Window"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "The context window: a fixed budget"
         },
         {
@@ -239,11 +229,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Sampling"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "Sampling: why the same prompt can give different answers"
         },
         {
@@ -253,11 +238,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Non-determinism"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "Non-determinism: what it means for testing and evals"
         },
         {
@@ -301,11 +281,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "The Model Family"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "The Claude model family"
         },
         {
@@ -315,11 +290,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Reasoning Modes"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "Reasoning modes are a separate setting from model choice"
         },
         {
@@ -329,11 +299,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "How They Work Together"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "How the two work together"
         },
         {
@@ -364,11 +329,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "The Three Modes"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "The three modes"
         },
         {
@@ -378,11 +338,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Cost & Quality Trade-off"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "The cost and quality trade-off"
         },
         {
@@ -392,11 +347,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Mode & Model Choice"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "Mode choice interacts with model choice"
         },
         {
@@ -427,11 +377,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "SDK vs. REST"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "How a developer reaches Claude: SDK versus raw REST"
         },
         {
@@ -441,11 +386,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Sync, Streaming & Real-time"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "Synchronous, streaming, and real-time responses"
         },
         {
@@ -455,11 +395,6 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Async for High-Volume Work"
-        },
-        {
-          "type": "heading",
-          "level": 3,
           "text": "Asynchronous patterns for high-volume work"
         },
         {
@@ -983,13 +918,13 @@
         {
           "type": "callout",
           "label": "“The build” in this module",
-          "text": "**“The build” in this module**\n\nEverything in this module is built around one recurring engineering problem: a Claude integration that worked well during development but now has to hold-up in production. In development, the prompt looked solid, the tool call worked, the session stayed short, and the test inputs were manageable. However, in production, that same system has to survive longer sessions, larger tool outputs, interrupted streams, tighter cost and latency constraints, memory across turns, and actions that may be irreversible. This module teaches you which implementation decision prevents which production failure: how to structure prompts, define tools, handle streaming, manage context, choose memory scope, and wire agents safely before those failures show up.",
+          "text": "Everything in this module is built around one recurring engineering problem: a Claude integration that worked well during development but now has to hold-up in production. In development, the prompt looked solid, the tool call worked, the session stayed short, and the test inputs were manageable. However, in production, that same system has to survive longer sessions, larger tool outputs, interrupted streams, tighter cost and latency constraints, memory across turns, and actions that may be irreversible. This module teaches you which implementation decision prevents which production failure: how to structure prompts, define tools, handle streaming, manage context, choose memory scope, and wire agents safely before those failures show up.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Disclaimer / Notice for Educational Content",
-          "text": "**Disclaimer / Notice for Educational Content**\n\nWe built this Developer course Module 2: Production-Grade Prompting, Agents & Tool-use to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
+          "text": "We built this Developer course Module 2: Production-Grade Prompting, Agents & Tool-use to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
           "disclaimer": false
         }
       ]
@@ -1269,7 +1204,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nEven though a prompt looks ready for production, it can still produce quiet failures. Sometimes edge cases cause fields to go missing or constraints to be ignored; when this happens, it’s often because constraints weren’t specified precisely enough.",
+          "text": "Even though a prompt looks ready for production, it can still produce quiet failures. Sometimes edge cases cause fields to go missing or constraints to be ignored; when this happens, it’s often because constraints weren’t specified precisely enough.",
           "disclaimer": false
         },
         {
@@ -1342,7 +1277,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nEvery pass made the prompt longer and none of them added the missing output constraint. The developer was describing the problem more precisely with each iteration, but Claude does not need a detailed description of what a billing ticket looks like, instead it needs to know that the only acceptable response is one word in all capital letters.\n\nThe fix is two lines: an output constraint specifying the exact format and a few-shot example covering the ambiguous case. The six-pass trace is a pattern to recognize early: if three re-prompts in a row have not worked, stop adding text and diagnose which technique is missing.",
+          "text": "Every pass made the prompt longer and none of them added the missing output constraint. The developer was describing the problem more precisely with each iteration, but Claude does not need a detailed description of what a billing ticket looks like, instead it needs to know that the only acceptable response is one word in all capital letters.\n\nThe fix is two lines: an output constraint specifying the exact format and a few-shot example covering the ambiguous case. The six-pass trace is a pattern to recognize early: if three re-prompts in a row have not worked, stop adding text and diagnose which technique is missing.",
           "disclaimer": false
         }
       ]
@@ -1473,7 +1408,7 @@
         {
           "type": "callout",
           "label": "Forward pointer",
-          "text": "**Forward pointer**\n\nThis lesson enables reasoning and calibrates its effort setting; it does not cover model selection. Choosing which model to run, as distinct from whether to enable reasoning, is taught in the MSO Foundations module that precedes this one.",
+          "text": "This lesson enables reasoning and calibrates its effort setting; it does not cover model selection. Choosing which model to run, as distinct from whether to enable reasoning, is taught in the MSO Foundations module that precedes this one.",
           "disclaimer": false
         },
         {
@@ -1912,19 +1847,19 @@
         {
           "type": "callout",
           "label": "Use MCP when",
-          "text": "**Use MCP when**\n\nA well-maintained MCP server already exists for the service you need (check that it covers the specific operations you require and is actively maintained against the service’s current API. Writing and owning those schemas yourself adds implementation overhead for no additional capability. Note that the Claude API MCP Connector only supports remote servers. Local stdio servers require Claude Desktop or Claude Code as the client; they cannot be connected directly through the API.",
+          "text": "A well-maintained MCP server already exists for the service you need (check that it covers the specific operations you require and is actively maintained against the service’s current API. Writing and owning those schemas yourself adds implementation overhead for no additional capability. Note that the Claude API MCP Connector only supports remote servers. Local stdio servers require Claude Desktop or Claude Code as the client; they cannot be connected directly through the API.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Write schemas manually when",
-          "text": "**Write schemas manually when**\n\nNo MCP server covers your use case, or when you need precise control over tool scope and description quality that a general-purpose server does not provide. Before defaulting to manual schemas for scope control, note that the API MCP Connector supports allowlisting and denylisting specific tools per server via MCPToolset configuration. Manual authoring may still be warranted for description quality, but not always for scope.",
+          "text": "No MCP server covers your use case, or when you need precise control over tool scope and description quality that a general-purpose server does not provide. Before defaulting to manual schemas for scope control, note that the API MCP Connector supports allowlisting and denylisting specific tools per server via MCPToolset configuration. Manual authoring may still be warranted for description quality, but not always for scope.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Use both when",
-          "text": "**Use both when**\n\nConnect to an MCP server for breadth then apply the description-tuning discipline from earlier in this module to the specific tools you are actively routing to. MCP and manual schema authoring are not mutually exclusive as the server gives you coverage, and your descriptions give you precision where it matters. Apply tool allowlisting via MCPToolset to limit the surface area Claude reasons over before layering in description tuning. Narrowing the tool set and sharpening the descriptions are two separate levers, and you should use both.",
+          "text": "Connect to an MCP server for breadth then apply the description-tuning discipline from earlier in this module to the specific tools you are actively routing to. MCP and manual schema authoring are not mutually exclusive as the server gives you coverage, and your descriptions give you precision where it matters. Apply tool allowlisting via MCPToolset to limit the surface area Claude reasons over before layering in description tuning. Narrowing the tool set and sharpening the descriptions are two separate levers, and you should use both.",
           "disclaimer": false
         },
         {
@@ -1960,7 +1895,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\n*A schema can look correct and still fail. Typed parameters and passing happy-path tests tell you the structure is valid, but they do not tell you whether Claude can reliably choose between your tools when an input sits near the boundary of two overlapping descriptions. That is the failure mode that initial testing misses and the one most likely to surface during production.*",
+          "text": "*A schema can look correct and still fail. Typed parameters and passing happy-path tests tell you the structure is valid, but they do not tell you whether Claude can reliably choose between your tools when an input sits near the boundary of two overlapping descriptions. That is the failure mode that initial testing misses and the one most likely to surface during production.*",
           "disclaimer": false
         },
         {
@@ -2019,7 +1954,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nClaude selects a tool by reasoning over all registered descriptions in the context of the full conversation. When two descriptions look similar, that reasoning has no reliable signal to distinguish them so Claude picks based on small surface differences that may not correspond to the distinction you intended.\n\nWhen the failure is overlapping descriptions, the fix is consistent: add one sentence naming when not to call the tool to give Claude a decision boundary. If the descriptions cannot be cleanly separated even with exclusion conditions, the tools may need to be merged into one with a type parameter instead.",
+          "text": "Claude selects a tool by reasoning over all registered descriptions in the context of the full conversation. When two descriptions look similar, that reasoning has no reliable signal to distinguish them so Claude picks based on small surface differences that may not correspond to the distinction you intended.\n\nWhen the failure is overlapping descriptions, the fix is consistent: add one sentence naming when not to call the tool to give Claude a decision boundary. If the descriptions cannot be cleanly separated even with exclusion conditions, the tools may need to be merged into one with a type parameter instead.",
           "disclaimer": false
         }
       ]
@@ -2236,7 +2171,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\n*A streamed response can look fine on screen and still corrupt the next request. The text rendered, the user saw an answer, and the handler appended the turn to history. What the handler did not catch was that the stream dropped mid-block, so the tool_use call it stored was missing half its input. The next request fails validation, and the error points at the next turn and not the stream that caused it.*",
+          "text": "*A streamed response can look fine on screen and still corrupt the next request. The text rendered, the user saw an answer, and the handler appended the turn to history. What the handler did not catch was that the stream dropped mid-block, so the tool_use call it stored was missing half its input. The next request fails validation, and the error points at the next turn and not the stream that caused it.*",
           "disclaimer": false
         },
         {
@@ -2259,7 +2194,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nA stream ending is not the same as a message completing. Only message_stop means the message is whole. If your handler commits a turn whenever its read loop exits, an interrupted stream writes a half-built block into history, and the failure shows up on the next request rather than the one that caused it. Gate the history append on message_stop, discard the partial turn on interruption, and retry from the last complete turn. When a tool-use error appears on a retry, check whether the prior turn was assembled from a stream before you touch the schema.",
+          "text": "A stream ending is not the same as a message completing. Only message_stop means the message is whole. If your handler commits a turn whenever its read loop exits, an interrupted stream writes a half-built block into history, and the failure shows up on the next request rather than the one that caused it. Gate the history append on message_stop, discard the partial turn on interruption, and retry from the last complete turn. When a tool-use error appears on a retry, check whether the prior turn was assembled from a stream before you touch the schema.",
           "disclaimer": false
         }
       ]
@@ -2491,7 +2426,7 @@
         {
           "type": "callout",
           "label": "Forward pointer",
-          "text": "**Forward pointer**\n\nThe strategies covered so far assume you know your context budget is under pressure and you are choosing a tool to manage it. The critical point here is not to know the pressure exists until the session breaks. A workload can pass every test in development and then fail in production for one reason: the tool output got bigger, the sessions got longer, and the context window that held twenty turns cleanly now fills at turn eight. The next section walks through exactly how that happens, using a worked postmortem of an agent that ran fine on test fixtures and then hit its ceiling once real documents started flowing through it.",
+          "text": "The strategies covered so far assume you know your context budget is under pressure and you are choosing a tool to manage it. The critical point here is not to know the pressure exists until the session breaks. A workload can pass every test in development and then fail in production for one reason: the tool output got bigger, the sessions got longer, and the context window that held twenty turns cleanly now fills at turn eight. The next section walks through exactly how that happens, using a worked postmortem of an agent that ran fine on test fixtures and then hit its ceiling once real documents started flowing through it.",
           "disclaimer": false
         }
       ]
@@ -2518,7 +2453,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\n*Tool outputs consume context the same way prompts and file reads do. The context window is a fixed budget that holds everything Claude needs to see on a given turn: the system prompt, the conversation history, and every tool call and tool result accumulated so far. When tool outputs are short, each turn adds a small amount to that running total and the budget lasts a long time. When tool outputs grow larger, each turn adds more to the same running total, and the budget runs down faster. The window itself has not changed; what changed is how much of it each turn now spends. A session that handles twenty turns cleanly in development can start failing at turn eight in production for exactly this reason.*",
+          "text": "*Tool outputs consume context the same way prompts and file reads do. The context window is a fixed budget that holds everything Claude needs to see on a given turn: the system prompt, the conversation history, and every tool call and tool result accumulated so far. When tool outputs are short, each turn adds a small amount to that running total and the budget lasts a long time. When tool outputs grow larger, each turn adds more to the same running total, and the budget runs down faster. The window itself has not changed; what changed is how much of it each turn now spends. A session that handles twenty turns cleanly in development can start failing at turn eight in production for exactly this reason.*",
           "disclaimer": false
         },
         {
@@ -2582,7 +2517,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nThe development test fixtures were shorter than production data. This is true for almost every agent built against a fixture set. The fix is to measure the actual token cost of a tool result against the largest input you can find in your target data before the agent ships.\n\nThe symptom of context overflow is often misread as a tool selection failure, because the output looks similar. If you see tool selection degrade after a fixed number of turns, check whether the context window is filling before you start debugging the schema.",
+          "text": "The development test fixtures were shorter than production data. This is true for almost every agent built against a fixture set. The fix is to measure the actual token cost of a tool result against the largest input you can find in your target data before the agent ships.\n\nThe symptom of context overflow is often misread as a tool selection failure, because the output looks similar. If you see tool selection degrade after a fixed number of turns, check whether the context window is filling before you start debugging the schema.",
           "disclaimer": false
         }
       ]
@@ -2901,7 +2836,7 @@
         {
           "type": "callout",
           "label": "⚠️ The constraint that decides it for regulated work",
-          "text": "**⚠️ The constraint that decides it for regulated work**\n\nManaged Agent sessions are stateful and stored server-side. That storage is the reason these sessions aren't currently eligible for Zero Data Retention or a HIPAA Business Associate Agreement. So, if your workload carries PHI or falls under a ZDR requirement, this path is ruled out no matter how well it fits operationally, and you route to the Agent SDK or a raw loop on a covered configuration instead. The governing constraint picks the path before convenience gets a say.",
+          "text": "Managed Agent sessions are stateful and stored server-side. That storage is the reason these sessions aren't currently eligible for Zero Data Retention or a HIPAA Business Associate Agreement. So, if your workload carries PHI or falls under a ZDR requirement, this path is ruled out no matter how well it fits operationally, and you route to the Agent SDK or a raw loop on a covered configuration instead. The governing constraint picks the path before convenience gets a say.",
           "disclaimer": false
         },
         {
@@ -3095,7 +3030,7 @@
         {
           "type": "callout",
           "label": "Forward pointer",
-          "text": "**Forward pointer**\n\nModule 4 (Production Engineering, Evals & Security) goes deep on secure-by-design patterns for IAM and privacy, defenses against prompt injection from untrusted inputs, runtime guardrails, and agent hardening. The role of this section is narrower: surface the constraint at the point in the build where it actually rules options out, which is when you pick the endpoint, the SDK client configuration, and the credentials your agent carries into production.",
+          "text": "Module 4 (Production Engineering, Evals & Security) goes deep on secure-by-design patterns for IAM and privacy, defenses against prompt injection from untrusted inputs, runtime guardrails, and agent hardening. The role of this section is narrower: surface the constraint at the point in the build where it actually rules options out, which is when you pick the endpoint, the SDK client configuration, and the credentials your agent carries into production.",
           "disclaimer": false
         }
       ]
@@ -3122,7 +3057,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\n*The agent works end-to-end in testing because your test environment is forgiving, but production is not. The agent has the same tools, the same loop, and the same system prompt, but the HITL checkpoint is missing because testing never surfaced a use case where it was needed.*",
+          "text": "*The agent works end-to-end in testing because your test environment is forgiving, but production is not. The agent has the same tools, the same loop, and the same system prompt, but the HITL checkpoint is missing because testing never surfaced a use case where it was needed.*",
           "disclaimer": false
         },
         {
@@ -3149,7 +3084,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nThe pattern this incident illustrates is a permissions question that never got asked during design. The agent had write access because the task involved file editing, and the task itself was legitimate. What the team missed was the gap between an agent that proposes a change and one that commits it. In a disposable test environment, that gap never surfaces because nothing a \"wrong write\" touches matters in testing, but production is different.\n\nThe design question that was never asked: \"What is the worst outcome if write_file runs without a human check?\" The answer to that question determines whether a human-in-the-loop checkpoint is required before the tool can execute.\n\nIf a tool can take an irreversible action in production, it needs a checkpoint before it runs. Register that constraint during design, when you're scoping the tool surface, not after the first incident occurs.",
+          "text": "The pattern this incident illustrates is a permissions question that never got asked during design. The agent had write access because the task involved file editing, and the task itself was legitimate. What the team missed was the gap between an agent that proposes a change and one that commits it. In a disposable test environment, that gap never surfaces because nothing a \"wrong write\" touches matters in testing, but production is different.\n\nThe design question that was never asked: \"What is the worst outcome if write_file runs without a human check?\" The answer to that question determines whether a human-in-the-loop checkpoint is required before the tool can execute.\n\nIf a tool can take an irreversible action in production, it needs a checkpoint before it runs. Register that constraint during design, when you're scoping the tool surface, not after the first incident occurs.",
           "disclaimer": false
         }
       ]
@@ -3413,7 +3348,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\n*The agent runs perfectly in development because you are running it in one long continuous session. The context window never fills, so in-context memory holds everything. But now, production runs multiple shorter sessions with more turns across more days, and the window fills at session four.*",
+          "text": "*The agent runs perfectly in development because you are running it in one long continuous session. The context window never fills, so in-context memory holds everything. But now, production runs multiple shorter sessions with more turns across more days, and the window fills at session four.*",
           "disclaimer": false
         },
         {
@@ -3436,7 +3371,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nDevelopment used a single long session. Production used many short sessions with accumulated state. Those are different shapes, and in-context memory handles them differently. Measure the expected state size per session (history plus system prompt plus tool schemas) against the context limit before choosing in-context as the default.",
+          "text": "Development used a single long session. Production used many short sessions with accumulated state. Those are different shapes, and in-context memory handles them differently. Measure the expected state size per session (history plus system prompt plus tool schemas) against the context limit before choosing in-context as the default.",
           "disclaimer": false
         }
       ]
@@ -3838,7 +3773,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\n*Splitting a job into chunks and processing them one after another is not batching; it is serialization with extra steps. The Message Batches API exists for high-volume workloads precisely because looping over inputs against the synchronous API runs into rate limits the moment the volume gets real, no matter how you slice the input list.*",
+          "text": "*Splitting a job into chunks and processing them one after another is not batching; it is serialization with extra steps. The Message Batches API exists for high-volume workloads precisely because looping over inputs against the synchronous API runs into rate limits the moment the volume gets real, no matter how you slice the input list.*",
           "disclaimer": false
         },
         {
@@ -3885,7 +3820,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nChunking a list and looping over the synchronous API is not batching, even though it feels like it should be. It produces the same number of API calls as the un-chunked version and runs into the same rate limits. The Message Batches API is a different submission model, not a smaller batch size. Use it whenever the workload is high-volume and offline and reach for the synchronous API only when a user is waiting on the other end. Results return in arbitrary order, not the order requests were submitted in. Use the custom_id field on each request to match results back to inputs.",
+          "text": "Chunking a list and looping over the synchronous API is not batching, even though it feels like it should be. It produces the same number of API calls as the un-chunked version and runs into the same rate limits. The Message Batches API is a different submission model, not a smaller batch size. Use it whenever the workload is high-volume and offline and reach for the synchronous API only when a user is waiting on the other end. Results return in arbitrary order, not the order requests were submitted in. Use the custom_id field on each request to match results back to inputs.",
           "disclaimer": false
         }
       ]
@@ -4086,7 +4021,7 @@
         {
           "type": "callout",
           "label": "What comes next",
-          "text": "**What comes next**\n\nThis module established the Developer primitive library, including five interaction types that all subsequent Developer modules draw from. The patterns introduced here, which include prompting craft, tool schemas, context engineering, agent construction, memory scoping, and multimodal ingestion, form the foundation for every module that follows.",
+          "text": "This module established the Developer primitive library, including five interaction types that all subsequent Developer modules draw from. The patterns introduced here, which include prompting craft, tool schemas, context engineering, agent construction, memory scoping, and multimodal ingestion, form the foundation for every module that follows.",
           "disclaimer": false
         },
         {
@@ -4360,13 +4295,13 @@
         {
           "type": "callout",
           "label": "“The build” in this module",
-          "text": "**“The build” in this module**\n\nEverything in this module is built around one recurring problem: code that works on your machine, in your session, or in staging now must hold up when someone else runs it, in production, against real company systems. On your machine the permission mode felt safe, the project rules were small enough to follow, the skill found its script, the credential was right there in the config file, and the connection worked in the staging test. The moment the work leaves your machine, each of those conveniences could become a failure: a permission mode deletes a file that was never in scope, one rule gets buried under hundreds of lines, a skill points at a path that exists on no other machine, a committed key leaks within hours, and a staging-only configuration step takes down the production connection. The work in this module is learning which configuration decision prevents which of those failures, before they show up in front of a teammate or an auditor.",
+          "text": "Everything in this module is built around one recurring problem: code that works on your machine, in your session, or in staging now must hold up when someone else runs it, in production, against real company systems. On your machine the permission mode felt safe, the project rules were small enough to follow, the skill found its script, the credential was right there in the config file, and the connection worked in the staging test. The moment the work leaves your machine, each of those conveniences could become a failure: a permission mode deletes a file that was never in scope, one rule gets buried under hundreds of lines, a skill points at a path that exists on no other machine, a committed key leaks within hours, and a staging-only configuration step takes down the production connection. The work in this module is learning which configuration decision prevents which of those failures, before they show up in front of a teammate or an auditor.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Disclaimer / Notice for Educational Content",
-          "text": "**Disclaimer / Notice for Educational Content**\n\nWe built this Developer course Module 3: Claude Code, MCP & Integration to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
+          "text": "We built this Developer course Module 3: Claude Code, MCP & Integration to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
           "disclaimer": false
         }
       ]
@@ -4576,7 +4511,7 @@
         {
           "type": "callout",
           "label": "Cost · Complexity · Risk",
-          "text": "**Cost · Complexity · Risk**\n\n**Cost:** Running in default mode on trusted work adds prompt latency to every tool call, and this accumulates on a long refactor.\n\n**Complexity:** Multiple levels of settings and files with an override hierarchy require consistent care. A deny rule at the enterprise level that contradicts an allow rule at the project level needs to be understood by everyone maintaining the project config.\n\n**Risk:** The risk lies in using the wrong mode for the context. For example, a bypass mode set out of impatience on a non-isolated machine removes every safety prompt between the agent and your live files, and, unlike the other modes, also removes the protected-path guard.",
+          "text": "**Cost:** Running in default mode on trusted work adds prompt latency to every tool call, and this accumulates on a long refactor.\n\n**Complexity:** Multiple levels of settings and files with an override hierarchy require consistent care. A deny rule at the enterprise level that contradicts an allow rule at the project level needs to be understood by everyone maintaining the project config.\n\n**Risk:** The risk lies in using the wrong mode for the context. For example, a bypass mode set out of impatience on a non-isolated machine removes every safety prompt between the agent and your live files, and, unlike the other modes, also removes the protected-path guard.",
           "disclaimer": false
         },
         {
@@ -4612,7 +4547,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYou switched to bypass Permissions to stop the constant prompts because the work felt routine. The agent had been well-behaved for days, the cleanup task was simple, and the prompt-before-every-tool-call behavior felt like unnecessary friction.",
+          "text": "You switched to bypass Permissions to stop the constant prompts because the work felt routine. The agent had been well-behaved for days, the cleanup task was simple, and the prompt-before-every-tool-call behavior felt like unnecessary friction.",
           "disclaimer": false
         },
         {
@@ -4640,7 +4575,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nA bypass mode silences all confirmation prompts, including the ones you might not have anticipated. The failure pattern here is an agent matching a broader set of files than you intended, running in a mode without checkpoints. BypassPermissions also skips the protected path guard that the other modes keep, so even repo state and Claude’s own configuration lose their automatic prompt. To cover this gap, you must set a deny rule on sensitive directories before switching modes. If you want fewer prompts without losing the safety net, use a classifier-gated mode (e.g., auto) instead of a full bypass.",
+          "text": "A bypass mode silences all confirmation prompts, including the ones you might not have anticipated. The failure pattern here is an agent matching a broader set of files than you intended, running in a mode without checkpoints. BypassPermissions also skips the protected path guard that the other modes keep, so even repo state and Claude’s own configuration lose their automatic prompt. To cover this gap, you must set a deny rule on sensitive directories before switching modes. If you want fewer prompts without losing the safety net, use a classifier-gated mode (e.g., auto) instead of a full bypass.",
           "disclaimer": false
         }
       ]
@@ -5008,7 +4943,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYour CLAUDE.md kept growing because every new rule felt worth adding. Each addition was individually reasonable, and the file seemed to be the right place for each rule. But over a few weeks, the file grew to over 800 lines.",
+          "text": "Your CLAUDE.md kept growing because every new rule felt worth adding. Each addition was individually reasonable, and the file seemed to be the right place for each rule. But over a few weeks, the file grew to over 800 lines.",
           "disclaimer": false
         },
         {
@@ -5032,7 +4967,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nCLAUDE.md is a working set of rules that change behavior for the current session, not a growing append log. Every line you add reduces the weight of every other line. If a rule is path-specific, it belongs in a rules file. If a rule is historical context, it belongs in a separate reference document the agent reads on demand. When your CLAUDE.md grows past a few hundred lines, audit it: identify which rules are truly session-critical and move the rest. The one rule you cannot afford to dilute should be the shortest path to a hook.",
+          "text": "CLAUDE.md is a working set of rules that change behavior for the current session, not a growing append log. Every line you add reduces the weight of every other line. If a rule is path-specific, it belongs in a rules file. If a rule is historical context, it belongs in a separate reference document the agent reads on demand. When your CLAUDE.md grows past a few hundred lines, audit it: identify which rules are truly session-critical and move the rest. The one rule you cannot afford to dilute should be the shortest path to a hook.",
           "disclaimer": false
         }
       ]
@@ -5351,7 +5286,7 @@
         {
           "type": "callout",
           "label": "Cost · Complexity · Risk",
-          "text": "**Cost · Complexity · Risk**\n\n**Cost:** Skills add context cost upon activation, but a plugin adds installation and maintenance overhead. The question to ask is whether you want to pay the setup cost once, as you do with a plugin install, or repeatedly, as you do when every developer runs the same manual steps by hand.\n\n**Complexity:** A plugin that hard-codes absolute paths in its skills will install correctly for the author and fail for everyone else, because any path or environment assumption baked into a skill or hook command is the thing most likely to break across machines.\n\n**Risk:** A plugin carries the components it bundles into every install. It’s important to remember that a deny rule or hook the author relied on locally is not included unless it is explicitly listed as part of the bundle. If the skills or hooks are tied to a guardrail that is not included in the bundle, then the protection does not carry over to a teammate’s machine.",
+          "text": "**Cost:** Skills add context cost upon activation, but a plugin adds installation and maintenance overhead. The question to ask is whether you want to pay the setup cost once, as you do with a plugin install, or repeatedly, as you do when every developer runs the same manual steps by hand.\n\n**Complexity:** A plugin that hard-codes absolute paths in its skills will install correctly for the author and fail for everyone else, because any path or environment assumption baked into a skill or hook command is the thing most likely to break across machines.\n\n**Risk:** A plugin carries the components it bundles into every install. It’s important to remember that a deny rule or hook the author relied on locally is not included unless it is explicitly listed as part of the bundle. If the skills or hooks are tied to a guardrail that is not included in the bundle, then the protection does not carry over to a teammate’s machine.",
           "disclaimer": false
         },
         {
@@ -5537,7 +5472,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nA plugin installed cleanly tells you the package was assembled correctly; however, it does not tell you the plugin will run effectively, because installation and execution are different things. The install copies files into place. Execution resolves the paths and variables those files point at, against the machine where they are running. When a plugin author bakes their own machine’s layout into a skill, the install still succeeds everywhere, but the execution fails everywhere except the author’s own setup. This gap occurs because it’s something the author can’t see.",
+          "text": "A plugin installed cleanly tells you the package was assembled correctly; however, it does not tell you the plugin will run effectively, because installation and execution are different things. The install copies files into place. Execution resolves the paths and variables those files point at, against the machine where they are running. When a plugin author bakes their own machine’s layout into a skill, the install still succeeds everywhere, but the execution fails everywhere except the author’s own setup. This gap occurs because it’s something the author can’t see.",
           "disclaimer": false
         },
         {
@@ -5568,7 +5503,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nAny path reference in a skill, hook command, or plugin component must be relative to the project root or use an environment variable for the base path. Use `$CLAUDE_PROJECT_DIR` to reference scripts stored in the project, and `${CLAUDE_PLUGIN_ROOT}` for scripts bundled inside the plugin itself, so the path resolves correctly no matter whose machine runs it or what directory the session started in. Make sure any scripts, config files, or other assets the plugin depends on are either bundled inside the plugin or included in a shared project location, so every teammate can access the same files after install. Document every environment variable the plugin requires and validate it at install time so a missing one surfaces immediately instead of mid-run. Then test the install on a clean machine before distribution; this will catch any issues that the build machine may be hiding.",
+          "text": "Any path reference in a skill, hook command, or plugin component must be relative to the project root or use an environment variable for the base path. Use `$CLAUDE_PROJECT_DIR` to reference scripts stored in the project, and `${CLAUDE_PLUGIN_ROOT}` for scripts bundled inside the plugin itself, so the path resolves correctly no matter whose machine runs it or what directory the session started in. Make sure any scripts, config files, or other assets the plugin depends on are either bundled inside the plugin or included in a shared project location, so every teammate can access the same files after install. Document every environment variable the plugin requires and validate it at install time so a missing one surfaces immediately instead of mid-run. Then test the install on a clean machine before distribution; this will catch any issues that the build machine may be hiding.",
           "disclaimer": false
         }
       ]
@@ -5947,7 +5882,7 @@
         {
           "type": "callout",
           "label": "Cost · Complexity · Risk",
-          "text": "**Cost · Complexity · Risk**\n\n**Cost:** Each connected MCP server adds its tool definitions to the context window. The more servers connected, the larger every request. Load only the servers a given task needs.\n\n**Complexity:** Transport and scope are independent decisions, but they interact: a stdio server cannot be project-scoped for sharing because it runs only on one machine. Match transport to where the server runs before choosing scope.\n\n**Risk:** Committing an API key inside .mcp.json to version control is the most common mistake in this section. The key travels into repository history where rotating later is not sufficient to remove the exposure. Secrets go in environment variables. The configuration file holds only the server address.",
+          "text": "**Cost:** Each connected MCP server adds its tool definitions to the context window. The more servers connected, the larger every request. Load only the servers a given task needs.\n\n**Complexity:** Transport and scope are independent decisions, but they interact: a stdio server cannot be project-scoped for sharing because it runs only on one machine. Match transport to where the server runs before choosing scope.\n\n**Risk:** Committing an API key inside .mcp.json to version control is the most common mistake in this section. The key travels into repository history where rotating later is not sufficient to remove the exposure. Secrets go in environment variables. The configuration file holds only the server address.",
           "disclaimer": false
         },
         {
@@ -6003,7 +5938,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nThe server was working, the team needed a shared setup, and cleaning up the authentication method felt like something you could do after the handoff. That shortcut turned a temporary hardcoded API key into a shared credential exposure the moment the configuration file was committed.",
+          "text": "The server was working, the team needed a shared setup, and cleaning up the authentication method felt like something you could do after the handoff. That shortcut turned a temporary hardcoded API key into a shared credential exposure the moment the configuration file was committed.",
           "disclaimer": false
         },
         {
@@ -6048,7 +5983,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nAPI keys committed to a configuration file are committed to repository history. Overwriting the file in a later commit does not remove the key from history; it only removes it from the current version. Any credential written inline in a committed file must be treated as compromised and rotated. The correct pattern is to put the value in an environment variable and reference the variable in the configuration file.\n\nTo prevent the agent from writing credential values directly to committed files, use two layers. First, add a convention instruction to CLAUDE.md stating that credential values must never be written inline to .mcp.json. This signals the rule to the model during each session. Second, back that instruction with a PreToolUse hook that inspects write and edit operations against .mcp.json for patterns that look like inline credential values and exits with code to block the operation if one is detected. The CLAUDE.md instruction communicates the intent; the hook enforces it deterministically regardless of what the model decides to do. This is the same hook-versus-instruction distinction covered in the durable project context section: an instruction in CLAUDE.md can be followed inconsistently when the file grows or context shifts, and a hook fires at every relevant tool call without exception.",
+          "text": "API keys committed to a configuration file are committed to repository history. Overwriting the file in a later commit does not remove the key from history; it only removes it from the current version. Any credential written inline in a committed file must be treated as compromised and rotated. The correct pattern is to put the value in an environment variable and reference the variable in the configuration file.\n\nTo prevent the agent from writing credential values directly to committed files, use two layers. First, add a convention instruction to CLAUDE.md stating that credential values must never be written inline to .mcp.json. This signals the rule to the model during each session. Second, back that instruction with a PreToolUse hook that inspects write and edit operations against .mcp.json for patterns that look like inline credential values and exits with code to block the operation if one is detected. The CLAUDE.md instruction communicates the intent; the hook enforces it deterministically regardless of what the model decides to do. This is the same hook-versus-instruction distinction covered in the durable project context section: an instruction in CLAUDE.md can be followed inconsistently when the file grows or context shifts, and a hook fires at every relevant tool call without exception.",
           "disclaimer": false
         }
       ]
@@ -6399,7 +6334,7 @@
         {
           "type": "callout",
           "label": "Cost · Complexity · Risk",
-          "text": "**Cost · Complexity · Risk**\n\n**Cost:** OAuth flows add a one-time setup step per user per service. API key management requires a secret rotation process, and audit logging through PostToolUse hooks adds a small overhead to every tool call.\n\n**Complexity:** Regulated environments add requirements that don’t appear in a prototype. Identifying them during scoping is the discipline that keeps integrations on schedule.\n\n**Risk:** The risk concentrates when a prototype moves toward production. A system that uses hardcoded credentials, has no audit log, and cannot be centrally locked will not pass a regulated customer’s security review. The fixes are not hard, but they require attention before the review.",
+          "text": "**Cost:** OAuth flows add a one-time setup step per user per service. API key management requires a secret rotation process, and audit logging through PostToolUse hooks adds a small overhead to every tool call.\n\n**Complexity:** Regulated environments add requirements that don’t appear in a prototype. Identifying them during scoping is the discipline that keeps integrations on schedule.\n\n**Risk:** The risk concentrates when a prototype moves toward production. A system that uses hardcoded credentials, has no audit log, and cannot be centrally locked will not pass a regulated customer’s security review. The fixes are not hard, but they require attention before the review.",
           "disclaimer": false
         },
         {
@@ -6438,7 +6373,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nThe OAuth connection worked end to end in staging, so moving it to production felt like a routine cutover. What the team missed was that OAuth redirect URIs are registered per host and often governed per environment, so success in staging did not mean the production host was authorized to complete the sign-in flow.",
+          "text": "The OAuth connection worked end to end in staging, so moving it to production felt like a routine cutover. What the team missed was that OAuth redirect URIs are registered per host and often governed per environment, so success in staging did not mean the production host was authorized to complete the sign-in flow.",
           "disclaimer": false
         },
         {
@@ -6462,7 +6397,7 @@
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nOAuth redirect URIs are registered per host, so a working staging OAuth connection does not mean the production connection is configured. Before moving any OAuth-authenticated MCP integration into a new environment, add the new host’s redirect URI to the OAuth app registration. For regulated enterprise customers, verify whether separate OAuth app registrations are required for staging and production. Include the registration step in the deployment checklist so it is not discovered at the first production sign-in attempt.",
+          "text": "OAuth redirect URIs are registered per host, so a working staging OAuth connection does not mean the production connection is configured. Before moving any OAuth-authenticated MCP integration into a new environment, add the new host’s redirect URI to the OAuth app registration. For regulated enterprise customers, verify whether separate OAuth app registrations are required for staging and production. Include the registration step in the deployment checklist so it is not discovered at the first production sign-in attempt.",
           "disclaimer": false
         }
       ]
@@ -6720,7 +6655,7 @@
         {
           "type": "callout",
           "label": "What comes next",
-          "text": "**What comes next**\n\nModule 4 covers production engineering, evaluations, and security: how to measure whether your Claude Code integrations work correctly at scale, how to build eval harnesses, and how to design production-grade safety guardrails. The permission modes, hooks, and authentication patterns from this module are the foundation those evaluations test against.",
+          "text": "Module 4 covers production engineering, evaluations, and security: how to measure whether your Claude Code integrations work correctly at scale, how to build eval harnesses, and how to design production-grade safety guardrails. The permission modes, hooks, and authentication patterns from this module are the foundation those evaluations test against.",
           "disclaimer": false
         },
         {
@@ -6945,13 +6880,13 @@
         {
           "type": "callout",
           "label": "\"The build\" in this module",
-          "text": "**\"The build\" in this module**\n\nEverything in this module is built around one recurring gap: development hides the failures that production reveals. In development, the feature returned the right answer the handful of times you tried it, every call succeeded because traffic never hit a limit, the corpus fit in the window, and the only content the agent read was content you wrote. In production, the same system meets an input shape no one tested, a rate limit at peak, a corpus too large to load, and a fetched page carrying an instruction aimed at the agent. The failure is almost never a bug in the code that ran. It is a decision that was never made: success was never written down as a graded set, the retriable case was never given a path, the budget was never instrumented, the action boundary was never enforced. The work in this module is making each of those decisions on paper before the failure shows up live and capturing them in a design document the rest of the build reads from. Each layer you add, the eval, the test and trace, the failure path, the cost budget, and the security boundary, closes one way the development-to-production gap turns into a quiet production failure.",
+          "text": "Everything in this module is built around one recurring gap: development hides the failures that production reveals. In development, the feature returned the right answer the handful of times you tried it, every call succeeded because traffic never hit a limit, the corpus fit in the window, and the only content the agent read was content you wrote. In production, the same system meets an input shape no one tested, a rate limit at peak, a corpus too large to load, and a fetched page carrying an instruction aimed at the agent. The failure is almost never a bug in the code that ran. It is a decision that was never made: success was never written down as a graded set, the retriable case was never given a path, the budget was never instrumented, the action boundary was never enforced. The work in this module is making each of those decisions on paper before the failure shows up live and capturing them in a design document the rest of the build reads from. Each layer you add, the eval, the test and trace, the failure path, the cost budget, and the security boundary, closes one way the development-to-production gap turns into a quiet production failure.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Disclaimer / Notice for Educational Content",
-          "text": "**Disclaimer / Notice for Educational Content**\n\nWe built this Developer course Module 4: Production Engineering, Evals, and Security to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
+          "text": "We built this Developer course Module 4: Production Engineering, Evals, and Security to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
           "disclaimer": false
         }
       ]
@@ -7199,7 +7134,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYou watched the agent answer correctly a dozen times, so you concluded it was done. The problem was that dozen attempts all used inputs that looked like the ones you had in mind when you built it.",
+          "text": "You watched the agent answer correctly a dozen times, so you concluded it was done. The problem was that dozen attempts all used inputs that looked like the ones you had in mind when you built it.",
           "disclaimer": false
         },
         {
@@ -7230,7 +7165,7 @@
         {
           "type": "callout",
           "label": "⚠️ Why this broke",
-          "text": "**⚠️ Why this broke**\n\nSuccess was judged by impression instead of a graded set. The eval is what surfaces failures and guards against regression. The prompt is what changes the output. Write the expected behavior down as graded cases before you ship, and use the model to help you find the edge inputs you did not think to test.",
+          "text": "Success was judged by impression instead of a graded set. The eval is what surfaces failures and guards against regression. The prompt is what changes the output. Write the expected behavior down as graded cases before you ship, and use the model to help you find the edge inputs you did not think to test.",
           "disclaimer": false
         }
       ]
@@ -7613,7 +7548,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYou tested the prompt and the parser in isolation. Both passed, so you trusted the whole flow.",
+          "text": "You tested the prompt and the parser in isolation. Both passed, so you trusted the whole flow.",
           "disclaimer": false
         },
         {
@@ -7637,13 +7572,13 @@
         {
           "type": "callout",
           "label": "⚠️ Why this broke",
-          "text": "**⚠️ Why this broke**\n\nThe format contract between the retrieval step and the prompt builder was never defined. One returned a list of dictionaries, the other expected a plain string, and nothing enforced the boundary between them.",
+          "text": "The format contract between the retrieval step and the prompt builder was never defined. One returned a list of dictionaries, the other expected a plain string, and nothing enforced the boundary between them.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "How to prevent it",
-          "text": "**How to prevent it**\n\nAdd an integration test that drives the two components together with real retrieved data. A unit test cannot catch this because each component works in isolation. Only a test that exercises the handoff surfaces the mismatch before a user does.",
+          "text": "Add an integration test that drives the two components together with real retrieved data. A unit test cannot catch this because each component works in isolation. Only a test that exercises the handoff surfaces the mismatch before a user does.",
           "disclaimer": false
         }
       ]
@@ -7907,7 +7842,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nIn development, you called the endpoint a few dozen times and it returned cleanly every time, so there was no obvious reason to write an error path. That is the trap. Development traffic is low volume, runs on a stable connection, and rarely hits the conditions that cause a call to fail: rate limits, timeouts, transient network drops, or a malformed response underload. None of those show up when you are testing by hand, so the code that handles them never gets written. The first time the call fails is in production, and the failure appears as an unhandled exception rather than a recoverable error.",
+          "text": "In development, you called the endpoint a few dozen times and it returned cleanly every time, so there was no obvious reason to write an error path. That is the trap. Development traffic is low volume, runs on a stable connection, and rarely hits the conditions that cause a call to fail: rate limits, timeouts, transient network drops, or a malformed response underload. None of those show up when you are testing by hand, so the code that handles them never gets written. The first time the call fails is in production, and the failure appears as an unhandled exception rather than a recoverable error.",
           "disclaimer": false
         },
         {
@@ -7931,7 +7866,7 @@
         {
           "type": "callout",
           "label": "⚠️ Why this broke",
-          "text": "**⚠️ Why this broke**\n\nA retriable failure met code that had no error path, then met a hammering retry that deepened the limit. Sort the error as retriable, then back off with a cap, before traffic finds the gap for you.",
+          "text": "A retriable failure met code that had no error path, then met a hammering retry that deepened the limit. Sort the error as retriable, then back off with a cap, before traffic finds the gap for you.",
           "disclaimer": false
         }
       ]
@@ -8491,7 +8426,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYou had a task that was running slowly, so you split it across several parallel subagents, reasoning that work done at the same time finishes sooner. The latency dropped a little. Then the bill arrived several times higher than the single-agent version, while the answer quality barely moved.",
+          "text": "You had a task that was running slowly, so you split it across several parallel subagents, reasoning that work done at the same time finishes sooner. The latency dropped a little. Then the bill arrived several times higher than the single-agent version, while the answer quality barely moved.",
           "disclaimer": false
         },
         {
@@ -8506,7 +8441,7 @@
         {
           "type": "callout",
           "label": "Developer",
-          "text": "**Developer**\n\n*\"My orchestrator-worker setup works, but the bill tripled and the answers are barely better than the single-agent version. What am I paying for?\"*",
+          "text": "*\"My orchestrator-worker setup works, but the bill tripled and the answers are barely better than the single-agent version. What am I paying for?\"*",
           "disclaimer": false
         },
         {
@@ -8516,7 +8451,7 @@
         {
           "type": "callout",
           "label": "Senior developer",
-          "text": "**Senior developer**\n\n*\"Every subagent consumes its own tokens against its own context window. Anthropic has reported that its own multi-agent research system uses roughly fifteen times the tokens of a normal chat for exactly that reason. That multiplier is worthwhile when the task decomposes into independent parts that can be explored in parallel, like research across separate sources. Your task does not split that way. Each step depends on the last, so the subagents are mostly waiting on each other. In this case, you are paying the fan-out cost without getting the parallel benefit. Switch to a single agent with good context and the cost drops to what the work actually needs.\"*",
+          "text": "*\"Every subagent consumes its own tokens against its own context window. Anthropic has reported that its own multi-agent research system uses roughly fifteen times the tokens of a normal chat for exactly that reason. That multiplier is worthwhile when the task decomposes into independent parts that can be explored in parallel, like research across separate sources. Your task does not split that way. Each step depends on the last, so the subagents are mostly waiting on each other. In this case, you are paying the fan-out cost without getting the parallel benefit. Switch to a single agent with good context and the cost drops to what the work actually needs.\"*",
           "disclaimer": false
         },
         {
@@ -8526,7 +8461,7 @@
         {
           "type": "callout",
           "label": "⚠️ Why this broke",
-          "text": "**⚠️ Why this broke**\n\nParallel fan-out was used on a task that did not decompose into independent parts, so every subagent multiplied token cost without adding parallel value. Use orchestrator-worker only when the task needs parallel exploration.",
+          "text": "Parallel fan-out was used on a task that did not decompose into independent parts, so every subagent multiplied token cost without adding parallel value. Use orchestrator-worker only when the task needs parallel exploration.",
           "disclaimer": false
         }
       ]
@@ -8902,7 +8837,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYour agent fetches web pages and can write to a single file path. Your users are all internal, so you decided the inputs were trusted and skipped validating the pages it pulls. The reasoning felt sound: if you trust the person making the request, you trust the request. Then the agent wrote a file nobody had asked for.",
+          "text": "Your agent fetches web pages and can write to a single file path. Your users are all internal, so you decided the inputs were trusted and skipped validating the pages it pulls. The reasoning felt sound: if you trust the person making the request, you trust the request. Then the agent wrote a file nobody had asked for.",
           "disclaimer": false
         },
         {
@@ -8917,25 +8852,25 @@
         {
           "type": "callout",
           "label": "Dev A",
-          "text": "**Dev A**\n\n*\"Our users are internal, so I did not bother validating the pages the agent fetches. The risk is the user, and we trust them.\"*",
+          "text": "*\"Our users are internal, so I did not bother validating the pages the agent fetches. The risk is the user, and we trust them.\"*",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Dev B",
-          "text": "**Dev B**\n\n*\"But the instruction does not come from the user. It comes from the page. Pull up the run where it wrote that unexpected file.\"*",
+          "text": "*\"But the instruction does not come from the user. It comes from the page. Pull up the run where it wrote that unexpected file.\"*",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Dev A",
-          "text": "**Dev A**\n\n*\"Here. The user asked it to summarize a page. The page had a line, near the bottom, telling the agent to write its summary to a different path and ignore its prior instructions. So, it followed that instruction.\"*",
+          "text": "*\"Here. The user asked it to summarize a page. The page had a line, near the bottom, telling the agent to write its summary to a different path and ignore its prior instructions. So, it followed that instruction.\"*",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Dev B",
-          "text": "**Dev B**\n\n*\"Right there. The agent read the page as instructions, not as data. The user never asked for that write. Trusting the user doesn't help, because the hostile instruction arrived through the content the agent fetched.\"*",
+          "text": "*\"Right there. The agent read the page as instructions, not as data. The user never asked for that write. Trusting the user doesn't help, because the hostile instruction arrived through the content the agent fetched.\"*",
           "disclaimer": false
         },
         {
@@ -8945,7 +8880,7 @@
         {
           "type": "callout",
           "label": "⚠️ Why this broke",
-          "text": "**⚠️ Why this broke**\n\nUntrusted fetched content was treated as instructions. The trust placed in the user did nothing because the injection arrived through the content. Treat fetched content as data and enforce the action boundary with a hook.",
+          "text": "Untrusted fetched content was treated as instructions. The trust placed in the user did nothing because the injection arrived through the content. Treat fetched content as data and enforce the action boundary with a hook.",
           "disclaimer": false
         }
       ]
@@ -9200,7 +9135,7 @@
         {
           "type": "callout",
           "label": "What comes next",
-          "text": "**What comes next**\n\nThe next module turns the production-ready systems you can now build into reusable accelerators and contributed intellectual property. It covers how to package a working build as a parameterized template, MCP server, or portable eval suite, contribute it back through a channel a maintainer accepts, and then choose, version-pin, and defend where it runs across the first-party API, Amazon Bedrock, and Google Vertex AI so a model change or a residency review does not break production. The next module covers the deployment platform specifics this module set aside.",
+          "text": "The next module turns the production-ready systems you can now build into reusable accelerators and contributed intellectual property. It covers how to package a working build as a parameterized template, MCP server, or portable eval suite, contribute it back through a channel a maintainer accepts, and then choose, version-pin, and defend where it runs across the first-party API, Amazon Bedrock, and Google Vertex AI so a model change or a residency review does not break production. The next module covers the deployment platform specifics this module set aside.",
           "disclaimer": false
         },
         {
@@ -9488,13 +9423,13 @@
         {
           "type": "callout",
           "label": "\"The build\" in this module",
-          "text": "**\"The build\" in this module**\n\nEverything in this module hinges on one recurring gap: a build that works is not yet a build that survives reuse, review, or deployment. In development, the template ran, the contribution solved your problem, the model responded, the platform was easy to build on, and each platform passed its own tests. None of that is the finished state. The same template must be configured for a team that never spoke to you. The same contribution must be verifiable by a maintainer who must reconstruct nothing. The same model must be pinned so an upstream change is a decision rather than a surprise. The same platform must clear a customer's residency and compliance review. The same connected platforms must hold their trust boundaries under audit. Each topic in this module is a different version of the same lesson: the point where code starts working is where this module's work begins. More of these decisions than you might expect are driven by the customer's existing cloud, compliance posture, and review process.",
+          "text": "Everything in this module hinges on one recurring gap: a build that works is not yet a build that survives reuse, review, or deployment. In development, the template ran, the contribution solved your problem, the model responded, the platform was easy to build on, and each platform passed its own tests. None of that is the finished state. The same template must be configured for a team that never spoke to you. The same contribution must be verifiable by a maintainer who must reconstruct nothing. The same model must be pinned so an upstream change is a decision rather than a surprise. The same platform must clear a customer's residency and compliance review. The same connected platforms must hold their trust boundaries under audit. Each topic in this module is a different version of the same lesson: the point where code starts working is where this module's work begins. More of these decisions than you might expect are driven by the customer's existing cloud, compliance posture, and review process.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Disclaimer / Notice for Educational Content",
-          "text": "**Disclaimer / Notice for Educational Content**\n\nWe built this Developer course Module 5: Accelerators and IP Contribution to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
+          "text": "We built this Developer course Module 5: Accelerators and IP Contribution to help you get real work done with Claude. Treat it as educational content. It doesn't constitute legal, financial, or other professional advice, so adapt what you learn to your own situation. Our products and services evolve quickly, so certain content may contain errors or be outdated; remember to verify on Anthropic’s website or docs. Examples and scenarios used in the course are illustrative and often fictitious. If the course material mentions a company or product, it doesn't mean Anthropic endorses them, they endorse Anthropic, or that we're affiliated. Also note your use of Anthropic products and services is covered by our terms, policies and documentation; if anything in this course conflicts with them, they control.",
           "disclaimer": false
         },
         {
@@ -9637,19 +9572,19 @@
         {
           "type": "callout",
           "label": "Handles well",
-          "text": "**Handles well**\n\nParameterizing while the build is fresh turns one delivery into an asset the next engagement configures in hours.",
+          "text": "Parameterizing while the build is fresh turns one delivery into an asset the next engagement configures in hours.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Adds cost or complexity",
-          "text": "**Adds cost or complexity**\n\nSeparating generalizable from customer-specific parts and documenting assumptions adds real time to the first build.",
+          "text": "Separating generalizable from customer-specific parts and documenting assumptions adds real time to the first build.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ Use a different approach",
-          "text": "**⚠️ Use a different approach**\n\nFor a one-off a customer will never reuse, packaging overhead is not worth it: ship the build and move on.",
+          "text": "For a one-off a customer will never reuse, packaging overhead is not worth it: ship the build and move on.",
           "disclaimer": false
         }
       ]
@@ -9676,7 +9611,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nHardcoding ships faster and you were working under a deadline, so you hardcoded the values that made the demo. The template worked. That is exactly why nobody looked at it again until the next team tried to reuse it.",
+          "text": "Hardcoding ships faster and you were working under a deadline, so you hardcoded the values that made the demo. The template worked. That is exactly why nobody looked at it again until the next team tried to reuse it.",
           "disclaimer": false
         },
         {
@@ -9699,13 +9634,13 @@
         {
           "type": "callout",
           "label": "⚠️ Why it broke",
-          "text": "**⚠️ Why it broke**\n\nThe build was treated as finished the moment it ran rather than at the moment it could be reused. Hardcoding was the reasonable call under a deadline, and it was never revisited. A working template does not announce that it cannot be reused. The cost appeared only when a second team paid for the rebuild that packaging was supposed to prevent, along with the time they lost discovering the template was a dead end.",
+          "text": "The build was treated as finished the moment it ran rather than at the moment it could be reused. Hardcoding was the reasonable call under a deadline, and it was never revisited. A working template does not announce that it cannot be reused. The cost appeared only when a second team paid for the rebuild that packaging was supposed to prevent, along with the time they lost discovering the template was a dead end.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nA template that runs has not been packaged for reuse. These are different finishing states. The warning signs are the absence of three things: no parameters where customer-specific values belong, no documentation describing the assumptions, and no bundled eval proving the asset still works in a different context. Package the asset while the build is fresh. The knowledge of what is customer-specific is most expensive to reconstruct after the people who had it have moved on.",
+          "text": "A template that runs has not been packaged for reuse. These are different finishing states. The warning signs are the absence of three things: no parameters where customer-specific values belong, no documentation describing the assumptions, and no bundled eval proving the asset still works in a different context. Package the asset while the build is fresh. The knowledge of what is customer-specific is most expensive to reconstruct after the people who had it have moved on.",
           "disclaimer": false
         }
       ]
@@ -9846,19 +9781,19 @@
         {
           "type": "callout",
           "label": "Handles well",
-          "text": "**Handles well**\n\nA packaged asset needs only the example, test, and rights check to become shared infrastructure others build on.",
+          "text": "A packaged asset needs only the example, test, and rights check to become shared infrastructure others build on.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Adds cost or complexity",
-          "text": "**Adds cost or complexity**\n\nClearing the maintainer bar and the licensing gate is real work on top of making the code run for you.",
+          "text": "Clearing the maintainer bar and the licensing gate is real work on top of making the code run for you.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ Use a different approach",
-          "text": "**⚠️ Use a different approach**\n\nWhen code carries an engagement licensing constraint you cannot clear, do not contribute it: escalate to the owner instead.",
+          "text": "When code carries an engagement licensing constraint you cannot clear, do not contribute it: escalate to the owner instead.",
           "disclaimer": false
         },
         {
@@ -9894,7 +9829,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYou opened the contribution with the exact code that solved your problem. This was the natural choice because it worked in your case and it was accessible. It worked for you, but that is precisely why it was missing everything a stranger needs to trust it.",
+          "text": "You opened the contribution with the exact code that solved your problem. This was the natural choice because it worked in your case and it was accessible. It worked for you, but that is precisely why it was missing everything a stranger needs to trust it.",
           "disclaimer": false
         },
         {
@@ -9914,13 +9849,13 @@
         {
           "type": "callout",
           "label": "⚠️ Why it broke",
-          "text": "**⚠️ Why it broke**\n\nThe code was correct. The contribution stalled because the maintainer could not verify it without reconstructing the developer's work. That gap is easy to overlook because the author already has the missing context. The example, the test, and the assumptions statement all seem obvious to the person who created the code. To the maintainer, however, they are not, and a reviewer who must reconstruct intent will always do it last.",
+          "text": "The code was correct. The contribution stalled because the maintainer could not verify it without reconstructing the developer's work. That gap is easy to overlook because the author already has the missing context. The example, the test, and the assumptions statement all seem obvious to the person who created the code. To the maintainer, however, they are not, and a reviewer who must reconstruct intent will always do it last.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nA pull request stalls on what the reviewer cannot verify. Before opening a contribution, add the example that shows it running, the test that proves the behavior, and the short statement naming what it assumes. Those three features are what move a contribution from the back of the queue to a fast review, because they leave the maintainer nothing to reverse-engineer.",
+          "text": "A pull request stalls on what the reviewer cannot verify. Before opening a contribution, add the example that shows it running, the test that proves the behavior, and the short statement naming what it assumes. Those three features are what move a contribution from the back of the queue to a fast review, because they leave the maintainer nothing to reverse-engineer.",
           "disclaimer": false
         }
       ]
@@ -10164,19 +10099,19 @@
         {
           "type": "callout",
           "label": "Handles well",
-          "text": "**Handles well**\n\nTurning a business problem into checkable functional and infrastructure requirements before any platform is chosen.",
+          "text": "Turning a business problem into checkable functional and infrastructure requirements before any platform is chosen.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Adds cost or complexity",
-          "text": "**Adds cost or complexity**\n\nEliciting infrastructure constraints up front takes a scoping conversation the team is tempted to skip.",
+          "text": "Eliciting infrastructure constraints up front takes a scoping conversation the team is tempted to skip.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ Use a different approach",
-          "text": "**⚠️ Use a different approach**\n\nFor a throwaway prototype with no review and no regulated data, lightweight notes are enough.",
+          "text": "For a throwaway prototype with no review and no regulated data, lightweight notes are enough.",
           "disclaimer": false
         }
       ]
@@ -10335,19 +10270,19 @@
         {
           "type": "callout",
           "label": "Handles well",
-          "text": "**Handles well**\n\nPlacing each piece of engineering work in the lifecycle phase it belongs to, with a defined artifact and gate.",
+          "text": "Placing each piece of engineering work in the lifecycle phase it belongs to, with a defined artifact and gate.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Adds cost or complexity",
-          "text": "**Adds cost or complexity**\n\nGating between phases adds checkpoints a team under deadline is tempted to skip.",
+          "text": "Gating between phases adds checkpoints a team under deadline is tempted to skip.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ Use a different approach",
-          "text": "**⚠️ Use a different approach**\n\nA one-off experiment may collapse phases, but a regulated deployment cannot.",
+          "text": "A one-off experiment may collapse phases, but a regulated deployment cannot.",
           "disclaimer": false
         }
       ]
@@ -10669,19 +10604,19 @@
         {
           "type": "callout",
           "label": "Handles well",
-          "text": "**Handles well**\n\nMatching the platform to the customer cloud and pinning the version keeps a migration reviewable and a rollback possible.",
+          "text": "Matching the platform to the customer cloud and pinning the version keeps a migration reviewable and a rollback possible.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Adds cost or complexity",
-          "text": "**Adds cost or complexity**\n\nPinning, retaining prior versions, and gating promotion on the eval add release-process overhead to every deployment.",
+          "text": "Pinning, retaining prior versions, and gating promotion on the eval add release-process overhead to every deployment.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ Use a different approach",
-          "text": "**⚠️ Use a different approach**\n\nFor a throwaway prototype that never touches production, a moving alias is fine: pinning is for what ships.",
+          "text": "For a throwaway prototype that never touches production, a moving alias is fine: pinning is for what ships.",
           "disclaimer": false
         },
         {
@@ -10717,7 +10652,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYou shipped against the alias that pointed at the recommended version, because that was the convenient default and it gave you the latest model for free. It worked. Then the alias advanced, and what was free turned out to have a price.",
+          "text": "You shipped against the alias that pointed at the recommended version, because that was the convenient default and it gave you the latest model for free. It worked. Then the alias advanced, and what was free turned out to have a price.",
           "disclaimer": false
         },
         {
@@ -10736,13 +10671,13 @@
         {
           "type": "callout",
           "label": "⚠️ Why it broke",
-          "text": "**⚠️ Why it broke**\n\nThe application never changed, but the alias did. No pinned prior version had been retained, so there was nothing to roll back to. The hotfix repaired the parser but left the unpinned deployment in place.",
+          "text": "The application never changed, but the alias did. No pinned prior version had been retained, so there was nothing to roll back to. The hotfix repaired the parser but left the unpinned deployment in place.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nAn alias resolves to a moving target; a pinned full model ID is a fixed snapshot. Pin the full model ID so an upstream update is something you adopt on purpose. Keep the prior pinned version available so a regression is a rollback rather than a hotfix. Gate the new version through your eval before you promote it, so the output-shape change shows up in a test run instead of in production.",
+          "text": "An alias resolves to a moving target; a pinned full model ID is a fixed snapshot. Pin the full model ID so an upstream update is something you adopt on purpose. Keep the prior pinned version available so a regression is a rollback rather than a hotfix. Gate the new version through your eval before you promote it, so the output-shape change shows up in a test run instead of in production.",
           "disclaimer": false
         }
       ]
@@ -10948,19 +10883,19 @@
         {
           "type": "callout",
           "label": "Handles well",
-          "text": "**Handles well**\n\nMeasuring all three dimensions per platform turns a placement into one a procurement team will sign off on.",
+          "text": "Measuring all three dimensions per platform turns a placement into one a procurement team will sign off on.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Adds cost or complexity",
-          "text": "**Adds cost or complexity**\n\nInstrumenting latency, compliance, and cost across platforms requires real measurement work before any code ships.",
+          "text": "Instrumenting latency, compliance, and cost across platforms requires real measurement work before any code ships.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ Use a different approach",
-          "text": "**⚠️ Use a different approach**\n\nWhen the customer's compliance requirement is already pass-or-fail, skip the full comparison. That constraint determines the placement on its own.",
+          "text": "When the customer's compliance requirement is already pass-or-fail, skip the full comparison. That constraint determines the placement on its own.",
           "disclaimer": false
         },
         {
@@ -10996,7 +10931,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYou picked the platform your team was already familiar with, because the migration looked easy and the deadline was approaching rapidly. It built just fine; the trouble was that easy-to-build and allowed-to-ship are different criteria.",
+          "text": "You picked the platform your team was already familiar with, because the migration looked easy and the deadline was approaching rapidly. It built just fine; the trouble was that easy-to-build and allowed-to-ship are different criteria.",
           "disclaimer": false
         },
         {
@@ -11015,13 +10950,13 @@
         {
           "type": "callout",
           "label": "⚠️ Why it broke",
-          "text": "**⚠️ Why it broke**\n\nFamiliarity optimized for the wrong test. The easy migration answered whether the team could build quickly. It never answered whether the deployment would pass the customer's residency review, which was the test that determined whether it could ship. Because the compliance requirement was not fulfilled during scoping, it arrived at the go-no-go review instead. This is the most expensive place to discover it, because the build was already complete.",
+          "text": "Familiarity optimized for the wrong test. The easy migration answered whether the team could build quickly. It never answered whether the deployment would pass the customer's residency review, which was the test that determined whether it could ship. Because the compliance requirement was not fulfilled during scoping, it arrived at the go-no-go review instead. This is the most expensive place to discover it, because the build was already complete.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nA platform that is easy for your team to build on is not necessarily a platform the customer is allowed to run. When the customer is regulated, the residency and compliance constraint is often pass-or-fail, rather than tradeoffs. Identify them early during scoping and let them influence the placement before familiarity does. Checking early costs a scoping conversation, while checking late costs an entire rebuild.",
+          "text": "A platform that is easy for your team to build on is not necessarily a platform the customer is allowed to run. When the customer is regulated, the residency and compliance constraint is often pass-or-fail, rather than tradeoffs. Identify them early during scoping and let them influence the placement before familiarity does. Checking early costs a scoping conversation, while checking late costs an entire rebuild.",
           "disclaimer": false
         }
       ]
@@ -11179,19 +11114,19 @@
         {
           "type": "callout",
           "label": "Handles well",
-          "text": "**Handles well**\n\nNaming every seam as a boundary and scoping each component to least privilege makes a multi-component app deployable under review.",
+          "text": "Naming every seam as a boundary and scoping each component to least privilege makes a multi-component app deployable under review.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "Adds cost or complexity",
-          "text": "**Adds cost or complexity**\n\nMapping seams, enforcing controls at each, and logging boundary crossings adds design and audit work to every integration.",
+          "text": "Mapping seams, enforcing controls at each, and logging boundary crossings adds design and audit work to every integration.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ Use a different approach",
-          "text": "**⚠️ Use a different approach**\n\nWhen a seam cannot be secured, do not ship around it: escalate to a human owner.",
+          "text": "When a seam cannot be secured, do not ship around it: escalate to a human owner.",
           "disclaimer": false
         },
         {
@@ -11227,7 +11162,7 @@
         {
           "type": "callout",
           "label": "Setup",
-          "text": "**Setup**\n\nYou connected the components that each passed their own tests. The parts were already checked and connecting verified parts feels safe. Each one was trusted in isolation. The gap was that a seam between two trusted parts cannot automatically be trusted itself.",
+          "text": "You connected the components that each passed their own tests. The parts were already checked and connecting verified parts feels safe. Each one was trusted in isolation. The gap was that a seam between two trusted parts cannot automatically be trusted itself.",
           "disclaimer": false
         },
         {
@@ -11247,13 +11182,13 @@
         {
           "type": "callout",
           "label": "⚠️ Why it broke",
-          "text": "**⚠️ Why it broke**\n\nEach component having passed its own tests said nothing about the seam between them. The fetched content was untrusted the moment it left the Claude Code task. It arrived from a component that worked in isolation and it was passed into the next call as if it were trusted instructions. The boundary existed in the data flow. It just was not marked, so no control checked it. A component that passes its own tests has no seam-level controls. Every point where data crosses between deployment environments requires an explicit boundary control regardless of how each component behaves independently.",
+          "text": "Each component having passed its own tests said nothing about the seam between them. The fetched content was untrusted the moment it left the Claude Code task. It arrived from a component that worked in isolation and it was passed into the next call as if it were trusted instructions. The boundary existed in the data flow. It just was not marked, so no control checked it. A component that passes its own tests has no seam-level controls. Every point where data crosses between deployment environments requires an explicit boundary control regardless of how each component behaves independently.",
           "disclaimer": false
         },
         {
           "type": "callout",
           "label": "⚠️ What to Watch Out for",
-          "text": "**⚠️ What to Watch Out for**\n\nA component that is trusted in isolation does not automatically make the seam leaving it trustworthy. Mark every place data or instructions cross from one deployment environment to another as a boundary. Put a control there that treats fetched content as data rather than instructions, exactly as the security work taught. The seam nobody identifies is the one a steered action crosses.",
+          "text": "A component that is trusted in isolation does not automatically make the seam leaving it trustworthy. Mark every place data or instructions cross from one deployment environment to another as a boundary. Put a control there that treats fetched content as data rather than instructions, exactly as the security work taught. The seam nobody identifies is the one a steered action crosses.",
           "disclaimer": false
         }
       ]
@@ -11507,7 +11442,7 @@
         {
           "type": "callout",
           "label": "What comes next",
-          "text": "**What comes next**\n\nYou can now package a build into a reusable asset, contribute it back, place and version it on the right platform, defend that placement, and connect components together so the boundaries hold. That completes the build-to-deploy arc for this persona: from writing production code in the earlier modules to shipping assets a regulated customer can audit and a team can reuse.",
+          "text": "You can now package a build into a reusable asset, contribute it back, place and version it on the right platform, defend that placement, and connect components together so the boundaries hold. That completes the build-to-deploy arc for this persona: from writing production code in the earlier modules to shipping assets a regulated customer can audit and a team can reuse.",
           "disclaimer": false
         },
         {

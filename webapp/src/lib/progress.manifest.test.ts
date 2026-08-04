@@ -162,6 +162,41 @@ test("no lesson opens with a heading that repeats its title", () => {
   }
 });
 
+/** Comparison form for two titles: case and punctuation don't count. */
+const titleKey = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+// The other two shapes that printed a title twice (docs/wiki/course-content-inventory.md). The
+// generator guards both; these pin the committed manifest so a stale regeneration can't hide it.
+test("no callout repeats its label in its body", () => {
+  for (const l of manifest.lessons) {
+    for (const b of l.blocks) {
+      if (b.type !== "callout" || !b.label) continue;
+      const firstLine = b.text.split("\n")[0].replace(/\*\*/g, "");
+      assert.notEqual(
+        titleKey(firstLine),
+        titleKey(b.label),
+        `${l.slug} prints the callout title "${b.label}" twice`
+      );
+    }
+  }
+});
+
+test("no heading is immediately restated by a deeper heading", () => {
+  for (const l of manifest.lessons) {
+    l.blocks.forEach((b, i) => {
+      const next = l.blocks[i + 1];
+      if (b.type !== "heading" || !next || next.type !== "heading" || next.level <= b.level) return;
+      const parent = titleKey(b.text);
+      const child = titleKey(next.text);
+      assert.equal(
+        child === parent || child.startsWith(parent + " "),
+        false,
+        `${l.slug}: heading "${b.text}" is restated by "${next.text}"`
+      );
+    });
+  }
+});
+
 test("no progress at all means nothing is complete", () => {
   const d = deriveProgress(manifest, {
     completedVideoIds: [],

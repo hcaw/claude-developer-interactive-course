@@ -66,13 +66,16 @@ function BlockView({ block }: { block: Block }) {
               <InlineMd text={block.label} />
             </p>
           )}
-          {/* Callout text keeps its source line breaks. */}
+          {/* Callout text keeps its source line breaks; blank ones would render as empty rows. */}
           <div className="space-y-2 leading-7">
-            {block.text.split("\n").map((line, i) => (
-              <p key={i}>
-                <InlineMd text={line} />
-              </p>
-            ))}
+            {block.text
+              .split("\n")
+              .filter((line) => line.trim())
+              .map((line, i) => (
+                <p key={i}>
+                  <InlineMd text={line} />
+                </p>
+              ))}
           </div>
         </Callout>
       );

@@ -1,0 +1,24 @@
+{
+  "bundles": 44,
+  "sections": 44,
+  "articles": 108,
+  "gradeableArticles": 8,
+  "quizQuestions": 18,
+  "freeformArticles": 29,
+  "sectionsWithoutVideo": [
+    "m3-09-module-complete",
+    "m4-09-module-complete"
+  ],
+  "sectionsWithDebriefOnly": [
+    "m2-09-cumulative-debug-task",
+    "m3-07-cumulative-integration-task",
+    "m4-07-cumulative-task",
+    "m5-08-cumulative-task"
+  ],
+  "knownAnomalies": [
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/04-tool-use-and-schema-design/03-checkpoint.md (option lists: 2, answer paragraphs: 1)",
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/06-context-engineering/03-checkpoint.md (option lists: 2, answer paragraphs: 1)"
+  ],
+  "errors": [],
+  "warnings": []
+}

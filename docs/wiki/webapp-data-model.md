@@ -16,7 +16,10 @@ CREATE TABLE course_app.users (
   name           text,
   email          text NOT NULL UNIQUE,
   email_verified timestamptz,
-  image          text
+  image          text,
+  -- access control (adr/2026-08-04-08); current state here, audit trail in access_events
+  is_admin       boolean NOT NULL DEFAULT false,
+  revoked_at     timestamptz          -- NULL = active. Offboarding never deletes the user.
 );
 CREATE TABLE course_app.accounts (      -- Google OAuth link
   user_id text NOT NULL REFERENCES course_app.users(id) ON DELETE CASCADE,
@@ -32,7 +35,27 @@ CREATE TABLE course_app.sessions (      -- required by adapter; UNUSED under JWT
 );
 ```
 
-User rows are retained forever; offboarding is allowlist removal, not deletion. Cascades are schema hygiene only.
+```sql
+CREATE TABLE course_app.access_events (  -- append-only; never update or delete
+  id         bigint GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  user_id    text NOT NULL REFERENCES course_app.users(id) ON DELETE CASCADE,
+  action     text NOT NULL CHECK (action IN
+               ('granted_admin','revoked_admin','revoked_access','restored_access')),
+  actor_id   text REFERENCES course_app.users(id) ON DELETE SET NULL,  -- NULL = system/env
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX access_events_user_idx ON course_app.access_events (user_id, created_at DESC);
+```
+
+User rows are retained forever; offboarding sets `revoked_at`, never deletes. Progress survives, so
+access can be restored without loss. `actor_id` is `SET NULL` rather than cascading, so history
+outlives the person who made the change.
+
+**Who may sign in** ([adr/2026-08-04-08](../adr/2026-08-04-08-db-backed-access-control.md)): the env
+domain rule (`ALLOWED_EMAIL_DOMAINS` / `ALLOWED_EMAILS`) is the outer boundary and auto-provisions a
+user row on first sign-in; `revoked_at` blocks an individual; `is_admin` (unioned with
+`BOOTSTRAP_ADMIN_EMAILS` from env) grants `/admin`. All of it is re-checked per request in
+`src/lib/session.ts`.
 
 ## Activity primitives
 

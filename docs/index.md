@@ -25,8 +25,10 @@ artifacts. Conventions follow the `ai-dev-docs` skill; ADR filenames are
 - [adr/2026-08-01-02-s3-cloudfront-video-hosting.md](adr/2026-08-01-02-s3-cloudfront-video-hosting.md) — S3 + CloudFront (OAC), casual gating; 8 providers rejected
 - [adr/2026-08-01-03-nextjs-vercel-rds-monorepo-stack.md](adr/2026-08-01-03-nextjs-vercel-rds-monorepo-stack.md) — Next.js in `webapp/`, Vercel, existing RDS schema `course_app`
 - [adr/2026-08-01-04-course-content-static-at-build.md](adr/2026-08-01-04-course-content-static-at-build.md) — content baked at build; answer keys server-only
-- [adr/2026-08-01-05-google-auth-jwt-env-allowlist.md](adr/2026-08-01-05-google-auth-jwt-env-allowlist.md) — Google + JWT sessions + env allowlist
+- [adr/2026-08-01-05-google-auth-jwt-env-allowlist.md](adr/2026-08-01-05-google-auth-jwt-env-allowlist.md) — Google + JWT sessions + env allowlist *(access-control half superseded by 2026-08-04-08)*
 - [adr/2026-08-01-06-activity-only-data-model-derived-completion.md](adr/2026-08-01-06-activity-only-data-model-derived-completion.md) — activity-only DB, derived completion, transition events
+- [adr/2026-08-03-07-free-tier-mvp-before-aws-access.md](adr/2026-08-03-07-free-tier-mvp-before-aws-access.md) — Neon + Cloudflare R2 as a free bridge until AWS access; two env vars, no code change
+- [adr/2026-08-04-08-db-backed-access-control.md](adr/2026-08-04-08-db-backed-access-control.md) — admin + revocation move to the DB with an audit trail; only the domain rule stays in env
 
 ## Stream
 

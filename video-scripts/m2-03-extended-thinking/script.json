@@ -2,7 +2,9 @@
   "sectionId": "m2-03-extended-thinking",
   "title": "Extended Thinking",
   "subtitle": "when reasoning earns its cost",
-  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/03-extended-thinking/01-teaching.md",
+  "covers": [
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/03-extended-thinking/01-teaching.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 2104,

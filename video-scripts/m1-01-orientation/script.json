@@ -2,7 +2,9 @@
   "sectionId": "m1-01-orientation",
   "title": "Welcome: MSO Foundations",
   "subtitle": "what you'll be able to do",
-  "source": "course-content/module-1-mso-foundations/01-orientation/01-orientation.md",
+  "covers": [
+    "course-content/module-1-mso-foundations/01-orientation/01-orientation.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 1101,

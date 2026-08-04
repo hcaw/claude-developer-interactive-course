@@ -2,7 +2,9 @@
   "sectionId": "m3-01-module-introduction",
   "title": "Module 3: Claude Code, MCP & Integration",
   "subtitle": "from your machine to real systems",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/01-module-introduction/01-orientation.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/01-module-introduction/01-orientation.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3101,

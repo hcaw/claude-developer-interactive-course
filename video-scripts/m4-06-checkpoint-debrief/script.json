@@ -2,7 +2,9 @@
   "sectionId": "m4-06-checkpoint-debrief",
   "title": "Checkpoint 6 Walkthrough",
   "subtitle": "the minimal secure configuration",
-  "source": "course-content/module-4-production-engineering-evals-and-security/06-security/03-checkpoint.md",
+  "covers": [
+    "course-content/module-4-production-engineering-evals-and-security/06-security/03-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 4111,

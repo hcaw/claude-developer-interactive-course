@@ -2,7 +2,10 @@
   "sectionId": "m4-08-key-takeaways",
   "title": "Module 4 Key Takeaways",
   "subtitle": "five, one per layer",
-  "source": "course-content/module-4-production-engineering-evals-and-security/08-key-takeaways/01-recap.md + 09-module-complete/01-module-complete.md",
+  "covers": [
+    "course-content/module-4-production-engineering-evals-and-security/08-key-takeaways/01-recap.md",
+    "course-content/module-4-production-engineering-evals-and-security/09-module-complete/01-module-complete.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 4113,

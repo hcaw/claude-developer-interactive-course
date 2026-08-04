@@ -2,7 +2,10 @@
   "sectionId": "m2-11-module-wrap-up",
   "title": "Module 2 Wrap-up",
   "subtitle": "eight takeaways",
-  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/11-module-wrap-up/01-recap.md + 03-module-complete.md",
+  "covers": [
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/11-module-wrap-up/01-recap.md",
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/11-module-wrap-up/03-module-complete.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 2119,

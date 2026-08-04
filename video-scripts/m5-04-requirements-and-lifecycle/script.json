@@ -2,7 +2,10 @@
   "sectionId": "m5-04-requirements-and-lifecycle",
   "title": "Requirements & Lifecycle",
   "subtitle": "what to build, in which phase",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/01-teaching.md + 03-teaching.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/01-teaching.md",
+    "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/03-teaching.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5106,

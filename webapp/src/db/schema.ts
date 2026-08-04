@@ -133,10 +133,9 @@ export const quizAttempts = courseApp.table(
     userId: text("user_id")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    sectionId: text("section_id").notNull(),
-    /** Manifest article key (the source file path). */
+    /** Manifest lesson key (the source file path). */
     articleKey: text("article_key").notNull(),
-    /** Positional letters, e.g. ["B","C","B","C"]. */
+    /** Positional answer slots; a multi-select slot is a comma-joined set, e.g. ["B","C,D"]. */
     answers: jsonb("answers").notNull().$type<string[]>(),
     score: smallint("score").notNull(),
     total: smallint("total").notNull(),
@@ -146,7 +145,10 @@ export const quizAttempts = courseApp.table(
   (t) => [index("quiz_attempts_user_article_idx").on(t.userId, t.articleKey, t.createdAt.desc())]
 );
 
-/** Free-form reveals (item_key = article key) and videoless sections (item_key = section id). */
+/**
+ * Free-form reveals and read view-only lessons. `item_key` is always a lesson key (the source file
+ * path); which of the two a row means is decided by the lesson's requirements, not by the row.
+ */
 export const manualCompletions = courseApp.table(
   "manual_completions",
   {
@@ -173,14 +175,20 @@ export const completionEvents = courseApp.table(
     userId: text("user_id")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    /** 'section' | 'module' */
-    itemType: text("item_type").notNull().$type<"section" | "module">(),
-    /** Section id, or the module number as text. */
+    /**
+     * 'lesson' | 'module'. 'section' is accepted by the CHECK but never written any more: the
+     * table is append-only, so rows recorded before adr/2026-08-04-11 stay exactly as they were.
+     */
+    itemType: text("item_type").notNull().$type<"lesson" | "module">(),
+    /** Lesson key (the source file path), or the module number as text. */
     itemId: text("item_id").notNull(),
     earnedAt: timestamp("earned_at", { withTimezone: true, mode: "date" }).notNull().defaultNow(),
   },
   (t) => [
     unique("completion_events_user_item_key").on(t.userId, t.itemType, t.itemId),
-    check("completion_events_item_type_check", sql`${t.itemType} IN ('section', 'module')`),
+    check(
+      "completion_events_item_type_check",
+      sql`${t.itemType} IN ('lesson', 'module', 'section')`
+    ),
   ]
 );

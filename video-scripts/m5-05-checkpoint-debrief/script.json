@@ -2,7 +2,9 @@
   "sectionId": "m5-05-checkpoint-debrief",
   "title": "Checkpoint 5 Walkthrough",
   "subtitle": "assemble the deployment config",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/05-deployment-and-versioning/03-checkpoint.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/05-deployment-and-versioning/03-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5109,

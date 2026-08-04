@@ -2,7 +2,9 @@
   "sectionId": "m3-02-checkpoint-debrief",
   "title": "Checkpoint 1 Walkthrough",
   "subtitle": "settings + the human gate",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/02-permission-modes-and-human-gates/03-checkpoint.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/02-permission-modes-and-human-gates/03-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3103,

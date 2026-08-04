@@ -2,7 +2,9 @@
   "sectionId": "m2-03-checkpoint-debrief",
   "title": "Checkpoint 2 Walkthrough",
   "subtitle": "when thinking earns its cost",
-  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/03-extended-thinking/02-checkpoint.md",
+  "covers": [
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/03-extended-thinking/02-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 2105,

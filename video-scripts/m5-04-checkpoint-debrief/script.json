@@ -2,7 +2,10 @@
   "sectionId": "m5-04-checkpoint-debrief",
   "title": "Checkpoints 3 & 4 Walkthrough",
   "subtitle": "requirements + lifecycle placement",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/02-checkpoint.md + 04-checkpoint.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/02-checkpoint.md",
+    "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/04-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5107,

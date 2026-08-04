@@ -2,7 +2,10 @@
   "sectionId": "m3-06-enterprise-integration",
   "title": "Enterprise Integration",
   "subtitle": "auth, secrets, and the audit",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/06-enterprise-integration/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/06-enterprise-integration/01-teaching.md",
+    "course-content/module-3-claude-code-mcp-and-integration/06-enterprise-integration/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3110,

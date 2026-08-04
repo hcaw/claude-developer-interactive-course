@@ -2,7 +2,11 @@
   "sectionId": "m4-04-failure-handling-and-model-selection",
   "title": "Failure Handling & Model Selection",
   "subtitle": "retriable vs terminal, tiers by eval",
-  "source": "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/01-teaching.md + 02-watch-out.md + 04-teaching.md",
+  "covers": [
+    "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/01-teaching.md",
+    "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/02-watch-out.md",
+    "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/04-teaching.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 4106,

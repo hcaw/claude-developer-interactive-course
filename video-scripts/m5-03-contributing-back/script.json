@@ -2,7 +2,10 @@
   "sectionId": "m5-03-contributing-back",
   "title": "Contributing Back",
   "subtitle": "what a maintainer can accept",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/03-contributing-back/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/03-contributing-back/01-teaching.md",
+    "course-content/module-5-accelerators-and-ip-contribution/03-contributing-back/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5104,

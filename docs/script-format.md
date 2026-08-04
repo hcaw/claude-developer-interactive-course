@@ -9,13 +9,22 @@ The contract between scriptwriting (Claude), TTS (`pipeline/tts.mjs`), and rende
   "sectionId": "m1-02-how-llms-behave",  // = Remotion composition id; format m<module>-<section-dir>
   "title": "How LLMs Behave",
   "subtitle": "optional",
-  "source": "course-content/.../01-teaching.md",  // provenance, not used by renderer
+  "covers": [                             // the lessons this video narrates, repo-relative paths
+    "course-content/.../01-teaching.md",  // in course order — the FIRST one renders the player,
+    "course-content/.../02-watch-out.md"  // the rest link to it
+  ],
   "voice": "af_heart",                    // any Kokoro voice id
   "speed": 1.0,
   "seed": 1102,                           // rough.js determinism; any int, unique per section
   "beats": [ /* Beat[] */ ]
 }
 ```
+
+The renderer ignores `covers`, but `webapp/scripts/generate-content.mjs` does not: it is the only
+join between a video and the lessons it belongs to, replacing the old `m{module}-{NN}` filename
+prefix ([adr/2026-08-04-11](adr/2026-08-04-11-lesson-as-the-unit.md)). Every path must resolve to a
+real lesson, every mp4 needs a script and vice versa, and no lesson may be claimed by two videos —
+`npm run content:gen` fails on all four. Editing `covers` alone never requires a re-render.
 
 ## Beat
 

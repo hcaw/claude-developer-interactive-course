@@ -2,7 +2,10 @@
   "sectionId": "m3-04-packaging-workflows",
   "title": "Packaging Workflows",
   "subtitle": "skills · commands · plugins",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/04-packaging-workflows/01-teaching.md + 03-watch-out.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/04-packaging-workflows/01-teaching.md",
+    "course-content/module-3-claude-code-mcp-and-integration/04-packaging-workflows/03-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3106,

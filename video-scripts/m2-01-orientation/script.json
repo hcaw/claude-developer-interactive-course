@@ -2,7 +2,9 @@
   "sectionId": "m2-01-orientation",
   "title": "Module 2: Production-Grade Claude",
   "subtitle": "prompting · agents · tool use",
-  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/01-orientation/01-orientation.md",
+  "covers": [
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/01-orientation/01-orientation.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 2101,

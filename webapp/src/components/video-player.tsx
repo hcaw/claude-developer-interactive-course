@@ -16,11 +16,11 @@ type Props = {
   src: string;
   /** Resume point from a previous session. */
   initialPosition?: number;
-  /** Called when the server reports this write completed the section. */
-  onSectionComplete?: () => void;
+  /** Called when the server reports this write completed the lesson. */
+  onLessonComplete?: () => void;
 };
 
-export function VideoPlayer({ videoId, src, initialPosition = 0, onSectionComplete }: Props) {
+export function VideoPlayer({ videoId, src, initialPosition = 0, onLessonComplete }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const lastSent = useRef(0);
   const resumed = useRef(false);
@@ -47,17 +47,17 @@ export function VideoPlayer({ videoId, src, initialPosition = 0, onSectionComple
           keepalive: true,
         });
         if (!res.ok) return;
-        const data = (await res.json()) as { sectionComplete?: boolean };
-        if (data.sectionComplete && !completeNotified.current) {
+        const data = (await res.json()) as { lessonComplete?: boolean };
+        if (data.lessonComplete && !completeNotified.current) {
           completeNotified.current = true;
-          onSectionComplete?.();
+          onLessonComplete?.();
         }
       } catch {
         // A dropped heartbeat is not worth interrupting playback over; the next one carries the
         // same high-water mark anyway.
       }
     },
-    [videoId, onSectionComplete]
+    [videoId, onLessonComplete]
   );
 
   useEffect(() => {
@@ -106,12 +106,14 @@ export function VideoPlayer({ videoId, src, initialPosition = 0, onSectionComple
     };
   }, [send, initialPosition]);
 
+  // bg-black is deliberate and theme-invariant: it's the letterbox behind the video frames,
+  // not a UI surface — the whiteboard renders are themselves dark-canvas.
   return (
     <video
       ref={ref}
       controls
       preload="metadata"
-      className="w-full rounded-lg border border-slate-800 bg-black"
+      className="w-full border border-border bg-black"
       src={src}
     />
   );

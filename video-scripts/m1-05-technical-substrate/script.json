@@ -2,7 +2,9 @@
   "sectionId": "m1-05-technical-substrate",
   "title": "The Technical Substrate",
   "subtitle": "SDK · REST · streaming · async",
-  "source": "course-content/module-1-mso-foundations/05-technical-substrate/01-teaching.md",
+  "covers": [
+    "course-content/module-1-mso-foundations/05-technical-substrate/01-teaching.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 1105,

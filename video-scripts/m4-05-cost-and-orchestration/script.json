@@ -2,7 +2,10 @@
   "sectionId": "m4-05-cost-and-orchestration",
   "title": "Cost & Orchestration",
   "subtitle": "surviving the bill",
-  "source": "course-content/module-4-production-engineering-evals-and-security/05-cost-and-orchestration/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-4-production-engineering-evals-and-security/05-cost-and-orchestration/01-teaching.md",
+    "course-content/module-4-production-engineering-evals-and-security/05-cost-and-orchestration/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 4108,

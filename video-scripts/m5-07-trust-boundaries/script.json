@@ -2,7 +2,10 @@
   "sectionId": "m5-07-trust-boundaries",
   "title": "Trust Boundaries",
   "subtitle": "the seams between components",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/07-trust-boundaries/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/07-trust-boundaries/01-teaching.md",
+    "course-content/module-5-accelerators-and-ip-contribution/07-trust-boundaries/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5112,

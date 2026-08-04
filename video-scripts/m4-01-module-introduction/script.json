@@ -2,7 +2,9 @@
   "sectionId": "m4-01-module-introduction",
   "title": "Module 4: Production Engineering, Evals & Security",
   "subtitle": "proving it keeps working",
-  "source": "course-content/module-4-production-engineering-evals-and-security/01-module-introduction/01-orientation.md",
+  "covers": [
+    "course-content/module-4-production-engineering-evals-and-security/01-module-introduction/01-orientation.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 4101,

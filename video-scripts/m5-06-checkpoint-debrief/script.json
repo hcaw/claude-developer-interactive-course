@@ -2,7 +2,9 @@
   "sectionId": "m5-06-checkpoint-debrief",
   "title": "Checkpoint 6 Walkthrough",
   "subtitle": "diagnose the platform mismatch",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/06-comparing-platforms/03-checkpoint.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/06-comparing-platforms/03-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5111,

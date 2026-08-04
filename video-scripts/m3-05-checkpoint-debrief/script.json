@@ -2,7 +2,9 @@
   "sectionId": "m3-05-checkpoint-debrief",
   "title": "Checkpoint 5 Walkthrough",
   "subtitle": "transport + scope, four scenarios",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/05-mcp-servers/03-checkpoint.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/05-mcp-servers/03-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3109,

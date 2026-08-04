@@ -2,7 +2,10 @@
   "sectionId": "m5-06-comparing-platforms",
   "title": "Comparing Platforms",
   "subtitle": "latency, compliance, cost",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/06-comparing-platforms/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/06-comparing-platforms/01-teaching.md",
+    "course-content/module-5-accelerators-and-ip-contribution/06-comparing-platforms/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5110,

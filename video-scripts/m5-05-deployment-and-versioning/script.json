@@ -2,7 +2,10 @@
   "sectionId": "m5-05-deployment-and-versioning",
   "title": "Deployment & Versioning",
   "subtitle": "where it runs, what pins it",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/05-deployment-and-versioning/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/05-deployment-and-versioning/01-teaching.md",
+    "course-content/module-5-accelerators-and-ip-contribution/05-deployment-and-versioning/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5108,

@@ -2,7 +2,10 @@
   "sectionId": "m2-05-streaming-responses",
   "title": "Streaming Responses",
   "subtitle": "assemble the pieces, survive the cut",
-  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/05-streaming-responses/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/05-streaming-responses/01-teaching.md",
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/05-streaming-responses/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 2108,

@@ -50,13 +50,13 @@ export async function POST(request: Request) {
   });
 
   const derived = await deriveAndRecord(user.id);
-  const section = [...derived.sections.values()].find(
-    (s) => s.requirements.videoId === videoId
-  );
+  // At most one lesson can require a given video: the generator assigns each video to exactly one
+  // owning lesson, and only the owner's copy is `required`.
+  const lesson = [...derived.lessons.values()].find((l) => l.requirements.videoId === videoId);
 
   return NextResponse.json({
     ok: true,
-    sectionComplete: section?.complete ?? false,
-    moduleComplete: section ? (derived.modules.get(section.module)?.complete ?? false) : false,
+    lessonComplete: lesson?.complete ?? false,
+    moduleComplete: lesson ? (derived.modules.get(lesson.module)?.complete ?? false) : false,
   });
 }

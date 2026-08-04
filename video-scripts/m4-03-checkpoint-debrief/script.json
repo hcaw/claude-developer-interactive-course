@@ -2,7 +2,9 @@
   "sectionId": "m4-03-checkpoint-debrief",
   "title": "Checkpoint 3 Walkthrough",
   "subtitle": "which test level catches it",
-  "source": "course-content/module-4-production-engineering-evals-and-security/03-testing-and-tracing/03-checkpoint.md",
+  "covers": [
+    "course-content/module-4-production-engineering-evals-and-security/03-testing-and-tracing/03-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 4105,

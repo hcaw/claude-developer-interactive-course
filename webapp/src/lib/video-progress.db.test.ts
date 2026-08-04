@@ -111,8 +111,8 @@ describe("video progress upsert", { skip: url ? false : "set TEST_DATABASE_URL" 
   test("completion_events appends are idempotent under repeats", async () => {
     const rows = Array.from({ length: 3 }, () => ({
       userId,
-      itemType: "section" as const,
-      itemId: "m1-01-orientation",
+      itemType: "lesson" as const,
+      itemId: "course-content/module-1-mso-foundations/01-orientation/01-orientation.md",
     }));
     // Simulates three racing heartbeats all deriving the same new completion.
     for (const r of rows) await db.insert(completionEvents).values(r).onConflictDoNothing();
@@ -124,12 +124,12 @@ describe("video progress upsert", { skip: url ? false : "set TEST_DATABASE_URL" 
     assert.equal(stored.length, 1, "the unique constraint collapses duplicates");
   });
 
-  test("item_type is constrained to section or module", async () => {
+  test("item_type is constrained to lesson, module or the historical section", async () => {
     // Drizzle wraps driver errors, so the constraint name lands on `cause`, not `message`.
     await assert.rejects(
       db.insert(completionEvents).values({
         userId,
-        itemType: "bogus" as unknown as "section",
+        itemType: "bogus" as unknown as "lesson",
         itemId: "x",
       }),
       (err: Error & { cause?: { constraint?: string } }) => {

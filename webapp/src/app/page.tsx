@@ -1,8 +1,13 @@
-// Dashboard: the five modules, their sections, and how far this user has got.
+// Dashboard: the five modules and how far this user has got.
+//
+// One row per module rather than per lesson — 108 lessons would bury the shape of the course. The
+// module page is where the lesson list lives.
 
 import Link from "next/link";
 
-import { manifest, getModuleSections } from "@/content/manifest";
+import { ListCard } from "@/components/ui/card";
+import { StatusDot } from "@/components/ui/status-dot";
+import { manifest, getModuleLessons } from "@/content/manifest";
 import { deriveForUser } from "@/lib/activity";
 import { requireUser } from "@/lib/session";
 
@@ -12,79 +17,57 @@ export default async function DashboardPage() {
   const user = await requireUser();
   const derived = await deriveForUser(user.id);
 
-  const doneSections = [...derived.sections.values()].filter((s) => s.complete).length;
+  const doneLessons = [...derived.lessons.values()].filter((l) => l.complete).length;
 
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="text-3xl font-semibold text-slate-100">Claude Developer Course</h1>
-        <p className="mt-2 text-slate-400">
-          {doneSections} of {manifest.sections.length} sections complete
+        <h1 className="text-3xl font-semibold text-foreground">Claude Developer Course</h1>
+        <p className="mt-2 text-muted-foreground">
+          {doneLessons} of {manifest.lessons.length} lessons complete
         </p>
       </div>
 
-      <div className="space-y-8">
+      <ListCard>
         {manifest.modules.map((m) => {
-          const sections = getModuleSections(m.module);
+          const lessons = getModuleLessons(m.module);
           const mod = derived.modules.get(m.module);
+          const done = mod?.completeLessonKeys.length ?? 0;
+          const state = mod?.complete ? "complete" : done > 0 ? "partial" : "none";
+          const next = lessons.find((l) => !derived.lessons.get(l.key)?.complete);
+
           return (
-            <section key={m.module}>
-              <div className="mb-3 flex items-baseline gap-3">
-                <span className="text-sm font-medium text-slate-500">Module {m.module}</span>
-                <Link
-                  href={`/modules/${m.module}`}
-                  className="text-xl font-semibold text-slate-100 hover:text-white"
-                >
-                  {m.title}
-                </Link>
-                <span className="ml-auto shrink-0 text-sm tabular-nums text-slate-500">
-                  {mod?.complete ? (
-                    <span className="text-emerald-400">complete</span>
-                  ) : (
-                    `${mod?.completeSectionIds.length ?? 0}/${sections.length}`
-                  )}
-                </span>
-              </div>
-              <ul className="divide-y divide-slate-800 overflow-hidden rounded-lg border border-slate-800">
-                {sections.map((s) => {
-                  const p = derived.sections.get(s.id);
-                  return (
-                    <li key={s.id}>
-                      <Link
-                        href={`/sections/${s.id}`}
-                        className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-slate-900"
-                      >
-                        <span className="flex min-w-0 items-center gap-3">
-                          <span
-                            aria-hidden
-                            className={`size-1.5 shrink-0 rounded-full ${
-                              p?.complete
-                                ? "bg-emerald-500"
-                                : (p?.fraction ?? 0) > 0
-                                  ? "bg-amber-500"
-                                  : "bg-slate-700"
-                            }`}
-                          />
-                          <span className="truncate text-slate-200">
-                            <span className="mr-3 text-slate-500 tabular-nums">
-                              {String(s.section).padStart(2, "0")}
-                            </span>
-                            {s.title}
-                          </span>
-                        </span>
-                        <span className="shrink-0 text-xs text-slate-500">
-                          {s.video ? "video" : s.debriefVideo ? "debrief" : "reading"} ·{" "}
-                          {s.articles.length} article{s.articles.length === 1 ? "" : "s"}
-                        </span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </section>
+            <li key={m.module}>
+              <Link
+                href={`/modules/${m.module}`}
+                className="block px-4 py-4 transition-colors hover:bg-secondary"
+              >
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="flex min-w-0 items-baseline gap-3">
+                    <StatusDot state={state} />
+                    <span className="mono-label shrink-0">Module {m.module}</span>
+                    <span className="truncate font-heading text-lg font-semibold tracking-tight text-foreground">
+                      {m.title}
+                    </span>
+                  </span>
+                  <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">
+                    {mod?.complete ? (
+                      <span className="uppercase tracking-widest text-accent-text">complete</span>
+                    ) : (
+                      `${done}/${lessons.length}`
+                    )}
+                  </span>
+                </div>
+                {next && (
+                  <p className="mt-1 truncate pl-[1.6rem] text-sm text-muted-foreground">
+                    Up next: {next.title}
+                  </p>
+                )}
+              </Link>
+            </li>
           );
         })}
-      </div>
+      </ListCard>
     </div>
   );
 }

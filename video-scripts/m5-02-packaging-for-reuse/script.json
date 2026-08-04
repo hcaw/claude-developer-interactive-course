@@ -2,7 +2,10 @@
   "sectionId": "m5-02-packaging-for-reuse",
   "title": "Packaging for Reuse",
   "subtitle": "configure, don't rewrite",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/02-packaging-for-reuse/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/02-packaging-for-reuse/01-teaching.md",
+    "course-content/module-5-accelerators-and-ip-contribution/02-packaging-for-reuse/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5102,

@@ -15,6 +15,13 @@
       "when": 1785837513052,
       "tag": "0001_add_access_control",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1785861115721,
+      "tag": "0002_lesson_completion",
+      "breakpoints": true
     }
   ]
 }

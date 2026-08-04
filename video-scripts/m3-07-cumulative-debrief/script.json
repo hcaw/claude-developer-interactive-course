@@ -2,7 +2,10 @@
   "sectionId": "m3-07-cumulative-debrief",
   "title": "Integration Task Walkthrough",
   "subtitle": "three bugs, three files",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/07-cumulative-integration-task/01-cumulative.md + 02-cumulative.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/07-cumulative-integration-task/01-cumulative.md",
+    "course-content/module-3-claude-code-mcp-and-integration/07-cumulative-integration-task/02-cumulative.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3112,

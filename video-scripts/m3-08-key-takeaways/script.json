@@ -2,7 +2,10 @@
   "sectionId": "m3-08-key-takeaways",
   "title": "Module 3 Key Takeaways",
   "subtitle": "seven, one per section",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/08-key-takeaways/01-recap.md + 09-module-complete/01-module-complete.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/08-key-takeaways/01-recap.md",
+    "course-content/module-3-claude-code-mcp-and-integration/09-module-complete/01-module-complete.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3113,

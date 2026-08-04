@@ -2,7 +2,10 @@
   "sectionId": "m3-03-durable-project-context",
   "title": "Durable Project Context",
   "subtitle": "CLAUDE.md · rules · hooks · subagents",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/03-durable-project-context/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/03-durable-project-context/01-teaching.md",
+    "course-content/module-3-claude-code-mcp-and-integration/03-durable-project-context/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3104,

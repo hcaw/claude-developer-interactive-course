@@ -2,7 +2,10 @@
   "sectionId": "m3-02-permission-modes",
   "title": "Permission Modes & Human Gates",
   "subtitle": "explore · plan · code — under guard",
-  "source": "course-content/module-3-claude-code-mcp-and-integration/02-permission-modes-and-human-gates/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-3-claude-code-mcp-and-integration/02-permission-modes-and-human-gates/01-teaching.md",
+    "course-content/module-3-claude-code-mcp-and-integration/02-permission-modes-and-human-gates/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 3102,

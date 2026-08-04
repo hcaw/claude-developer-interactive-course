@@ -2,7 +2,10 @@
   "sectionId": "m1-06-quiz-debrief",
   "title": "Quiz Walkthrough",
   "subtitle": "every answer, explained",
-  "source": "course-content/module-1-mso-foundations/06-module-wrap-up/01-quiz.md + 02-exercise.md",
+  "covers": [
+    "course-content/module-1-mso-foundations/06-module-wrap-up/01-quiz.md",
+    "course-content/module-1-mso-foundations/06-module-wrap-up/02-exercise.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 1107,

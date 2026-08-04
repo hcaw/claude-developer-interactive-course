@@ -2,7 +2,10 @@
   "sectionId": "m5-09-key-takeaways",
   "title": "Module 5 Key Takeaways",
   "subtitle": "five, and the course complete",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/09-key-takeaways/01-recap.md + 03-module-complete.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/09-key-takeaways/01-recap.md",
+    "course-content/module-5-accelerators-and-ip-contribution/09-key-takeaways/03-module-complete.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5115,

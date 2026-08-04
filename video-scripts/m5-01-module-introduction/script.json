@@ -2,7 +2,9 @@
   "sectionId": "m5-01-module-introduction",
   "title": "Module 5: Accelerators & IP Contribution",
   "subtitle": "making a build last",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/01-module-introduction/01-orientation.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/01-module-introduction/01-orientation.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5101,

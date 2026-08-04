@@ -2,7 +2,10 @@
   "sectionId": "m4-02-evals-and-judges",
   "title": "Evals & Judges",
   "subtitle": "defining done before you ship",
-  "source": "course-content/module-4-production-engineering-evals-and-security/02-evals-and-judges/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-4-production-engineering-evals-and-security/02-evals-and-judges/01-teaching.md",
+    "course-content/module-4-production-engineering-evals-and-security/02-evals-and-judges/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 4102,

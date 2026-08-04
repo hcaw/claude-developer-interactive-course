@@ -2,7 +2,10 @@
   "sectionId": "m4-04-checkpoint-debrief",
   "title": "Checkpoints 4a & 4b Walkthrough",
   "subtitle": "the retry fix + the model picks",
-  "source": "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/03-checkpoint.md + 05-checkpoint.md",
+  "covers": [
+    "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/03-checkpoint.md",
+    "course-content/module-4-production-engineering-evals-and-security/04-failure-handling-and-model-selection/05-checkpoint.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 4107,

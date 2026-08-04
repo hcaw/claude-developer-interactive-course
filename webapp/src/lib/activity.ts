@@ -40,7 +40,8 @@ export async function loadActivity(userId: string) {
 
   return {
     completedVideoIds: videos.map((v) => v.videoId),
-    passedArticleKeys: quizzes.map((q) => q.articleKey),
+    // `quiz_attempts.article_key` holds a lesson key — an article IS a lesson (adr/2026-08-04-11).
+    passedLessonKeys: quizzes.map((q) => q.articleKey),
     manualCompletionKeys: manual.map((m) => m.itemKey),
   };
 }
@@ -102,7 +103,7 @@ export async function deriveAndRecord(userId: string): Promise<DerivedProgress> 
 export type UserProgressRow = {
   user: { id: string; email: string; name: string | null };
   derived: DerivedProgress;
-  /** Best score per gradeable article, for the detail view. */
+  /** Best score per gradeable lesson, for the detail view. */
   bestScores: Map<string, { score: number; total: number; passed: boolean }>;
 };
 
@@ -152,7 +153,7 @@ export async function loadAllUsersProgress(): Promise<UserProgressRow[]> {
       user,
       derived: deriveProgress(manifest, {
         completedVideoIds: (videosBy.get(user.id) ?? []).map((v) => v.videoId),
-        passedArticleKeys: userAttempts.filter((a) => a.passed).map((a) => a.articleKey),
+        passedLessonKeys: userAttempts.filter((a) => a.passed).map((a) => a.articleKey),
         manualCompletionKeys: (manualBy.get(user.id) ?? []).map((m) => m.itemKey),
       }),
       bestScores: new Map(

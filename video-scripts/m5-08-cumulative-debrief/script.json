@@ -2,7 +2,10 @@
   "sectionId": "m5-08-cumulative-debrief",
   "title": "Cumulative Task Walkthrough",
   "subtitle": "three defects, one accelerator",
-  "source": "course-content/module-5-accelerators-and-ip-contribution/08-cumulative-task/01-cumulative.md + 02-cumulative.md",
+  "covers": [
+    "course-content/module-5-accelerators-and-ip-contribution/08-cumulative-task/01-cumulative.md",
+    "course-content/module-5-accelerators-and-ip-contribution/08-cumulative-task/02-cumulative.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 5114,

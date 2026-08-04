@@ -2,7 +2,10 @@
   "sectionId": "m1-06-module-wrap-up",
   "title": "Wrap-up: Five Takeaways",
   "subtitle": "Module 1 recap",
-  "source": "course-content/module-1-mso-foundations/06-module-wrap-up/03-recap.md + 04-module-complete.md",
+  "covers": [
+    "course-content/module-1-mso-foundations/06-module-wrap-up/03-recap.md",
+    "course-content/module-1-mso-foundations/06-module-wrap-up/04-module-complete.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 1106,

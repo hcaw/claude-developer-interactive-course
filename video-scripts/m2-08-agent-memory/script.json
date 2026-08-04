@@ -2,7 +2,10 @@
   "sectionId": "m2-08-agent-memory",
   "title": "Agent Memory",
   "subtitle": "what survives when the session ends",
-  "source": "course-content/module-2-production-grade-prompting-agents-and-tool-use/08-agent-memory/01-teaching.md + 02-watch-out.md",
+  "covers": [
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/08-agent-memory/01-teaching.md",
+    "course-content/module-2-production-grade-prompting-agents-and-tool-use/08-agent-memory/02-watch-out.md"
+  ],
   "voice": "af_heart",
   "speed": 1.0,
   "seed": 2114,

@@ -9,6 +9,7 @@
     "lint": "eslint",
     "content:gen": "node scripts/generate-content.mjs",
     "content:check": "node scripts/generate-content.mjs --check",
+    "admin:grant": "node scripts/grant-admin.mjs",
     "test": "node --experimental-strip-types --test 'src/**/*.test.ts' --test-skip-pattern='db.test'",
     "test:db": "node --experimental-strip-types --test 'src/**/*.db.test.ts'"
   },

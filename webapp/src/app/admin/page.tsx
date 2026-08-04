@@ -1,106 +1,117 @@
-// Admin: a users × modules completion matrix.
+// Admin: a users × modules completion matrix, plus the people/access table.
 //
 // Runs the same deriveProgress() the learner UI runs. Nothing here recomputes completion in SQL.
 
+import type { Metadata } from "next";
+
 import { PeopleTable, type Person } from "@/components/people-table";
+import { Callout } from "@/components/ui/callout";
+import { TableHead, TableShell, Td, Th, Tr } from "@/components/ui/table";
 import { manifest } from "@/content/manifest";
-import { isBootstrapAdmin, listPeople } from "@/lib/access";
+import { listPeople } from "@/lib/access";
 import { loadAllUsersProgress } from "@/lib/activity";
 import { requireAdmin } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
+export const metadata: Metadata = { title: "Admin · Claude Developer Course" };
+
 export default async function AdminPage() {
   const admin = await requireAdmin();
   const [rows, people] = await Promise.all([loadAllUsersProgress(), listPeople()]);
 
-  const totalSections = manifest.sections.length;
+  const totalLessons = manifest.lessons.length;
   const peopleRows: Person[] = people.map((p) => ({
     id: p.id,
     email: p.email,
     name: p.name,
     isAdmin: p.isAdmin,
     revoked: p.revokedAt !== null,
-    bootstrapAdmin: isBootstrapAdmin(p.email),
     isSelf: p.id === admin.id,
   }));
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-semibold text-slate-100">Progress</h1>
-        <p className="mt-2 text-slate-400">
+        <h1 className="text-3xl font-semibold text-foreground">Admin</h1>
+        <p className="mt-2 text-muted-foreground">
           {rows.length} user{rows.length === 1 ? "" : "s"} · {manifest.modules.length} modules ·{" "}
-          {totalSections} sections
+          {totalLessons} lessons
         </p>
       </div>
 
+      <h2 className="text-2xl font-semibold text-foreground">Progress</h2>
+
       {rows.length === 0 ? (
-        <p className="rounded-lg border border-dashed border-slate-700 p-6 text-slate-500">
+        <Callout variant="empty" className="p-6">
           Nobody has signed in yet.
-        </p>
+        </Callout>
       ) : (
-        <div className="overflow-x-auto rounded-lg border border-slate-800">
-          <table className="w-full border-collapse text-left text-sm">
-            <thead>
-              <tr className="bg-slate-900">
-                <th className="px-4 py-3 font-semibold text-slate-100">User</th>
-                {manifest.modules.map((m) => (
-                  <th key={m.module} className="px-4 py-3 text-center font-semibold text-slate-100">
-                    M{m.module}
-                  </th>
-                ))}
-                <th className="px-4 py-3 text-right font-semibold text-slate-100">Sections</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map(({ user, derived }) => {
-                const done = [...derived.sections.values()].filter((s) => s.complete).length;
-                return (
-                  <tr key={user.id} className="border-t border-slate-800">
-                    <td className="px-4 py-3">
-                      <div className="text-slate-100">{user.name ?? user.email}</div>
-                      {user.name && <div className="text-xs text-slate-500">{user.email}</div>}
-                    </td>
-                    {manifest.modules.map((m) => {
-                      const mod = derived.modules.get(m.module);
-                      const complete = mod?.complete ?? false;
-                      const partial = mod?.completeSectionIds.length ?? 0;
-                      return (
-                        <td key={m.module} className="px-4 py-3 text-center">
-                          {complete ? (
-                            <span className="text-emerald-400">✓</span>
-                          ) : partial > 0 ? (
-                            <span className="text-amber-400 tabular-nums">
-                              {partial}/{mod?.sectionIds.length}
-                            </span>
-                          ) : (
-                            <span className="text-slate-700">—</span>
-                          )}
-                        </td>
-                      );
-                    })}
-                    <td className="px-4 py-3 text-right tabular-nums text-slate-300">
-                      {done}/{totalSections}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <TableShell>
+          <TableHead>
+            <tr>
+              <Th>User</Th>
+              {manifest.modules.map((m) => (
+                <Th key={m.module} className="text-center">
+                  M{m.module}
+                </Th>
+              ))}
+              <Th className="text-right">Lessons</Th>
+            </tr>
+          </TableHead>
+          <tbody>
+            {rows.map(({ user, derived }) => {
+              const done = [...derived.lessons.values()].filter((l) => l.complete).length;
+              return (
+                <Tr key={user.id}>
+                  <Td>
+                    <div className="text-foreground">{user.name ?? user.email}</div>
+                    {user.name && (
+                      <div className="text-xs text-muted-foreground">{user.email}</div>
+                    )}
+                  </Td>
+                  {manifest.modules.map((m) => {
+                    const mod = derived.modules.get(m.module);
+                    const complete = mod?.complete ?? false;
+                    const partial = mod?.completeLessonKeys.length ?? 0;
+                    return (
+                      <Td key={m.module} className="text-center">
+                        {complete ? (
+                          <span className="text-accent-text">
+                            ✓<span className="sr-only"> complete</span>
+                          </span>
+                        ) : partial > 0 ? (
+                          <span className="font-mono tabular-nums text-ink-2">
+                            {partial}/{mod?.lessonKeys.length}
+                          </span>
+                        ) : (
+                          <span className="text-ink-4">
+                            —<span className="sr-only"> not started</span>
+                          </span>
+                        )}
+                      </Td>
+                    );
+                  })}
+                  <Td className="text-right font-mono tabular-nums text-ink-2">
+                    {done}/{totalLessons}
+                  </Td>
+                </Tr>
+              );
+            })}
+          </tbody>
+        </TableShell>
       )}
 
       <section className="pt-4">
-        <h2 className="text-2xl font-semibold text-slate-100">People</h2>
-        <p className="mt-2 mb-4 text-slate-400">
+        <h2 className="text-2xl font-semibold text-foreground">People</h2>
+        <p className="mt-2 mb-4 text-muted-foreground">
           Anyone with an allowed email domain can sign in; their row appears here on first sign-in.
           Revoking keeps their progress — it can be restored.
         </p>
         {peopleRows.length === 0 ? (
-          <p className="rounded-lg border border-dashed border-slate-700 p-6 text-slate-500">
+          <Callout variant="empty" className="p-6">
             Nobody has signed in yet.
-          </p>
+          </Callout>
         ) : (
           <PeopleTable people={peopleRows} />
         )}

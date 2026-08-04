@@ -50,7 +50,7 @@ export async function getSessionState(): Promise<SessionState> {
       email,
       name: record?.name ?? session.user.name ?? null,
       image: record?.image ?? session.user.image ?? null,
-      isAdmin: isAdminRecord(record, email),
+      isAdmin: isAdminRecord(record),
     },
   };
 }

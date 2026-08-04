@@ -26,8 +26,9 @@ async function findById(userId: string) {
 }
 
 /**
- * Guard against emptying the admin list. BOOTSTRAP_ADMIN_EMAILS would still let someone back in,
- * but silently removing the last admin is a trap rather than a feature.
+ * Guard against emptying the admin list. Since adr/2026-08-04-10 there is no env override left, so
+ * this is the only thing standing between a mis-click and an admin-less deployment — the recovery
+ * is `npm run admin:grant`, which needs database access.
  */
 async function wouldStrandAdmins(userId: string): Promise<boolean> {
   const [target, admins] = await Promise.all([findById(userId), activeAdminCount()]);

@@ -1,6 +1,6 @@
 // Access control: who may sign in, who is an admin, and how that changes.
 //
-// Split by rate of change (adr/2026-08-04-08):
+// Split by rate of change (adr/2026-08-04-08, adr/2026-08-04-10):
 //
 //   ENV  ALLOWED_EMAIL_DOMAINS   which organisation this deployment serves. Changes ~never, and
 //                                it is the outer bound that keeps "no self-signup" true before any
@@ -10,7 +10,9 @@
 //
 // The env allowlist previously carried the last two. It was the wrong home: on Vercel an env var
 // change only takes effect on redeploy, so adding a teammate meant redeploying the app, and there
-// was no record of who granted what.
+// was no record of who granted what. Admin rights are now DB-only — there is no env override left
+// (adr/2026-08-04-10). Bootstrap and break-glass are `npm run admin:grant`, which writes the same
+// row and the same audit event the UI does.
 
 import "server-only";
 
@@ -19,20 +21,6 @@ import { and, count, desc, eq, isNull } from "drizzle-orm";
 import { db } from "@/db";
 import { accessEvents, users } from "@/db/schema";
 import { isAllowedDomain } from "@/lib/allowlist";
-
-/**
- * Admins of last resort, from env. Always unioned with the DB flag, so a bad revoke or an empty
- * table can never lock everyone out of /admin. This is the bootstrap: the very first admin exists
- * before anyone is in the database to grant it.
- */
-export function isBootstrapAdmin(email: string | null | undefined): boolean {
-  if (!email) return false;
-  const list = (process.env.BOOTSTRAP_ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((s) => s.trim().toLowerCase())
-    .filter(Boolean);
-  return list.includes(email.trim().toLowerCase());
-}
 
 export type AccessRecord = {
   id: string;
@@ -72,8 +60,7 @@ export async function canSignIn(email: string | null | undefined): Promise<boole
   return record === null || record.revokedAt === null;
 }
 
-export function isAdminRecord(record: AccessRecord | null, email: string): boolean {
-  if (isBootstrapAdmin(email)) return true;
+export function isAdminRecord(record: AccessRecord | null): boolean {
   return record !== null && record.isAdmin && record.revokedAt === null;
 }
 

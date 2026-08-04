@@ -33,7 +33,7 @@ fetched = code_task.run(fetch_url=customer_page)
 next_call(input=fetched)
 ```
 
-*Carry your three corrected lines into the next screen, where you assemble and verify the fixed deployment.*
+*Carry your three corrected lines into the next page, where you assemble and verify the fixed deployment.*
 
 In your own words, identify all three defects.
 

@@ -34,7 +34,7 @@ The Python SDK exposes an async client (**AsyncAnthropic**) that uses non-blocki
 
 The **Message Batches API** is a separate pattern for bulk offline workloads. You submit a large set of requests in one call, receive an identifier, and poll for completion. Batch jobs can take up to 24 hours to complete and run at a lower per-token cost in exchange for that latency. This suits offline pipelines, evaluation runs, and bulk jobs where no user is waiting on each result and cost matters more than turnaround time.
 
-## Terms on this screen
+## Glossary
 
 **AsyncAnthropic** — The async client exposed by the Python SDK. Uses non-blocking async/await to make API calls without tying up your application thread while the request returns in real time.
 

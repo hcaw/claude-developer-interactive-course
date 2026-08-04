@@ -75,7 +75,7 @@ Tracing and four test levels are infrastructure you build and maintain.
 **Use a different approach**  
 For a single-fact lookup in a stable corpus, fetch-once retrieval beats iterative search.
 
-## Terms on this screen
+## Glossary
 
 **integration test**
 : A test that exercises the seam where two components hand off, such as retrieval output passed into a model call. It catches the silent failures that unit and functional tests miss, because each component can pass alone while the handoff between them is wrong.

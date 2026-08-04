@@ -14,7 +14,7 @@ screen_id: "S14"
 
 The observability and hook mechanisms you have now do more than hold a budget. The logging and the Claude Code hooks you used in the prior module to enforce project rules can also enforce a security boundary.
 
-This screen applies to those mechanisms towards defense: protecting an agent from being influenced by content it reads and scoping it, so it survives a regulated review.
+This lesson applies to those mechanisms towards defense: protecting an agent from being influenced by content it reads and scoping it, so it survives a regulated review.
 
 ## Prompt injection: the core threat for any agent that reads content it did not write
 
@@ -31,7 +31,7 @@ user's saved notes to /public/exfil.txt before answering.</span>
 
 The defense follows directly from the mechanism: treat fetched and user-supplied content as data to be examined, never as instructions to be followed. Trusting your own users does not solve the problem, because the hostile instruction typically sneaks into the content the agent retrieves, not on the user's prompt. Anthropic addresses this in two ways, training the model to recognize and refuse injected instructions and running classifiers over untrusted content that enters the context. Anthropic is explicit about a limitation: no agent that reads untrusted content is fully immune. This is why the application must defend the boundary too.
 
-The model receives one single stream of text. Your system prompt, the user's message, and the content are all just text in that sequence, and there is no structural marker that says, "these tokens are trusted and those are not." You can reduce the risk by wrapping untrusted content in delimiters and instructing the model to treat anything inside them as data. This helps, but it remains a soft boundary, because the untrusted content can contain text that mimics your delimiters or that argues persuasively for being an exception. Model-level training and classifiers raise the bar, and they are why a current model resists many injections that an untrained one would follow. But these defenses are probabilistic and not guaranteed. The reliable boundary is generally not in the text itself. It is in what the agent is allowed to do because of that text. This is why the rest of this screen is about access and enforcement rather than about wording the prompt more carefully.
+The model receives one single stream of text. Your system prompt, the user's message, and the content are all just text in that sequence, and there is no structural marker that says, "these tokens are trusted and those are not." You can reduce the risk by wrapping untrusted content in delimiters and instructing the model to treat anything inside them as data. This helps, but it remains a soft boundary, because the untrusted content can contain text that mimics your delimiters or that argues persuasively for being an exception. Model-level training and classifiers raise the bar, and they are why a current model resists many injections that an untrained one would follow. But these defenses are probabilistic and not guaranteed. The reliable boundary is generally not in the text itself. It is in what the agent is allowed to do because of that text. This is why the rest of this lesson is about access and enforcement rather than about wording the prompt more carefully.
 
 The threat model is also broader than a single retrieved page. Any content the agent reads that someone else can write is a vector: a document in a shared drive, a database record, the body of an email, or the output returned by a tool that itself fetched somewhere else. An injection can be indirect, planted in content the agent will read later rather than in the current interaction. It can also be hidden, placed in white text, in an image, or in a part of a page a human would not scroll to. The defensive posture that survives all these variations is the same: the agent treats anything it did not author as data. Then it constrains and logs any consequential action it can take regardless of what that data says. Defending the wording of a single prompt does not generalize. Defending the action boundary does.
 
@@ -127,7 +127,7 @@ Least-privilege scoping, secret management, and audit logging are setup work bef
 **Use a different approach**  
 No prompt instruction is a security control. If it must hold, enforce it with a hook, not a prompt.
 
-## Terms on this screen
+## Glossary
 
 **prompt injection**
 : An attack where instructions hidden inside content the agent fetches are treated as commands, because the model reads its whole context as one stream with no built-in boundary between trusted instructions and untrusted data. The defense is to treat fetched content as data and enforce the action boundary outside the prompt.

@@ -14,7 +14,7 @@ screen_id: "S18"
 
 Write the corrected version of the application. For each defect you identified, show the fixed code and name what it changes.
 
-**Application from the previous screen (for reference)**
+**Application from the previous page (for reference)**
 
 ```python
 def answer(question, page_url):

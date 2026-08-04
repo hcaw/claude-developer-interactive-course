@@ -18,7 +18,7 @@ A prompt that works once in interactive use often breaks when it runs in product
 
 When a first-pass response misses, the instinct is often to add more words to the prompt and run it again. However, that instinct can make the problem harder to isolate and rarely fixes it. Rewording changes how you say something but does not add to the structural piece of the prompt that’s missing. For example, if Claude is crossing the boundary between your instructions and your input data, clearer phrasing will not fix it, and if the output format keeps drifting, "please format this correctly" will not fix it either.
 
-The failure mode tells you which of the four techniques is absent. Diagnose how your prompt is failing first, then add the specific technique that addresses that failure. The four techniques themselves are defined in full further down this screen.
+The failure mode tells you which of the four techniques is absent. Diagnose how your prompt is failing first, then add the specific technique that addresses that failure. The four techniques themselves are defined in full further down this lesson.
 
 | What you observed | What the prompt is missing | Why this technique is the fix |
 |---|---|---|
@@ -128,7 +128,7 @@ Constraining generation has costs, and a developer choosing this in production n
 - **A guaranteed schema is not a guaranteed success.** Two cases still return output that does not match: a refusal, where the model declines for safety reasons and the response carries `stop_reason refusal`, and a truncation, where the response hits the `max_tokens` limit and stops mid-structure with `stop_reason max_tokens`. Your code still checks `stop_reason` rather than assuming every response parses.
 - **It does not combine with message prefilling.** JSON outputs and prefilling the assistant message are incompatible, so a pattern that starts the response for Claude and a pattern that constrains the whole response to a schema cannot run on the same request. Pick the one that fits the task.
 
-## Terms on this screen
+## Glossary
 
 **structured outputs**
 : Constrained decoding: as Claude generates each token, the API only allows tokens that keep the output valid against your schema, so a response that violates the schema cannot be produced in the first place.

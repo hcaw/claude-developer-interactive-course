@@ -12,7 +12,7 @@ screen_id: "S11"
 
 # Comparing platforms on latency, compliance, and cost so the choice survives review
 
-In the last two screens you chose a platform and pinned its version. That choice was right for the customer's cloud, but "right for their cloud" is not yet an argument a procurement and security team will sign off on.
+Earlier in this module you chose a platform and pinned its version. That choice was right for the customer's cloud, but "right for their cloud" is not yet an argument a procurement and security team will sign off on.
 
 ## Measure latency from the customer's region
 
@@ -46,7 +46,7 @@ Per-token rates are broadly aligned across platforms; total cost moves on egress
 >
 > When the customer's compliance requirement is already pass-or-fail, skip the full comparison. That constraint determines the placement on its own.
 
-## Terms on this screen
+## Glossary
 
 **Data residency**
 : A rule that a customer's data must be processed in a specific country or region.

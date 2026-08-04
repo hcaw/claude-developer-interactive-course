@@ -71,7 +71,7 @@ Beta headers are versioned and change as features move toward general availabili
 
 ***One important constraint:*** subagents do not automatically inherit Skills from the parent session. When you delegate a task to a subagent, it starts with a clean context. Note that while Skills and conversation history do not carry over, subagents do inherit the permission context from the parent session; permission scope is not reset at delegation. If the subagent needs a Skill, you must explicitly list it in the subagent's configuration. This matters at agent design time: if you are wiring a subagent to perform a task that depends on specific instructions, those instructions need to be registered against the subagent, not assumed to carry over from the parent.
 
-## Terms on this screen
+## Glossary
 
 **Skill**
 : A reusable markdown file that teaches Claude how to handle a specific kind of task once, loaded automatically when a request matches its description.

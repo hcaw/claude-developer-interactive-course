@@ -51,7 +51,7 @@ The carry-back requirement in tool-use loops, and an effort setting you now must
 **Use a different approach**  
 For classification, extraction, and format tasks, a well-constrained prompt is cheaper and just as accurate.
 
-## Terms on this screen
+## Glossary
 
 **thinking block**
 : Claude's internal reasoning, visible only when extended thinking is enabled. Must be passed back to the API unchanged on subsequent turns.

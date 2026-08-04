@@ -53,7 +53,7 @@ The example worked here is the customer service agent case. A reusable conversat
 >
 > When code carries an engagement licensing constraint you cannot clear, do not contribute it: escalate to the owner instead.
 
-## Terms on this screen
+## Glossary
 
 **Claude Cookbook**
 : A GitHub repository of focused reference implementations, designed for self-contained single- or multi-pattern implementations demonstrated clearly and working end to end.

@@ -14,7 +14,7 @@ screen_id: "S11"
 
 A system that recovers from failure still must be affordable and fast, or it will not survive contact with a real bill.
 
-The retry budgets and fallbacks from the last screen keep it reliable. This screen instruments and budgets it, then handles the pattern that multiplies cost fastest: distributing work across several coordinating agents.
+The retry budgets and fallbacks from the failure-handling lessons keep it reliable. This lesson instruments and budgets it, then handles the pattern that multiplies cost fastest: distributing work across several coordinating agents.
 
 ## Cost and latency are invisible in development but decisive in production
 
@@ -103,7 +103,7 @@ def stream_with_tools(client, **kwargs):
     return "".join(text_chunks), tool_calls
 ```
 
-A tool_use block is not safe to act on until the stream closes and the full input_json has been accumulated. Acting on a partial block produces malformed tool inputs. The same retriable-versus-terminal failure handling from the failure screen applies here: a stream that breaks mid-response is a transient failure and the whole request should be retried, not the partial output passed downstream.
+A tool_use block is not safe to act on until the stream closes and the full input_json has been accumulated. Acting on a partial block produces malformed tool inputs. The same retriable-versus-terminal failure handling from the failure-handling lesson applies here: a stream that breaks mid-response is a transient failure and the whole request should be retried, not the partial output passed downstream.
 
 ## Prompt caching: reusing the work already done on a stable prefix
 
@@ -156,7 +156,7 @@ A rough cost estimation makes the tradeoff concrete. Suppose a single agent answ
 
 If the question was a single lookup dressed up as research, you paid the multiplier for nothing, because four of the five contexts were doing work the task never needed. The number is neither inherently large nor small. Its value depends entirely on whether the task requires the additional agents.
 
-There is a control dimension the cost estimation does not capture. Spreading work across agents multiplies the places a failure can occur, so each subagent needs the same retriable-versus-terminal handling, the same backoff, and the same fallback discipline from the failure screen, applied independently. A single subagent that hits a rate limit and has no backoff can stall the whole compilation step while the lead waits for a return that never comes. The orchestration pattern does not replace the failure-handling work, it multiplies it, which is another reason to use it only when the parallel exploration is worth that added surface area. A model choice detail also helps here: consider using more capable model as the lead agent and cheaper models for the subagents, so you are not paying top-tier rates across every parallel context. This reduces the cost multiplier while preserving the coordination quality where it matters.
+There is a control dimension the cost estimation does not capture. Spreading work across agents multiplies the places a failure can occur, so each subagent needs the same retriable-versus-terminal handling, the same backoff, and the same fallback discipline from the failure-handling lesson, applied independently. A single subagent that hits a rate limit and has no backoff can stall the whole compilation step while the lead waits for a return that never comes. The orchestration pattern does not replace the failure-handling work, it multiplies it, which is another reason to use it only when the parallel exploration is worth that added surface area. A model choice detail also helps here: consider using more capable model as the lead agent and cheaper models for the subagents, so you are not paying top-tier rates across every parallel context. This reduces the cost multiplier while preserving the coordination quality where it matters.
 
 ## Reliability has a floor you tune cost within
 
@@ -187,7 +187,7 @@ Parallel subagents multiply token cost, roughly by 15x in the reported case, bef
 **Use a different approach**  
 For tightly coupled work, such as coding, a single agent with good context beats fan-out.
 
-## Terms on this screen
+## Glossary
 
 **orchestrator-worker pattern**
 : A multi-agent shape where a lead agent plans a task, spawns subagents that work in parallel each with its own context and compiles their results. It helps on broad tasks that split into independent parts, at roughly fifteen times the token cost of a single chat in Anthropic's reported case.

@@ -82,7 +82,7 @@ Every failure path is code you write, test, and maintain on top of the happy pat
 **Use a different approach**  
 Do not retry a terminal error. Retrying a 400 does nothing but waste the retry budget.
 
-## Terms on this screen
+## Glossary
 
 **retriable**
 : The first distinction for any production failure. A retriable error, such as a rate limit or overload, is likely to succeed on a later attempt and gets backoff. A terminal error, such as a bad request, will fail again identically and should fail fast instead of wasting the retry budget.

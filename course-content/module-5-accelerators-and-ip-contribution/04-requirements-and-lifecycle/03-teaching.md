@@ -12,7 +12,7 @@ screen_id: "S07C"
 
 # Systems lifecycle for Claude applications
 
-The requirements you just captured are the first phase of a longer arc. This screen names that arc as the systems lifecycle, so the deployment, versioning, and boundary work in the rest of this module sits in the right phase rather than arriving as unrelated tasks.
+The requirements you just captured are the first phase of a longer arc. This lesson names that arc as the systems lifecycle, so the deployment, versioning, and boundary work in the rest of this module sits in the right phase rather than arriving as unrelated tasks.
 
 ## The lifecycle phases applied to a Claude application
 

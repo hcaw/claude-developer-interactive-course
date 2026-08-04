@@ -135,7 +135,7 @@ The other piece worth knowing at this stage is how the client actually talks to 
 >
 > Connect to an MCP server for breadth then apply the description-tuning discipline from earlier in this module to the specific tools you are actively routing to. MCP and manual schema authoring are not mutually exclusive as the server gives you coverage, and your descriptions give you precision where it matters. Apply tool allowlisting via MCPToolset to limit the surface area Claude reasons over before layering in description tuning. Narrowing the tool set and sharpening the descriptions are two separate levers, and you should use both.
 
-## Terms on this screen
+## Glossary
 
 **Model Context Protocol, MCP**
 : A standardized communication layer that moves tool definitions and execution out of your application code and into dedicated servers.

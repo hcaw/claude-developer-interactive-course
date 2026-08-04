@@ -107,7 +107,7 @@ The placement of the gate and the choice of permission mode are the same decisio
 >
 > **Risk:** The risk lies in using the wrong mode for the context. For example, a bypass mode set out of impatience on a non-isolated machine removes every safety prompt between the agent and your live files, and, unlike the other modes, also removes the protected-path guard.
 
-## Terms on this screen
+## Glossary
 
 **plan mode**
 : Plan mode holds Claude Code in the explore phase, blocking all file edits and shell commands until you release it.

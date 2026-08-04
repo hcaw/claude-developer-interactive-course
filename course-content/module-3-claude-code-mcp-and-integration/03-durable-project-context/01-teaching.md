@@ -117,7 +117,7 @@ Projects you’ll return to across many sessions, where a stable set of rules, p
 **Use a different approach**  
 One-off tasks you won’t revisit. For a quick exploration of an unfamiliar codebase, the setup overhead isn’t warranted.
 
-## Terms on this screen
+## Glossary
 
 **rules instruction files**
 : A file that scopes guidance to a specific path or condition in Claude Code, instead of loading into every session unconditionally.

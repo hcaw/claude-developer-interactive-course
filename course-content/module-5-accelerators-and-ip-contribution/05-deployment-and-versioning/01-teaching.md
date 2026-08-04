@@ -66,7 +66,7 @@ Gate promotion on the eval suite. Send a new version to a portion of traffic, co
 >
 > For a throwaway prototype that never touches production, a moving alias is fine: pinning is for what ships.
 
-## Terms on this screen
+## Glossary
 
 **deployment platform**
 : Where a Claude workload runs. The six are: the first-party Claude API, Claude Platform on AWS, Claude in Amazon Bedrock, Claude on Amazon Bedrock (legacy), Google Vertex AI, and third-party platforms. The same model can differ by platform on identity, data residency, latency, and cost.

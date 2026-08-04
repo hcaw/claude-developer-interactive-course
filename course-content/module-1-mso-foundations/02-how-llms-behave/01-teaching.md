@@ -36,7 +36,7 @@ A language model does not pick one fixed next token. At each step it produces a 
 
 **Non-determinism** is the primary consequence of sampling: identical inputs do not guarantee identical outputs. That changes how you test a Claude feature. A test that asserts the exact text of a response will be inconsistent, because the model can express the same correct answer many ways. Instead, assert on the property that must hold: a required field is present, a value is in range, the structure parses. When you need to judge meaning rather than structure, use an **eval with a model-graded judge**. This is why the course treats evals as the standard for knowing a feature is correct, and why Module 3 builds that capability.
 
-## Terms on this screen
+## Glossary
 
 **temperature** — A setting that shapes the probability distribution the model samples from. A lower temperature concentrates probability on the most likely tokens and makes output more repeatable; a higher temperature spreads it out and makes output more varied.
 

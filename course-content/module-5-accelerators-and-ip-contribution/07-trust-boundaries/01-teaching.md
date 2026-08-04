@@ -50,7 +50,7 @@ A regulated review requires justifying audit logging, data-residency decisions, 
 >
 > When a seam cannot be secured, do not ship around it: escalate to a human owner.
 
-## Terms on this screen
+## Glossary
 
 **trust boundary**
 : The seam where data or instructions move from one deployment environment to another in a multi-component app. Content fetched by one component is untrusted when it reaches the next, so the receiving component treats it as data, not instructions.

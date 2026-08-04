@@ -12,7 +12,7 @@ screen_id: "S07A"
 
 # From business requirements to functional and infrastructure requirements
 
-The deployment-platform decisions that follow all assume the requirements already exist: the residency rule, the latency target, the identity model. This screen is where those requirements come from: turning a business problem into the functional and infrastructure requirements a deployment decision can be defended against.
+The deployment-platform decisions that follow all assume the requirements already exist: the residency rule, the latency target, the identity model. This lesson is where those requirements come from: turning a business problem into the functional and infrastructure requirements a deployment decision can be defended against.
 
 ## Capturing functional requirements from a business problem
 
@@ -24,7 +24,7 @@ Infrastructure requirements are the non-functional constraints the deployment mu
 
 ## Documenting requirements so a decision can be defended
 
-Requirements are written down because the deployment decision will be reviewed by people who did not gather them. A short requirements record covering the functional behaviors, the infrastructure constraints, and the regulation each constraint comes from lets you defend a platform choice as following from the requirements rather than from familiarity. This record is the input the next screen's deployment decision reads from.
+Requirements are written down because the deployment decision will be reviewed by people who did not gather them. A short requirements record covering the functional behaviors, the infrastructure constraints, and the regulation each constraint comes from lets you defend a platform choice as following from the requirements rather than from familiarity. This record is the input the deployment decision later in this module reads from.
 
 > **Handles well**
 >

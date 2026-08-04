@@ -138,7 +138,7 @@ Teams that are not managing environment secrets carefully should be watched clos
 **Use a different approach**  
 A one-off task where the tool logic can live directly in the codebase and does not need to be reused across sessions or applications. For a single-project integration used by one person, wiring the tool directly in the API call may be simpler than maintaining a server.
 
-## Terms on this screen
+## Glossary
 
 **Model Context Protocol, or MCP**
 : An open communication layer that allows an MCP client such as Claude Code to connect to an MCP server that exposes tools, resources, and prompts.

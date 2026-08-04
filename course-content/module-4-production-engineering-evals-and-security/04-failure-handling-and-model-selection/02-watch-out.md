@@ -29,7 +29,7 @@ for item in batch:
     results.append(resp.content)    # assumes every call returns 200
 ```
 
-The feature shipped. At the first traffic peak the API returned a rate-limit response, the unhandled error was raised and the whole request failed instead of waiting a moment and trying again. To the user it looked like the feature was simply broken. The developer's first instinct was to add immediate retries in a tight loop. This made it worse: each instant retry counted as another request against the same limit, deepening it. The real fix was the distinction from the teaching screen. The rate-limit response was retriable, so it needed exponential backoff with a capped number of attempts and a retry that honored the retry-after value when the response included one. Development never produced the failure, so the path that would know how to handle one was never written.
+The feature shipped. At the first traffic peak the API returned a rate-limit response, the unhandled error was raised and the whole request failed instead of waiting a moment and trying again. To the user it looked like the feature was simply broken. The developer's first instinct was to add immediate retries in a tight loop. This made it worse: each instant retry counted as another request against the same limit, deepening it. The real fix was the distinction from the teaching lesson. The rate-limit response was retriable, so it needed exponential backoff with a capped number of attempts and a retry that honored the retry-after value when the response included one. Development never produced the failure, so the path that would know how to handle one was never written.
 
 > **⚠️ Why this broke**
 >

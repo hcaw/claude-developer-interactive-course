@@ -142,7 +142,7 @@ Authoring cases and calibrating a judge is real up-front work before any feature
 **Use a different approach**  
 For a single fixed-format output, a code check alone is enough. Skip the judge entirely.
 
-## Terms on this screen
+## Glossary
 
 **eval**
 : A set of input cases, expected behaviors, and grades that defines what a feature must do before it ships. Running an eval produces a score on a holdout set, which turns 'done' from a judgment call into a number you can track as you change the prompt, tools, or model.

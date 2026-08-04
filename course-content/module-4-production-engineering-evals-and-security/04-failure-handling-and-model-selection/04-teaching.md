@@ -12,7 +12,7 @@ screen_id: "S10A"
 
 # Model selection in production
 
-The previous screens kept a system inside its cost budget once the model was chosen. This screen handles the choice that sets that budget in the first place: which Claude model runs the workload.
+The previous lessons kept a system inside its cost budget once the model was chosen. This lesson handles the choice that sets that budget in the first place: which Claude model runs the workload.
 
 Cost management optimizes spend within a model. Model selection determines the baseline that optimization works from.
 

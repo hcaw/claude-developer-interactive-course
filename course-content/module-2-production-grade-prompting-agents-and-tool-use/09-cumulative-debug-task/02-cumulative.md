@@ -12,7 +12,7 @@ screen_id: "S23"
 
 # Cumulative debug task · Write the corrected version
 
-Stage 2: write the corrected version of each bug identified on the previous screen. For each one, show the fixed code and name what it changes.
+Stage 2: write the corrected version of each bug identified on the previous page. For each one, show the fixed code and name what it changes.
 
 **Buggy implementation (for reference)**
 

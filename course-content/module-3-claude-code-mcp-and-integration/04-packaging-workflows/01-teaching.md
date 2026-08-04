@@ -103,7 +103,7 @@ The table below identifies each layer, who it is for, and when to reach for it.
 >
 > **Risk:** A plugin carries the components it bundles into every install. It’s important to remember that a deny rule or hook the author relied on locally is not included unless it is explicitly listed as part of the bundle. If the skills or hooks are tied to a guardrail that is not included in the bundle, then the protection does not carry over to a teammate’s machine.
 
-## Terms on this screen
+## Glossary
 
 **skill**
 : A portable Markdown file (SKILL.md) placed in .claude/skills; front matter identifies when it applies, and the body holds the steps.

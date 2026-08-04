@@ -14,7 +14,7 @@ screen_id: "S22"
 
 The agent implementation below has four planted bugs, one in each of four layers: the schema layer, the streaming layer where the response is assembled and committed, the context layer where the message structure is built, and the memory layer.
 
-Work through the two stages below. This screen covers Stage 1: identify each bug. Stage 2, writing the corrected version, is on the next screen.
+Work through the two stages below. This page covers Stage 1: identify each bug. Stage 2, writing the corrected version, is on the next page.
 
 **Buggy implementation**
 

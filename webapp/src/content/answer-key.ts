@@ -9,28 +9,30 @@
 import "server-only";
 
 import raw from "./answer-key.json";
+import { slotMatches } from "@/lib/quiz-grading";
 import type { AnswerKey, AnswerKeyEntry } from "./types";
 
 const answerKey = raw as unknown as AnswerKey;
 
-export function getAnswerKey(articleKey: string): AnswerKeyEntry | undefined {
-  return answerKey[articleKey];
+export function getAnswerKey(lessonKey: string): AnswerKeyEntry | undefined {
+  return answerKey[lessonKey];
 }
 
 /**
  * Grade positional answers against the key.
- * `submitted[i]` is the letter chosen for question i; a missing/blank entry counts as wrong.
+ * `submitted[i]` is the slot for question i — "B", or "C,D" for a multi-select — and is compared
+ * as a letter SET, all-or-nothing per question. A missing/blank entry counts as wrong.
  */
 export function gradeQuiz(
-  articleKey: string,
+  lessonKey: string,
   submitted: string[]
-): { score: number; total: number; results: { correct: boolean; expected: string; explanation: string }[] } | null {
-  const entry = getAnswerKey(articleKey);
+): { score: number; total: number; results: { correct: boolean; expected: string[]; explanation: string }[] } | null {
+  const entry = getAnswerKey(lessonKey);
   if (!entry || entry.kind !== "quiz") return null;
 
   const results = entry.answers.map((a, i) => {
-    const correct = (submitted[i] ?? "").toUpperCase() === a.letter.toUpperCase();
-    return { correct, expected: a.letter, explanation: a.explanation };
+    const correct = slotMatches(submitted[i] ?? "", a.letters);
+    return { correct, expected: a.letters, explanation: a.explanation };
   });
 
   return {

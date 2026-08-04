@@ -12,39 +12,47 @@ screen_id: "S09"
 
 # Checkpoint 3: place the skill in the right runtime
 
-Try it now. Three teams want to reuse the same review-checklist skill in different places.
+Try it now. Four teams want to reuse the same review-checklist skill in different places.
 
-For each, match what must be configured for the skill to load and run. Note: the source presents four runtime situations. All four are included here so the match stays complete.
+For each situation below, select the configuration that makes the skill load and run in that runtime.
 
-## Situations
+### Situation 1 · A developer wants the skill to load when they ask for a review in the Claude Code terminal
 
-1. A developer wants the skill to load when they ask for a review in the Claude Code terminal.
-2. A service calls the Messages API and wants the skill to run as part of the request.
-3. A scheduled headless job uses Agent SDK and expects the skill from the repo to load.
-4. A product team wants the same review-checklist skill to run inside a long-running agent that Anthropic hosts, reachable by an agent ID across sessions.
+- **A.** Enable filesystem sources by setting settingSources explicitly so the agent loads skills from the project. Do not rely on a default, and confirm current default behavior against the Agent SDK reference at build time.
+- **B.** Place SKILL.md in .claude/skills with a description that matches review requests.
+- **C.** Define the agent as an API resource that lists the skill and set the managed-agents-2026-04-01 beta header on the calls. Write the skill so its steps do not depend on local files, because it will run in Anthropic’s sandbox.
+- **D.** Send the code-execution and skills beta headers and write the skill so its steps do not depend on local files or local tools.
 
-## Options
+**Answer: B** — This is the filesystem-discovery runtime: Claude Code finds SKILL.md in .claude/skills and loads it when the description matches the request.
 
-- Enable filesystem sources by setting settingSources explicitly so the agent loads skills from the project. Do not rely on a default, and confirm current default behavior against the Agent SDK reference at build time.
-- Place SKILL.md in .claude/skills with a description that matches review requests.
-- Define the agent as an API resource that lists the skill and set the managed-agents-2026-04-01 beta header on the calls. Write the skill so its steps do not depend on local files, because it will run in Anthropic’s sandbox.
-- Send the code-execution and skills beta headers and write the skill so its steps do not depend on local files or local tools.
+### Situation 2 · A service calls the Messages API and wants the skill to run as part of the request
 
-## Answer
+- **A.** Enable filesystem sources by setting settingSources explicitly so the agent loads skills from the project. Do not rely on a default, and confirm current default behavior against the Agent SDK reference at build time.
+- **B.** Place SKILL.md in .claude/skills with a description that matches review requests.
+- **C.** Define the agent as an API resource that lists the skill and set the managed-agents-2026-04-01 beta header on the calls. Write the skill so its steps do not depend on local files, because it will run in Anthropic’s sandbox.
+- **D.** Send the code-execution and skills beta headers and write the skill so its steps do not depend on local files or local tools.
 
-| Situation | Correct configuration |
-|---|---|
-| A developer wants the skill to load when they ask for a review in the Claude Code terminal. | Place SKILL.md in .claude/skills with a description that matches review requests. |
-| A service calls the Messages API and wants the skill to run as part of the request. | Send the code-execution and skills beta headers and write the skill so its steps do not depend on local files or local tools. |
-| A scheduled headless job uses Agent SDK and expects the skill from the repo to load. | Enable filesystem sources by setting settingSources explicitly so the agent loads skills from the project. Do not rely on a default, and confirm current default behavior against the Agent SDK reference at build time. |
-| A product team wants the same review-checklist skill to run inside a long-running agent that Anthropic hosts, reachable by an agent ID across sessions. | Define the agent as an API resource that lists the skill and set the managed-agents-2026-04-01 beta header on the calls. Write the skill so its steps do not depend on local files, because it will run in Anthropic’s sandbox. |
+**Answer: D** — The Messages API runs the skill inside Anthropic’s code execution container, not your machine, so the beta headers enable it and the skill must not depend on local files or tools.
+
+### Situation 3 · A scheduled headless job uses Agent SDK and expects the skill from the repo to load
+
+- **A.** Enable filesystem sources by setting settingSources explicitly so the agent loads skills from the project. Do not rely on a default, and confirm current default behavior against the Agent SDK reference at build time.
+- **B.** Place SKILL.md in .claude/skills with a description that matches review requests.
+- **C.** Define the agent as an API resource that lists the skill and set the managed-agents-2026-04-01 beta header on the calls. Write the skill so its steps do not depend on local files, because it will run in Anthropic’s sandbox.
+- **D.** Send the code-execution and skills beta headers and write the skill so its steps do not depend on local files or local tools.
+
+**Answer: A** — Whether filesystem settings load in the Agent SDK is controlled by the settingSources configuration; set it explicitly rather than relying on a default.
+
+### Situation 4 · A product team wants the same review-checklist skill to run inside a long-running agent that Anthropic hosts, reachable by an agent ID across sessions
+
+- **A.** Enable filesystem sources by setting settingSources explicitly so the agent loads skills from the project. Do not rely on a default, and confirm current default behavior against the Agent SDK reference at build time.
+- **B.** Place SKILL.md in .claude/skills with a description that matches review requests.
+- **C.** Define the agent as an API resource that lists the skill and set the managed-agents-2026-04-01 beta header on the calls. Write the skill so its steps do not depend on local files, because it will run in Anthropic’s sandbox.
+- **D.** Send the code-execution and skills beta headers and write the skill so its steps do not depend on local files or local tools.
+
+**Answer: C** — Claude Managed Agents load the skill server-side as part of the agent resource definition, and the managed sandbox is why the skill cannot depend on local files.
 
 ### Why
-
-- **A developer wants the skill to load when they ask for a review in the Claude Code terminal.** — This is the filesystem-discovery runtime: Claude Code.
-- **A service calls the Messages API and wants the skill to run as part of the request.** — The Messages API runs the skill inside Anthropic’s code execution container, not your machine.
-- **A scheduled headless job uses Agent SDK and expects the skill from the repo to load.** — Whether filesystem settings load in the Agent SDK is controlled by the settingSources configuration; set it explicitly rather than relying on a default.
-- **A product team wants the same review-checklist skill to run inside a long-running agent that Anthropic hosts, reachable by an agent ID across sessions.** — Claude Managed Agents load the skill server-side as part of the agent resource definition.
 
 Each situation is matched to the one configuration that makes the skill load in that runtime. The common thread: the same SKILL.md is portable, but each runtime discovers and sandboxes it differently, so “runs everywhere” is something you configure for, not something you get for free.
 

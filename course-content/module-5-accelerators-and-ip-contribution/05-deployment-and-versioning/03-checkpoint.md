@@ -12,39 +12,36 @@ screen_id: "S10"
 
 # Checkpoint 5: Match the deployment platform and version pin to each scenario
 
-Try it now. A customer runs AWS with a data-residency requirement and needs to be able to roll back a model update. Select the one correct piece in each group below to assemble the minimal deployment configuration that satisfies both. Leave out what does not belong.
+Try it now. A customer runs AWS with a data-residency requirement and needs to be able to roll back a model update. Select the one correct piece in each group below to assemble the minimal deployment configuration that satisfies both.
 
-#### Platform Group
+### Platform Group
 
-- First-party API
-- Amazon Bedrock
-- Google Vertex AI
+- **A.** First-party API
+- **B.** Amazon Bedrock
+- **C.** Google Vertex AI
 
-#### Identity Group
+**Answer: B** — Bedrock keeps identity and data inside the AWS boundary the customer already cleared; the first-party API or Vertex AI moves them outside it.
 
-- AWS identity reference
-- Anthropic API key
+### Identity Group
 
-#### Model reference group
+- **A.** AWS identity reference
+- **B.** Anthropic API key
 
-- A pinned full model ID
-- A moving alias
+**Answer: A** — An AWS identity reference stays inside the customer's cleared boundary; an Anthropic key moves identity outside it.
 
-#### Rollback Group
+### Model reference group
 
-- Retain the prior pinned version
-- No retention
+- **A.** A pinned full model ID
+- **B.** A moving alias
 
-### Answer
+**Answer: A** — The pinned full Bedrock model ID (with the anthropic. prefix) makes an upstream change something you adopt deliberately; a moving alias drifts underneath you.
 
-- **Platform Group**  
-  Amazon Bedrock
-- **Identity Group**  
-  AWS identity reference
-- **Model reference group**  
-  A pinned full model ID
-- **Rollback Group**  
-  Retain the prior pinned version
+### Rollback Group
+
+- **A.** Retain the prior pinned version
+- **B.** No retention
+
+**Answer: A** — Retaining the prior version is what gives you a rollback target; a pinned ID with no retained version still cannot roll back.
 
 ### Why
 

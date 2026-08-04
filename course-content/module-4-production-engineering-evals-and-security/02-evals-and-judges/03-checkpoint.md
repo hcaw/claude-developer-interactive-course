@@ -12,7 +12,7 @@ screen_id: "S04"
 
 # Complete a partial eval for a summarization feature
 
-This eval has two gaps. For the dataset, identify the specific output each input case should produce. For the judge prompt, match each score band to what it means. Drag each answer card from the bank onto its row below.
+This eval has two gaps. For the dataset, identify the specific output each input case should produce. For the judge prompt, match each score band to what it means. Select the correct answer for each row below.
 
 **dataset.json**
 
@@ -46,30 +46,56 @@ Return JSON with "strengths", "weaknesses", "reasoning", and "score".
 Score scale: 1 to 3, 4 to 7, 8 to 10 (see below to complete the definitions).
 ```
 
-## Options
+### Row 1 · Expected output for the meeting-transcript case
 
-- A summary that lists all three action items with their owners
-- A summary of the bug and its repro steps that omits the unrelated aside
-- Misses required content
-- Partial: some required content present, some missing
-- Complete and faithful to the expected behavior
+- **A.** Misses required content
+- **B.** A summary that lists all three action items with their owners
+- **C.** Complete and faithful to the expected behavior
+- **D.** A summary of the bug and its repro steps that omits the unrelated aside
+- **E.** Partial: some required content present, some missing
 
-## Answer
+**Answer: B** — The dataset case is a meeting transcript where three action items are assigned; the expected_behavior must name that specific output, not restate the input.
 
-| Row | Correct answer |
-|---|---|
-| Expected output for the meeting-transcript case | A summary that lists all three action items with their owners |
-| Expected output for the bug-report case | A summary of the bug and its repro steps that omits the unrelated aside |
-| Judge score band 1 to 3 | Misses required content |
-| Judge score band 4 to 7 | Partial: some required content present, some missing |
-| Judge score band 8 to 10 | Complete and faithful to the expected behavior |
+### Row 2 · Expected output for the bug-report case
+
+- **A.** Misses required content
+- **B.** A summary that lists all three action items with their owners
+- **C.** Complete and faithful to the expected behavior
+- **D.** A summary of the bug and its repro steps that omits the unrelated aside
+- **E.** Partial: some required content present, some missing
+
+**Answer: D** — The dataset case is a bug report with repro steps and one unrelated aside; the expected output names the bug and repro steps and excludes the aside.
+
+### Row 3 · Judge score band 1 to 3
+
+- **A.** Misses required content
+- **B.** A summary that lists all three action items with their owners
+- **C.** Complete and faithful to the expected behavior
+- **D.** A summary of the bug and its repro steps that omits the unrelated aside
+- **E.** Partial: some required content present, some missing
+
+**Answer: A** — The low band anchors to missing the required content entirely.
+
+### Row 4 · Judge score band 4 to 7
+
+- **A.** Misses required content
+- **B.** A summary that lists all three action items with their owners
+- **C.** Complete and faithful to the expected behavior
+- **D.** A summary of the bug and its repro steps that omits the unrelated aside
+- **E.** Partial: some required content present, some missing
+
+**Answer: E** — The middle band anchors to partial coverage.
+
+### Row 5 · Judge score band 8 to 10
+
+- **A.** Misses required content
+- **B.** A summary that lists all three action items with their owners
+- **C.** Complete and faithful to the expected behavior
+- **D.** A summary of the bug and its repro steps that omits the unrelated aside
+- **E.** Partial: some required content present, some missing
+
+**Answer: C** — The top band anchors to complete, faithful coverage of the expected behavior.
 
 ### Why
-
-- **Expected output for the meeting-transcript case** — The dataset case is a meeting transcript where three action items are assigned; the expected_behavior must name that specific output, not restate the input.
-- **Expected output for the bug-report case** — The dataset case is a bug report with repro steps and one unrelated aside; the expected output names the bug and repro steps and excludes the aside.
-- **Judge score band 1 to 3** — The low band anchors to missing the required content entirely.
-- **Judge score band 4 to 7** — The middle band anchors to partial coverage.
-- **Judge score band 8 to 10** — The top band anchors to complete, faithful coverage of the expected behavior.
 
 You named a concrete output for each case, for example "a summary listing all three action items with their owners" and "a summary of the bug and its repro steps that omits the unrelated aside," and you gave the judge an anchored scale, such as 1 to 3 misses required content, 4 to 7 partial, 8 to 10 complete and faithful. The expected behavior and the anchored scale are what make the score comparable across runs and defensible in review.

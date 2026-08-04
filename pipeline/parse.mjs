@@ -158,9 +158,9 @@ function splitAnswerKey(blocks) {
     if (block.type === "list") {
       const keyItems = block.items.filter((it) => ANSWER_LINE_RE.test(it));
       if (keyItems.length) {
-        answerKey.push({ type: "list", items: keyItems });
+        answerKey.push({ type: "list", items: keyItems, srcIdx: block.srcIdx });
         const rest = block.items.filter((it) => !ANSWER_LINE_RE.test(it));
-        if (rest.length) learner.push({ type: "list", items: rest });
+        if (rest.length) learner.push({ type: "list", items: rest, srcIdx: block.srcIdx });
         continue;
       }
     }
@@ -194,6 +194,10 @@ for (const file of files) {
   const [moduleDir, sectionDir] = rel.split("/");
   const sectionId = `m${fm.module}-${sectionDir}`;
   const blocks = parseBlocks(body.trim());
+  // Source order, stamped before the answer-key split so the generator can verify that each
+  // answer paragraph really sits next to its option list (positional grading depends on it).
+  // Never reaches the manifest: the generator's cleanBlock whitelists fields.
+  blocks.forEach((b, i) => (b.srcIdx = i));
 
   const article = {
     file: join("course-content", rel),

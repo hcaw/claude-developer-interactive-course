@@ -50,11 +50,11 @@ prompt  = build_prompt(question, context)
 
 **Answer: C** — The trace shows both components passing alone, so the failure can only live in the handoff: retrieve() returns chunk dicts and build_prompt() never reads the content field, so the model got malformed context. Option C extracts the content and adds a test on that exact seam. This is the integration level.
 
+### Why
+
+You chose Option C and named the integration level. The trace shows both components passing alone, so the failure can only live in the handoff: retrieve() returns chunk dicts and build_prompt() never reads the content field, so the model got malformed context. Option C extracts the content and adds a test on that exact seam.
+
 | Option | Why |
 |---|---|
 | A | The parser already passes its unit test in the trace. A component that passes in isolation is not where an end-to-end-only failure lives. |
 | B | The model call passes its functional test in the trace. Rewording the prompt ignores the seam where chunks are placed into the prompt without reading the content field. |
-
-### Why
-
-You chose Option C and named the integration level. The trace shows both components passing alone, so the failure can only live in the handoff: retrieve() returns chunk dicts and build_prompt() never reads the content field, so the model got malformed context. Option C extracts the content and adds a test on that exact seam.

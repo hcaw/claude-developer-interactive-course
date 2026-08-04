@@ -43,5 +43,7 @@ Turn 4: API response:
 
 **Answer: B** — The defect is in the user turn at Turn 3. The assistant issued a tool_use block with id toolu_01, but the tool_result block references toolu_02. The API matches tool_use and tool_result blocks by id, not by position, so a mismatched id is treated as a reference to a tool_use block that does not exist in the conversation. The fix is to return the result with tool_use_id="toolu_01". This is the invariant from the message block table: every tool_use must have a matching tool_result in the immediately following user turn, with the id preserved exactly. The corrected Turn 3 reads: [tool_result]: tool_use_id="toolu_01", content="Balance: $1,240.18".
 
+### Why the other options are wrong
+
 - **A.** The description is not the defect. The trace shows Claude selected the correct tool on the first call, which rules out a routing problem. The failure happens after the tool result returns, which means the schema and the description are not what triggered the validation error.
 - **C.** Required fields control whether Claude can call the tool without arguments. They do not affect how tool_result blocks are matched to tool_use blocks. The trace shows the tool was called correctly with a valid account_id, so a missing required array is not what caused the error.

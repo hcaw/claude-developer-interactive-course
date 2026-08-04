@@ -12,7 +12,7 @@ screen_id: "S16"
 
 # Assemble the minimal secure configuration for a fetch-and-write agent
 
-The scenario is an agent that fetches untrusted web content and writes to a single protected path while acting under a scoped identity. Assemble the minimal configuration for this agent. Write the four controls it must include and explain in one sentence what each one enforces. Leave out anything that does not belong.
+The scenario is an agent that fetches untrusted web content and writes to a single protected path while acting under a scoped identity. Assemble the minimal configuration for this agent: select every piece that belongs, and leave out anything that does not.
 
 **Piece 1 · hook on a lifecycle event**
 
@@ -40,7 +40,18 @@ api_key: os.environ["SERVICE_API_KEY"]   # not committed config
 log_audit(action, path, result)     # on every privileged action
 ```
 
-### Model answer
+### Which pieces belong in the minimal configuration?
+
+Select all that apply.
+
+- **A.** Piece 1 · the PreToolUse hook
+- **B.** Piece 2 · the deny rule
+- **C.** Piece 3 · the secret reference
+- **D.** Piece 4 · the audit-log line
+
+**Answer: A, B, C, D** — All four pieces belong. The hook blocks before the tool runs, the deny rule restricts the accessible filesystem, the env reference keeps the credential out of source control, and the audit log creates the record. The injected write hits the hook block and the audit log, not the disk.
+
+### Why each control earns its place
 
 **Piece 1: PreToolUse hook.** Runs before write_file executes. Blocks any write outside /workspace/output and logs the attempt. Enforcement happens before the tool runs, this is a guardrail, not a convention.
 
@@ -50,8 +61,4 @@ log_audit(action, path, result)     # on every privileged action
 
 **Piece 4: Audit log.** Records every privileged action with its result. Provides the evidence trail a regulated review requires and makes enforcement visible.
 
-All four pieces belong. The hook blocks before the tool runs, the deny rule restricts the accessible filesystem, the env reference keeps the credential out of source control, and the audit log creates the record. The injected write hits the hook block and the audit log, not the disk.
-
-### Why
-
-All four controls belong: the hook, the deny rule, the environment reference, and the audit log.
+The trap in this checkpoint is looking for a piece to exclude. "Minimal" does not mean "fewer than offered" — it means nothing beyond what the threat model requires, and this threat model (untrusted content, privileged write, scoped identity, regulated review) requires all four.

@@ -12,30 +12,61 @@ screen_id: "S07D"
 
 # Checkpoint 4: place the work in the right phase
 
-Try it now. Place each activity in the lifecycle phase it belongs to: requirements, design, test, deploy, operate.
+Try it now. For each activity below, select the lifecycle phase it belongs to.
 
-### Answer
+### Activity 1 · Pinning the full model ID and keeping the prior version
 
-- **(a) pinning the full model ID and keeping the prior version**  
-  deploy
-- **(b) gating promotion on the eval result before a version goes to production**  
-  deploy
-- **(c) deciding data must be processed in a specific region**  
-  requirements
-- **(d) instrumenting token cost and latency per call in production**  
-  operate
-- **(e) choosing Amazon Bedrock because the customer holds its compliance posture there**  
-  design
+- **A.** requirements
+- **B.** design
+- **C.** test
+- **D.** deploy
+- **E.** operate
+
+**Answer: D** — Pinning the version and retaining the prior one is a deploy decision.
+
+### Activity 2 · Gating promotion on the eval result before a version goes to production
+
+- **A.** requirements
+- **B.** design
+- **C.** test
+- **D.** deploy
+- **E.** operate
+
+**Answer: D** — Gating promotion on an eval result before production is a deploy decision.
+
+### Activity 3 · Deciding data must be processed in a specific region
+
+- **A.** requirements
+- **B.** design
+- **C.** test
+- **D.** deploy
+- **E.** operate
+
+**Answer: A** — The residency rule is a requirement.
+
+### Activity 4 · Instrumenting token cost and latency per call in production
+
+- **A.** requirements
+- **B.** design
+- **C.** test
+- **D.** deploy
+- **E.** operate
+
+**Answer: E** — Instrumenting cost and latency in production is operate.
+
+### Activity 5 · Choosing Amazon Bedrock because the customer holds its compliance posture there
+
+- **A.** requirements
+- **B.** design
+- **C.** test
+- **D.** deploy
+- **E.** operate
+
+**Answer: B** — The platform that satisfies the requirement is a design choice.
 
 ### Why
 
-- **(a) pinning the full model ID and keeping the prior version** — Pinning the version and retaining the prior one is a deploy decision.
-- **(b) gating promotion on the eval result before a version goes to production** — Gating promotion on an eval result before production is a deploy decision.
-- **(c) deciding data must be processed in a specific region** — The residency rule is a requirement.
-- **(d) instrumenting token cost and latency per call in production** — Instrumenting cost and latency in production is operate.
-- **(e) choosing Amazon Bedrock because the customer holds its compliance posture there** — The platform that satisfies the requirement is a design choice.
-
-The residency rule is a requirement, the platform that satisfies it is a design choice, gating promotion on an eval result is a deploy decision, and instrumenting cost and latency is operate. Writing the eval suite and rubric is test; gating promotion on its result is deploy.
+The residency rule is a requirement, the platform that satisfies it is a design choice, gating promotion on an eval result is a deploy decision, and instrumenting cost and latency is operate. Writing the eval suite and rubric is test; gating promotion on its result is deploy — which is why no activity here lands in test.
 
 ### Other feedback branches
 

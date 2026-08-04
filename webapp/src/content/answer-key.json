@@ -3,19 +3,27 @@
     "kind": "quiz",
     "answers": [
       {
-        "letter": "B",
+        "letters": [
+          "B"
+        ],
         "explanation": "— Sampling makes generation non-deterministic, which is why tests assert on properties and meaning rather than exact text."
       },
       {
-        "letter": "C",
+        "letters": [
+          "C"
+        ],
         "explanation": "— The two levers are independent but can work together."
       },
       {
-        "letter": "B",
+        "letters": [
+          "B"
+        ],
         "explanation": "— Add examples when the output shape is wrong, not when zero-shot already works."
       },
       {
-        "letter": "C",
+        "letters": [
+          "C"
+        ],
         "explanation": "— Batch trades latency for lower per-token cost and avoids the rate limits a synchronous loop hits."
       }
     ],
@@ -25,19 +33,27 @@
     "kind": "quiz",
     "answers": [
       {
-        "letter": "A",
+        "letters": [
+          "A"
+        ],
         "explanation": "— Temperature shapes the probability distribution the model samples from, it does not fix or disable the output. Lower temperature concentrates probability on the most likely tokens, making repeated runs far more consistent (identical outputs are never guaranteed, even at temperature 0), which is what a classifier needs. On the newest models, sampling parameters are omitted entirely. Non-default values return an error, and repeatability is managed through prompt design. Higher temperature spreads the distribution and lets the label and wording vary."
       },
       {
-        "letter": "B",
+        "letters": [
+          "B"
+        ],
         "explanation": "— Examples in a prompt are not training and do not lower cost. They sit in the prompt, demonstrate the exact output shape, and add tokens on every call. Reach for multi-shot when the structure is wrong, and add the fewest examples that make the output reliable."
       },
       {
-        "letter": "C",
+        "letters": [
+          "C"
+        ],
         "explanation": "— Match the request shape to whether a user is waiting. With no user watching and tens of thousands of inputs, the Message Batches API is the right fit: submit the requests in one call, poll for completion, and accept longer latency in exchange for a lower per-token cost. A synchronous loop hits rate limits at this volume. Streaming only helps when someone is watching the output arrive."
       },
       {
-        "letter": "B",
+        "letters": [
+          "B"
+        ],
         "explanation": "— The context window is a fixed budget. An oversized input is rejected with an error before generation; a request that reaches the ceiling mid-generation instead comes back truncated with a model_context_window_exceeded stop reason. The oldest content is never silently dropped. The symptom is a session that passed in testing failing once inputs and turns grow, which is why trimming or summarizing history is the application's job."
       }
     ],
@@ -72,25 +88,28 @@
     ]
   },
   "course-content/module-2-production-grade-prompting-agents-and-tool-use/03-extended-thinking/02-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Answer key"
+        "letters": [
+          "B"
+        ],
+        "explanation": "— A one-word label needs no reasoning pass. Reasoning tokens on every ticket multiply output cost across 50,000 calls with no accuracy gain."
       },
       {
-        "type": "paragraph",
-        "text": "**Classify 50,000 support tickets into three labels overnight.** Leave it off."
+        "letters": [
+          "C"
+        ],
+        "explanation": "— Without the reasoning pass the model commits to a plan before working through the dependencies, and the first dependent step fails."
       },
       {
-        "type": "paragraph",
-        "text": "**Plan a multi-step refactor where each step depends on the previous one.** Enable it, budget for the planning step."
-      },
-      {
-        "type": "paragraph",
-        "text": "**Strip the thinking block out of conversation history to save context before the next tool call.** Never do this."
-      },
+        "letters": [
+          "A"
+        ],
+        "explanation": "— The signature no longer matches and the next request is rejected. Manage accumulated reasoning with context engineering, not by editing the blocks."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -98,28 +117,32 @@
       },
       {
         "type": "paragraph",
-        "text": "**Leave it off.** A one-word label needs no reasoning pass. Reasoning tokens on every ticket multiply output cost across 50,000 calls with no accuracy gain."
-      },
-      {
-        "type": "paragraph",
-        "text": "**Enable it, budget for the planning step.** Without the reasoning pass the model commits to a plan before working through the dependencies, and the first dependent step fails."
-      },
-      {
-        "type": "paragraph",
-        "text": "**Never do this.** The signature no longer matches and the next request is rejected. Manage accumulated reasoning with context engineering, not by editing the blocks."
-      },
-      {
-        "type": "paragraph",
-        "text": "All three calls are right. Classify at volume: leave thinking off. Multi-step dependent plan: enable it and budget for the planning step. Stripping the thinking block: never do this, it breaks the signature."
+        "text": "Classify at volume: leave thinking off. Multi-step dependent plan: enable it and budget for the planning step. Stripping the thinking block: never do this, it breaks the signature."
       }
     ]
   },
   "course-content/module-2-production-grade-prompting-agents-and-tool-use/04-tool-use-and-schema-design/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "paragraph",
-        "text": "**Answer: B** — The defect is in the user turn at Turn 3. The assistant issued a tool_use block with id toolu_01, but the tool_result block references toolu_02. The API matches tool_use and tool_result blocks by id, not by position, so a mismatched id is treated as a reference to a tool_use block that does not exist in the conversation. The fix is to return the result with tool_use_id=\"toolu_01\". This is the invariant from the message block table: every tool_use must have a matching tool_result in the immediately following user turn, with the id preserved exactly. The corrected Turn 3 reads: [tool_result]: tool_use_id=\"toolu_01\", content=\"Balance: $1,240.18\"."
+        "letters": [
+          "B"
+        ],
+        "explanation": "— The defect is in the user turn at Turn 3. The assistant issued a tool_use block with id toolu_01, but the tool_result block references toolu_02. The API matches tool_use and tool_result blocks by id, not by position, so a mismatched id is treated as a reference to a tool_use block that does not exist in the conversation. The fix is to return the result with tool_use_id=\"toolu_01\". This is the invariant from the message block table: every tool_use must have a matching tool_result in the immediately following user turn, with the id preserved exactly. The corrected Turn 3 reads: [tool_result]: tool_use_id=\"toolu_01\", content=\"Balance: $1,240.18\"."
+      }
+    ],
+    "debrief": [
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Why the other options are wrong"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**A.** The description is not the defect. The trace shows Claude selected the correct tool on the first call, which rules out a routing problem. The failure happens after the tool result returns, which means the schema and the description are not what triggered the validation error.",
+          "**C.** Required fields control whether Claude can call the tool without arguments. They do not affect how tool_result blocks are matched to tool_use blocks. The trace shows the tool was called correctly with a valid account_id, so a missing required array is not what caused the error."
+        ]
       }
     ]
   },
@@ -148,11 +171,43 @@
     ]
   },
   "course-content/module-2-production-grade-prompting-agents-and-tool-use/06-context-engineering/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
+      {
+        "letters": [
+          "B"
+        ],
+        "explanation": "— The failure triggered at turn 5, not turn 1. Correct tool selections at turns 1-4 rule out a schema description problem. The turn-5 shift points to accumulated context, which included four large tool results filling the window and pushing current instructions toward the edge."
+      }
+    ],
+    "debrief": [
+      {
+        "type": "heading",
+        "level": 3,
+        "text": "Why — the trace, turn by turn"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**Turn 1** — fetch_policy_document, correct selection, 2,400 tokens. Correct tool call. No sign of trouble yet.",
+          "**Turn 2** — fetch_policy_document, correct selection, 2,400 tokens. Still correct. Context is accumulating: 4,800 tokens of tool output so far.",
+          "**Turn 3** — fetch_policy_document, correct selection, 2,400 tokens. Still correct. Accumulated tool output now around 7,200 tokens.",
+          "**Turn 4** — fetch_policy_document, correct selection, 2,400 tokens. Last correct turn. Four large tool results (9,600 tokens) are now sitting in the context window, crowding the instructions that tell Claude which tool to use next.",
+          "**Turn 5** — search_knowledge_base instead of apply_coverage_rule, wrong selection, 1,800 tokens. This is where the failure starts. Tool selection did not degrade because of a bad schema description; turns 1-4 prove the schema works. The accumulated context from four prior tool calls is what shifted the selection.",
+          "**Turn 6** — search_knowledge_base again, wrong selection (same as turn 5), 1,800 tokens. The same wrong call repeats, confirming this is not a one-off fluke but a systemic drift caused by the crowded context window.",
+          "**Turn 7** — Session ends without result, N/A. The session never recovers and terminates without completing the task."
+        ]
+      },
       {
         "type": "paragraph",
-        "text": "**Answer: B** — The failure triggered at turn 5, not turn 1. Correct tool selections at turns 1-4 rule out a schema description problem. The turn-5 shift points to accumulated context, which included four large tool results filling the window and pushing current instructions toward the edge."
+        "text": "**Why the other options are wrong:**"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**A.** This would fix a tool-selection problem caused by an ambiguous schema. That is not what the trace shows.",
+          "**C.** Increasing max_tokens controls how much Claude can write in a single response, not how much context it can read. That is the wrong parameter for this problem."
+        ]
       }
     ]
   },
@@ -193,25 +248,28 @@
     ]
   },
   "course-content/module-2-production-grade-prompting-agents-and-tool-use/08-agent-memory/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Answer key"
+        "letters": [
+          "B"
+        ],
+        "explanation": "— In-context state resets when the session ends, so on day two the agent has no record of yesterday's check-in. Every session would open as a first contact, and the user has to re-explain their situation from scratch."
       },
       {
-        "type": "paragraph",
-        "text": "**A customer support agent assists the same user across daily check-ins over two weeks. Each session starts where the previous one left off.** External storage: write state to a database at session end, then read it back at session start."
+        "letters": [
+          "C"
+        ],
+        "explanation": "— External storage adds read and write calls to a job that has no continuity requirement. Nothing breaks, but every run pays a latency and implementation cost for state the agent will never reuse."
       },
       {
-        "type": "paragraph",
-        "text": "**A document formatter receives a file, applies a transformation, returns the output, and terminates. Each job is fully independent.** No persistent memory (stateless): each session starts fresh."
-      },
-      {
-        "type": "paragraph",
-        "text": "**A coding assistant works with a developer across a multi-hour session. The session will not continue after it ends.** In-context memory: all state lives in the active conversation."
-      },
+        "letters": [
+          "A"
+        ],
+        "explanation": "— External storage is unnecessary overhead for a session that ends when the developer logs off. A summarized memory layer would compress out the exact code-level detail the developer still needs to reference later in the same session."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -219,19 +277,7 @@
       },
       {
         "type": "paragraph",
-        "text": "**Correct scope:** External storage: write state to a database at session end, then read it back at session start. In-context state resets when the session ends, so on day two the agent has no record of yesterday's check-in. Every session would open as a first contact, and the user has to re-explain their situation from scratch."
-      },
-      {
-        "type": "paragraph",
-        "text": "**Correct scope:** No persistent memory (stateless): each session starts fresh. External storage adds read and write calls to a job that has no continuity requirement. Nothing breaks, but every run pays a latency and implementation cost for state the agent will never reuse."
-      },
-      {
-        "type": "paragraph",
-        "text": "**Correct scope:** In-context memory: all state lives in the active conversation. External storage is unnecessary overhead for a session that ends when the developer logs off. A summarized memory layer would compress out the exact code-level detail the developer still needs to reference later in the same session."
-      },
-      {
-        "type": "paragraph",
-        "text": "All three use cases matched to the right memory scope."
+        "text": "The deciding question is always continuity: does state need to outlive the session? Cross-session continuity needs external storage, independent jobs need no memory at all, and a single long session is exactly what the context window already covers."
       }
     ]
   },
@@ -298,25 +344,28 @@
     ]
   },
   "course-content/module-2-production-grade-prompting-agents-and-tool-use/10-multimodal-and-batch-ingestion/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Answer key"
+        "letters": [
+          "B"
+        ],
+        "explanation": "— Inline base64 would resend the full payload with every request, adding transfer overhead and latency on every call."
       },
       {
-        "type": "paragraph",
-        "text": "**A reference product diagram used in every request your pipeline makes** Files API: upload once, reference file_id in each request"
+        "letters": [
+          "C"
+        ],
+        "explanation": "— Uploading to the Files API adds a round-trip step for an asset that will only ever be used once."
       },
       {
-        "type": "paragraph",
-        "text": "**A one-off screenshot of a UI bug, submitted by a support engineer in a single request** Inline base64: encode and include directly in the message block"
-      },
-      {
-        "type": "paragraph",
-        "text": "**A job classifying 5,000 customer feedback responses** Message Batches API: submit all requests in one batch call, poll for completion"
-      },
+        "letters": [
+          "A"
+        ],
+        "explanation": "— The synchronous API would process requests sequentially or require managing thousands of concurrent connections against rate limits."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -324,33 +373,28 @@
       },
       {
         "type": "paragraph",
-        "text": "**Correct method:** Files API: upload once, reference file_id in each request Inline base64 would resend the full payload with every request, adding transfer overhead and latency on every call."
-      },
-      {
-        "type": "paragraph",
-        "text": "**Correct method:** Inline base64: encode and include directly in the message block Files uploaded to API add a round-trip step for an asset that will only ever be used once."
-      },
-      {
-        "type": "paragraph",
-        "text": "**Correct method:** Message Batches API: submit all requests in one batch call, poll for completion Synchronous API would process requests sequentially or require managing thousands of concurrent connections against rate limits."
-      },
-      {
-        "type": "paragraph",
-        "text": "All three scenarios matched to the right encoding method."
+        "text": "Match the encoding to the asset's lifetime and volume: reused assets go to the Files API once, one-off inputs travel inline, and bulk offline jobs belong on the Batches API."
       }
     ]
   },
   "course-content/module-3-claude-code-mcp-and-integration/02-permission-modes-and-human-gates/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "paragraph",
-        "text": "**Answer: Pieces C and D**"
+        "letters": [
+          "C",
+          "D"
+        ],
+        "explanation": "— C gates shell execution: it allows the safe npm run command and denies destructive shell commands (rm, git push), so the agent can edit and run safe commands but is blocked from destructive ones. D enforces the path restriction: the deny rule on .env.production holds at the settings layer regardless of what the agent is asked to do during the session."
       },
       {
-        "type": "paragraph",
-        "text": "**Answer: b**"
-      },
+        "letters": [
+          "B"
+        ],
+        "explanation": "— Auto-approving edits is the right default for the trusted local refactor, but the worst-case question still governs the one high-cost action. A write to a deployment configuration file that several production services read is hard to undo and reaches beyond the file, so a person reviews and approves it before the write executes."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -358,7 +402,19 @@
       },
       {
         "type": "paragraph",
-        "text": "Pieces C and D together satisfy the scenario. Reads, searches, and navigation run without confirmation, file edits are allowed, and destructive shell commands are denied, while the deny rule on .env.production enforces the path restriction at the settings layer. (You might wonder about an auto-style classifier here: it would also catch a destructive command, but this scenario calls for deterministic, predictable shell-gating, which the explicit deny rule gives you without depending on a classifier’s judgment.) Part 2: auto-approving edits is the right default for the trusted local refactor, but the worst-case question still governs the one high-cost action. A write to a deployment configuration file that several production services read is hard to undo and reaches beyond the file, so a person reviews and approves it before the write executes."
+        "text": "Pieces C and D together satisfy the scenario. Reads, searches, and navigation run without confirmation, file edits are allowed, and destructive shell commands are denied, while the deny rule on .env.production enforces the path restriction at the settings layer. (You might wonder about an auto-style classifier here: it would also catch a destructive command, but this scenario calls for deterministic, predictable shell-gating, which the explicit deny rule gives you without depending on a classifier’s judgment.)"
+      },
+      {
+        "type": "paragraph",
+        "text": "The pieces that don't belong:"
+      },
+      {
+        "type": "list",
+        "items": [
+          "**A.** This mode prompts before nearly every edit or command; it does not match the \"auto-approve file edits\" requirement in the scenario.",
+          "**B.** With bypassPermissions set, the agent can run any shell command without confirmation, including destructive ones, and the protected-path guard is also removed. The scenario requires shell-command oversight.",
+          "**E.** Allows every shell command with no destructive-command gate at all, the opposite of what the scenario requires."
+        ]
       },
       {
         "type": "heading",
@@ -368,37 +424,29 @@
       {
         "type": "list",
         "items": [
-          "**Check both parts:** Part 1 needs Pieces C and D together. Part 2 asks where the human gate belongs for a high-cost, hard-to-undo write, review Option (a) treats the session default as if it answered the per-action question, which it does not; option (c) removes every prompt and the protected-path guard; option (d) reviews the change only after it has already reached production.",
+          "**Check both parts:** Part 1 needs Pieces C and D together. Part 2 asks where the human gate belongs for a high-cost, hard-to-undo write. Option (A) treats the session default as if it answered the per-action question, which it does not; option (C) removes every prompt and the protected-path guard; option (D) reviews the change only after it has already reached production.",
           "**Revisit Part 1:** Without the deny rule on .env.production, the agent can read that file if it matches something in a broad operation. The deny rule is what enforces the path restriction at the configuration layer."
         ]
       }
     ]
   },
   "course-content/module-3-claude-code-mcp-and-integration/03-durable-project-context/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Answer"
+        "letters": [
+          "A"
+        ],
+        "explanation": "— PreToolUse fires before the tool call executes, which is when blocking is possible. A PostToolUse hook cannot block because the tool has already run."
       },
       {
-        "type": "table",
-        "rows": [
-          [
-            "Blank",
-            "Correct value"
-          ],
-          [
-            "Blank 1: the lifecycle event",
-            "PreToolUse"
-          ],
-          [
-            "Blank 2: the command",
-            "A script that reads the tool call from stdin, checks the file path, and exits with code 2 when the path is .env.production (writing the reason to stderr)."
-          ]
-        ]
-      },
+        "letters": [
+          "A"
+        ],
+        "explanation": "— The command reads the tool call from stdin, checks the file path, and exits with code 2 to block it, and anything written to stderr becomes the message Claude sees."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -406,7 +454,7 @@
       },
       {
         "type": "paragraph",
-        "text": "PreToolUse fires before the tool call executes, which is when blocking is possible. A PostToolUse hook cannot block because the tool has already run. The command reads the tool call from stdin, checks the file path, and exits with code 2 to block it, and anything written to stderr becomes the message Claude sees."
+        "text": "Blocking has to happen at the only moment blocking is possible: before the tool runs, with an exit code the runtime treats as a veto. Everything else — auditing, warning — observes the read without preventing it."
       },
       {
         "type": "heading",
@@ -423,51 +471,38 @@
     ]
   },
   "course-content/module-3-claude-code-mcp-and-integration/04-packaging-workflows/02-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Answer"
+        "letters": [
+          "B"
+        ],
+        "explanation": "— This is the filesystem-discovery runtime: Claude Code finds SKILL.md in .claude/skills and loads it when the description matches the request."
       },
       {
-        "type": "table",
-        "rows": [
-          [
-            "Situation",
-            "Correct configuration"
-          ],
-          [
-            "A developer wants the skill to load when they ask for a review in the Claude Code terminal.",
-            "Place SKILL.md in .claude/skills with a description that matches review requests."
-          ],
-          [
-            "A service calls the Messages API and wants the skill to run as part of the request.",
-            "Send the code-execution and skills beta headers and write the skill so its steps do not depend on local files or local tools."
-          ],
-          [
-            "A scheduled headless job uses Agent SDK and expects the skill from the repo to load.",
-            "Enable filesystem sources by setting settingSources explicitly so the agent loads skills from the project. Do not rely on a default, and confirm current default behavior against the Agent SDK reference at build time."
-          ],
-          [
-            "A product team wants the same review-checklist skill to run inside a long-running agent that Anthropic hosts, reachable by an agent ID across sessions.",
-            "Define the agent as an API resource that lists the skill and set the managed-agents-2026-04-01 beta header on the calls. Write the skill so its steps do not depend on local files, because it will run in Anthropic’s sandbox."
-          ]
-        ]
+        "letters": [
+          "D"
+        ],
+        "explanation": "— The Messages API runs the skill inside Anthropic’s code execution container, not your machine, so the beta headers enable it and the skill must not depend on local files or tools."
       },
+      {
+        "letters": [
+          "A"
+        ],
+        "explanation": "— Whether filesystem settings load in the Agent SDK is controlled by the settingSources configuration; set it explicitly rather than relying on a default."
+      },
+      {
+        "letters": [
+          "C"
+        ],
+        "explanation": "— Claude Managed Agents load the skill server-side as part of the agent resource definition, and the managed sandbox is why the skill cannot depend on local files."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
         "text": "Why"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**A developer wants the skill to load when they ask for a review in the Claude Code terminal.** — This is the filesystem-discovery runtime: Claude Code.",
-          "**A service calls the Messages API and wants the skill to run as part of the request.** — The Messages API runs the skill inside Anthropic’s code execution container, not your machine.",
-          "**A scheduled headless job uses Agent SDK and expects the skill from the repo to load.** — Whether filesystem settings load in the Agent SDK is controlled by the settingSources configuration; set it explicitly rather than relying on a default.",
-          "**A product team wants the same review-checklist skill to run inside a long-running agent that Anthropic hosts, reachable by an agent ID across sessions.** — Claude Managed Agents load the skill server-side as part of the agent resource definition."
-        ]
       },
       {
         "type": "paragraph",
@@ -490,11 +525,15 @@
     "kind": "quiz",
     "answers": [
       {
-        "letter": "C",
+        "letters": [
+          "C"
+        ],
         "explanation": ""
       },
       {
-        "letter": "A",
+        "letters": [
+          "A"
+        ],
         "explanation": ""
       }
     ],
@@ -523,38 +562,34 @@
     ]
   },
   "course-content/module-3-claude-code-mcp-and-integration/05-mcp-servers/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Answer"
+        "letters": [
+          "C"
+        ],
+        "explanation": "— stdio runs the server as a subprocess on your machine, and local scope keeps a personal tool personal."
       },
       {
-        "type": "table",
-        "rows": [
-          [
-            "Scenario",
-            "Correct transport + scope"
-          ],
-          [
-            "A local SQLite query tool you use only on your development machine.",
-            "stdio + Local"
-          ],
-          [
-            "A code search service hosted on your company’s infrastructure that the whole engineering team should access.",
-            "HTTP + Project (.mcp.json)"
-          ],
-          [
-            "An experimental web-scraping server you are testing this week against one specific repository, not ready to share.",
-            "stdio or HTTP + Local"
-          ],
-          [
-            "A security-scanning server your organization’s IT team needs deployed to every developer’s Claude Code installation.",
-            "HTTP + Enterprise (managed settings)"
-          ]
-        ]
+        "letters": [
+          "A"
+        ],
+        "explanation": "— HTTP is the transport for a service hosted on company infrastructure, and project scope (.mcp.json) shares the configuration with everyone who clones the repo."
       },
+      {
+        "letters": [
+          "D"
+        ],
+        "explanation": "— An experiment can run over either transport, but local scope is what keeps the configuration personal and out of version control until it is ready to share."
+      },
+      {
+        "letters": [
+          "B"
+        ],
+        "explanation": "— Enterprise scope deploys the server administratively to every installation, and HTTP reaches the centrally hosted service."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -562,7 +597,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Right on all four. The decision logic: stdio is for servers that run on your machine only, while HTTP is for anything hosted remotely or accessed by more than one machine. Local scope keeps a server personal, project scope (.mcp.json) shares it with everyone who clones the repo, and enterprise scope deploys it administratively to all users."
+        "text": "The decision logic: stdio is for servers that run on your machine only, while HTTP is for anything hosted remotely or accessed by more than one machine. Local scope keeps a server personal, project scope (.mcp.json) shares it with everyone who clones the repo, and enterprise scope deploys it administratively to all users."
       },
       {
         "type": "heading",
@@ -581,7 +616,9 @@
     "kind": "quiz",
     "answers": [
       {
-        "letter": "B",
+        "letters": [
+          "B"
+        ],
         "explanation": ""
       }
     ],
@@ -691,56 +728,44 @@
     ]
   },
   "course-content/module-4-production-engineering-evals-and-security/02-evals-and-judges/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Answer"
+        "letters": [
+          "B"
+        ],
+        "explanation": "— The dataset case is a meeting transcript where three action items are assigned; the expected_behavior must name that specific output, not restate the input."
       },
       {
-        "type": "table",
-        "rows": [
-          [
-            "Row",
-            "Correct answer"
-          ],
-          [
-            "Expected output for the meeting-transcript case",
-            "A summary that lists all three action items with their owners"
-          ],
-          [
-            "Expected output for the bug-report case",
-            "A summary of the bug and its repro steps that omits the unrelated aside"
-          ],
-          [
-            "Judge score band 1 to 3",
-            "Misses required content"
-          ],
-          [
-            "Judge score band 4 to 7",
-            "Partial: some required content present, some missing"
-          ],
-          [
-            "Judge score band 8 to 10",
-            "Complete and faithful to the expected behavior"
-          ]
-        ]
+        "letters": [
+          "D"
+        ],
+        "explanation": "— The dataset case is a bug report with repro steps and one unrelated aside; the expected output names the bug and repro steps and excludes the aside."
       },
+      {
+        "letters": [
+          "A"
+        ],
+        "explanation": "— The low band anchors to missing the required content entirely."
+      },
+      {
+        "letters": [
+          "E"
+        ],
+        "explanation": "— The middle band anchors to partial coverage."
+      },
+      {
+        "letters": [
+          "C"
+        ],
+        "explanation": "— The top band anchors to complete, faithful coverage of the expected behavior."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
         "text": "Why"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**Expected output for the meeting-transcript case** — The dataset case is a meeting transcript where three action items are assigned; the expected_behavior must name that specific output, not restate the input.",
-          "**Expected output for the bug-report case** — The dataset case is a bug report with repro steps and one unrelated aside; the expected output names the bug and repro steps and excludes the aside.",
-          "**Judge score band 1 to 3** — The low band anchors to missing the required content entirely.",
-          "**Judge score band 4 to 7** — The middle band anchors to partial coverage.",
-          "**Judge score band 8 to 10** — The top band anchors to complete, faithful coverage of the expected behavior."
-        ]
       },
       {
         "type": "paragraph",
@@ -752,7 +777,9 @@
     "kind": "quiz",
     "answers": [
       {
-        "letter": "C",
+        "letters": [
+          "C"
+        ],
         "explanation": "— The trace shows both components passing alone, so the failure can only live in the handoff: retrieve() returns chunk dicts and build_prompt() never reads the content field, so the model got malformed context. Option C extracts the content and adds a test on that exact seam. This is the integration level."
       }
     ],
@@ -765,6 +792,23 @@
       {
         "type": "paragraph",
         "text": "You chose Option C and named the integration level. The trace shows both components passing alone, so the failure can only live in the handoff: retrieve() returns chunk dicts and build_prompt() never reads the content field, so the model got malformed context. Option C extracts the content and adds a test on that exact seam."
+      },
+      {
+        "type": "table",
+        "rows": [
+          [
+            "Option",
+            "Why"
+          ],
+          [
+            "A",
+            "The parser already passes its unit test in the trace. A component that passes in isolation is not where an end-to-end-only failure lives."
+          ],
+          [
+            "B",
+            "The model call passes its functional test in the trace. Rewording the prompt ignores the seam where chunks are placed into the prompt without reading the content field."
+          ]
+        ]
       }
     ]
   },
@@ -799,15 +843,21 @@
     "kind": "quiz",
     "answers": [
       {
-        "letter": "C",
+        "letters": [
+          "C"
+        ],
         "explanation": "— The deciding constraint is cost-at-volume, and the eval confirms the quality bar still holds, so paying for a larger model buys nothing."
       },
       {
-        "letter": "B",
+        "letters": [
+          "B"
+        ],
         "explanation": "— The decision constraint is quality on hard reasoning where the cost of a wrong answer is high, and the eval shows the step up is needed."
       },
       {
-        "letter": "D",
+        "letters": [
+          "D"
+        ],
         "explanation": "— The deciding constraint is that traffic is mixed, so a single model either overpays on the simple requests or underperforms on the complex ones."
       }
     ],
@@ -835,55 +885,42 @@
     ]
   },
   "course-content/module-4-production-engineering-evals-and-security/05-cost-and-orchestration/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 2,
-        "text": "Answers"
+        "letters": [
+          "C"
+        ],
+        "explanation": "— Fetch-once retrieval with the smallest model that works; no need to pay for iteration or fan-out."
       },
       {
-        "type": "table",
-        "rows": [
-          [
-            "Scenario",
-            "Correct snippet"
-          ],
-          [
-            "A single-fact lookup against a stable reference corpus",
-            "C"
-          ],
-          [
-            "A broad research question that splits into independent parts explored at once",
-            "A"
-          ],
-          [
-            "A user-facing request where the reply should feel instant",
-            "D"
-          ],
-          [
-            "A cost-sensitive, non-urgent batch job",
-            "B"
-          ]
-        ]
+        "letters": [
+          "A"
+        ],
+        "explanation": "— The one task that genuinely parallelizes, so the fan-out multiplier buys parallel exploration."
       },
+      {
+        "letters": [
+          "D"
+        ],
+        "explanation": "— Streaming so the response is perceived as fast even before it finishes."
+      },
+      {
+        "letters": [
+          "B"
+        ],
+        "explanation": "— Batch and cache because latency does not matter and the same context recurs across requests. The Message Batches API processes requests asynchronously and reduces cost by approximately 50%; prompt caching compounds the saving when context is reused across calls."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
         "text": "Why"
       },
       {
-        "type": "list",
-        "items": [
-          "**A single-fact lookup against a stable reference corpus → C.** Fetch-once retrieval with the smallest model that works; no need to pay for iteration or fan-out.",
-          "**A broad research question that splits into independent parts explored at once → A.** The one task that genuinely parallelizes, so the fan-out multiplier buys parallel exploration.",
-          "**A user-facing request where the reply should feel instant → D.** Streaming so the response is perceived as fast even before it finishes.",
-          "**A cost-sensitive, non-urgent batch job → B.** Batch and cache because latency does not matter and the same context recurs across requests. The Message Batches API processes requests asynchronously and reduces cost by approximately 50%; prompt caching compounds the saving when context is reused across calls."
-        ]
-      },
-      {
         "type": "paragraph",
-        "text": "You matched 1 to C (fetch-once, smallest model that works), 2 to A (the one task that splits into independent parts, so the fan-out multiplier buys parallel exploration), 3 to D (streaming so the reply feels instant), and 4 to B (batch and cache for a cost-sensitive non-urgent job). Your explanations for the incorrect choice correctly identify the real cost, such as paying the fan-out token multiplier on the lookup by choosing A, or forfeiting the Message Batches API's approximately 50% cost reduction by choosing a synchronous path for a non-urgent job."
+        "text": "You matched 1 to C (fetch-once, smallest model that works), 2 to A (the one task that splits into independent parts, so the fan-out multiplier buys parallel exploration), 3 to D (streaming so the reply feels instant), and 4 to B (batch and cache for a cost-sensitive non-urgent job). The real cost of a wrong pick is concrete: paying the fan-out token multiplier on the lookup by choosing A, or forfeiting the Message Batches API's approximately 50% cost reduction by choosing a synchronous path for a non-urgent job."
       },
       {
         "type": "heading",
@@ -900,12 +937,23 @@
     ]
   },
   "course-content/module-4-production-engineering-evals-and-security/06-security/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
+      {
+        "letters": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "explanation": "— All four pieces belong. The hook blocks before the tool runs, the deny rule restricts the accessible filesystem, the env reference keeps the credential out of source control, and the audit log creates the record. The injected write hits the hook block and the audit log, not the disk."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
-        "text": "Model answer"
+        "text": "Why each control earns its place"
       },
       {
         "type": "paragraph",
@@ -925,16 +973,7 @@
       },
       {
         "type": "paragraph",
-        "text": "All four pieces belong. The hook blocks before the tool runs, the deny rule restricts the accessible filesystem, the env reference keeps the credential out of source control, and the audit log creates the record. The injected write hits the hook block and the audit log, not the disk."
-      },
-      {
-        "type": "heading",
-        "level": 3,
-        "text": "Why"
-      },
-      {
-        "type": "paragraph",
-        "text": "All four controls belong: the hook, the deny rule, the environment reference, and the audit log."
+        "text": "The trap in this checkpoint is looking for a piece to exclude. \"Minimal\" does not mean \"fewer than offered\" — it means nothing beyond what the threat model requires, and this threat model (untrusted content, privileged write, scoped identity, regulated review) requires all four."
       }
     ]
   },
@@ -1022,8 +1061,46 @@
     ]
   },
   "course-content/module-5-accelerators-and-ip-contribution/03-contributing-back/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
+      {
+        "letters": [
+          "B"
+        ],
+        "explanation": "— A focused tool lives and is reviewed in its own repository."
+      },
+      {
+        "letters": [
+          "C"
+        ],
+        "explanation": "— A whole application does not fit a review built for one pattern; only the extracted pattern goes to the Cookbook."
+      },
+      {
+        "letters": [
+          "A"
+        ],
+        "explanation": "— A fix to an existing example belongs in that example’s own repository."
+      },
+      {
+        "letters": [
+          "C"
+        ],
+        "explanation": "— A focused tool still needs a test that proves the wrapper behaves."
+      },
+      {
+        "letters": [
+          "A"
+        ],
+        "explanation": "— The application must be reduced to the pattern before it fits the review."
+      },
+      {
+        "letters": [
+          "B"
+        ],
+        "explanation": "— Engagement code needs the licensing gate cleared before any technical review."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -1051,92 +1128,63 @@
     "kind": "quiz",
     "answers": [
       {
-        "letter": "B",
+        "letters": [
+          "B"
+        ],
         "explanation": "— B is checkable and tied to a specific business process constraint (human-in-the-loop review). A is not checkable. C and D are infrastructure requirements, not functional ones."
       },
       {
-        "letter": "C",
+        "letters": [
+          "C"
+        ],
         "explanation": "— C is checkable and tied to a specific regulatory constraint (specific data residency requirement). A is not checkable. B is a design choice, not an infrastructure requirement. D is a functional requirement, not an infrastructure one."
       }
     ],
     "debrief": []
   },
   "course-content/module-5-accelerators-and-ip-contribution/04-requirements-and-lifecycle/04-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Answer"
+        "letters": [
+          "D"
+        ],
+        "explanation": "— Pinning the version and retaining the prior one is a deploy decision."
       },
       {
-        "type": "list",
-        "items": [
-          "**(a) pinning the full model ID and keeping the prior version**"
-        ]
+        "letters": [
+          "D"
+        ],
+        "explanation": "— Gating promotion on an eval result before production is a deploy decision."
       },
       {
-        "type": "paragraph",
-        "text": "deploy"
+        "letters": [
+          "A"
+        ],
+        "explanation": "— The residency rule is a requirement."
       },
       {
-        "type": "list",
-        "items": [
-          "**(b) gating promotion on the eval result before a version goes to production**"
-        ]
+        "letters": [
+          "E"
+        ],
+        "explanation": "— Instrumenting cost and latency in production is operate."
       },
       {
-        "type": "paragraph",
-        "text": "deploy"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**(c) deciding data must be processed in a specific region**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "requirements"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**(d) instrumenting token cost and latency per call in production**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "operate"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**(e) choosing Amazon Bedrock because the customer holds its compliance posture there**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "design"
-      },
+        "letters": [
+          "B"
+        ],
+        "explanation": "— The platform that satisfies the requirement is a design choice."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
         "text": "Why"
       },
       {
-        "type": "list",
-        "items": [
-          "**(a) pinning the full model ID and keeping the prior version** — Pinning the version and retaining the prior one is a deploy decision.",
-          "**(b) gating promotion on the eval result before a version goes to production** — Gating promotion on an eval result before production is a deploy decision.",
-          "**(c) deciding data must be processed in a specific region** — The residency rule is a requirement.",
-          "**(d) instrumenting token cost and latency per call in production** — Instrumenting cost and latency in production is operate.",
-          "**(e) choosing Amazon Bedrock because the customer holds its compliance posture there** — The platform that satisfies the requirement is a design choice."
-        ]
-      },
-      {
         "type": "paragraph",
-        "text": "The residency rule is a requirement, the platform that satisfies it is a design choice, gating promotion on an eval result is a deploy decision, and instrumenting cost and latency is operate. Writing the eval suite and rubric is test; gating promotion on its result is deploy."
+        "text": "The residency rule is a requirement, the platform that satisfies it is a design choice, gating promotion on an eval result is a deploy decision, and instrumenting cost and latency is operate. Writing the eval suite and rubric is test; gating promotion on its result is deploy — which is why no activity here lands in test."
       },
       {
         "type": "heading",
@@ -1152,53 +1200,34 @@
     ]
   },
   "course-content/module-5-accelerators-and-ip-contribution/05-deployment-and-versioning/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Answer"
+        "letters": [
+          "B"
+        ],
+        "explanation": "— Bedrock keeps identity and data inside the AWS boundary the customer already cleared; the first-party API or Vertex AI moves them outside it."
       },
       {
-        "type": "list",
-        "items": [
-          "**Platform Group**"
-        ]
+        "letters": [
+          "A"
+        ],
+        "explanation": "— An AWS identity reference stays inside the customer's cleared boundary; an Anthropic key moves identity outside it."
       },
       {
-        "type": "paragraph",
-        "text": "Amazon Bedrock"
+        "letters": [
+          "A"
+        ],
+        "explanation": "— The pinned full Bedrock model ID (with the anthropic. prefix) makes an upstream change something you adopt deliberately; a moving alias drifts underneath you."
       },
       {
-        "type": "list",
-        "items": [
-          "**Identity Group**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "AWS identity reference"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**Model reference group**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "A pinned full model ID"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**Rollback Group**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "Retain the prior pinned version"
-      },
+        "letters": [
+          "A"
+        ],
+        "explanation": "— Retaining the prior version is what gives you a rollback target; a pinned ID with no retained version still cannot roll back."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -1226,7 +1255,9 @@
     "kind": "quiz",
     "answers": [
       {
-        "letter": "B",
+        "letters": [
+          "B"
+        ],
         "explanation": ""
       }
     ],
@@ -1262,43 +1293,22 @@
     ]
   },
   "course-content/module-5-accelerators-and-ip-contribution/07-trust-boundaries/03-checkpoint.md": {
-    "kind": "freeform",
-    "modelAnswer": [
+    "kind": "quiz",
+    "answers": [
       {
-        "type": "heading",
-        "level": 3,
-        "text": "Answer key"
+        "letters": [
+          "A"
+        ],
+        "explanation": "— Wrapping the fetched content means the next component treats it as data rather than instructions. This closes the injection seam."
       },
       {
-        "type": "list",
-        "items": [
-          "**BLANK 1: control on the seam receiving untrusted fetched content**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "`treat_as_data`"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**BLANK 2: identity scope**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "`least_privilege_read_only`"
-      },
-      {
-        "type": "list",
-        "items": [
-          "**Distractors**"
-        ]
-      },
-      {
-        "type": "paragraph",
-        "text": "`run_as_instructions`, `full_access`"
-      },
+        "letters": [
+          "B"
+        ],
+        "explanation": "— Scoping the most privileged component to least privilege means a steered action cannot reach beyond its task."
+      }
+    ],
+    "debrief": [
       {
         "type": "heading",
         "level": 3,
@@ -1306,7 +1316,7 @@
       },
       {
         "type": "paragraph",
-        "text": "Blank 1 wraps the fetched content, so the next component treats it as data, rather than instructions. This closes the injection seam. Blank 2 scopes the most privileged component to least privilege, so a steered action cannot reach beyond its task. Together they hold both boundaries under review."
+        "text": "Blank 1 wraps the fetched content, so the next component treats it as data, rather than instructions. Blank 2 scopes the most privileged component to least privilege. Together they hold both boundaries under review. The two distractors are the two failure modes: `run_as_instructions` lets untrusted content cross as instructions, and `full_access` makes the privileged component the weak point for the whole app."
       },
       {
         "type": "heading",

@@ -12,7 +12,7 @@ screen_id: "S07"
 
 # Checkpoint 2: Choose the contribution channel and the readiness fix
 
-Try it now. Read the three cases below. Match each case to the channel built for it and match each case to the one readiness item the snippet is missing.
+Try it now. Read the three cases below. For each case, select the channel built for it, then select the one readiness item its snippet is missing.
 
 **Case A:** A focused tool that wraps a single API into a clean function. The snippet is the function and nothing else.
 
@@ -20,45 +20,53 @@ Try it now. Read the three cases below. Match each case to the channel built for
 
 **Case C:** A one-line fix to an existing Cookbook example. The snippet is the corrected line, carried in from a customer engagement.
 
-### Match 1: case to channel
+### Channel for Case A · the focused API-wrapper tool
 
-Options:
+- **A.** The Cookbook example's own repository
+- **B.** The tool's own repository
+- **C.** The Cookbook, but only after the reusable pattern is stripped out as a focused example
 
-- The tool's own repository
-- The Cookbook, but only after the reusable pattern is stripped out as a focused example
-- The Cookbook example's own repository
+**Answer: B** — A focused tool lives and is reviewed in its own repository.
 
-Correct matches:
+### Channel for Case B · the full customer-service application
 
-- **Case A: A focused tool that wraps a single API into a clean function. The snippet is the function and nothing else.**  
-  The tool's own repository  
-  A focused tool lives and is reviewed in its own repository.
-- **Case B: A full customer-service application shared whole, including its UI and deployment scripts.**  
-  The Cookbook, but only after the reusable pattern is stripped out as a focused example  
-  A whole application does not fit a review built for one pattern; only the extracted pattern goes to the Cookbook.
-- **Case C: A one-line fix to an existing Cookbook example. The snippet is the corrected line, carried in from a customer engagement.**  
-  The Cookbook example's own repository  
-  A fix to an existing example belongs in that example’s own repository.
+- **A.** The Cookbook example's own repository
+- **B.** The tool's own repository
+- **C.** The Cookbook, but only after the reusable pattern is stripped out as a focused example
 
-### Match 2: case to the missing readiness item
+**Answer: C** — A whole application does not fit a review built for one pattern; only the extracted pattern goes to the Cookbook.
 
-Options:
+### Channel for Case C · the one-line Cookbook fix
 
-- A test that proves the wrapper behaves
-- Reduction to a single focused pattern, because a whole application does not fit a review built for one pattern
-- The rights check, because engagement code can carry a licensing constraint that blocks the merge before any technical review
+- **A.** The Cookbook example's own repository
+- **B.** The tool's own repository
+- **C.** The Cookbook, but only after the reusable pattern is stripped out as a focused example
 
-Correct matches:
+**Answer: A** — A fix to an existing example belongs in that example’s own repository.
 
-- **Case A: A focused tool that wraps a single API into a clean function. The snippet is the function and nothing else.**  
-  A test that proves the wrapper behaves  
-  A focused tool still needs a test that proves the wrapper behaves.
-- **Case B: A full customer-service application shared whole, including its UI and deployment scripts.**  
-  Reduction to a single focused pattern, because a whole application does not fit a review built for one pattern  
-  The application must be reduced to the pattern before it fits the review.
-- **Case C: A one-line fix to an existing Cookbook example. The snippet is the corrected line, carried in from a customer engagement.**  
-  The rights check, because engagement code can carry a licensing constraint that blocks the merge before any technical review  
-  Engagement code needs the licensing gate cleared before any technical review.
+### Missing readiness item for Case A · the focused API-wrapper tool
+
+- **A.** Reduction to a single focused pattern, because a whole application does not fit a review built for one pattern
+- **B.** The rights check, because engagement code can carry a licensing constraint that blocks the merge before any technical review
+- **C.** A test that proves the wrapper behaves
+
+**Answer: C** — A focused tool still needs a test that proves the wrapper behaves.
+
+### Missing readiness item for Case B · the full customer-service application
+
+- **A.** Reduction to a single focused pattern, because a whole application does not fit a review built for one pattern
+- **B.** The rights check, because engagement code can carry a licensing constraint that blocks the merge before any technical review
+- **C.** A test that proves the wrapper behaves
+
+**Answer: A** — The application must be reduced to the pattern before it fits the review.
+
+### Missing readiness item for Case C · the one-line Cookbook fix
+
+- **A.** Reduction to a single focused pattern, because a whole application does not fit a review built for one pattern
+- **B.** The rights check, because engagement code can carry a licensing constraint that blocks the merge before any technical review
+- **C.** A test that proves the wrapper behaves
+
+**Answer: B** — Engagement code needs the licensing gate cleared before any technical review.
 
 ### Why
 

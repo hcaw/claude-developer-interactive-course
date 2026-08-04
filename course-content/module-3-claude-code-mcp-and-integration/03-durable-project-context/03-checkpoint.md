@@ -5,16 +5,16 @@ section: 3
 section_title: "Durable Project Context"
 article: 3
 article_type: "Checkpoint"
-title: "Checkpoint 2: drag the correct value"
+title: "Checkpoint 2: select the correct value"
 duration: "3 min"
 screen_id: "S07"
 ---
 
-# Checkpoint 2: drag the correct value
+# Checkpoint 2: select the correct value
 
 Try it now. You are setting up a hook that enforces a path restriction, and the configuration below has two blanks.
 
-Select the correct one: the lifecycle event that runs before a tool call executes, and the command the hook runs to block reads of `.env.production`.
+Select the correct value for each blank: the lifecycle event that runs before a tool call executes, and the command the hook runs to block reads of `.env.production`.
 
 ```json
 {
@@ -29,29 +29,26 @@ Select the correct one: the lifecycle event that runs before a tool call execute
 }
 ```
 
-### Blank 1: the lifecycle event
+### Blank 1 · The lifecycle event
 
-- PreToolUse
-- PostToolUse
-- UserPromptSubmit
-- SessionStart
+- **A.** PreToolUse
+- **B.** PostToolUse
+- **C.** UserPromptSubmit
+- **D.** SessionStart
 
-### Blank 2: the command
+**Answer: A** — PreToolUse fires before the tool call executes, which is when blocking is possible. A PostToolUse hook cannot block because the tool has already run.
 
-- A script that reads the tool call from stdin, checks the file path, and exits with code 2 when the path is .env.production (writing the reason to stderr).
-- A script that logs the tool call to an audit file and exits 0.
-- A script that prints a warning and exits 0 unconditionally.
+### Blank 2 · The command
 
-### Answer
+- **A.** A script that reads the tool call from stdin, checks the file path, and exits with code 2 when the path is .env.production (writing the reason to stderr).
+- **B.** A script that logs the tool call to an audit file and exits 0.
+- **C.** A script that prints a warning and exits 0 unconditionally.
 
-| Blank | Correct value |
-|---|---|
-| Blank 1: the lifecycle event | PreToolUse |
-| Blank 2: the command | A script that reads the tool call from stdin, checks the file path, and exits with code 2 when the path is .env.production (writing the reason to stderr). |
+**Answer: A** — The command reads the tool call from stdin, checks the file path, and exits with code 2 to block it, and anything written to stderr becomes the message Claude sees.
 
 ### Why
 
-PreToolUse fires before the tool call executes, which is when blocking is possible. A PostToolUse hook cannot block because the tool has already run. The command reads the tool call from stdin, checks the file path, and exits with code 2 to block it, and anything written to stderr becomes the message Claude sees.
+Blocking has to happen at the only moment blocking is possible: before the tool runs, with an exit code the runtime treats as a veto. Everything else — auditing, warning — observes the read without preventing it.
 
 ### Other feedback branches
 

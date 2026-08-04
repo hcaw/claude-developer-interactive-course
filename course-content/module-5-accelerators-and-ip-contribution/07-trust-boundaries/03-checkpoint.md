@@ -12,7 +12,7 @@ screen_id: "S16"
 
 # Checkpoint 7: Complete the multi-component boundary configuration
 
-Try it now. The multi-component app below is wired, with two blanks left. Drag the correct control onto the seam that receives untrusted fetched content and drag the correct identity scope onto the most privileged component.
+Try it now. The multi-component app below is wired, with two blanks left. Select the correct control for the seam that receives untrusted fetched content, and the correct identity scope for the most privileged component. The token bank is shared — two of the four tokens are distractors.
 
 **The partial app**
 
@@ -21,34 +21,36 @@ Try it now. The multi-component app below is wired, with two blanks left. Drag t
 fetched = code_task.run(fetch_url=customer_page)
 
 # BLANK 1: control on the seam receiving untrusted fetched content
-next_call(input=drop here(fetched))
+next_call(input=________(fetched))
 
 # MCP server reaches the customer system (most privileged component)
 mcp_server = MCPServer(
     system=customer_db,
-    scope=drop here,   # BLANK 2: identity scope
+    scope=________,   # BLANK 2: identity scope
 )
 ```
 
-**Drag tokens (shared bank, two are distractors)**
+### Blank 1 · The control on the seam receiving untrusted fetched content
 
-- `treat_as_data`
-- `least_privilege_read_only`
-- `run_as_instructions`
-- `full_access`
+- **A.** `treat_as_data`
+- **B.** `least_privilege_read_only`
+- **C.** `run_as_instructions`
+- **D.** `full_access`
 
-### Answer key
+**Answer: A** — Wrapping the fetched content means the next component treats it as data rather than instructions. This closes the injection seam.
 
-- **BLANK 1: control on the seam receiving untrusted fetched content**  
-  `treat_as_data`
-- **BLANK 2: identity scope**  
-  `least_privilege_read_only`
-- **Distractors**  
-  `run_as_instructions`, `full_access`
+### Blank 2 · The identity scope on the most privileged component
+
+- **A.** `treat_as_data`
+- **B.** `least_privilege_read_only`
+- **C.** `run_as_instructions`
+- **D.** `full_access`
+
+**Answer: B** — Scoping the most privileged component to least privilege means a steered action cannot reach beyond its task.
 
 ### Why
 
-Blank 1 wraps the fetched content, so the next component treats it as data, rather than instructions. This closes the injection seam. Blank 2 scopes the most privileged component to least privilege, so a steered action cannot reach beyond its task. Together they hold both boundaries under review.
+Blank 1 wraps the fetched content, so the next component treats it as data, rather than instructions. Blank 2 scopes the most privileged component to least privilege. Together they hold both boundaries under review. The two distractors are the two failure modes: `run_as_instructions` lets untrusted content cross as instructions, and `full_access` makes the privileged component the weak point for the whole app.
 
 ### Other feedback branches
 

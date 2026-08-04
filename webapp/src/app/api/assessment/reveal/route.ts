@@ -7,7 +7,7 @@
 import { NextResponse } from "next/server";
 
 import { getAnswerKey } from "@/content/answer-key";
-import { freeformArticleKeys, getArticle } from "@/content/manifest";
+import { freeformLessonKeys, getLessonByKey } from "@/content/manifest";
 import { db } from "@/db";
 import { manualCompletions } from "@/db/schema";
 import { deriveAndRecord } from "@/lib/activity";
@@ -17,31 +17,31 @@ export async function POST(request: Request) {
   const user = await requireApiUser();
   if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
-  let body: { articleKey?: unknown };
+  let body: { lessonKey?: unknown };
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: "invalid json" }, { status: 400 });
   }
 
-  const articleKey = typeof body.articleKey === "string" ? body.articleKey : null;
-  if (!articleKey || !freeformArticleKeys.has(articleKey)) {
-    return NextResponse.json({ error: "unknown or non-freeform articleKey" }, { status: 400 });
+  const lessonKey = typeof body.lessonKey === "string" ? body.lessonKey : null;
+  if (!lessonKey || !freeformLessonKeys.has(lessonKey)) {
+    return NextResponse.json({ error: "unknown or non-freeform lessonKey" }, { status: 400 });
   }
 
   await db
     .insert(manualCompletions)
-    .values({ userId: user.id, itemKey: articleKey })
+    .values({ userId: user.id, itemKey: lessonKey })
     // Re-revealing is not a new completion; keep the original timestamp.
     .onConflictDoNothing();
 
   const derived = await deriveAndRecord(user.id);
-  const entry = getAnswerKey(articleKey);
-  const section = getArticle(articleKey)?.section;
+  const entry = getAnswerKey(lessonKey);
+  const lesson = getLessonByKey(lessonKey);
 
   return NextResponse.json({
     modelAnswer: entry?.kind === "freeform" ? entry.modelAnswer : [],
-    sectionComplete: section ? (derived.sections.get(section.id)?.complete ?? false) : false,
-    moduleComplete: section ? (derived.modules.get(section.module)?.complete ?? false) : false,
+    lessonComplete: derived.lessons.get(lessonKey)?.complete ?? false,
+    moduleComplete: lesson ? (derived.modules.get(lesson.module)?.complete ?? false) : false,
   });
 }

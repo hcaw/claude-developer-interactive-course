@@ -16,8 +16,6 @@ The session trace below shows a multi-turn agent run with degrading tool selecti
 
 **Session trace**
 
-Click each turn to inspect it.
-
 | Turn | Tool called | Result size |
 |---|---|---|
 | 1 | fetch_policy_document, correct selection | 2,400 tokens |
@@ -28,6 +26,14 @@ Click each turn to inspect it.
 | 6 | search_knowledge_base again, wrong selection (same as turn 5) | 1,800 tokens |
 | 7 | Session ends without result | N/A |
 
+- **A.** Add a clearer description to the apply_coverage_rule tool schema.
+- **B.** Prune fetch_policy_document results after each turn so that accumulated outputs do not crowd out current instructions, and apply compaction before turn 5.
+- **C.** Increase max_tokens in the API call to give Claude more room to respond.
+
+**Answer: B** — The failure triggered at turn 5, not turn 1. Correct tool selections at turns 1-4 rule out a schema description problem. The turn-5 shift points to accumulated context, which included four large tool results filling the window and pushing current instructions toward the edge.
+
+### Why — the trace, turn by turn
+
 - **Turn 1** — fetch_policy_document, correct selection, 2,400 tokens. Correct tool call. No sign of trouble yet.
 - **Turn 2** — fetch_policy_document, correct selection, 2,400 tokens. Still correct. Context is accumulating: 4,800 tokens of tool output so far.
 - **Turn 3** — fetch_policy_document, correct selection, 2,400 tokens. Still correct. Accumulated tool output now around 7,200 tokens.
@@ -36,11 +42,7 @@ Click each turn to inspect it.
 - **Turn 6** — search_knowledge_base again, wrong selection (same as turn 5), 1,800 tokens. The same wrong call repeats, confirming this is not a one-off fluke but a systemic drift caused by the crowded context window.
 - **Turn 7** — Session ends without result, N/A. The session never recovers and terminates without completing the task.
 
-- **A.** Add a clearer description to the apply_coverage_rule tool schema.
-- **B.** Prune fetch_policy_document results after each turn so that accumulated outputs do not crowd out current instructions, and apply compaction before turn 5.
-- **C.** Increase max_tokens in the API call to give Claude more room to respond.
-
-**Answer: B** — The failure triggered at turn 5, not turn 1. Correct tool selections at turns 1-4 rule out a schema description problem. The turn-5 shift points to accumulated context, which included four large tool results filling the window and pushing current instructions toward the edge.
+**Why the other options are wrong:**
 
 - **A.** This would fix a tool-selection problem caused by an ambiguous schema. That is not what the trace shows.
 - **C.** Increasing max_tokens controls how much Claude can write in a single response, not how much context it can read. That is the wrong parameter for this problem.

@@ -1,11 +1,23 @@
 "use client";
 
+// Graded assessment: single-select (radios) and multi-select (checkboxes) questions
+// (adr/2026-08-04-12). One component covers every checkable pattern — matching and fill-blank
+// checkpoints are authored as rows of single-selects sharing an option bank.
+//
+// An answer slot is one string per question: "B", or "C,D" for multi (kept sorted and deduped
+// here, so the server always sees canonical sets). Grading is server-side, all-or-nothing per
+// question.
+
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Blocks } from "./block-renderer";
+import { InlineMd } from "./inline-md";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 import type { Block, QuizQuestion } from "@/content/types";
 
-type Result = { correct: boolean; expected: string; explanation: string };
+type Result = { correct: boolean; expected: string[]; explanation: string };
 type Response = {
   score: number;
   total: number;
@@ -16,19 +28,42 @@ type Response = {
 };
 
 type Props = {
-  articleKey: string;
+  lessonKey: string;
   questions: QuizQuestion[];
+  /**
+   * Authored content that follows the last question. Held back until grading — trailing regularly
+   * discusses the options, and one checkpoint's trailing table used to give the answers away.
+   */
+  trailing: Block[];
   /** True if a previous attempt already passed. */
   alreadyPassed?: boolean;
 };
 
-export function Quiz({ articleKey, questions, alreadyPassed = false }: Props) {
+export function Quiz({ lessonKey, questions, trailing, alreadyPassed = false }: Props) {
+  const router = useRouter();
   const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
   const [result, setResult] = useState<Response | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const allAnswered = answers.every((a) => a !== "");
+
+  function choose(qi: number, letter: string) {
+    setAnswers((prev) => prev.map((a, i) => (i === qi ? letter : a)));
+  }
+
+  /** Multi slots stay canonical — sorted, deduped, comma-joined — so picking D then C is "C,D". */
+  function toggle(qi: number, letter: string) {
+    setAnswers((prev) =>
+      prev.map((a, i) => {
+        if (i !== qi) return a;
+        const set = new Set(a.split(",").filter(Boolean));
+        if (set.has(letter)) set.delete(letter);
+        else set.add(letter);
+        return [...set].sort().join(",");
+      })
+    );
+  }
 
   async function submit() {
     setSubmitting(true);
@@ -37,13 +72,16 @@ export function Quiz({ articleKey, questions, alreadyPassed = false }: Props) {
       const res = await fetch("/api/quiz/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ articleKey, answers }),
+        body: JSON.stringify({ lessonKey, answers }),
       });
       if (!res.ok) {
         setError("Could not submit. Try again.");
         return;
       }
-      setResult((await res.json()) as Response);
+      const graded = (await res.json()) as Response;
+      setResult(graded);
+      // Refresh so the header pill, module page and dashboard pick up a new pass.
+      if (graded.passed && !alreadyPassed) router.refresh();
     } catch {
       setError("Could not submit. Try again.");
     } finally {
@@ -60,52 +98,57 @@ export function Quiz({ articleKey, questions, alreadyPassed = false }: Props) {
     <div className="mt-6 space-y-6">
       {questions.map((q, qi) => {
         const r = result?.results[qi];
+        const chosen = new Set(answers[qi].split(",").filter(Boolean));
         return (
-          <fieldset key={qi} className="rounded-lg border border-slate-800 p-4">
+          <fieldset key={qi} className="border border-border p-4">
             <legend className="sr-only">Question {qi + 1}</legend>
             <Blocks blocks={q.prompt} />
+            {q.multi && (
+              <p className="mono-label mt-3 text-muted-foreground">Select all that apply</p>
+            )}
             <div className="mt-3 space-y-2">
               {q.options.map((o) => {
-                const selected = answers[qi] === o.letter;
-                // After grading, mark the right answer and the user's wrong pick.
-                const isExpected = r && o.letter === r.expected;
-                const isWrongPick = r && selected && !r.correct;
+                const selected = chosen.has(o.letter);
+                // After grading, mark every right answer and the user's wrong picks.
+                // Strict-amber state language: right = amber, wrong = destructive
+                // (see the design-system ADR — the palette has no green).
+                const isExpected = r && r.expected.includes(o.letter);
+                const isWrongPick = r && selected && !r.expected.includes(o.letter);
                 return (
                   <label
                     key={o.letter}
-                    className={`flex cursor-pointer gap-3 rounded-md border p-3 ${
+                    className={cn(
+                      "flex cursor-pointer gap-3 border p-3 transition-colors",
                       isExpected
-                        ? "border-emerald-700 bg-emerald-950/40"
+                        ? "border-primary bg-accent-tint"
                         : isWrongPick
-                          ? "border-red-800 bg-red-950/30"
+                          ? "border-destructive/40 bg-destructive/10"
                           : selected
-                            ? "border-sky-700 bg-sky-950/30"
-                            : "border-slate-800 hover:border-slate-700"
-                    }`}
+                            ? "border-line-strong bg-secondary"
+                            : "border-border hover:border-line-strong",
+                    )}
                   >
                     <input
-                      type="radio"
-                      name={`${articleKey}-${qi}`}
+                      type={q.multi ? "checkbox" : "radio"}
+                      name={`${lessonKey}-${qi}`}
                       value={o.letter}
                       checked={selected}
                       disabled={!!result}
-                      onChange={() =>
-                        setAnswers((prev) => prev.map((a, i) => (i === qi ? o.letter : a)))
-                      }
-                      className="mt-1"
+                      onChange={() => (q.multi ? toggle(qi, o.letter) : choose(qi, o.letter))}
+                      className="mt-1 accent-primary"
                     />
-                    <span className="text-slate-300">
-                      <span className="mr-2 font-mono text-slate-500">{o.letter}.</span>
-                      {o.text}
+                    <span className="text-ink-2">
+                      <span className="mr-2 font-mono text-muted-foreground">{o.letter}.</span>
+                      <InlineMd text={o.text} />
                     </span>
                   </label>
                 );
               })}
             </div>
             {r && (
-              <p className="mt-3 text-sm text-slate-400">
-                <span className={r.correct ? "text-emerald-400" : "text-red-400"}>
-                  {r.correct ? "Correct" : `Answer: ${r.expected}`}
+              <p className="mt-3 text-sm text-muted-foreground">
+                <span className={r.correct ? "text-accent-text" : "text-destructive"}>
+                  {r.correct ? "Correct" : `Answer: ${r.expected.join(", ")}`}
                 </span>{" "}
                 {r.explanation}
               </p>
@@ -114,40 +157,48 @@ export function Quiz({ articleKey, questions, alreadyPassed = false }: Props) {
         );
       })}
 
-      {error && <p className="text-sm text-red-400">{error}</p>}
+      {error && <p className="text-sm text-destructive">{error}</p>}
 
       {!result ? (
         <div className="flex items-center gap-4">
-          <button
-            type="button"
-            disabled={!allAnswered || submitting}
-            onClick={submit}
-            className="rounded-lg bg-slate-100 px-4 py-2 font-medium text-slate-900 hover:bg-white disabled:cursor-not-allowed disabled:opacity-40"
-          >
+          <Button disabled={!allAnswered || submitting} onClick={submit}>
             {submitting ? "Checking…" : "Submit answers"}
-          </button>
-          {alreadyPassed && <span className="text-sm text-emerald-400">Already passed</span>}
+          </Button>
+          {alreadyPassed && (
+            <span className="font-mono text-[11px] uppercase tracking-widest text-accent-text">
+              Already passed
+            </span>
+          )}
           {!allAnswered && (
-            <span className="text-sm text-slate-500">Answer every question to submit.</span>
+            <span className="text-sm text-muted-foreground">Answer every question to submit.</span>
           )}
         </div>
       ) : (
         <div className="space-y-4">
-          <p className={`font-medium ${result.passed ? "text-emerald-400" : "text-amber-400"}`}>
-            {result.score} / {result.total} — {result.passed ? "passed" : `${result.required} needed to pass`}
+          <p
+            className={cn(
+              "font-mono text-sm tabular-nums",
+              result.passed ? "text-accent-text" : "text-destructive",
+            )}
+          >
+            {result.score} / {result.total} —{" "}
+            {result.passed ? "passed" : `${result.required} needed to pass`}
           </p>
           {result.debrief.length > 0 && (
-            <div className="rounded-lg border border-slate-800 p-4">
+            <div className="border border-border p-4">
               <Blocks blocks={result.debrief} />
             </div>
           )}
-          <button
-            type="button"
-            onClick={retake}
-            className="rounded-lg border border-slate-700 px-4 py-2 text-slate-200 hover:border-slate-500"
-          >
+          <Button variant="outline" onClick={retake}>
             Retake
-          </button>
+          </Button>
+        </div>
+      )}
+
+      {/* Post-question commentary: after grading, or on revisit once passed. */}
+      {(result || alreadyPassed) && trailing.length > 0 && (
+        <div className="mt-6">
+          <Blocks blocks={trailing} />
         </div>
       )}
     </div>

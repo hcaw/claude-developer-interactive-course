@@ -3,6 +3,7 @@
 // The switch is exhaustive on purpose: `never` in the default branch means adding a block type to
 // the pipeline without handling it here is a compile error, not a silently blank page.
 
+import { Callout } from "@/components/ui/callout";
 import type { Block } from "@/content/types";
 import { InlineMd } from "./inline-md";
 
@@ -21,6 +22,7 @@ function BlockView({ block }: { block: Block }) {
     case "heading": {
       const level = Math.min(Math.max(block.level, 1), 6);
       const Tag = `h${level}` as "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+      // Content headings pick up the display role (Chakra Petch, uppercase) from the base layer.
       const size =
         level <= 2
           ? "text-2xl font-semibold"
@@ -28,7 +30,7 @@ function BlockView({ block }: { block: Block }) {
             ? "text-xl font-semibold"
             : "text-lg font-medium";
       return (
-        <Tag className={`${size} mt-8 text-slate-100 first:mt-0`}>
+        <Tag className={`${size} mt-8 text-foreground first:mt-0`}>
           <InlineMd text={block.text} />
         </Tag>
       );
@@ -36,7 +38,7 @@ function BlockView({ block }: { block: Block }) {
 
     case "paragraph":
       return (
-        <p className="leading-7 text-slate-300">
+        <p className="leading-7 text-ink-2">
           <InlineMd text={block.text} />
         </p>
       );
@@ -45,8 +47,9 @@ function BlockView({ block }: { block: Block }) {
       return (
         <ul className="ml-1 space-y-2">
           {block.items.map((item, i) => (
-            <li key={i} className="flex gap-3 leading-7 text-slate-300">
-              <span aria-hidden className="mt-[0.6rem] size-1.5 shrink-0 rounded-full bg-slate-600" />
+            <li key={i} className="flex gap-3 leading-7 text-ink-2">
+              {/* Square ink bullet (the DS has no circles); mt is tuned to leading-7. */}
+              <span aria-hidden className="mt-[0.65rem] size-1.25 shrink-0 bg-ink-4" />
               <span>
                 <InlineMd text={item} />
               </span>
@@ -57,15 +60,9 @@ function BlockView({ block }: { block: Block }) {
 
     case "callout":
       return (
-        <aside
-          className={`rounded-lg border-l-4 p-4 ${
-            block.disclaimer
-              ? "border-slate-600 bg-slate-900/60 text-sm text-slate-400"
-              : "border-sky-500 bg-sky-950/40 text-slate-300"
-          }`}
-        >
+        <Callout as="aside" variant={block.disclaimer ? "disclaimer" : "info"}>
           {block.label && (
-            <p className="mb-1 font-semibold text-slate-100">
+            <p className="mb-2 font-mono text-[11px] font-medium uppercase tracking-widest">
               <InlineMd text={block.label} />
             </p>
           )}
@@ -77,24 +74,29 @@ function BlockView({ block }: { block: Block }) {
               </p>
             ))}
           </div>
-        </aside>
+        </Callout>
       );
 
     case "table":
       return (
         // Wide tables scroll inside their own box rather than pushing the page sideways.
-        <div className="overflow-x-auto rounded-lg border border-slate-800">
+        // Row 0 is the header row (the parser emits no <thead>); it gets the muted strip
+        // and mono column-label treatment from the DS table language.
+        <div className="overflow-x-auto border border-border">
           <table className="w-full border-collapse text-left text-sm">
             <tbody>
               {block.rows.map((row, r) => (
-                <tr key={r} className={r === 0 ? "bg-slate-900" : "border-t border-slate-800"}>
+                <tr key={r} className={r === 0 ? "bg-muted" : "border-t border-border"}>
                   {row.map((cell, c) =>
                     r === 0 ? (
-                      <th key={c} className="px-4 py-2.5 font-semibold text-slate-100">
+                      <th
+                        key={c}
+                        className="px-4 py-2.5 font-mono text-[11px] font-medium uppercase tracking-widest text-muted-foreground"
+                      >
                         <InlineMd text={cell} />
                       </th>
                     ) : (
-                      <td key={c} className="px-4 py-2.5 align-top text-slate-300">
+                      <td key={c} className="px-4 py-2.5 align-top text-ink-2">
                         <InlineMd text={cell} />
                       </td>
                     )
@@ -108,8 +110,8 @@ function BlockView({ block }: { block: Block }) {
 
     case "code":
       return (
-        <pre className="overflow-x-auto rounded-lg border border-slate-800 bg-slate-950 p-4 text-sm">
-          <code className={`language-${block.lang} font-mono text-slate-300`}>{block.code}</code>
+        <pre className="overflow-x-auto border border-border bg-muted p-4 text-sm">
+          <code className={`language-${block.lang} font-mono text-ink-2`}>{block.code}</code>
         </pre>
       );
 

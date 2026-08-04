@@ -1,22 +1,194 @@
 @import "tailwindcss";
 
-/* The course app commits to a single dark theme — the whiteboard videos are rendered on a dark
-   canvas, so a light UI around them reads as a mismatch. */
+/* Stackdrop design system tokens — vendored verbatim from the Stackdrop UI 0.1.0 kit export
+   (Claude Design → "Stackdrop UI", generated from the live Stackdrop site codebase).
+   Do not tune values here by hand; re-sync from the kit export instead.
+   See docs/wiki/webapp-design-system.md and the design-system adoption ADR.
+
+   Both themes ship. Dark is the default (whiteboard videos render on a dark canvas);
+   next-themes toggles the `dark` class on <html>. */
 
 :root {
-  --background: #020617; /* slate-950 */
-  --foreground: #e2e8f0; /* slate-200 */
+  --background: #fff;
+  --foreground: #0a0a0a;
+  --card: #fff;
+  --card-foreground: #0a0a0a;
+  --popover: #fff;
+  --popover-foreground: #0a0a0a;
+  --primary: #fbb03a;
+  --primary-foreground: #2a1e05;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #fafafa;
+  --muted-foreground: #71717a;
+  --accent: #fafafa;
+  --accent-foreground: #0a0a0a;
+  --destructive: oklch(57.7% 0.245 27.325);
+  --border: #09090b1a;
+  --input: #09090b1a;
+  --ring: #09090b29;
+  --radius: 0px;
+  --ink-2: #3f3f46;
+  --ink-4: #a1a1aa;
+  --line-soft: #09090b0b;
+  --line-strong: #09090b29;
+  --accent-text: #b9760a;
+  --accent-tint: #fbb03a29;
+  --dot: #09090b29;
+  --hatch: #09090b0b;
+  --draw: #09090b47;
+  --overshoot: 26px;
+  --shell-max: 1280px;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #0a0a0b;
+  --foreground: #f4f4f5;
+  --card: #0f0f11;
+  --card-foreground: #f4f4f5;
+  --popover: #0f0f11;
+  --popover-foreground: #f4f4f5;
+  --primary: #fbb03a;
+  --primary-foreground: #241a04;
+  --secondary: #1b1b1e;
+  --secondary-foreground: #f4f4f5;
+  --muted: #131315;
+  --muted-foreground: #8b8b95;
+  --accent: #131315;
+  --accent-foreground: #f4f4f5;
+  --destructive: oklch(70.4% 0.191 22.216);
+  --border: #ffffff1f;
+  --input: #ffffff1f;
+  --ring: #ffffff38;
+  --ink-2: #c9c9d1;
+  --ink-4: #5b5b64;
+  --line-soft: #ffffff0e;
+  --line-strong: #ffffff38;
+  --accent-text: #ffca62;
+  --accent-tint: #fbb03a24;
+  --dot: #ffffff21;
+  --hatch: #ffffff0a;
+  --draw: #ffffff42;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink-2: var(--ink-2);
+  --color-ink-4: var(--ink-4);
+  --color-line-soft: var(--line-soft);
+  --color-line-strong: var(--line-strong);
+  --color-accent-text: var(--accent-text);
+  --color-accent-tint: var(--accent-tint);
+
+  --font-heading: var(--font-chakra-petch);
+  --font-sans: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
+
+  /* Hard rectangles everywhere: collapse the whole radius scale so every
+     rounded-* utility (including pre-migration screens) resolves to square. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Display type role: Chakra Petch, always uppercase (kit base layer). */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--accent-tint);
+    color: var(--foreground);
+  }
+}
+
+/* Motif + label utilities, copied from the kit's compiled stylesheet. */
+@utility mono-label {
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  display: inline-flex;
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.4px);
+  background-position: 11px 11px;
+  background-size: 22px 22px;
+}
+
+@utility bg-dots-fine {
+  background-image: radial-gradient(var(--dot) 0.9px, transparent 1.2px);
+  background-position: 7px 7px;
+  background-size: 15px 15px;
+}
+
+@utility bg-stripe {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0,
+    transparent 8px,
+    var(--hatch) 8px,
+    var(--hatch) 9px
+  );
+}
+
+@utility bg-stripe-tight {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0,
+    transparent 5px,
+    var(--hatch) 5px,
+    var(--hatch) 6px
+  );
 }

@@ -5,6 +5,7 @@
 // /admin without losing anything.
 
 import { signOut } from "@/auth";
+import { Button } from "@/components/ui/button";
 import { getSessionState } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
@@ -14,11 +15,11 @@ export default async function NoAccessPage() {
 
   return (
     <div className="mx-auto max-w-md py-16 text-center">
-      <h1 className="text-2xl font-semibold text-slate-100">Access removed</h1>
-      <p className="mt-3 text-slate-400">
+      <h1 className="text-2xl font-semibold text-foreground">Access removed</h1>
+      <p className="mt-3 text-muted-foreground">
         {state.status === "revoked" ? (
           <>
-            <span className="font-mono text-slate-300">{state.email}</span> no longer has access to
+            <span className="font-mono text-ink-2">{state.email}</span> no longer has access to
             this course. Ask an admin if you think this is a mistake.
           </>
         ) : (
@@ -33,12 +34,9 @@ export default async function NoAccessPage() {
           await signOut({ redirectTo: "/login" });
         }}
       >
-        <button
-          type="submit"
-          className="rounded-lg border border-slate-700 px-4 py-2 text-slate-200 hover:border-slate-500"
-        >
+        <Button type="submit" variant="outline" size="lg">
           Sign out
-        </button>
+        </Button>
       </form>
     </div>
   );

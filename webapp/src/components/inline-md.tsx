@@ -18,7 +18,7 @@ export function InlineMd({ text }: { text: string }): ReactNode {
       {parts.map((part, i) => {
         if (part.startsWith("**") && part.endsWith("**")) {
           return (
-            <strong key={i} className="font-semibold text-slate-100">
+            <strong key={i} className="font-semibold text-foreground">
               {part.slice(2, -2)}
             </strong>
           );
@@ -27,7 +27,7 @@ export function InlineMd({ text }: { text: string }): ReactNode {
           return (
             <code
               key={i}
-              className="rounded bg-slate-800 px-1.5 py-0.5 font-mono text-[0.9em] text-amber-200"
+              className="bg-secondary px-1.5 py-0.5 font-mono text-[0.9em] text-ink-2"
             >
               {part.slice(1, -1)}
             </code>
@@ -48,7 +48,7 @@ export function InlineMd({ text }: { text: string }): ReactNode {
             <a
               key={i}
               href={href}
-              className="text-sky-400 underline underline-offset-2 hover:text-sky-300"
+              className="text-accent-text underline underline-offset-2 transition-colors hover:text-foreground"
               {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               {label}

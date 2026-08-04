@@ -1,7 +1,9 @@
 # Store only user activity; derive completion, snapshot transitions
 
 Date: 2026-08-01
-Status: Accepted
+Status: Accepted; the *section as the unit* half is superseded by
+[2026-08-04-11](2026-08-04-11-lesson-as-the-unit.md). The core decision —
+store only activity, derive completion, snapshot transitions — still stands.
 
 ## Decision
 

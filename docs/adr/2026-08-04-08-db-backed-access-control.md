@@ -1,7 +1,10 @@
 # Move per-person access and admin rights into the database
 
 Date: 2026-08-04
-Status: Accepted
+Status: Accepted; the `BOOTSTRAP_ADMIN_EMAILS` env bootstrap is removed by
+[2026-08-04-10](2026-08-04-10-remove-env-admin-bootstrap.md). Everything else
+(domain rule in env, `users.is_admin` / `users.revoked_at`, `access_events`,
+the `/admin` UI) still stands.
 Supersedes: the access-control half of
 [2026-08-01-05](2026-08-01-05-google-auth-jwt-env-allowlist.md) —
 `ALLOWED_EMAILS` and `ADMIN_EMAILS`. The rest of that ADR (Google-only

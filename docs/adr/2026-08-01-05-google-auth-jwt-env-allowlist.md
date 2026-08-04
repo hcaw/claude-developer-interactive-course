@@ -1,7 +1,9 @@
 # Google sign-in via Auth.js with JWT sessions and an env allowlist
 
 Date: 2026-08-01
-Status: Accepted
+Status: Accepted; the access-control half (per-person allowlist in env) is
+superseded by [2026-08-04-08](2026-08-04-08-db-backed-access-control.md).
+The auth mechanism (Google via Auth.js, JWT sessions, domain rule) still stands.
 
 ## Decision
 

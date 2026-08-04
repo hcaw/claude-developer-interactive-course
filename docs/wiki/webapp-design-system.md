@@ -57,6 +57,7 @@ Motif utilities available: `bg-dots(-fine)`, `bg-stripe(-tight)`, `mono-label`,
 | `Callout` | `info` (amber left rule) / `disclaimer` / `error` / `empty` (dashed) with mono label slot |
 | `TableShell`/`TableHead`/`Th`/`Tr`/`Td` | bordered shell, muted header strip, mono column labels |
 | `Separator` | hairline rule |
+| `Textarea` | course extension, not in the kit (adr/2026-08-04-12): token-only, zero radius, `font-mono` — the SelfAssess answer box |
 | `ThemeToggle` | ghost icon button, inline stroke SVGs (no icon library) |
 
 State-color mapping (strict amber — the palette has no green) is tabled in the ADR;
@@ -96,13 +97,14 @@ Implementation notes preserved from the migration:
   styled as the header strip; `thead`-scoped CSS will miss it.
 - The list bullet's `mt-[0.65rem]` is optically tuned to `leading-7`; retune if the
   body line-height changes.
-- Quiz option rows are `<label>` cards around a native radio (`accent-primary`);
-  graded states: correct = `border-primary bg-accent-tint`, wrong = destructive tint,
+- Quiz option rows are `<label>` cards around a native radio — or a native checkbox
+  when the question is multi-select — both `accent-primary`; graded states:
+  correct = `border-primary bg-accent-tint`, wrong = destructive tint,
   selected-ungraded = `border-line-strong bg-secondary`. Keep the
   `fieldset`/`sr-only legend` semantics.
 - `video-player.tsx` keeps `bg-black` deliberately — it's the letterbox behind the
   dark-canvas video frames, not a themable surface. The heartbeat effect is bound to
   that exact `<video>` element.
 - Status is never color-only: `StatusDot` carries `sr-only` text, the admin matrix
-  glyphs (`✓`/`—`) have `sr-only` labels, `MarkComplete`'s completed state is a
+  glyphs (`✓`/`—`) have `sr-only` labels, `RecordView`'s recorded state is a
   `role="status"` live region.

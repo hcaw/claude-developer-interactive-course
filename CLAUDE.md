@@ -21,7 +21,7 @@ Webapp (`cd webapp`, its own `package.json`):
 
 - Quiz answer keys must never reach any client bundle (adr/2026-08-01-04-course-content-static-at-build). `webapp/src/content/answer-key.ts` starts with `import 'server-only'`; only grading routes may import it
 - Generated content files (`webapp/src/content/manifest.json`, `answer-key.json`, `content-report.json`) are never hand-edited — run `npm run content:gen` and commit
-- `webapp/scripts/generate-content.mjs` must exit non-zero on any anomaly it doesn't already whitelist (currently the two m2-04 / m2-06 checkpoints)
+- `webapp/scripts/generate-content.mjs` must exit non-zero on any anomaly it doesn't already whitelist. `KNOWN_ANOMALIES` is empty (adr/2026-08-04-12) — fix content instead of adding entries
 - Never weaken DB TLS: `rejectUnauthorized: false` is forbidden. Provider differences go through `DB_CA_BUNDLE_PATH` (adr/2026-08-03-07)
 - Provider swaps are env-only: `DATABASE_URL` and `NEXT_PUBLIC_VIDEO_BASE_URL`. Don't add provider-specific drivers (e.g. `@neondatabase/serverless`)
 - `completion_events` is append-only; completion logic lives only in `webapp/src/lib/progress.ts` (adr/2026-08-01-06). The unit is the **lesson** — one authored article, one page (adr/2026-08-04-11); sections are only a heading

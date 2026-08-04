@@ -4,11 +4,11 @@ kind: system
 
 # Webapp Architecture
 
-Last verified: 2026-08-03 against main (M1–M5 implemented in `webapp/`; see [status.md](status.md))
+Last verified: 2026-08-04 against main (M1–M5 implemented in `webapp/`; see [status.md](status.md))
 
 ## System overview
 
-An internal course webapp for the ~20-person distributed Stackdrop team: module/section navigation, video playback, readable articles, graded checkpoint quizzes, automatic progress tracking, and a small admin matrix. Next.js 16 (App Router, TypeScript) on Vercel; user activity in Postgres (schema `course_app`); videos in object storage behind a CDN. Course content is baked in at build time — the app has no CMS and no content database.
+An internal course webapp for the ~20-person distributed Stackdrop team: module/lesson navigation, video playback, readable lessons, graded checkpoint quizzes, automatic progress tracking, and a small admin matrix. Next.js 16 (App Router, TypeScript) on Vercel; user activity in Postgres (schema `course_app`); videos in object storage behind a CDN. Course content is baked in at build time — the app has no CMS and no content database.
 
 **Storage providers are swappable by environment variable.** Until AWS access arrives the app runs on Neon Postgres and Cloudflare R2, both free tier; the AWS targets (RDS, S3+CloudFront) are unchanged and reached by editing `DATABASE_URL` and `NEXT_PUBLIC_VIDEO_BASE_URL`. No application code differs between the two. See [adr/2026-08-03-07](../adr/2026-08-03-07-free-tier-mvp-before-aws-access.md).
 
@@ -16,8 +16,8 @@ An internal course webapp for the ~20-person distributed Stackdrop team: module/
 
 ```
 course-content/*.md ──parse──▶ build/bundles/*.json ─┐
-video-scripts/*/script.json ─────────────────────────┼─▶ generate-content.mjs
-output/module-N/*.mp4 ──(existence check)────────────┘        │
+video-scripts/*/script.json ──(`covers`: video↔lesson)──┼─▶ generate-content.mjs
+output/module-N/*.mp4 ───────────────────────────────┘        │
         │                                     ┌───────────────┴───────────────┐
         │ aws s3 sync                         ▼                               ▼
         ▼                            src/content/manifest.json   src/content/answer-key.json
@@ -34,7 +34,7 @@ Browser ◀──▶ Vercel (Next.js: RSC pages + API routes) ◀── Drizzle 
 
 | Path | Responsibility | Talks to |
 |---|---|---|
-| `scripts/generate-content.mjs` | Bundles + scripts → manifest, answer-key, content-report. Whitelists output fields; fails on new anomalies. | `../build/bundles`, `../video-scripts`, `../output` |
+| `scripts/generate-content.mjs` | Bundles + scripts + videos → manifest (lessons), answer-key, content-report. Whitelists output fields; fails on new anomalies, duplicate slugs, unresolved `covers`, or a lesson claimed by two videos. | `../build/bundles`, `../video-scripts`, `../output` |
 | `scripts/sync-videos.sh` | `aws s3 sync output/ s3://…/videos/` with immutable cache headers. `VIDEO_S3_ENDPOINT` targets R2; unset for S3. Forces `AWS_REGION=auto` and relaxed checksums, which R2 requires. | R2 / S3 |
 | `src/content/` | Generated manifest (client-safe) + answer keys (`import 'server-only'`) + typed re-exports | consumed app-wide |
 | `src/db/` | Drizzle schema (`pgSchema('course_app')`) + node-postgres Pool (`max: 1`, memoized on `globalThis`). TLS always verified; the RDS CA bundle is optional via `DB_CA_BUNDLE_PATH`. | Neon / RDS |
@@ -46,20 +46,23 @@ Browser ◀──▶ Vercel (Next.js: RSC pages + API routes) ◀── Drizzle 
 | `src/proxy.ts` | Optimistic route protection (Next 16's renamed middleware) | `src/auth.config.ts` |
 | `src/lib/session.ts` | `getSessionState` (anonymous / revoked / ok) + `requireUser` / `requireAdmin` / `requireApiUser` — the actual per-request authorization gate | `src/auth.ts`, `access.ts` |
 | `src/lib/allowlist.ts` | Pure domain rule from env. Edge-safe, fails closed when unset. | — |
-| `src/lib/access.ts` | DB-backed admin + revocation, audit writes, bootstrap-admin union | `src/db` |
+| `src/lib/access.ts` | DB-backed admin + revocation, audit writes. No env override — `users.is_admin` is the only source ([adr/2026-08-04-10](../adr/2026-08-04-10-remove-env-admin-bootstrap.md)) | `src/db` |
+| `scripts/grant-admin.mjs` | `npm run admin:grant -- <email>`: the first admin, and break-glass. UPDATEs an existing row (an INSERT would break their first sign-in with `OAuthAccountNotLinked`) and audits it as a system event. | `course_app.users` |
 | `src/app/admin/actions.ts` | Promote / demote / revoke / restore. Each re-checks admin rights. | `access.ts` |
-| `src/lib/progress.ts` | THE completion derivation function + `QUIZ_PASS_THRESHOLD = 0.7`. SQL never re-implements this. | manifest, activity rows |
+| `src/lib/progress.ts` | THE completion derivation function + `QUIZ_PASS_THRESHOLD = 0.7`. Per **lesson**, not per section ([adr/2026-08-04-11](../adr/2026-08-04-11-lesson-as-the-unit.md)). SQL never re-implements this. | manifest, activity rows |
 | `src/lib/activity.ts` | Loads activity rows, derives, appends `completion_events`; admin's all-users read | `src/db`, `progress.ts` |
 | `src/lib/video-progress.ts` | The heartbeat upsert, isolated so it can be tested against a real Postgres | `src/db/schema` |
-| `src/components/` | `video-player` (heartbeat/resume), `block-renderer` + `inline-md` (6 block types, hand-rolled inline markdown), `quiz`, `assessment-reveal`, `mark-complete` | API routes |
-| `src/app/` | Dashboard, `modules/[module]`, `sections/[sectionId]`, `admin/` (RSC-fetched, `isAdmin` gate), `login`, API routes | everything above |
+| `src/components/` | `video-player` (heartbeat/resume), `block-renderer` + `inline-md` (6 block types, hand-rolled inline markdown), `quiz` (radio + checkbox questions, trailing gated behind grading), `self-assess` (free-text + localStorage draft + reveal), `record-view` | API routes |
+| `src/components/ui/` + `src/app/globals.css` | Stackdrop design system: vendored tokens (light+dark, dark default) and primitives. See [webapp-design-system.md](webapp-design-system.md) | consumed app-wide |
+| `src/app/` | Dashboard, `modules/[module]`, `lessons/[slug]`, `admin/` (RSC-fetched, `isAdmin` gate), `login`, API routes | everything above |
 
 ## Data flow
 
 1. **Watch**: `video-player` throttles `timeupdate` → POST `/api/progress/heartbeat` every 10s (+ `sendBeacon` flush on pause/ended/pagehide) → upsert `video_progress` (position + high-water mark) → server sets `completed_at` at ≥90% → derive → append `completion_events` on transition.
 2. **Quiz**: `quiz` component → POST `/api/quiz/submit` → grade against server-only answer key → insert `quiz_attempts` → derive → events → return per-question results + debrief blocks.
-3. **Reveal** (free-form assessments): POST `/api/assessment/reveal` → upsert `manual_completions` → return model-answer blocks. One click = content + credit (accepted casual-gating tradeoff).
-4. **Admin**: `/admin` RSC runs four selects (users, video_progress, best attempts via `DISTINCT ON`, manual_completions) → `deriveProgress()` → users × modules matrix.
+3. **Reveal** (free-form assessments): the SelfAssess answer box keeps a draft in localStorage (client-only, deliberately not server-persisted); "Compare with model answer" POSTs `/api/assessment/reveal` → upsert `manual_completions` → model-answer blocks render under the learner's own text. One click = content + credit (accepted casual-gating tradeoff).
+4. **Read** (the 33 lessons with nothing to watch or answer): `record-view` posts once from an effect on mount → POST `/api/progress/complete` → upsert `manual_completions`. An effect, not a server write during render: Next prefetches `<Link>` targets on hover, and a write there would complete lessons the learner only pointed at.
+5. **Admin**: `/admin` RSC runs four selects (users, video_progress, best attempts via `DISTINCT ON`, manual_completions) → `deriveProgress()` → users × modules matrix.
 
 ## Invariants and boundaries
 
@@ -74,7 +77,10 @@ Browser ◀──▶ Vercel (Next.js: RSC pages + API routes) ◀── Drizzle 
 - Server actions re-check admin rights themselves. Rendering them on an admin-only page is not authorization; they are addressable endpoints.
 - The proxy answers unauthenticated **API** requests with `401 {"error":"unauthorized"}` and only redirects **page** requests. `fetch` follows redirects transparently, so a 307 to `/login` would hand the client 200 + HTML and surface as a JSON parse failure rather than an auth failure.
 - DB writes only through the activity tables in [webapp-data-model.md](webapp-data-model.md); `completion_events` is append-only.
-- Section pages render dynamically (they read session + DB); never let Next static-optimize them.
+- Lesson pages render dynamically (they read session + DB); never let Next static-optimize them.
+- `/api/progress/complete` accepts only the manifest's `viewOnlyLessonKeys`. It must never become a general mark-anything-done endpoint, or video and quiz requirements become bypassable.
+- Every lesson renders its title exactly once, from frontmatter. The generator strips the leading `# Title` heading and **fails** if one does not match — that check is what keeps the two in step.
+- Quiz `trailing` blocks and the debrief render only after an attempt (and on revisit once passed) — trailing regularly discusses the options. Non-required (debrief) videos on assessment lessons render below the task, not above it (adr/2026-08-04-12).
 
 ## External dependencies
 
@@ -110,13 +116,15 @@ Verify: `curl -I -H "Range: bytes=0-1023" "$NEXT_PUBLIC_VIDEO_BASE_URL/module-1/
 
 Template with commentary: `webapp/.env.example`.
 
-`DATABASE_URL` (as `course_app_user`) · `AUTH_SECRET` · `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` · `ALLOWED_EMAIL_DOMAINS` / `ALLOWED_EMAILS` (comma-separated, case-insensitive) · `BOOTSTRAP_ADMIN_EMAILS` · `NEXT_PUBLIC_VIDEO_BASE_URL`
+`DATABASE_URL` (as `course_app_user`) · `AUTH_SECRET` · `AUTH_GOOGLE_ID` / `AUTH_GOOGLE_SECRET` · `ALLOWED_EMAIL_DOMAINS` / `ALLOWED_EMAILS` (comma-separated, case-insensitive) · `NEXT_PUBLIC_VIDEO_BASE_URL`
+
+There is deliberately **no admin variable**. Admin rights live only in `users.is_admin`; the first one is granted with `npm run admin:grant -- <email>` ([adr/2026-08-04-10](../adr/2026-08-04-10-remove-env-admin-bootstrap.md)).
 
 Situational: `DB_CA_BUNDLE_PATH` (AWS-day only) · `AUTH_TRUST_HOST=true` (only to run a production build locally; Vercel and `next dev` trust the host already) · `VIDEO_BUCKET` / `VIDEO_S3_ENDPOINT` (local, for `sync-videos.sh` only).
 
 ## Commands
 
-`npm run content:gen` regenerate `src/content/*` · `content:check` fail on drift · `npm test` unit tests (no DB) · `npm run test:db` heartbeat integration tests, needs `TEST_DATABASE_URL` · `npm run build`.
+`npm run content:gen` regenerate `src/content/*` · `content:check` fail on drift · `npm test` unit tests (no DB) · `npm run test:db` heartbeat integration tests, needs `TEST_DATABASE_URL` · `npm run admin:grant -- <email>` · `npm run build`.
 
 ## Build milestones
 
@@ -130,3 +138,5 @@ M1 static browse → M2 auth → M3 DB + video progress → M4 assessments → M
 - Auth: [adr/2026-08-01-05-google-auth-jwt-env-allowlist.md](../adr/2026-08-01-05-google-auth-jwt-env-allowlist.md)
 - Data model: [adr/2026-08-01-06-activity-only-data-model-derived-completion.md](../adr/2026-08-01-06-activity-only-data-model-derived-completion.md)
 - Free-tier bridge (Neon + R2) before AWS access: [adr/2026-08-03-07-free-tier-mvp-before-aws-access.md](../adr/2026-08-03-07-free-tier-mvp-before-aws-access.md)
+- DB-backed access control: [adr/2026-08-04-08-db-backed-access-control.md](../adr/2026-08-04-08-db-backed-access-control.md), tightened by [adr/2026-08-04-10-remove-env-admin-bootstrap.md](../adr/2026-08-04-10-remove-env-admin-bootstrap.md)
+- The lesson as the unit of content, routing and completion: [adr/2026-08-04-11-lesson-as-the-unit.md](../adr/2026-08-04-11-lesson-as-the-unit.md)

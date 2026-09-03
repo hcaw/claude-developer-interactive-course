@@ -34,6 +34,7 @@ artifacts. Conventions follow the `ai-dev-docs` skill; ADR filenames are
 - [adr/2026-08-04-10-remove-env-admin-bootstrap.md](adr/2026-08-04-10-remove-env-admin-bootstrap.md) — delete `BOOTSTRAP_ADMIN_EMAILS`; `users.is_admin` is the only source, seeded by `npm run admin:grant`
 - [adr/2026-08-04-11-lesson-as-the-unit.md](adr/2026-08-04-11-lesson-as-the-unit.md) — one article = one lesson = one page = one unit of completion; sections deleted; videos join via `covers`
 - [adr/2026-08-04-12-interactive-checkpoints.md](adr/2026-08-04-12-interactive-checkpoints.md) — every checkable checkpoint becomes a graded quiz (24 lessons / 68 questions); free-text gets SelfAssess with local drafts; the authoring convention and content guards
+- [adr/2026-09-03-01-anki-spaced-repetition-deck.md](adr/2026-09-03-01-anki-spaced-repetition-deck.md) — `anki/` deck compiled from LLM-authored card JSON; deck stops at module, tags carry section + content-type; namespaced so future courses are new data files, not code changes
 
 ## Stream
 
